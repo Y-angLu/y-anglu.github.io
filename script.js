@@ -1,22 +1,22 @@
 // Function to handle switching between tabs instantly
 function showSection(sectionId) {
-    // Hide all sections
+    // Hide all major views
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(section => {
         section.classList.add('hidden');
     });
 
-    // Show the active section
+    // Reveal the target view (either 'about' or 'posts')
     const activeSection = document.getElementById(sectionId);
     if (activeSection) {
         activeSection.classList.remove('hidden');
     }
 
-    // Scroll back to top smoothly on section change
+    // Reset window scroll position smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Ensure the page loads on the 'about' section by default
+// Default initialization to 'about' section on page load
 document.addEventListener('DOMContentLoaded', () => {
     showSection('about');
 });

@@ -3,98 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio</title>
-    <!-- Tailwind CSS CDN for rapid styling -->
+    <title>Yang's Portfolio</title>
+    
+    <!-- Google Fonts: Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-zinc-200">
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200">
 
-    <!-- Sticky Navigation Bar -->
+    <!-- Compact Navigation Bar - Upgraded to max-w-5xl -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
-        <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" onclick="showSection('about')" class="font-medium tracking-tight hover:text-zinc-600 transition">Your Name</a>
-            <nav class="flex space-x-6 text-sm font-medium text-zinc-600">
-                <button onclick="showSection('about')" class="nav-link hover:text-zinc-900 transition focus:outline-none">About</button>
-                <button onclick="showSection('experience')" class="nav-link hover:text-zinc-900 transition focus:outline-none">Experience</button>
-                <button onclick="showSection('projects')" class="nav-link hover:text-zinc-900 transition focus:outline-none">Projects</button>
-                <button onclick="showSection('writeups')" class="nav-link hover:text-zinc-900 transition focus:outline-none">Write-ups</button>
+        <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
+            <a href="#" onclick="showSection('about')" class="font-bold tracking-tight text-base hover:text-zinc-600 transition">Yang Lu</a>
+            <nav class="flex space-x-6 text-xs font-bold text-zinc-600">
+                <button onclick="showSection('about')" class="nav-link hover:text-zinc-900 transition focus:outline-none cursor-pointer">About</button>
+                <button onclick="showSection('posts')" class="nav-link hover:text-zinc-900 transition focus:outline-none cursor-pointer">Posts</button>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-3xl mx-auto px-6 py-16 min-h-[calc(100vh-4rem)]">
+    <!-- Main Content Container - Expanded to max-w-5xl for wider desktop layout -->
+    <main class="max-w-5xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
         
         <!-- ABOUT SECTION -->
-        <section id="about" class="content-section space-y-6">
-            <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Hi, I'm Your Name.</h1>
-            <p class="text-lg text-zinc-600 leading-relaxed">
-                I am an engineer and designer focused on building functional, high-performance systems. I bridge the gap between technical execution and clean aesthetic form.
-            </p>
-            <div class="pt-4 flex space-x-4 text-sm font-medium">
-                <a href="mailto:your.email@example.com" class="text-zinc-900 hover:underline">Email</a>
-                <a href="https://github.com" target="_blank" class="text-zinc-900 hover:underline">GitHub</a>
-                <a href="https://linkedin.com" target="_blank" class="text-zinc-900 hover:underline">LinkedIn</a>
-            </div>
-        </section>
+        <section id="about" class="content-section space-y-8">
+            
+            <!-- 1. My Name / Bio -->
+            <div class="space-y-4">
+                <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Yang Lu</h1>
+                
+                <ul class="list-disc list-inside text-base text-zinc-600 leading-relaxed font-medium space-y-1">
+                    <li>Mechatronics engineering undergraduate from the University of Waterloo.</li>
+                    <li>Incoming mechanical engineering intern at Humanoid, with previous ME internships at Proception AI, Tesla, and Sanctuary AI.</li>
+                    <li>Exploring humanoid robotics. Part-time runner. Feel free to reach out!</li>
+                </ul>
 
-        <!-- EXPERIENCE SECTION -->
-        <section id="experience" class="content-section space-y-8 hidden">
-            <h2 class="text-2xl font-bold tracking-tight">Experience</h2>
-            <div class="space-y-8 border-l border-zinc-200 pl-6 ml-2">
-                <!-- Job 1 -->
-                <div class="relative space-y-2">
-                    <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-zinc-900 ring-4 ring-zinc-50"></div>
-                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
-                        <h3 class="font-semibold text-zinc-900">Engineering Intern</h3>
-                        <span class="text-xs text-zinc-500 font-medium font-mono uppercase tracking-wider">Jan 2026 — Present</span>
-                    </div>
-                    <p class="text-sm font-medium text-zinc-600">Company Name · Robotics & Automation</p>
-                    <p class="text-zinc-600 text-sm leading-relaxed">
-                        Optimized hardware-software interfaces for robotic sub-assemblies. Improved mechanical efficiency by refactoring underactuated mechanisms.
-                    </p>
+                <div class="pt-1 flex space-x-4 text-xs font-bold">
+                    <a href="mailto:y494lu@uwaterloo.ca" class="text-zinc-900 hover:underline">Email</a>
+                    <a href="https://www.linkedin.com/in/yang--lu/" target="_blank" class="text-zinc-900 hover:underline">LinkedIn</a>
                 </div>
             </div>
-        </section>
 
-        <!-- PROJECTS SECTION -->
-        <section id="projects" class="content-section space-y-8 hidden">
-            <h2 class="text-2xl font-bold tracking-tight">Projects</h2>
-            <div class="grid gap-6 sm:grid-cols-2">
-                <!-- Project 1 -->
-                <div class="group border border-zinc-200 rounded-lg p-5 bg-white hover:border-zinc-400 transition shadow-xs">
-                    <h3 class="font-semibold text-zinc-900 group-hover:text-zinc-700 transition">Project Title</h3>
-                    <p class="text-xs font-mono text-zinc-400 mt-1">HTML, CSS, JavaScript</p>
-                    <p class="text-zinc-600 text-sm mt-3 leading-relaxed">
-                        A high-performance web tool or design asset built to solve a niche hardware constraint. Focus on rapid rendering and minimal footprint.
-                    </p>
+            <hr class="border-zinc-200">
+
+            <!-- 2. Projects (Wider Footprint with lg:grid-cols-4) -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold tracking-tight">Projects</h2>
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    
+                    <!-- Project Tile 1 -->
+                    <a href="projects/Biped_V2.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Biped_Assembly.jpg" alt="Biped V2" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Biped V2</h3>
+                    </a>
+
+                    <!-- Project Tile 2 -->
+                    <a href="projects/Wave_Actuator.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Actuator_Assembly.jpg" alt="Wave Actuator" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Wave Actuator</h3>
+                    </a>
+
+                    <!-- Project Tile 3 -->
+                    <a href="projects/Biped_V1.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Biped_V1.jpg" alt="Biped V1" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Biped V1</h3>
+                    </a>
+
+                    <!-- Project Tile 4 -->
+                    <a href="projects/Quadruped.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Quadruped_Assembly.jpg" alt="Quadruped" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Quadruped</h3>
+                    </a>
+
+                    <!-- Project Tile 5 -->
+                    <a href="projects/Hand.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Hand_Assembly.jpg" alt="Robotic Hand" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Robotic Hand</h3>
+                    </a>
+
                 </div>
             </div>
+
+            <hr class="border-zinc-200">
+
+            <!-- 3. Experiences (Wider Footprint with lg:grid-cols-4) -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold tracking-tight">Experiences</h2>
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    
+                    <!-- Experience Tile 1 -->
+                    <a href="experiences/Proception_AI.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Proception_Hand.jpg" alt="Proception AI" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Proception AI</h3>
+                    </a>
+
+                    <!-- Experience Tile 2 -->
+                    <a href="experiences/Tesla.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Tesla_Model3.jpg" alt="Tesla" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Tesla</h3>
+                    </a>
+
+                    <!-- Experience Tile 3 -->
+                    <a href="experiences/Mycro_Harvest.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Mycroharvest_Enclosure.jpg" alt="Mycro Harvest" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Mycro Harvest</h3>
+                    </a>
+
+                    <!-- Experience Tile 4 -->
+                    <a href="experiences/Sanctuary_AI.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Sanctuary_Phoenix.jpg" alt="Sanctuary AI" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Sanctuary AI</h3>
+                    </a>
+
+                    <!-- Experience Tile 5 -->
+                    <a href="experiences/Neurocage_Systems.html" class="group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-xs flex flex-col justify-between">
+                        <img src="images/Neurocage_Enclosure.jpg" alt="Neurocage Systems" class="w-full h-auto aspect-video rounded-lg object-cover">
+                        <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Neurocage Systems</h3>
+                    </a>
+
+                </div>
+            </div>
+            
         </section>
 
-        <!-- WRITE-UPS SECTION -->
-        <section id="writeups" class="content-section space-y-8 hidden">
-            <h2 class="text-2xl font-bold tracking-tight">Write-ups</h2>
-            <div class="space-y-6">
-                <!-- Article 1 -->
-                <article class="space-y-2">
-                    <span class="text-xs text-zinc-400 font-mono">May 2026</span>
-                    <h3 class="text-lg font-semibold tracking-tight hover:text-zinc-600 transition">
-                        <a href="#">The Intersection of Mechanical Intelligence and Industrial Design</a>
-                    </h3>
-                    <p class="text-zinc-600 text-sm leading-relaxed">
-                        Exploring why task-specific utility and deliberate surfacing matter more than generalized forms in consumer-facing hardware.
-                    </p>
-                </article>
+        <!-- POSTS SECTION -->
+        <section id="posts" class="content-section space-y-4 hidden">
+            <h2 class="text-xl font-bold tracking-tight">Posts</h2>
+            
+            <div class="border border-dashed border-zinc-300 rounded-xl p-8 bg-zinc-100/50 flex flex-col items-center justify-center text-center space-y-2">
+                <div class="flex items-center space-x-2">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-zinc-500"></span>
+                    </span>
+                    <h3 class="text-sm font-bold tracking-tight text-zinc-700">Work in Progress</h3>
+                </div>
+                <p class="text-zinc-500 text-xs font-medium max-w-xs">
+                    Writing about interests. Coming soon!
+                </p>
             </div>
         </section>
 
     </main>
 
-    <!-- Simple Footer -->
+    <!-- Compact Footer - Upgraded to max-w-5xl -->
     <footer class="border-t border-zinc-200 bg-white">
-        <div class="max-w-3xl mx-auto px-6 py-8 text-center text-xs text-zinc-400 font-mono">
-            © 2026 Your Name. Built clean, fast, and lightweight.
+        <div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+            © 2026 Yang Lu. Built clean, with vibes.
         </div>
     </footer>
 
