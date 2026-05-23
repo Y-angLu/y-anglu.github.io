@@ -81,10 +81,11 @@ function updateActiveNavStyles(activeId) {
         const isMatch = btn.textContent.trim().toLowerCase() === activeId.toLowerCase();
         
         if (isMatch) {
-            btn.classList.add('text-zinc-900', 'dark:text-white');
+            // Explicitly set both light and dark active colors without hitting token mapping bugs
+            btn.classList.add('text-zinc-900', 'dark:text-zinc-50');
             btn.classList.remove('text-zinc-600');
         } else {
-            btn.classList.remove('text-zinc-900', 'dark:text-white');
+            btn.classList.remove('text-zinc-900', 'dark:text-zinc-50');
             btn.classList.add('text-zinc-600');
         }
     });
