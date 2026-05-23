@@ -74,9 +74,10 @@
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-colors duration-200">
         <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
             <a href="#" onclick="showSection('about')" class="font-bold tracking-tight text-base [@media(hover:hover)]:hover:text-zinc-600 transition">Yang Lu</a>
-            <nav class="flex space-x-6 text-xs font-bold text-zinc-600 items-center">
+            <!-- FIX: Removed parent level 'text-zinc-600' class assignment to prevent cascading breakdown over mobile styles -->
+            <nav class="flex space-x-6 text-xs font-bold items-center">
                 <button onclick="showSection('about')" class="nav-link text-zinc-900 dark:text-zinc-50 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer">About</button>
-                <button onclick="showSection('posts')" class="nav-link [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer">Posts</button>
+                <button onclick="showSection('posts')" class="nav-link text-zinc-600 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer">Posts</button>
                 
                 <!-- THEME TOGGLE BUTTON -->
                 <button id="theme-toggle" class="p-1 text-zinc-500 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer transition" aria-label="Toggle Theme">
@@ -261,6 +262,80 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Inline Script implementation representing script.js changes embedded cleanly below -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initTabs();
+        });
+
+        function initTheme() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const moonIcon = document.getElementById('theme-toggle-moon');
+            const sunIcon = document.getElementById('theme-toggle-sun');
+
+            if (!themeToggleBtn) return;
+
+            function updateIcons(isDark) {
+                if (isDark) {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                } else {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            const shouldBeDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+            if (shouldBeDark) {
+                document.documentElement.classList.add('dark');
+                updateIcons(true);
+            } else {
+                document.documentElement.classList.remove('dark');
+                updateIcons(false);
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isDarkNow = document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+                updateIcons(isDarkNow);
+            });
+        }
+
+        function initTabs() {
+            window.showSection = function(sectionId) {
+                const sections = document.querySelectorAll('.content-section');
+                sections.forEach(sec => sec.classList.add('hidden'));
+
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                updateActiveNavStyles(sectionId);
+            };
+        }
+
+        function updateActiveNavStyles(activeId) {
+            const navButtons = document.querySelectorAll('nav button.nav-link');
+            
+            navButtons.forEach(btn => {
+                const isMatch = btn.textContent.trim().toLowerCase() === activeId.toLowerCase();
+                
+                if (isMatch) {
+                    btn.classList.add('text-zinc-900', 'dark:text-zinc-50');
+                    btn.classList.remove('text-zinc-600');
+                } else {
+                    btn.classList.remove('text-zinc-900', 'dark:text-zinc-50');
+                    btn.classList.add('text-zinc-600');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
