@@ -1,92 +1,91 @@
-// Function to handle switching between tabs instantly
-function showSection(sectionId) {
-    // Hide all major views
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(section => {
-        section.classList.add('hidden');
-    });
+// Execute immediately to set up the theme toggle and tab navigation
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    initTabs();
+});
 
-    // Reveal the target view (either 'about' or 'posts')
-    const activeSection = document.getElementById(sectionId);
-    if (activeSection) {
-        activeSection.classList.remove('hidden');
-    }
-
-    // --- Update Nav Link Highlights for Dark Mode ---
-    const isDark = document.documentElement.classList.contains('dark');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        // Reset all links to their muted grey state
-        link.classList.remove('text-zinc-900', 'text-zinc-100');
-        link.classList.add('text-zinc-600', 'dark:text-zinc-400');
-    });
-
-    // Apply the correct active color to the current tab button
-    const clickedButton = Array.from(navLinks).find(btn => 
-        btn.getAttribute('onclick')?.includes(`'${sectionId}'`)
-    );
-    if (clickedButton) {
-        clickedButton.classList.remove('text-zinc-600', 'dark:text-zinc-400');
-        // If the site is dark, highlight in white; if light, highlight in dark grey
-        clickedButton.classList.add(isDark ? 'text-zinc-100' : 'text-zinc-900');
-    }
-    // -----------------------------------------------------
-
-    // Reset window scroll position smoothly
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// --- Light / Dark Mode Core Functionality ---
+/**
+ * 1. THEME PERSISTENCE MANAGEMENT
+ */
 function initTheme() {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const moonIcon = document.getElementById('theme-toggle-moon');
     const sunIcon = document.getElementById('theme-toggle-sun');
 
-    if (!themeToggleBtn || !moonIcon || !sunIcon) return;
+    if (!themeToggleBtn) return;
 
-    // Determine target mode: checked from explicit localStorage state or system dark preferences fallback
-    const isDarkSaved = localStorage.getItem('color-theme') === 'dark';
-    const isSystemDark = !('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (isDarkSaved || isSystemDark) {
-        document.documentElement.classList.add('dark');
-        moonIcon.classList.add('hidden');
-        sunIcon.classList.remove('hidden');
-    } else {
-        document.documentElement.classList.remove('dark');
-        moonIcon.classList.remove('hidden');
-        sunIcon.classList.add('hidden');
-    }
-
-    // Handle Button Interactions
-    themeToggleBtn.addEventListener('click', () => {
-        const isCurrentDark = document.documentElement.classList.contains('dark');
-        
-        if (isCurrentDark) {
-            // Swap to Light Mode
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-            sunIcon.classList.add('hidden');
-            moonIcon.classList.remove('hidden');
-        } else {
-            // Swap to Dark Mode
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
+    // Helper to update visual icon states based on current HTML element layout class
+    function updateIcons(isDark) {
+        if (isDark) {
             moonIcon.classList.add('hidden');
             sunIcon.classList.remove('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
         }
+    }
 
-        // Re-trigger active section formatting to ensure highlighted text links switch shades correctly
-        const activeSection = Array.from(document.querySelectorAll('.content-section')).find(s => !s.classList.contains('hidden'));
-        if (activeSection) {
-            showSection(activeSection.id);
-        }
+    // Check localStorage or fallback to preferred system browser defaults
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+
+    if (shouldBeDark) {
+        document.documentElement.classList.add('dark');
+        updateIcons(true);
+    } else {
+        document.documentElement.classList.remove('dark');
+        updateIcons(false);
+    }
+
+    // Toggle logic on click
+    themeToggleBtn.addEventListener('click', () => {
+        const isDarkNow = document.documentElement.classList.toggle('dark');
+        
+        // Save state to local browser memory for reference by the template pages
+        localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+        updateIcons(isDarkNow);
     });
 }
 
-// Default initialization to 'about' section and loading layout theme triggers on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-    initTheme();
-    showSection('about');
-});
+/**
+ * 2. PORTFOLIO TABS NAVIGATION MANAGEMENT
+ */
+function initTabs() {
+    // Expose the showSection function to window scope so onclick handlers work inline
+    window.showSection = function(sectionId) {
+        // Hide all major section layout blocks
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(sec => sec.classList.add('hidden'));
+
+        // Target and reveal the chosen clicked view container
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+        }
+
+        // Keep page scrolling positioned cleanly at top on layout swap
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+        // Update navigation link underlines/colors dynamically
+        updateActiveNavStyles(sectionId);
+    };
+}
+
+function updateActiveNavStyles(activeId) {
+    const navButtons = document.querySelectorAll('nav button.nav-link');
+    
+    navButtons.forEach(btn => {
+        // Normalizes string match clean up
+        const isMatch = btn.textContent.trim().toLowerCase() === activeId.toLowerCase();
+        
+        if (isMatch) {
+            btn.classList.add('text-zinc-900', 'dark:text-white');
+            btn.classList.remove('text-zinc-600');
+        } else {
+            btn.classList.remove('text-zinc-900', 'dark:text-white');
+            btn.classList.add('text-zinc-600');
+        }
+    });
+}

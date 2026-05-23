@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,38 +7,94 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
         }
-    </style>
-</head>
-<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200">
 
-    <header class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-        <a href="../index.html" class="text-sm font-bold text-zinc-600 hover:text-zinc-900 transition flex items-center gap-2">
-            ← Back to Home
-        </a>
+        /* HARD-CODED NATIVE FALLBACKS:
+           Bypasses the Tailwind runtime engine engine entirely during the first paint frame */
+        html {
+            background-color: #f4f4f5 !important; /* Light mode default canvas */
+        }
+        html.dark {
+            background-color: #121212 !important; /* Charcoal Slate dark mode canvas */
+            color-scheme: dark;
+
+            /* Match the main landing website charcoal token shifts exactly */
+            --color-zinc-50: #121212;
+            --color-zinc-900: var(--color-zinc-100);
+            --color-zinc-700: var(--color-zinc-300); 
+            --color-zinc-600: var(--color-zinc-100);
+            --color-zinc-200: #27272a;               
+            --color-white: #121212; 
+        }
+
+        /* PURE CSS ANTI-FLASH SHIELD:
+           Keeps the body invisible until our inline script confirms the dark/light state.
+           Once .no-js is removed, the page reveals cleanly without a flash. */
+        html.no-js body {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+    </style>
+
+    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly, long before Tailwind initializes -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            
+            // Drop the safety lock now that classes are synchronized
+            document.documentElement.classList.remove('no-js');
+        })();
+    </script>
+</head>
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200 transition-colors duration-200">
+
+    <!-- Fixed navigation bar with real-time backdrop filtering and charcoal alpha matching -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-colors duration-200">
+        <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+            <a href="../index.html" class="text-xs font-bold text-zinc-600 hover:text-zinc-900 dark:hover:text-white transition flex items-center gap-2">
+                ← Back to Home
+            </a>
+        </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-6 py-10">
+    <main class="max-w-3xl mx-auto px-6 py-10 min-h-[calc(100vh-3rem)]">
         <article class="space-y-6">
-            <h1 class="text-3xl font-bold tracking-tight">Project/Experience Title Here</h1>
-            <p class="text-sm text-zinc-400 font-semibold uppercase tracking-wider">Date or Subtitle</p>
+            <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Project/Experience Title Here</h1>
+            <p class="text-xs text-zinc-400 font-bold uppercase tracking-wider">Date or Subtitle</p>
             
-            <img src="../images/project1.jpg" alt="Featured Image" class="w-full h-auto rounded-xl object-cover shadow-lg">
+            <hr class="border-zinc-200">
+            
+            <img src="../images/project1.jpg" alt="Featured Image" class="w-full h-auto rounded-xl object-cover border border-zinc-200">
 
-            <div class="prose prose-zinc leading-relaxed text-zinc-700 space-y-4 font-medium">
+            <div class="prose prose-zinc leading-relaxed text-zinc-700 space-y-4 font-medium text-base">
                 <p>This is where your detailed write-up goes. You can write paragraphs here, reflecting on the challenges, the solutions, and the technical implementation.</p>
                 <p>Because each write-up is its own page, you can include more images, code snippets, or detailed explanations without slowing down the main portfolio landing page.</p>
                 <p>This approach keeps the initial load incredibly fast, while offering depth when a user is interested in a specific project.</p>
             </div>
         </article>
     </main>
+
+    <!-- Compact Footer matching charcoal design rules -->
+    <footer class="border-t border-zinc-200 bg-white transition-colors duration-200">
+        <div class="max-w-3xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+            © 2026 Yang Lu. Built clean, with vibes.
+        </div>
+    </footer>
 
 </body>
 </html>
