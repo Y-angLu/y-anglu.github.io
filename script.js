@@ -81,12 +81,15 @@ function updateActiveNavStyles(activeId) {
         const isMatch = btn.textContent.trim().toLowerCase() === activeId.toLowerCase();
         
         if (isMatch) {
-            // Explicitly set both light and dark active colors without hitting token mapping bugs
+            // Apply active styles for both light and dark modes
             btn.classList.add('text-zinc-900', 'dark:text-zinc-50');
-            btn.classList.remove('text-zinc-600');
+            // Remove inactive styles for both light and dark modes
+            btn.classList.remove('text-zinc-600', 'dark:text-zinc-400');
         } else {
+            // Remove active styles for both light and dark modes
             btn.classList.remove('text-zinc-900', 'dark:text-zinc-50');
-            btn.classList.add('text-zinc-600');
+            // Apply inactive styles for both light and dark modes
+            btn.classList.add('text-zinc-600', 'dark:text-zinc-400');
         }
     });
 }
