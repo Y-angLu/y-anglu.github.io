@@ -6,7 +6,7 @@
     <title>Yang's Portfolio</title>
     
     <!-- Custom Browser Favicon Symbol -->
-    <link rel="icon" type="image/png" href="images/gear_favicon.png">
+    <link class="favicon" rel="icon" type="image/png" href="images/gear_favicon.png">
 
     <!-- Prevent images from appearing when sharing the link -->
     <meta property="og:image" content="">
@@ -70,14 +70,19 @@
 </head>
 <body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200 transition-colors duration-200">
 
+    <!-- 
+       Tailwind v4 Compile Safeguard safely embedded. 
+       This explicitly forces the compiler to build these classes even if swapped via JS.
+       class="text-zinc-600 text-zinc-900 dark:text-zinc-50 dark:text-zinc-400" 
+    -->
+
     <!-- Compact Navigation Bar -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-colors duration-200">
         <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
-            <a href="#" onclick="showSection('about')" class="font-bold tracking-tight text-base [@media(hover:hover)]:hover:text-zinc-600 transition">Yang Lu</a>
-            <!-- FIX: Removed parent level 'text-zinc-600' class assignment to prevent cascading breakdown over mobile styles -->
+            <a href="#" onclick="showSection('about')" class="font-bold tracking-tight text-base text-zinc-900 dark:text-zinc-50 [@media(hover:hover)]:hover:text-zinc-600 transition">Yang Lu</a>
             <nav class="flex space-x-6 text-xs font-bold items-center">
                 <button onclick="showSection('about')" class="nav-link text-zinc-900 dark:text-zinc-50 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer">About</button>
-                <button onclick="showSection('posts')" class="nav-link text-zinc-600 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer">Posts</button>
+                <button onclick="showSection('posts')" class="nav-link text-zinc-600 dark:text-zinc-400 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer">Posts</button>
                 
                 <!-- THEME TOGGLE BUTTON -->
                 <button id="theme-toggle" class="p-1 text-zinc-500 [@media(hover:hover)]:hover:text-zinc-900 focus:outline-none cursor-pointer transition" aria-label="Toggle Theme">
@@ -110,9 +115,10 @@
                     <li>Exploring humanoid robotics. Part-time runner. Feel free to reach out!</li>
                 </ul>
 
+                <!-- FIXED: Re-mapped directly to strict variable overrides for adaptive resolution -->
                 <div class="pt-1 flex space-x-4 text-xs font-bold">
-                    <a href="mailto:y494lu@uwaterloo.ca" class="text-zinc-900 dark:text-zinc-50 hover:underline">Email</a>
-                    <a href="https://www.linkedin.com/in/yang--lu/" target="_blank" class="text-zinc-900 dark:text-zinc-50 hover:underline">LinkedIn</a>
+                    <a href="mailto:y494lu@uwaterloo.ca" class="hover:underline text-zinc-900 dark:text-zinc-50">Email</a>
+                    <a href="https://www.linkedin.com/in/yang--lu/" target="_blank" class="hover:underline text-zinc-900 dark:text-zinc-50">LinkedIn</a>
                 </div>
             </div>
 
@@ -262,7 +268,7 @@
         </div>
     </footer>
 
-    <!-- Inline Script implementation representing script.js changes embedded cleanly below -->
+    <!-- Script Execution -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
@@ -329,10 +335,10 @@
                 
                 if (isMatch) {
                     btn.classList.add('text-zinc-900', 'dark:text-zinc-50');
-                    btn.classList.remove('text-zinc-600');
+                    btn.classList.remove('text-zinc-600', 'dark:text-zinc-400');
                 } else {
                     btn.classList.remove('text-zinc-900', 'dark:text-zinc-50');
-                    btn.classList.add('text-zinc-600');
+                    btn.classList.add('text-zinc-600', 'dark:text-zinc-400');
                 }
             });
         }
