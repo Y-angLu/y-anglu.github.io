@@ -1,50 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write-up: Title Here</title>
+    <title>Experience: Humanoid</title>
     
+    <!-- Custom Browser Favicon Symbol -->
+    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
+
+    <!-- Google Fonts: Quicksand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind CSS v3 CDN (Stable for Class-Based Dark Mode) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
         }
-
-        /* HARD-CODED NATIVE FALLBACKS:
-           Bypasses the Tailwind runtime engine engine entirely during the first paint frame */
-        html {
-            background-color: #f4f4f5 !important; /* Light mode default canvas */
-        }
-        html.dark {
-            background-color: #121212 !important; /* Charcoal Slate dark mode canvas */
-            color-scheme: dark;
-
-            /* Match the main landing website charcoal token shifts exactly */
-            --color-zinc-50: #121212;
-            --color-zinc-900: var(--color-zinc-100);
-            --color-zinc-700: var(--color-zinc-300); 
-            --color-zinc-600: var(--color-zinc-100);
-            --color-zinc-200: #27272a;               
-            --color-white: #121212; 
-        }
-
-        /* PURE CSS ANTI-FLASH SHIELD:
-           Keeps the body invisible until our inline script confirms the dark/light state.
-           Once .no-js is removed, the page reveals cleanly without a flash. */
-        html.no-js body {
-            visibility: hidden !important;
-            opacity: 0 !important;
-        }
     </style>
 
-    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly, long before Tailwind initializes -->
+    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly to prevent dark mode flash -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -55,43 +46,62 @@
             } else {
                 document.documentElement.classList.remove('dark');
             }
-            
-            // Drop the safety lock now that classes are synchronized
-            document.documentElement.classList.remove('no-js');
         })();
     </script>
 </head>
-<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200 transition-colors duration-200">
+<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
 
-    <!-- Fixed navigation bar with real-time backdrop filtering and charcoal alpha matching -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-colors duration-200">
+    <!-- Fixed navigation bar -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-            <a href="../index.html" class="text-xs font-bold text-zinc-600 hover:text-zinc-900 dark:hover:text-white transition flex items-center gap-2">
-                ← Back to Home
+            <a href="../index.html" class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                </svg>
+                Back to Home
             </a>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-6 py-10 min-h-[calc(100vh-3rem)]">
-        <article class="space-y-6">
-            <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Project/Experience Title Here</h1>
-            <p class="text-xs text-zinc-400 font-bold uppercase tracking-wider">Date or Subtitle</p>
+    <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+        <article class="space-y-5">
             
-            <hr class="border-zinc-200">
-            
-            <img src="../images/project1.jpg" alt="Featured Image" class="w-full h-auto rounded-xl object-cover border border-zinc-200">
-
-            <div class="prose prose-zinc leading-relaxed text-zinc-700 space-y-4 font-medium text-base">
-                <p>This is where your detailed write-up goes. You can write paragraphs here, reflecting on the challenges, the solutions, and the technical implementation.</p>
-                <p>Because each write-up is its own page, you can include more images, code snippets, or detailed explanations without slowing down the main portfolio landing page.</p>
-                <p>This approach keeps the initial load incredibly fast, while offering depth when a user is interested in a specific project.</p>
+            <!-- Header: Company, Title, and Metadata -->
+            <div class="space-y-2">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Humanoid</h1>
+                    <h2 class="text-base font-semibold text-zinc-600 dark:text-zinc-400 mt-0.5">Mechanical Engineering Intern</h2>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                    <span>May 2026 — Present</span>
+                    <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
+                    <span>Vancouver, BC</span>
+                </div>
             </div>
+            
+            <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
+            
+            <!-- Brief Summary Line (Placed Above Picture) -->
+            <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                <p>
+                    Incoming summer 2026. See what we're building <a href="https://thehumanoid.ai/" target="_blank" class="text-zinc-900 dark:text-zinc-50 font-bold underline decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-400 transition-colors">here</a>.
+                </p>
+            </div>
+
+            <!-- Centered Single Image Container (Uniform Compact Sizing) -->
+            <div class="flex justify-center w-full py-1">
+                <div class="max-w-xl w-full bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                    <img src="../images/experiences/13112024_Warehouse_High Res_IT.jpg" alt="Humanoid Side By Side" class="w-full h-auto max-h-[400px] object-contain mx-auto">
+                </div>
+            </div>
+            
         </article>
     </main>
 
-    <!-- Compact Footer matching charcoal design rules -->
-    <footer class="border-t border-zinc-200 bg-white transition-colors duration-200">
-        <div class="max-w-3xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+    <!-- Compact Footer -->
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
+        <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
             © 2026 Yang Lu. Built clean, with vibes.
         </div>
     </footer>
