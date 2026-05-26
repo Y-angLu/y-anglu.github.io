@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience: Sanctuary AI</title>
     
-    <!-- Custom Browser Favicon Symbol -->
     <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
 
-    <!-- Google Fonts: Quicksand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS v3 CDN (Stable for Class-Based Dark Mode) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -35,7 +32,6 @@
         }
     </style>
 
-    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly to prevent dark mode flash -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -51,7 +47,6 @@
 </head>
 <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
 
-    <!-- Fixed navigation bar -->
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
             <a href="../index.html" class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2">
@@ -66,7 +61,6 @@
     <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
         <article class="space-y-5">
             
-            <!-- Header: Company, Title, and Metadata -->
             <div class="space-y-2">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Sanctuary AI</h1>
@@ -82,30 +76,62 @@
             
             <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
             
-            <!-- Brief Summary Line (Placed Above Pictures) -->
             <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                 <p>
                     Helped build various mechanical subsystems within Phoenix, Sanctuary's humanoid platform.
                 </p>
             </div>
 
-            <!-- Compact 2x2 Image Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-1">
+                
                 <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder1.jpg" alt="Project detail 1" class="w-full h-full object-cover">
+                    <img src="../images/experiences/me_and_phoenix.png" alt="Project detail 1" class="w-full h-full object-cover">
                 </div>
+
                 <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder2.jpg" alt="Project detail 2" class="w-full h-full object-cover">
+                    <img src="../images/experiences/sanctuary_group_pic.jpg" alt="Project detail 2" class="w-full h-full object-cover">
                 </div>
-                <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder3.jpg" alt="Project detail 3" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder4.jpg" alt="Project detail 4" class="w-full h-full object-cover">
-                </div>
+                
+                <a href="https://www.youtube.com/watch?v=FH3zbUSMAAU" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Watch Sanctuary AI Phoenix Human-Equivalent Speed video on YouTube"
+                   class="group relative aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 block transform transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-md">
+                    
+                    <img src="https://img.youtube.com/vi/FH3zbUSMAAU/maxresdefault.jpg" 
+                         alt="Sanctuary AI - Phoenix at Human-Equivalent Speed Thumbnail" 
+                         class="w-full h-full object-cover transition duration-300 group-hover:brightness-[0.85] dark:group-hover:brightness-75">
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div class="bg-black/40 backdrop-blur-sm p-4 rounded-full border border-white/20 text-white shadow-lg transform scale-95 group-hover:scale-100 transition-transform duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="https://www.youtube.com/watch?v=O73vVHbSX1s" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Watch Sanctuary AI In-hand Manipulation video on YouTube"
+                   class="group relative aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 block transform transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-md">
+                    
+                    <img src="https://img.youtube.com/vi/O73vVHbSX1s/maxresdefault.jpg" 
+                         alt="Sanctuary AI Achieves In-hand Manipulation Thumbnail" 
+                         class="w-full h-full object-cover transition duration-300 group-hover:brightness-[0.85] dark:group-hover:brightness-75">
+                    
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div class="bg-black/40 backdrop-blur-sm p-4 rounded-full border border-white/20 text-white shadow-lg transform scale-95 group-hover:scale-100 transition-transform duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
             </div>
 
-            <!-- Bullet Points Body (Placed Below Pictures) -->
             <div class="space-y-3 font-medium text-base leading-relaxed">
                 <p class="font-bold text-zinc-900 dark:text-zinc-100 text-sm uppercase tracking-wider">Key Contributions</p>
                 
@@ -120,7 +146,6 @@
         </article>
     </main>
 
-    <!-- Compact Footer -->
     <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
             © 2026 Yang Lu. Built clean, with vibes.
