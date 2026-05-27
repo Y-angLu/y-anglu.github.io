@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience: Tesla</title>
     
-    <!-- Custom Browser Favicon Symbol -->
     <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
 
-    <!-- Google Fonts: Quicksand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS v3 CDN (Stable for Class-Based Dark Mode) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -35,7 +32,6 @@
         }
     </style>
 
-    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly to prevent dark mode flash -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -51,7 +47,6 @@
 </head>
 <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
 
-    <!-- Fixed navigation bar -->
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
             <a href="../index.html" class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2">
@@ -66,7 +61,6 @@
     <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
         <article class="space-y-5">
             
-            <!-- Header: Company, Title, and Metadata -->
             <div class="space-y-2">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Tesla</h1>
@@ -82,7 +76,6 @@
             
             <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
             
-            <!-- Brief Summary Line (Placed Above Pictures) -->
             <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                 <p>
                     Safety and restraints - seatbelts team. Helped develop various seatbelt and test systems.
@@ -92,26 +85,17 @@
                 </p>
             </div>
 
-            <!-- Compact 2x2 Image Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-1">
-                <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder1.jpg" alt="Project detail 1" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder2.jpg" alt="Project detail 2" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder3.jpg" alt="Project detail 3" class="w-full h-full object-cover">
-                </div>
-                <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/placeholder4.jpg" alt="Project detail 4" class="w-full h-full object-cover">
-                </div>
+            <div class="w-full aspect-[4/3] bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 my-2">
+                <img 
+                    src="../images/experiences/Model3_77.jpg" 
+                    alt="Tesla project showcase" 
+                    class="w-full h-full object-cover"
+                >
             </div>
             
         </article>
     </main>
 
-    <!-- Compact Footer -->
     <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
             © 2026 Yang Lu. Built clean, with vibes.
