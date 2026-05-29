@@ -1,50 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write-up: Title Here</title>
+    <title>Project: Robotic Hand</title>
     
+    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
         }
-
-        /* HARD-CODED NATIVE FALLBACKS:
-           Bypasses the Tailwind runtime engine engine entirely during the first paint frame */
-        html {
-            background-color: #f4f4f5 !important; /* Light mode default canvas */
-        }
-        html.dark {
-            background-color: #121212 !important; /* Charcoal Slate dark mode canvas */
-            color-scheme: dark;
-
-            /* Match the main landing website charcoal token shifts exactly */
-            --color-zinc-50: #121212;
-            --color-zinc-900: var(--color-zinc-100);
-            --color-zinc-700: var(--color-zinc-300); 
-            --color-zinc-600: var(--color-zinc-100);
-            --color-zinc-200: #27272a;               
-            --color-white: #121212; 
-        }
-
-        /* PURE CSS ANTI-FLASH SHIELD:
-           Keeps the body invisible until our inline script confirms the dark/light state.
-           Once .no-js is removed, the page reveals cleanly without a flash. */
-        html.no-js body {
-            visibility: hidden !important;
-            opacity: 0 !important;
-        }
     </style>
 
-    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly, long before Tailwind initializes -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -55,43 +42,278 @@
             } else {
                 document.documentElement.classList.remove('dark');
             }
-            
-            // Drop the safety lock now that classes are synchronized
-            document.documentElement.classList.remove('no-js');
         })();
     </script>
 </head>
-<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200 transition-colors duration-200">
+<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
 
-    <!-- Fixed navigation bar with real-time backdrop filtering and charcoal alpha matching -->
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 transition-colors duration-200">
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-            <a href="../index.html" class="text-xs font-bold text-zinc-600 hover:text-zinc-900 dark:hover:text-white transition flex items-center gap-2">
-                ← Back to Home
+            <a href="../index.html" class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                </svg>
+                Back to Home
             </a>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-6 py-10 min-h-[calc(100vh-3rem)]">
-        <article class="space-y-6">
-            <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Project/Experience Title Here</h1>
-            <p class="text-xs text-zinc-400 font-bold uppercase tracking-wider">Date or Subtitle</p>
+    <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+        <article class="space-y-8">
             
-            <hr class="border-zinc-200">
-            
-            <img src="../images/project1.jpg" alt="Featured Image" class="w-full h-auto rounded-xl object-cover border border-zinc-200">
+            <div class="space-y-3">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Robotic Hand</h1>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                    <span>Feb 2023 — Apr 2023</span>
+                    <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
+                    <span>Personal Project</span>
+                </div>
 
-            <div class="prose prose-zinc leading-relaxed text-zinc-700 space-y-4 font-medium text-base">
-                <p>This is where your detailed write-up goes. You can write paragraphs here, reflecting on the challenges, the solutions, and the technical implementation.</p>
-                <p>Because each write-up is its own page, you can include more images, code snippets, or detailed explanations without slowing down the main portfolio landing page.</p>
-                <p>This approach keeps the initial load incredibly fast, while offering depth when a user is interested in a specific project.</p>
+                <div class="flex flex-wrap gap-2 py-1 mt-1">
+                    <a href="#actuation" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors cursor-pointer">
+                        Cable-Driven Actuation
+                    </a>
+                    <a href="#decoupling" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors cursor-pointer">
+                        Kinematic Decoupling
+                    </a>
+                    <a href="#dynamics" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors cursor-pointer">
+                        Underactuated Dynamics
+                    </a>
+                </div>
             </div>
+            
+            <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
+            
+            <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed space-y-4">
+                <p>
+                    Robotic hands originally inspired me to pursue engineering, so building one felt like the perfect first engineering project: a highly dexterous, anthropomorphic hand.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/robotic_hand_final_1.jpg" alt="Final assembled robotic hand 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/robotic_hand_final_2.jpg" alt="Final assembled robotic hand 2" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 id="actuation" class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20">1. Actuation Architecture</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    Choosing how to deliver power across linkages heavily impacts both performance and packaging constraints. Early in the design process, I was keen on a cable-driven approach because it most closely emulated human anatomy. Looking at the trade-offs between the three primary robotic hand configurations:
+                </p>
+                
+                <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800 my-4">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+                            <tr>
+                                <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-1/4">Type</th>
+                                <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-3/8">Advantages</th>
+                                <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-3/8">Disadvantages</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-zinc-700 dark:text-zinc-300 font-medium divide-y divide-zinc-200 dark:divide-zinc-800">
+                            <tr>
+                                <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Direct Drive</td>
+                                <td class="p-4 align-top">High torque bandwidth; zero mechanical hysteresis or cable slack; high positional accuracy</td>
+                                <td class="p-4 align-top">High distal mass; bulky joints; susceptible to gearbox damage and overload</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Tendon Driven</td>
+                                <td class="p-4 align-top">Low distal mass and robust (actuators in forearm); supports anthropomorphic finger geometry</td>
+                                <td class="p-4 align-top">Friction and creep along routing pathway; nonlinear tendon coupling between joints</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Pneumatic</td>
+                                <td class="p-4 align-top">Natural mechanical compliance; low system inertia; power-to-weight density</td>
+                                <td class="p-4 align-top">Low efficiency; complex pressure regulation; external pumps, valves, and tubing required</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    <strong class="text-zinc-900 dark:text-zinc-50">Decision:</strong> I chose a tendon-driven architecture. Moving the actuators to the forearm allowed the main hand assembly to remain lightweight, simple, and packaged closely to human proportions.
+                </p>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">2. Thumb Design</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    The human thumb accounts for roughly 40% of overall hand utility due to its unique opposability. The thumb, and by extension the fingers, suffer from a challenging trade-off between high posability (degrees of freedom) and controllability. Packaging constraints further complicate the design.
+                </p>
+                
+                <div class="space-y-2 mt-4">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">2.1 CMC Joint Architecture</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The thumb’s opposability primarily originates from the carpometacarpal (CMC) joint located at the base of the thumb. Anatomically, the CMC is a saddle joint capable of multi-axis motion. To simplify the mechanical design, I modelled the joint as a 2-DOF universal joint (u-joint), inspired by a nested camera gimbal.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/thumb_ujoint_1.jpg" alt="U-joint mechanism" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/thumb_ujoint_2.jpg" alt="U-joint mechanism detail" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This preserved thumb opposability while reducing mechanical complexity.
+                    </p>
+                </div>
+
+                <div class="space-y-2 mt-4">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">2.2 Tendon Actuation</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Four cables were dedicated to driving the u-joint itself. Each degree of freedom was controlled antagonistically using paired cables routed to opposite sides of the joint. Knots were used as terminations and cutouts were made to let the tendons swing freely without interference or binding.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/thumb_ujoint_1.jpg" alt="Tendon actuation on U-joint 1" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/thumb_ujoint_2.jpg" alt="Tendon actuation on U-joint 2" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2 mt-4 pt-2">
+                    <h4 id="decoupling" class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20">2.3 Kinematic Decoupling Strategy</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The principal challenge was routing an additional independent tendon required to actuate the thumb’s distal tip without coupling it to the base joint’s movements. I solved this by routing the distal tendon through the concentric center of rotation of the universal joint. This minimized changes in tendon length regardless of base orientation, reducing the need for additional software compensation or active control strategies.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Although the distal tendon was decoupled, I couldn’t find a great decoupling strategy for the tendons controlling the u-joint itself before the end of my internship. I settled on the same axis of rotation bending technique used on the center running tendon.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/tendon_path.jpg" alt="Tendon routing path" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/ujoint_decoupling.jpg" alt="U-joint decoupling" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The two tendons controlling the outer ring would remain taut throughout articulation, while the two tendons driving the inner ring would bend about the outer ring’s axis of rotation before entering the palm. I explored several alternative concepts, including a spherical gear design intended to eliminate the swinging motion of the two inner tendons, though none proved successful.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        In retrospect, a more robust solution would likely have involved mechanically separating the two degrees of freedom and/or incorporating rollers or pulley surfaces to better manage tendon wrap throughout the thumb’s range of motion.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 id="dynamics" class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20">3. Underactuated Dynamics</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    Three approaches were considered for finger flexion and extension:
+                </p>
+                
+                <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800 my-4">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+                            <tr>
+                                <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-1/4">Type</th>
+                                <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-3/8">Advantages</th>
+                                <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-3/8">Disadvantages</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-zinc-700 dark:text-zinc-300 font-medium divide-y divide-zinc-200 dark:divide-zinc-800">
+                            <tr>
+                                <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Passive Elastic Extension</td>
+                                <td class="p-4 align-top">Reduced actuator and tendon count; naturally compliant, tolerant to positioning error</td>
+                                <td class="p-4 align-top">Reduced extension authority; non-linear restoring force; limited positional control</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Dedicated Flexion + Extension</td>
+                                <td class="p-4 align-top">Full control; deterministic joint positioning</td>
+                                <td class="p-4 align-top">Increased actuator count; poor passive compliance without force control</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Bidirectional Tendon</td>
+                                <td class="p-4 align-top">Single actuator controls both flexion and extension; compact</td>
+                                <td class="p-4 align-top">Tendon slack and tensioning issues; reduced compliance; sensitive to cable creep and backlash</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    <strong class="text-zinc-900 dark:text-zinc-50">Decision:</strong> I chose a passive elastic extension architecture. This reduced actuator and tendon count while enabling naturally compliant grasping behaviour.
+                </p>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    The primary trade-offs were reduced extension authority, lower positional controllability, and a non-linear restoring force throughout the finger’s range of motion. However, given the inexpensive hobby servos I was prototyping with, which were operating through PWM signals with no force sensing or feedback, passive extension was the only architecture capable of compliant grasping. Tendons were terminated using embedded knots within the finger components. Extension cables were secured using fasteners on the back of the fingers.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/finger_assembly.jpg" alt="Finger assembly and tendon routing" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/finger_assembly.jpg" alt="Finger assembly and tendon routing" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="space-y-2 mt-4">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">Sequential Joint Flexion</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I configured the tendon routing geometry and linkage proportions within the fingers to produce a non-uniform mechanical advantage across the joints. During flexion, the proximal joint would rotate first under tendon tension before progressively transferring torque to the medial and distal joints. This underactuated behaviour allowed the fingers to naturally wrap and conform around arbitrary object geometries during grasping.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        In practice, tuning this behaviour was challenging due to uncertain elastic restoring forces, friction losses and variability within the tendon routing. Using one tendon to drive all three joints significantly simplified the mechanism but also reduced controllability and made the flexion sequence highly sensitive to small changes in geometry and system friction.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">4. System Integration</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    The palm and the forearm were built as simple routing pieces for the tendons and mounting for the servos. The control stack consisted of a Raspberry Pi commanding seven hobby servos through a PCA9685 PWM driver board, allowing for coordinated, multi-DOF grasping sequences.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/palm_forearm.jpg" alt="Palm and forearm assembly" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/compute_setup.jpg" alt="Compute and electronics setup" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">5. Retrospective and Lessons Learned</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    Looking back, this project was a success as a first engineering project with a goal to build a functioning, posable hand that matched human proportions. However, there is a long list of things I would do differently today:
+                </p>
+                
+                <ul class="list-disc list-outside ml-5 space-y-3 mt-4 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    <li>
+                        <strong class="text-zinc-900 dark:text-zinc-100">Tendon Material and Terminations:</strong> Using thin fishing line made routing easy, but it was incredibly frustrating to tie off. The knots would slowly slip under tension, changing the finger calibration over time.
+                    </li>
+                    <li>
+                        <strong class="text-zinc-900 dark:text-zinc-100">Passive Extension Element:</strong> The elastic bands used fatigued quickly and their extension force was unknown. It was also difficult to consistently terminate them.
+                    </li>
+                    <li>
+                        <strong class="text-zinc-900 dark:text-zinc-100">Actuator Limits:</strong> The cheap hobby servos were tough to work with. Operating on open-loop PWM signals with zero force feedback meant I couldn't command a specific grip strength; I just had to drive the motor until the passive mechanics did the wrapping.
+                    </li>
+                </ul>
+                
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed pt-2">
+                    Plus, many others. I learned a lot about cable-driven systems from this project that I brought forward with me to future challenges and experiences. A lot of that can be seen in the work I did at Proception AI.
+                </p>
+            </div>
+
         </article>
     </main>
 
-    <!-- Compact Footer matching charcoal design rules -->
-    <footer class="border-t border-zinc-200 bg-white transition-colors duration-200">
-        <div class="max-w-3xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+        <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
             © 2026 Yang Lu. Built clean, with vibes.
         </div>
     </footer>
