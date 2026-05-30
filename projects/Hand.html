@@ -248,7 +248,7 @@
                     <strong class="text-zinc-900 dark:text-zinc-50">Decision:</strong> I chose a passive elastic extension architecture. This reduced actuator and tendon count while enabling naturally compliant grasping behaviour.
                 </p>
                 <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                    The primary trade-offs were reduced extension authority, lower positional controllability, and a non-linear restoring force throughout the finger’s range of motion. However, given the inexpensive hobby servos I was prototyping with, which were operating through PWM signals with no force sensing or feedback, passive extension was the only architecture capable of compliant grasping. Tendons were terminated using embedded knots within the finger components. Extension cables were secured using fasteners on the back of the fingers.
+                    The primary trade-offs were reduced extension authority, lower positional controllability, and a non-linear restoring force throughout the finger’s range of motion. However, given the inexpensive hobby servos I was prototyping with, which were operating through PWM signals with no force sensing or feedback, passive extension was the only architecture capable of compliant grasping (discounting SEAs). Tendons were terminated using embedded knots within the finger components. Extension cables were secured using fasteners on the back of the fingers.
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
@@ -274,7 +274,7 @@
             <div class="space-y-4 pt-4">
                 <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">4. System Integration</h3>
                 <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                    The palm and the forearm were built as simple routing pieces for the tendons and mounting for the servos. The control stack consisted of a Raspberry Pi commanding seven hobby servos through a PCA9685 PWM driver board, allowing for coordinated, multi-DOF grasping sequences.
+                    The palm and the forearm were built as simple routing pieces for the tendons and mounting for the servos. The control stack consisted of a Raspberry Pi commanding seven hobby servos pulling nine tendons through a PCA9685 PWM driver board, allowing for coordinated, multi-DOF grasping sequences.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                     <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
