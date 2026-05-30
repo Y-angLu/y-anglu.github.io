@@ -5,32 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write-up: Coming Soon</title>
     
+    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
     
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
-        }
-
-        /* HARD-CODED NATIVE FALLBACKS:
-           Bypasses the Tailwind runtime engine entirely during the first paint frame */
-        html {
-            background-color: #f4f4f5 !important;
-        }
-        html.dark {
-            background-color: #121212 !important;
-            color-scheme: dark;
-
-            --color-zinc-50: #121212;
-            --color-zinc-900: var(--color-zinc-100);
-            --color-zinc-700: var(--color-zinc-300); 
-            --color-zinc-600: var(--color-zinc-100);
-            --color-zinc-200: #27272a;               
-            --color-white: #121212; 
         }
 
         /* PURE CSS ANTI-FLASH SHIELD */
