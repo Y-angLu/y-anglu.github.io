@@ -59,9 +59,9 @@
     </header>
 
     <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
-        <article class="space-y-8">
+        <article class="space-y-5">
             
-            <div class="space-y-3">
+            <div class="space-y-2">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Robotic Hand</h1>
                 </div>
@@ -87,18 +87,10 @@
             
             <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
             
-            <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed space-y-4">
+            <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                 <p>
                     Robotic hands originally inspired me to pursue engineering, so building one felt like the perfect first engineering project: a highly dexterous, anthropomorphic hand.
                 </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                        <img src="../images/projects/robotic_hand_final_1.jpg" alt="Final assembled robotic hand 1" class="w-full h-full object-cover">
-                    </div>
-                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                        <img src="../images/projects/robotic_hand_final_2.jpg" alt="Final assembled robotic hand 2" class="w-full h-full object-cover">
-                    </div>
-                </div>
             </div>
 
             <div class="space-y-4 pt-4">
@@ -155,10 +147,10 @@
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                            <img src="../images/projects/thumb_ujoint_1.jpg" alt="U-joint mechanism" class="w-full h-full object-cover">
+                            <img src="../images/projects/hand/cmc_joint.png" alt="CMC joint comparison" class="w-full h-full object-cover">
                         </div>
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                            <img src="../images/projects/thumb_ujoint_2.jpg" alt="U-joint mechanism detail" class="w-full h-full object-cover">
+                            <img src="../images/projects/hand/u-joint_axis.png" alt="U-joint axis diagram" class="w-full h-full object-cover">
                         </div>
                     </div>
                     
@@ -174,10 +166,10 @@
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                            <img src="../images/projects/thumb_ujoint_1.jpg" alt="Tendon actuation on U-joint 1" class="w-full h-full object-cover">
+                            <img src="../images/projects/hand/u-joint_tendons.jpg" alt="Tendon setup on U-joint" class="w-full h-full object-cover">
                         </div>
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                            <img src="../images/projects/thumb_ujoint_2.jpg" alt="Tendon actuation on U-joint 2" class="w-full h-full object-cover">
+                            <img src="../images/projects/hand/u-joint_rotate.jpg" alt="Tendon actuation on U-joint" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
@@ -193,10 +185,10 @@
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                            <img src="../images/projects/tendon_path.jpg" alt="Tendon routing path" class="w-full h-full object-cover">
+                            <img src="../images/projects/hand/thumb_decoupling.jpg" alt="Thumb tendon routing path" class="w-full h-full object-cover">
                         </div>
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                            <img src="../images/projects/ujoint_decoupling.jpg" alt="U-joint decoupling" class="w-full h-full object-cover">
+                            <img src="../images/projects/hand/u-joint_decoupling.jpg" alt="U-joint decoupling" class="w-full h-full object-cover">
                         </div>
                     </div>
 
@@ -248,15 +240,15 @@
                     <strong class="text-zinc-900 dark:text-zinc-50">Decision:</strong> I chose a passive elastic extension architecture. This reduced actuator and tendon count while enabling naturally compliant grasping behaviour.
                 </p>
                 <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                    The primary trade-offs were reduced extension authority, lower positional controllability, and a non-linear restoring force throughout the finger’s range of motion. However, given the inexpensive hobby servos I was prototyping with, which were operating through PWM signals with no force sensing or feedback, passive extension was the only architecture capable of compliant grasping (discounting SEAs). Tendons were terminated using embedded knots within the finger components. Extension cables were secured using fasteners on the back of the fingers.
+                    The primary trade-offs were reduced extension authority, lower positional controllability, and a non-linear restoring force throughout the finger’s range of motion. However, given the inexpensive hobby servos I was prototyping with, which were operating through PWM signals with no externally available force sensing or feedback, passive extension was the most practical architecture capable of compliant grasping (discounting more complex solutions like SEAs). Tendons were terminated using embedded knots within the finger components. Extension cables were secured using fasteners on the back of the fingers.
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
                     <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                        <img src="../images/projects/finger_assembly.jpg" alt="Finger assembly and tendon routing" class="w-full h-full object-cover">
+                        <img src="../images/projects/hand/fingers.png" alt="Fingers" class="w-full h-full object-cover">
                     </div>
                     <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                        <img src="../images/projects/finger_assembly.jpg" alt="Finger assembly and tendon routing" class="w-full h-full object-cover">
+                        <img src="../images/projects/hand/extension_elastics.png" alt="Finger elastic extension cables" class="w-full h-full object-cover">
                     </div>
                 </div>
 
@@ -278,16 +270,32 @@
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                     <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                        <img src="../images/projects/palm_forearm.jpg" alt="Palm and forearm assembly" class="w-full h-full object-cover">
+                        <img src="../images/projects/hand/deconstructed.png" alt="Deconstructed hand" class="w-full h-full object-cover">
                     </div>
                     <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                        <img src="../images/projects/compute_setup.jpg" alt="Compute and electronics setup" class="w-full h-full object-cover">
+                        <img src="../images/projects/hand/electronics.png" alt="Compute and electronics setup" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
 
             <div class="space-y-4 pt-4">
                 <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">5. Retrospective and Lessons Learned</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/hand/hand_pinch.png" alt="Hand pose 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/hand/rock_pose.png" alt="Hand pose 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/hand/peace_pose.png" alt="Hand pose 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="../images/projects/hand/spread_pose.png" alt="Hand pose 4" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
                 <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                     Looking back, this project was a success as a first engineering project with a goal to build a functioning, posable hand that matched human proportions. However, there is a long list of things I would do differently today:
                 </p>
@@ -301,6 +309,9 @@
                     </li>
                     <li>
                         <strong class="text-zinc-900 dark:text-zinc-100">Actuator Limits:</strong> The cheap hobby servos were tough to work with. Operating on open-loop PWM signals with zero force feedback meant I couldn't command a specific grip strength; I just had to drive the motor until the passive mechanics did the wrapping.
+                    </li>
+                    <li>
+                        <strong class="text-zinc-900 dark:text-zinc-100">Limited Degrees of Freedom:</strong> Driving each finger with a single tendon cable restricted overall posability. Adding independent tendons per joint would enable individual joint articulation and support active abduction/adduction.
                     </li>
                 </ul>
                 
