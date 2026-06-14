@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write-up: Coming Soon</title>
+    <title>Project: Quadruped</title>
     
     <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
 
@@ -30,12 +30,6 @@
         body {
             font-family: 'Quicksand', sans-serif;
         }
-
-        /* PURE CSS ANTI-FLASH SHIELD */
-        html.no-js body {
-            visibility: hidden !important;
-            opacity: 0 !important;
-        }
     </style>
 
     <script>
@@ -48,12 +42,10 @@
             } else {
                 document.documentElement.classList.remove('dark');
             }
-            
-            document.documentElement.classList.remove('no-js');
         })();
     </script>
 </head>
-<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200 flex flex-col min-h-screen">
+<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
 
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
@@ -66,36 +58,392 @@
         </div>
     </header>
 
-    <main class="flex-1 w-full max-w-3xl mx-auto px-6 flex flex-col items-center justify-center py-12">
-        
-        <div class="flex flex-col items-center text-center space-y-6 max-w-sm">
+    <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+        <article class="space-y-5">
             
-            <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800/40 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-sm">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"></path>
-                </svg>
-            </div>
+            <div class="space-y-2">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Quadruped</h1>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                    <span>September 2023 – December 2023</span>
+                    <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
+                    <span>Personal Project</span>
+                </div>
 
-            <div class="space-y-3">
-                <span class="inline-block px-3 py-1 text-[10px] font-bold tracking-widest uppercase bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 rounded-full border border-zinc-300/30 dark:border-zinc-700/30">
-                    Work in Progress
-                </span>
-                
-                <h1 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                    Documentation Pending
-                </h1>
-                
-                <p class="text-zinc-500 dark:text-zinc-400 font-medium text-sm leading-relaxed">
-                    Currently compiling the details. Check back soon for the full write-up!
+                <div class="flex flex-wrap gap-2 py-1 mt-1">
+                    <a href="#mechanical-design" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors cursor-pointer">
+                        Mechanical Design
+                    </a>
+                    <a href="#inverse-kinematics" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors cursor-pointer">
+                        Inverse Kinematics
+                    </a>
+                    <a href="#gait-generation" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors cursor-pointer">
+                        Gait and Step Generation
+                    </a>
+                </div>
+            </div>
+            
+            <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
+            
+            <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                <p>
+                    After building a robotic hand, I wanted to transition from a stationary mechanism to a standalone, dynamic robotic system. Inspired by Boston Dynamics' Spot, I set out to design and build my own quadruped robot from scratch.
                 </p>
             </div>
 
-        </div>
+            <div class="space-y-4 pt-4">
+                <h3 id="mechanical-design" class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20">1. Mechanical Design</h3>
+                
+                <div class="space-y-4 mt-4">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">1.1 Leg Topologies</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The first design challenge was developing the leg architecture. To constrain cost and complexity, all joints were required to use standard hobby servos. Since each leg required three degrees of freedom (two in the sagittal plane, one at the hip for roll), I evaluated three primary actuation architectures for the thigh and tibia:
+                    </p>
+                    
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800 my-4">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+                                <tr>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-1/4">Type</th>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-3/8">Advantages</th>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-3/8">Disadvantages</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-zinc-700 dark:text-zinc-300 font-medium divide-y divide-zinc-200 dark:divide-zinc-800">
+                                <tr>
+                                    <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Direct Drive</td>
+                                    <td class="p-4 align-top">Zero linkage backlash; simple geometric inverse kinematics; high transmission efficiency</td>
+                                    <td class="p-4 align-top">High distal mass; maximizes swing-phase rotational inertia; requires higher torque at the hip</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Offset Actuator</td>
+                                    <td class="p-4 align-top">Simpler kinematics compared to full closed-loop linkage; marginally reduced distal mass</td>
+                                    <td class="p-4 align-top">Bulky form factor; requires higher torque at the hip; significant mass mid-limb</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">Co-located Actuators (6-Bar Linkage)</td>
+                                    <td class="p-4 align-top">Actuator mass is concentrated entirely at the hip; significantly reduced rotational inertia; highly compact packaging</td>
+                                    <td class="p-4 align-top">High mechanical complexity; potential for linkage backlash/friction; nonlinear torque delivery (cosine losses)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/direct_drive_leg.jpg" alt="Direct Drive Leg Architecture" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">Direct Drive</div>
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/offset_actuator_leg.jpg" alt="Offset Actuator Leg Architecture" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">Offset Actuator</div>
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/6bar_linkage_leg.jpg" alt="6-Bar Linkage Leg Architecture" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">6-Bar Linkage</div>
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-50">Decision:</strong> I chose the 6-bar linkage architecture. Co-locating the thigh and tibia actuators at the hip concentrated nearly all leg mass close to the body, significantly reducing swing-phase inertia and the torque demand placed on the hip roll actuator. Given the limited torque capabilities of hobby servos, this reduction in rotational inertia outweighed the additional mechanical complexity and nonlinear transmission characteristics introduced by the linkage system.
+                    </p>
+                </div>
+
+                <div class="space-y-4 mt-6">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">6-Bar Linkage and Force Optimization</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        To actuate the tibia from the hip, I implemented a variation of a Watt’s linkage. A critical design challenge was sizing the linkage lengths to maximize torque delivery across the leg's effective range of motion (ROM).
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 text-sm font-semibold">
+                            <img src="" alt="[Insert leg design image here]" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 text-sm font-semibold">
+                            <img src="" alt="[Insert linkage design image here]" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I optimized the linkage dimensions to maintain a transmission angle as close to 90° as possible during the stance phase. Since ground reaction forces are only present while the foot is in contact with the ground, maximizing force transmission in this region provided the greatest improvement in overall locomotive performance. Furthermore, this linkage architecture provided a distinct kinematic advantage: joint decoupling. In a standard serial chain, moving the thigh alters the absolute angle of the tibia, creating a coupled system. The parallel nature of the 6-bar linkage largely decoupled radial extension from the angular sweep of the leg, simplifying the inverse kinematic control loop.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/quadruped/decoupled_extension.jpg" alt="Kinematic Decoupling Extension Diagram" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                            <img src="../images/projects/quadruped/decoupled_sweep.jpg" alt="Kinematic Decoupling Sweep Diagram" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        However, because packaging constraints prevented the linkage pivot from being perfectly concentric with the servo’s axis, the mechanism suffered from slight cosine losses. The effective lever arm changed as a function of the joint angle, meaning torque delivery was non-linear at the extreme ends of the leg's flexion and extension. This informed actuator selection to ensure sufficient torque margin near the boundaries of the operating workspace.
+                    </p>
+                </div>
+
+                <div class="space-y-4 mt-8">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">1.2 Dynamic Loading and Actuator Sizing</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        A major shortcoming of the first quadruped I built was not properly designing the leg geometry given the servos I was using. V1 frequently demanded torques near the servo’s stall limits, resulting in stalling, poor efficiency, and failures from drivetrain wear. Therefore, for V2 and V3, leg dimensions were strictly derived from defined actuator torque budgets.
+                    </p>
+                    
+                    <div class="space-y-2 mt-4">
+                        <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">Establishing the Torque Budget</h5>
+                        <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                            The servos I was using for the leg joints were rated for a stall torque of <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert spec here)</span>. V1 showed that operating near and at stall torques were unsustainable for continuous operation. Therefore, for V2 onwards, I conservatively limited the allowable operating torques to <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert percentage)</span> of the rate stall limit. This established a torque budget of <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert number)</span> per joint, which became the primary mechanical constraint governing the leg geometry.
+                        </p>
+                        <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                            Working with V1 showed that the highest joint load occurred during dynamic motion, specifically when only two legs support the entire weight of the robot midway through its trot. Using V1’s weight of <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert weight here)</span>, the ground reaction force acting on a single leg is:
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                                <img src="" alt="[Insert leg diagram here]" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                                <img src="" alt="[Insert force calculations here]" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                            This derivation is greatly simplified and ignores factors such as impact loading and body acceleration, but it served as a conversative first order baseline for linkage sizing. For the hip actuator, the worst-case loading condition occurs when the robot is in a deep crouch. In this configuration the horizontal distance between the foot contact point and hip joint is maximized, producing the largest bending moment about the hip. Using the maximum torque limit and the calculated ground reaction force, the largest horizontal moment arm the servos could support was calculated as:
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                                <img src="" alt="[Insert hip diagram here]" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                                <img src="" alt="[Insert force calculations here]" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 mt-4">
+                        <h5 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">Selecting the Leg Dimensions</h5>
+                        <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                            With the absolute horizontal limit of <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert number)</span> derived, the overall leg geometry could be sized without the risk of stalling the motors.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                                <img src="" alt="[Insert full leg calculations here]" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                                <img src="" alt="[Insert final design here]" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                            I ultimately selected a femur length of <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert length)</span> and a tibia length of <span class="text-zinc-900 dark:text-white bg-zinc-200/50 dark:bg-zinc-800/50 px-1 rounded">(insert length)</span>. The tibia was made slightly longer than the femur to improve toe clearance during swing phase while extending the reachable forward workspace.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-2 mt-8">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">1.3 Chassis Iterations and System Integration</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Building this quadruped was a highly iterative process. The platform underwent three major design iterations, each addressing limitations identified during testing of the previous revision.
+                    </p>
+                    
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800 my-4">
+                        <table class="w-full text-left text-sm border-collapse min-w-[600px]">
+                            <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:bg-zinc-100">
+                                <tr>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-[10%]">Version</th>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-[30%]">Key Features</th>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-[30%]">Identified Issues</th>
+                                    <th class="p-4 border-b border-zinc-200 dark:border-zinc-800 font-bold w-[30%]">Design Iteration/Fix</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-zinc-700 dark:text-zinc-300 font-medium divide-y divide-zinc-200 dark:divide-zinc-800">
+                                <tr>
+                                    <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">V1</td>
+                                    <td class="p-4 align-top">Initial 6-bar linkage prototype; inverted Raspberry Pi mount</td>
+                                    <td class="p-4 align-top">Legs were oversized; servos overloaded by excessive lever arms; Pi was inaccessible; poor cable management</td>
+                                    <td class="p-4 align-top">Conducted torque calculations to shorten leg lengths; optimized linkage ratios; shrank the overall chassis; switched to Arduino</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">V2</td>
+                                    <td class="p-4 align-top">Minimized leg lengths; high compact chassis footprint</td>
+                                    <td class="p-4 align-top">Unserviceable design; disorganized wire nesting; CoM shifted rearward due to board placement, causing asymmetric leg loading</td>
+                                    <td class="p-4 align-top">Transitioned to internal cable routing; shifted compute mounting and design to align physical CoM</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">V3</td>
+                                    <td class="p-4 align-top">Internal cable channels; aligned CoM; upgraded high-torque hip actuators</td>
+                                    <td class="p-4 align-top">(Final iteration) The initial mini hip servos periodically stalled during walking gait</td>
+                                    <td class="p-4 align-top">Integrated higher-torque actuators for the hip roll; improved 3D-printability of components</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/chassis_v1.jpg" alt="Version 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">Version 1</div>
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/chassis_v2.jpg" alt="Version 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">Version 2</div>
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/chassis_v3.jpg" alt="Version 3 (Final)" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">Version 3 (Final)</div>
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
+                            <img src="../images/projects/quadruped/chassis_comparison.jpg" alt="All CAD Versions" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 id="inverse-kinematics" class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20">2. Inverse Kinematics and Gait Generation</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    Given the hardware constraints with open-loop servos, control of the quadruped was strictly kinematic and feedforward.
+                </p>
+
+                <div class="space-y-2 mt-4">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">2.1 Single-Leg Inverse Kinematics</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Each leg has three degrees of freedom: a hip roll joint and the two sagittal-plane joints (femur and tibia) driven by the co-located 6-bar linkage. The inverse kinematics solve for these three angles given a desired foot position expressed in the leg’s hip frame.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                            <img src="" alt="[Insert IK diagram here]" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                            <img src="" alt="[Insert derivations here]" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        It’s worth noting that the planar solver returns an abstract tibia joint angle, not the angle seen from its driving servo. This non-linear behaviour is due to the 6-bar linkage. A final transmission mapping was needed to convert the desired joint angle into the corresponding servo angle.
+                    </p>
+                </div>
+
+                <div class="space-y-2 mt-6">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">2.2 Global Body Pose Control via Homogeneous Transforms</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Per-leg IK only positions a single foot, but the robot needs to coordinate all four legs to control its overall posture. To handle this, I used homogeneous transformation matrices to compose rotation (yaw, pitch, roll) and translation (x, y, z) as a single 4×4 operation.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                            <img src="" alt="[Insert derivations here]" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                            <img src="" alt="[Insert diagram of body here]" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The key idea is that the feet stay planted in the world while the body moves above them. To command a body orientation, each foot’s position is first expressed relative to the body center rather than its local hip. The desired body rotation is then applied. Because the body rotates while the contact points stay fixed, the foot targets in the body frame transform by the inverse of the intended body rotation. The result is translated back into the corresponding hip frame and handed to the single leg IK solver, which returns the joint angles that realize the new pose.
+                    </p>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Concretely, for each leg the foot target is shifted from the hip to the body center, multiplied by the inverse rotation matrix, and shifted back by the hip offset. Expressing this as homogeneous transforms means one consistent operation handles pure translations as well as rotations.
+                    </p>
+
+                </div>
+
+                <div class="space-y-2 mt-6">
+                    <h4 id="gait-generation" class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20">2.3 Trot Gait and Step Trajectory Generation</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The robot walks using a standard trot gait. By moving diagonal leg pairs in antiphase, two legs are always grounded. This kept the robot's center of mass stable at low speeds, which was needed due to its open-loop control.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                            <img src="" alt="[Insert diagram of gait here]" class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+                            <img src="" alt="[Insert picture of trotting here]" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Each foot’s trajectory was split into a stance phase and a swing phase. Through testing I found that interpolating the step waypoints with a sinusoidal profile worked best. This avoided any velocity discontinuities, or jerk, and allowed me to quickly change the foot path’s height and frequency. Additionally, I could easily speed up and slow down the gait by reducing and adding the number of interpolation points per cycle, at the cost of smoothness.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        A discovery I made while tinkering with gait timings was the importance of where the stance stroke is centered. My first trajectories were centered on each leg’s neutral standing position, which placed the average contact point behind the hips and shifted the effective center of mass rearwards, making the quadruped back-heavy. Biasing the stance phase forward of neutral recentered the load and noticeably improved stability.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <h3 id="electrical-integration" class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20">3. Electrical and Software Integration</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    Electronics and software were supporting systems rather than the focus of this project, so the implementation prioritized simplicity and reliability using off-the-shelf components.
+                </p>
+
+                <div class="space-y-2 mt-4">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">3.1 Power and Electronics</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Two 2S LiPo batteries powered the robot through a buck converter supplying separate servo and logic power rails. Twelve hobby servos were controlled through a PCA9685 PWM driver over I²C. While early revisions used a Raspberry Pi, the final design transitioned to an Arduino since the workload was simple and didn’t require a full Linux system. Separating the high-current servo supply from the logic rail prevented brownouts during large transient loads.
+                    </p>
+                </div>
+
+                <div class="space-y-2 mt-6">
+                    <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">3.2 Software and Simulation</h4>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Control software followed an iterative workflow: gait generation -> body-pose transform -> inverse kinematics -> servo commands. It also included a calibration file that mapped each kinematic zero to its servo’s commanded pulse width. The pipeline was first developed and tuned in Python, then ported to run directly on the microcontroller in the final iteration.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        To reduce hardware debugging time, I built a lightweight 3D kinematic simulator in Matplotlib that implemented the same kinematic model as the robot. This let gait trajectories, workspace limits, and kinematic errors be validated in software before testing on hardware.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="space-y-4 pt-4">
+                <h3 id="retrospectives" class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20">4. Retrospectives and Lessons Learned</h3>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    This was my first dynamic robotic system and highlighted the gap between a mechanism that poses correctly and one that moves well. It was rewarding to watch the platform walk, but several limitations became apparent:
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="" alt="Hand pose 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="" alt="Hand pose 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="" alt="Hand pose 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                        <img src="" alt="Hand pose 4" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <ul class="list-disc pl-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed mt-4 marker:text-zinc-400 dark:marker:text-zinc-600">
+                    <li><strong class="text-zinc-900 dark:text-zinc-100">Closing the control loop:</strong> The single biggest limitation was open-loop control with no force or inertial feedback. Adding current or torque sensing and fusing an IMU would enable an active and optimized gait policy.</li>
+                    <li><strong class="text-zinc-900 dark:text-zinc-100">Improving structural stiffness and overall quality:</strong> Compliance in the 3D-printed components, joints, and hobby servos reduced system accuracy. Higher-quality actuators and stiffer, possibly machined components would improve performance.</li>
+                    <li><strong class="text-zinc-900 dark:text-zinc-100">Increasing foot traction:</strong> The printed feet frequently slipped during walking. Adding overmolded silicone foot pads would increase grip and improve gait stability.</li>
+                    <li><strong class="text-zinc-900 dark:text-zinc-100">Designing for integration:</strong> The final quadruped lacked a polished A surface and didn’t integrate its hardware components well. I’d also love to add easily swappable battery ports and proper IMU mounting.</li>
+                </ul>
+
+                <div class="mt-6 p-4 bg-zinc-100 dark:bg-zinc-800/30 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I ended up handing this quadruped off to my friend, Ethan Woo, who used it to develop RL simulation and control policies for movement. His GitHub repository can be found here: 
+                        <a href="https://github.com/ethancpwoo/quadrupedal-sim" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors underline decoration-blue-600/30 dark:decoration-blue-400/30 underline-offset-2">
+                            quadrupedal-sim
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+        </article>
     </main>
 
-    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
-        <div class="max-w-3xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+        <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
             © 2026 Yang Lu. Built clean, with vibes.
         </div>
     </footer>
