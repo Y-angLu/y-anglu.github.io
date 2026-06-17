@@ -8,10 +8,7 @@
     <!-- Custom Browser Favicon Symbol -->
     <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
 
-    <!-- Google Fonts: Quicksand -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="../fonts/Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
     
     <!-- Tailwind CSS v3 CDN (Stable for Class-Based Dark Mode) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,8 +27,16 @@
     </script>
     
     <style>
+        @font-face {
+            font-family: 'Quicksand';
+            src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
     </style>
 
