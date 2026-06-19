@@ -1,7 +1,8 @@
-// Execute immediately to set up the theme toggle and tab navigation
+// Initialize all modules once the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initTabs();
+    initHorizontalScroll();
 });
 
 /**
@@ -14,7 +15,6 @@ function initTheme() {
 
     if (!themeToggleBtn) return;
 
-    // Helper to update visual icon states based on current HTML element layout class
     function updateIcons(isDark) {
         if (isDark) {
             moonIcon.classList.add('hidden');
@@ -25,10 +25,8 @@ function initTheme() {
         }
     }
 
-    // Check localStorage or fallback to preferred system browser defaults
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
     const shouldBeDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
 
     if (shouldBeDark) {
@@ -39,11 +37,8 @@ function initTheme() {
         updateIcons(false);
     }
 
-    // Toggle logic on click
     themeToggleBtn.addEventListener('click', () => {
         const isDarkNow = document.documentElement.classList.toggle('dark');
-        
-        // Save state to local browser memory for reference by the template pages
         localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
         updateIcons(isDarkNow);
     });
@@ -53,22 +48,16 @@ function initTheme() {
  * 2. PORTFOLIO TABS NAVIGATION MANAGEMENT
  */
 function initTabs() {
-    // Expose the showSection function to window scope so onclick handlers work inline
     window.showSection = function(sectionId) {
-        // Hide all major section layout blocks
         const sections = document.querySelectorAll('.content-section');
         sections.forEach(sec => sec.classList.add('hidden'));
 
-        // Target and reveal the chosen clicked view container
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
             targetSection.classList.remove('hidden');
         }
 
-        // Keep page scrolling positioned cleanly at top on layout swap
         window.scrollTo({ top: 0, behavior: 'instant' });
-
-        // Update navigation link underlines/colors dynamically
         updateActiveNavStyles(sectionId);
     };
 }
@@ -77,19 +66,75 @@ function updateActiveNavStyles(activeId) {
     const navButtons = document.querySelectorAll('nav button.nav-link');
     
     navButtons.forEach(btn => {
-        // Normalizes string match clean up
         const isMatch = btn.textContent.trim().toLowerCase() === activeId.toLowerCase();
         
         if (isMatch) {
-            // Apply active styles for both light and dark modes
             btn.classList.add('text-zinc-900', 'dark:text-zinc-50');
-            // Remove inactive styles for both light and dark modes
             btn.classList.remove('text-zinc-600', 'dark:text-zinc-400');
         } else {
-            // Remove active styles for both light and dark modes
             btn.classList.remove('text-zinc-900', 'dark:text-zinc-50');
-            // Apply inactive styles for both light and dark modes
             btn.classList.add('text-zinc-600', 'dark:text-zinc-400');
         }
+    });
+}
+
+/**
+ * 3. HORIZONTAL SCROLL MANAGEMENT (Experiences)
+ */
+function initHorizontalScroll() {
+    const slider = document.getElementById('experiences-scroll');
+    const btnLeft = document.getElementById('scroll-left');
+    const btnRight = document.getElementById('scroll-right');
+
+    if (!slider) return;
+
+    // --- Click to Scroll ---
+    const scrollAmount = 280; 
+
+    btnLeft?.addEventListener('click', () => {
+        slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    btnRight?.addEventListener('click', () => {
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    const handleScrollState = () => {
+        if (btnLeft) btnLeft.disabled = slider.scrollLeft <= 0;
+        if (btnRight) btnRight.disabled = slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 1;
+    };
+    
+    slider.addEventListener('scroll', handleScrollState);
+    window.addEventListener('resize', handleScrollState);
+    handleScrollState();
+
+    // --- Drag to Scroll ---
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.remove('snap-x', 'snap-mandatory', 'scroll-smooth');
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.add('snap-x', 'snap-mandatory', 'scroll-smooth');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.add('snap-x', 'snap-mandatory', 'scroll-smooth');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2; 
+        slider.scrollLeft = scrollLeft - walk;
     });
 }

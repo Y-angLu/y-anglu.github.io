@@ -150,18 +150,22 @@
             <div class="space-y-4">
                 <div>
                     <h2 class="text-xl font-bold tracking-tight">Experiences</h2>
-                    <div class="flex items-center space-x-1 mt-1 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                    <!-- <div class="flex items-center space-x-1 mt-1 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
                         <span>Chronological Scroll</span>
                         <svg class="w-3 h-3 text-zinc-500 animate-pulse-x ml-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
                         </svg>
-                    </div>
+                    </div> -->
                 </div>
                 
-                <div class="relative">
-                    <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 hide-scrollbar pr-12">
+                <div class="relative group">
+                    <button id="scroll-left" class="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 dark:bg-[#121212]/80 backdrop-blur border border-zinc-200 dark:border-zinc-800 shadow-sm text-zinc-600 dark:text-zinc-400 opacity-0 group-hover:opacity-100 transition-all disabled:opacity-0 hidden sm:flex items-center justify-center hover:text-zinc-900 dark:hover:text-zinc-50 cursor-pointer scale-95 hover:scale-100" aria-label="Scroll left">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"></path></svg>
+                    </button>
+                
+                    <div id="experiences-scroll" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 hide-scrollbar pr-12 scroll-smooth cursor-grab active:cursor-grabbing">
                         
-                        <a href="experiences/Humanoid.html" class="w-64 flex-none snap-start group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
+                        <a href="experiences/Humanoid.html" class="w-64 flex-none snap-start group/card border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
                             <div class="relative w-full aspect-square bg-zinc-50 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100">
                                 
                                 <div class="absolute top-2 right-2 bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm z-10 uppercase tracking-wider">
@@ -170,45 +174,49 @@
                                 
                                 <img src="images/Humanoid_Robots.jpg" alt="Humanoid" class="w-full h-full object-contain">
                             </div>
-                            <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Humanoid</h3>
+                            <h3 class="font-bold text-zinc-900 group-hover/card:text-zinc-700 transition text-sm mt-3">Humanoid</h3>
                         </a>
-
-                        <a href="experiences/Proception_AI.html" class="w-64 flex-none snap-start group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
+                
+                        <a href="experiences/Proception_AI.html" class="w-64 flex-none snap-start group/card border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
                             <div class="w-full aspect-square bg-zinc-50 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100">
                                 <img src="images/Proception_Hand.jpg" alt="Proception AI" class="w-full h-full object-contain">
                             </div>
-                            <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Proception AI</h3>
+                            <h3 class="font-bold text-zinc-900 group-hover/card:text-zinc-700 transition text-sm mt-3">Proception AI</h3>
                         </a>
-
-                        <a href="experiences/Tesla.html" class="w-64 flex-none snap-start group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
+                
+                        <a href="experiences/Tesla.html" class="w-64 flex-none snap-start group/card border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
                             <div class="w-full aspect-square bg-zinc-50 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100">
                                 <img src="images/Tesla_Model3.jpg" alt="Tesla" class="w-full h-full object-contain">
                             </div>
-                            <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Tesla</h3>
+                            <h3 class="font-bold text-zinc-900 group-hover/card:text-zinc-700 transition text-sm mt-3">Tesla</h3>
                         </a>
-
-                        <a href="experiences/Mycro_Harvest.html" class="w-64 flex-none snap-start group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
+                
+                        <a href="experiences/Mycro_Harvest.html" class="w-64 flex-none snap-start group/card border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
                             <div class="w-full aspect-square bg-zinc-50 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100">
                                 <img src="images/Mycroharvest_Enclosure.jpg" alt="Mycro Harvest" class="w-full h-full object-contain">
                             </div>
-                            <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Mycro Harvest</h3>
+                            <h3 class="font-bold text-zinc-900 group-hover/card:text-zinc-700 transition text-sm mt-3">Mycro Harvest</h3>
                         </a>
-
-                        <a href="experiences/Sanctuary_AI.html" class="w-64 flex-none snap-start group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
+                
+                        <a href="experiences/Sanctuary_AI.html" class="w-64 flex-none snap-start group/card border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
                             <div class="w-full aspect-square bg-zinc-50 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100">
                                 <img src="images/Sanctuary_Phoenix.jpg" alt="Sanctuary AI" class="w-full h-full object-contain">
                             </div>
-                            <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Sanctuary AI</h3>
+                            <h3 class="font-bold text-zinc-900 group-hover/card:text-zinc-700 transition text-sm mt-3">Sanctuary AI</h3>
                         </a>
-
-                        <a href="experiences/Neurocage_Systems.html" class="w-64 flex-none snap-start group border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
+                
+                        <a href="experiences/Neurocage_Systems.html" class="w-64 flex-none snap-start group/card border border-zinc-200 rounded-xl p-3 bg-white hover:border-zinc-400 transition shadow-sm flex flex-col justify-between">
                             <div class="w-full aspect-square bg-zinc-50 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100">
                                 <img src="images/Neurocage_Enclosure.jpg" alt="Neurocage Systems" class="w-full h-full object-contain">
                             </div>
-                            <h3 class="font-bold text-zinc-900 group-hover:text-zinc-700 transition text-sm mt-3">Neurocage Systems</h3>
+                            <h3 class="font-bold text-zinc-900 group-hover/card:text-zinc-700 transition text-sm mt-3">Neurocage Systems</h3>
                         </a>
-
+                
                     </div>
+                
+                    <button id="scroll-right" class="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 dark:bg-[#121212]/80 backdrop-blur border border-zinc-200 dark:border-zinc-800 shadow-sm text-zinc-600 dark:text-zinc-400 opacity-0 group-hover:opacity-100 transition-all disabled:opacity-0 hidden sm:flex items-center justify-center hover:text-zinc-900 dark:hover:text-zinc-50 cursor-pointer scale-95 hover:scale-100" aria-label="Scroll right">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path></svg>
+                    </button>
                 </div>
             </div>
             
