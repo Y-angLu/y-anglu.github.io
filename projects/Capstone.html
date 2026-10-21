@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="Engineering project documentation and technical notes." name="description"/>
+        <title>
+            Nudge + Notice
+        </title>
+        <link href="../images/gear_favicon.png" rel="icon" type="image/png"/>
+        <link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
+        <script src="https://cdn.tailwindcss.com">
+        </script>
+        <script>
+            tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+        </script>
+        <style>
+            @font-face {
+            font-family: 'Quicksand';
+            src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        </style>
+        <script>
+            (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+        </script>
+    </head>
+    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+            <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../index.html">
+                    <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>
+                    Back to Home
+                </a>
+            </div>
+        </header>
+        <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+            <article class="space-y-5">
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">
+                        Nudge + Notice
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                        <span>
+                            September 2026 — Present
+                        </span>
+                        <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">
+                            •
+                        </span>
+                        <span>
+                            Capstone/FYDP
+                        </span>
+                    </div>
+                    <div class="flex flex-wrap gap-2 py-1 mt-1">
+                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_1.html">
+                            Subpage 1
+                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
+                                ↗
+                            </span>
+                        </a>
+                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_2.html">
+                            Subpage 2
+                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
+                                ↗
+                            </span>
+                        </a>
+                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_3.html">
+                            Subpage 3
+                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
+                                ↗
+                            </span>
+                        </a>
+                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_4.html">
+                            Subpage 4
+                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
+                                ↗
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <hr class="border-zinc-200 dark:border-zinc-800 transition-colors"/>
+                <div class="space-y-4">
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        [Write a concise project introduction: what you are building, why it matters, and what makes the engineering challenging. Aim for two to four sentences.]
+                    </p>
+                    <!-- OPTIONAL HERO IMAGE: uncomment and update the path when the image exists.
+   <figure class="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30">
+    <img src="../../images/projects/project-name/hero.jpg" alt="[Project overview]" class="w-full h-auto object-contain" loading="lazy">
+   </figure>
+   -->
+                </div>
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
+                        1. Project Overview
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        [Describe the objective, system-level concept, and scope. This landing page should be readable on its own; reserve the longer derivations and technical detail for the subpages.]
+                    </p>
+                </div>
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
+                        2. System Summary
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium">
+                                <tr>
+                                    <th class="p-4 w-1/3 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
+                                        Point 1
+                                    </th>
+                                    <td class="p-4">
+                                        Info
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="p-4 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
+                                        Point 2
+                                    </th>
+                                    <td class="p-4">
+                                        Info
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="p-4 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
+                                        Point 3
+                                    </th>
+                                    <td class="p-4">
+                                        Info
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="p-4 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
+                                        Point 4
+                                    </th>
+                                    <td class="p-4">
+                                        Info
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="space-y-4 pt-4" id="technical-notes">
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
+                            3. Subpages
+                        </h3>
+                        <p class="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                            Detailed design work, organized by topic.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_1.html">
+                            <div class="flex justify-between items-start gap-3">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                                    01 / Technical note
+                                </span>
+                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                    ↗
+                                </span>
+                            </div>
+                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
+                                Subpage 1
+                            </h3>
+                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
+                                Summary 1
+                            </p>
+                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
+                                Read technical note →
+                            </span>
+                        </a>
+                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_2.html">
+                            <div class="flex justify-between items-start gap-3">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                                    02 / Technical note
+                                </span>
+                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                    ↗
+                                </span>
+                            </div>
+                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
+                                Subpage 2
+                            </h3>
+                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
+                                Summary 2
+                            </p>
+                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
+                                Read technical note →
+                            </span>
+                        </a>
+                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_3.html">
+                            <div class="flex justify-between items-start gap-3">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                                    03 / Technical note
+                                </span>
+                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                    ↗
+                                </span>
+                            </div>
+                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
+                                Subpage 2
+                            </h3>
+                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
+                                Summary 2
+                            </p>
+                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
+                                Read technical note →
+                            </span>
+                        </a>
+                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_4.html">
+                            <div class="flex justify-between items-start gap-3">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                                    04 / Technical note
+                                </span>
+                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                    ↗
+                                </span>
+                            </div>
+                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
+                                Subpage 4
+                            </h3>
+                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
+                                Summary 4
+                            </p>
+                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
+                                Read technical note →
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-4 pt-4">
+                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
+                        4. Current Progress & Next Steps
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Note
+                    </p>
+                </div>
+            </article>
+        </main>
+        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+            <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+                © 2026 Yang Lu. Built clean, with vibes.
+            </div>
+        </footer>
+    </body>
+</html>

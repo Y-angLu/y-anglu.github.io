@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write-up: Coming Soon</title>
+    
+    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
+
+    <link rel="preload" href="../fonts/Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @font-face {
+            font-family: 'Quicksand';
+            src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+    </style>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            
+            document.documentElement.classList.remove('no-js');
+        })();
+    </script>
+</head>
+<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+        <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+            <a href="../Capstone.html" class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                </svg>
+                Back to Capstone
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-3xl mx-auto px-6 flex flex-col items-center justify-center py-12">
+        
+        <div class="flex flex-col items-center text-center space-y-6 max-w-sm">
+            
+            <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800/40 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-sm">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"></path>
+                </svg>
+            </div>
+
+            <div class="space-y-3">
+                <span class="inline-block px-3 py-1 text-[10px] font-bold tracking-widest uppercase bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 rounded-full border border-zinc-300/30 dark:border-zinc-700/30">
+                    Work in Progress
+                </span>
+                
+                <h1 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                    Documentation Pending
+                </h1>
+                
+                <p class="text-zinc-500 dark:text-zinc-400 font-medium text-sm leading-relaxed">
+                    Currently compiling the details. Check back soon for the full write-up!
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
+        <div class="max-w-3xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+            © 2026 Yang Lu. Built clean, with vibes.
+        </div>
+    </footer>
+
+</body>
+</html>
