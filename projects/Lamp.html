@@ -546,56 +546,45 @@
             </div>
         </section>
 
-        <!-- revision strip — horizontal, draggable. add/remove entries freely. -->
         <section class="pb-16 sm:pb-24">
-            <!-- left padding matches the chapter body indent so the strip lines up with the copy above -->
-            <div id="rev-strip" class="mx-auto max-w-5xl flex gap-4 overflow-x-auto hide-scrollbar px-6 sm:pl-[4.5rem] md:pl-[4.75rem] pb-2 snap-x cursor-grab active:cursor-grabbing">
+            <!-- Revision gallery — aligned with chapter body -->
+            <div id="rev-strip" class="mx-auto max-w-5xl px-6 sm:pl-[4.5rem] md:pl-[4.75rem]">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
 
-                <figure class="w-52 sm:w-60 flex-none snap-start">
-                    <!-- <img src="../images/projects/lamp/rev-01.jpg" alt="Revision 01" class="w-full aspect-[4/5] object-cover"> -->
-                    <div class="ph w-full aspect-[4/5]"><span>Rev 01</span></div>
-                    <figcaption class="mt-2 border-t-2 rule-accent pt-2">
-                        <div class="text-xs font-bold tabular-nums">Rev 01 &nbsp;·&nbsp; [ date ]</div>
-                        <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">[ what changed from the last one ]</div>
-                    </figcaption>
-                </figure>
+                    <figure class="min-w-0">
+                        <!-- <img src="../images/projects/lamp/rev-01.jpg" alt="Revision 01" class="w-full aspect-[4/5] object-cover"> -->
+                        <div class="ph w-full aspect-[4/5]"><span>Rev 01</span></div>
+                        <figcaption class="mt-2 border-t-2 rule-accent pt-2">
+                            <div class="text-xs font-bold tabular-nums">Rev 01 &nbsp;·&nbsp; [ date ]</div>
+                            <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">
+                                [ what changed from the last one ]
+                            </div>
+                        </figcaption>
+                    </figure>
 
-                <figure class="w-52 sm:w-60 flex-none snap-start">
-                    <!-- <img src="../images/projects/lamp/rev-02.jpg" alt="Revision 02" class="w-full aspect-[4/5] object-cover"> -->
-                    <div class="ph w-full aspect-[4/5]"><span>Rev 02</span></div>
-                    <figcaption class="mt-2 border-t-2 rule-accent pt-2">
-                        <div class="text-xs font-bold tabular-nums">Rev 02 &nbsp;·&nbsp; [ date ]</div>
-                        <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">[ what changed from the last one ]</div>
-                    </figcaption>
-                </figure>
+                    <figure class="min-w-0">
+                        <!-- <img src="../images/projects/lamp/rev-02.jpg" alt="Revision 02" class="w-full aspect-[4/5] object-cover"> -->
+                        <div class="ph w-full aspect-[4/5]"><span>Rev 02</span></div>
+                        <figcaption class="mt-2 border-t-2 rule-accent pt-2">
+                            <div class="text-xs font-bold tabular-nums">Rev 02 &nbsp;·&nbsp; [ date ]</div>
+                            <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">
+                                [ what changed from the last one ]
+                            </div>
+                        </figcaption>
+                    </figure>
 
-                <figure class="w-52 sm:w-60 flex-none snap-start">
-                    <!-- <img src="../images/projects/lamp/rev-03.jpg" alt="Revision 03" class="w-full aspect-[4/5] object-cover"> -->
-                    <div class="ph w-full aspect-[4/5]"><span>Rev 03</span></div>
-                    <figcaption class="mt-2 border-t-2 rule-accent pt-2">
-                        <div class="text-xs font-bold tabular-nums">Rev 03 &nbsp;·&nbsp; [ date ]</div>
-                        <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">[ what changed from the last one ]</div>
-                    </figcaption>
-                </figure>
+                    <figure class="min-w-0">
+                        <!-- <img src="../images/projects/lamp/rev-03.jpg" alt="Revision 03" class="w-full aspect-[4/5] object-cover"> -->
+                        <div class="ph w-full aspect-[4/5]"><span>Rev 03</span></div>
+                        <figcaption class="mt-2 border-t-2 rule-accent pt-2">
+                            <div class="text-xs font-bold tabular-nums">Rev 03 &nbsp;·&nbsp; [ date ]</div>
+                            <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">
+                                [ what changed from the last one ]
+                            </div>
+                        </figcaption>
+                    </figure>
 
-                <figure class="w-52 sm:w-60 flex-none snap-start">
-                    <!-- <img src="../images/projects/lamp/rev-04.jpg" alt="Revision 04" class="w-full aspect-[4/5] object-cover"> -->
-                    <div class="ph w-full aspect-[4/5]"><span>Rev 04</span></div>
-                    <figcaption class="mt-2 border-t-2 rule-accent pt-2">
-                        <div class="text-xs font-bold tabular-nums">Rev 04 &nbsp;·&nbsp; [ date ]</div>
-                        <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">[ what changed from the last one ]</div>
-                    </figcaption>
-                </figure>
-
-                <figure class="w-52 sm:w-60 flex-none snap-start">
-                    <!-- <img src="../images/projects/lamp/rev-final.jpg" alt="Final revision" class="w-full aspect-[4/5] object-cover"> -->
-                    <div class="ph w-full aspect-[4/5]"><span>Final</span></div>
-                    <figcaption class="mt-2 border-t-2 rule-accent pt-2">
-                        <div class="text-xs font-bold tabular-nums">Final &nbsp;·&nbsp; [ date ]</div>
-                        <div class="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 leading-snug mt-1">[ what made this one the one ]</div>
-                    </figcaption>
-                </figure>
-
+                </div>
             </div>
         </section>
 
