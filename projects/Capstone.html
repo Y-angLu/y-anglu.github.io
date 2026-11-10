@@ -27,7 +27,8 @@
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
 
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia(
@@ -261,6 +262,70 @@
             html.colour-mode .note-card.colour-note:hover .note-arrow,
             html.colour-mode .note-card.colour-note:hover .note-link {
                 opacity: 1;
+            }
+            .capstone-contents {
+                position: fixed;
+                right: max(1rem, env(safe-area-inset-right));
+                bottom: max(1rem, env(safe-area-inset-bottom));
+                z-index: 60;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.6rem;
+                max-width: calc(100vw - 2rem);
+            }
+            .capstone-contents-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+                border: 1px solid rgba(113,113,122,0.3);
+                border-radius: 9999px;
+                padding: 0.65rem 0.9rem;
+                background: rgba(255,255,255,0.88);
+                color: #3f3f46;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                opacity: 0.75;
+                transition: opacity 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+                font: 700 0.75rem/1.2 Quicksand, sans-serif;
+                cursor: pointer;
+            }
+            .capstone-contents-toggle:hover,
+            .capstone-contents-toggle:focus-visible,
+            .capstone-contents[data-open="true"] .capstone-contents-toggle { opacity: 1; }
+            .capstone-contents-toggle:focus-visible,
+            .capstone-contents-panel a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+            .capstone-contents-panel {
+                width: min(17.5rem, calc(100vw - 2rem));
+                max-height: min(70vh, 29rem);
+                overflow-y: auto;
+                padding: 0.85rem;
+                border: 1px solid rgba(113,113,122,0.25);
+                border-radius: 1rem;
+                background: rgba(255,255,255,0.95);
+                box-shadow: 0 12px 35px rgba(0,0,0,0.11);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+            }
+            .capstone-contents-panel[hidden] { display: none; }
+            .capstone-contents-panel a {
+                display: block;
+                padding: 0.55rem 0.65rem;
+                border-radius: 0.5rem;
+                color: #52525b;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-decoration: none;
+                transition: background-color 150ms ease, color 150ms ease;
+            }
+            .capstone-contents-panel a:hover { background: rgba(113,113,122,0.1); color: #18181b; }
+            html.dark .capstone-contents-toggle,
+            html.dark .capstone-contents-panel { background: rgba(24,24,27,0.92); color: #e4e4e7; border-color: rgba(161,161,170,0.28); }
+            html.dark .capstone-contents-panel a { color: #d4d4d8; }
+            html.dark .capstone-contents-panel a:hover { background: rgba(161,161,170,0.14); color: white; }
+            @media (prefers-reduced-motion: reduce) {
+                .capstone-contents-toggle, .capstone-contents-panel a { transition: none; }
             }
         </style>
     </head>
@@ -506,6 +571,20 @@
                 </div>
             </section>
         </main>
+        <!-- Compact chapter navigation, matching the Lamp page. -->
+        <nav class="capstone-contents" aria-label="Capstone page chapters" data-open="false" id="capstone-contents">
+            <div class="capstone-contents-panel" id="capstone-contents-panel" hidden>
+                <div class="px-2 pb-2 text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">On this page</div>
+                <a href="#overview">01 · Project Overview</a>
+                <a href="#technical-notes">02 · Technical Documentation</a>
+                <a href="#summary">03 · TL;DR</a>
+            </div>
+            <button class="capstone-contents-toggle" type="button" id="capstone-contents-toggle" aria-expanded="false" aria-controls="capstone-contents-panel">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                Contents
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+            </button>
+        </nav>
         <footer class="border-t border-zinc-200 dark:border-zinc-800">
             <div class="footer-banner relative overflow-hidden">
                 <img alt="Notify Robotics footer banner" class="w-full h-full object-cover" loading="lazy" src="../images/projects/capstone/footer.png"/>
@@ -598,6 +677,38 @@
                 window.addEventListener('load', scheduleUpdate);
                 window.addEventListener('pageshow', scheduleUpdate);
                 scheduleUpdate();
+            })();
+        </script>
+        <script>
+            // The contents menu is opt-in and automatically dismisses during scrolling.
+            (function () {
+                const nav = document.getElementById('capstone-contents');
+                const toggle = document.getElementById('capstone-contents-toggle');
+                const panel = document.getElementById('capstone-contents-panel');
+                if (!nav || !toggle || !panel) return;
+
+                function setOpen(open) {
+                    nav.dataset.open = String(open);
+                    toggle.setAttribute('aria-expanded', String(open));
+                    panel.hidden = !open;
+                }
+
+                toggle.addEventListener('click', () => setOpen(panel.hidden));
+                panel.addEventListener('click', event => {
+                    if (event.target.closest('a[href^="#"]')) setOpen(false);
+                });
+                document.addEventListener('pointerdown', event => {
+                    if (!nav.contains(event.target)) setOpen(false);
+                });
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape' && !panel.hidden) {
+                        setOpen(false);
+                        toggle.focus();
+                    }
+                });
+                window.addEventListener('scroll', () => {
+                    if (!panel.hidden) setOpen(false);
+                }, { passive: true });
             })();
         </script>
     </body>

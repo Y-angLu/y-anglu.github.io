@@ -196,7 +196,8 @@
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
 
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia(
@@ -219,6 +220,73 @@
                 root.style.colorScheme = useDark ? 'dark' : 'light';
             })();
         </script>
+        <style>
+            /* Lamp: unobtrusive, opt-in chapter navigation. */
+            .lamp-contents {
+                position: fixed;
+                right: max(1rem, env(safe-area-inset-right));
+                bottom: max(1rem, env(safe-area-inset-bottom));
+                z-index: 60;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.6rem;
+                max-width: calc(100vw - 2rem);
+            }
+            .lamp-contents-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+                border: 1px solid rgba(113,113,122,0.3);
+                border-radius: 9999px;
+                padding: 0.65rem 0.9rem;
+                background: rgba(255,255,255,0.88);
+                color: #3f3f46;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                opacity: 0.75;
+                transition: opacity 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+                font: 700 0.75rem/1.2 Quicksand, sans-serif;
+                cursor: pointer;
+            }
+            .lamp-contents-toggle:hover,
+            .lamp-contents-toggle:focus-visible,
+            .lamp-contents[data-open="true"] .lamp-contents-toggle { opacity: 1; }
+            .lamp-contents-toggle:focus-visible,
+            .lamp-contents-panel a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+            .lamp-contents-panel {
+                width: min(17.5rem, calc(100vw - 2rem));
+                max-height: min(70vh, 29rem);
+                overflow-y: auto;
+                padding: 0.85rem;
+                border: 1px solid rgba(113,113,122,0.25);
+                border-radius: 1rem;
+                background: rgba(255,255,255,0.95);
+                box-shadow: 0 12px 35px rgba(0,0,0,0.11);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+            }
+            .lamp-contents-panel[hidden] { display: none; }
+            .lamp-contents-panel a {
+                display: block;
+                padding: 0.55rem 0.65rem;
+                border-radius: 0.5rem;
+                color: #52525b;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-decoration: none;
+                transition: background-color 150ms ease, color 150ms ease;
+            }
+            .lamp-contents-panel a:hover { background: rgba(113,113,122,0.1); color: #18181b; }
+            html.dark .lamp-contents-toggle,
+            html.dark .lamp-contents-panel { background: rgba(24,24,27,0.92); color: #e4e4e7; border-color: rgba(161,161,170,0.28); }
+            html.dark .lamp-contents-panel a { color: #d4d4d8; }
+            html.dark .lamp-contents-panel a:hover { background: rgba(161,161,170,0.14); color: white; }
+            @media (prefers-reduced-motion: reduce) {
+                .lamp-contents-toggle, .lamp-contents-panel a { transition: none; }
+            }
+        </style>
     </head>
     <body class="bg-white dark:bg-[#0E0E0E] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
         <div aria-hidden="true" class="navigation-veil">
@@ -328,7 +396,7 @@
                 <img alt="Lamp" class="w-full aspect-[16/9] sm:aspect-[2/1] object-cover" src="../images/projects/lamp/main_hero.png"/>
             </section>
             <!-- ========================= 01 · PREMISE ========================== -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-14">
+            <section id="premise" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-14">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         01
@@ -372,7 +440,7 @@
                 </div>
             </section>
             <!-- ===================== 02 · DESIGN PRECEDENT ===================== -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-14">
+            <section id="design-precedent" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-14">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         02
@@ -533,7 +601,7 @@
                 </div>
             </section>
             <!-- =================== 03 · CONCEPT DEVELOPMENT ==================== -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
+            <section id="concept-development" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         03
@@ -589,7 +657,7 @@
                 </div>
             </section>
             <!-- ===================== 04 · SHADE GEOMETRY ======================= -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
+            <section id="shade-geometry" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         04
@@ -712,7 +780,7 @@
                 </div>
             </section>
             <!-- ======================== 05 · ITERATION ========================= -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-8">
+            <section id="iteration" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-8">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         05
@@ -820,7 +888,7 @@
                 </div>
             </section>
             <!-- ======================== 06 · MECHANISM ========================= -->
-            <section class="mx-auto max-w-5xl px-6 pb-16 sm:pb-24">
+            <section id="mechanism" class="mx-auto max-w-5xl px-6 pb-16 sm:pb-24">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         06
@@ -922,7 +990,7 @@
             <!-- ========================== 07 · LIGHT =========================== -->
             <!-- A lamp deserves one section shot in the dark. This band stays dark in
              both themes on purpose — it is the product doing its job. -->
-            <section class="w-full band-ink py-16 sm:py-24">
+            <section id="light" class="w-full band-ink py-16 sm:py-24">
                 <div class="mx-auto max-w-5xl px-6">
                     <div class="border-t-2 rule-accent pt-4 flex items-baseline gap-5 sm:gap-8">
                         <span class="text-sm sm:text-base font-bold accent tabular-nums flex-none w-7">
@@ -963,7 +1031,7 @@
                 </div>
             </section>
             <!-- ============== 08 · COLOUR & FINISH (speculative) =============== -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
+            <section id="colour-finish" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2 sm:gap-x-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         08
@@ -1136,7 +1204,7 @@
                 </div>
             </section>
             <!-- ======================= 09 · NEXT STEPS ========================= -->
-            <section class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
+            <section id="in-retrospect" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex items-baseline gap-5 sm:gap-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         09
@@ -1218,6 +1286,26 @@
                 </p>
             </section>
         </main>
+        <!-- Compact chapter navigation; closed by default to keep full-width imagery unobstructed. -->
+        <nav class="lamp-contents" aria-label="Lamp page chapters" data-open="false" id="lamp-contents">
+            <div class="lamp-contents-panel" id="lamp-contents-panel" hidden>
+                <div class="px-2 pb-2 text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">On this page</div>
+                <a href="#premise">01 · Premise</a>
+                <a href="#design-precedent">02 · Design Precedent</a>
+                <a href="#concept-development">03 · Concept Development</a>
+                <a href="#shade-geometry">04 · Shade Geometry</a>
+                <a href="#iteration">05 · Iteration</a>
+                <a href="#mechanism">06 · Mechanism</a>
+                <a href="#light">07 · Light</a>
+                <a href="#colour-finish">08 · Colour &amp; Finish</a>
+                <a href="#in-retrospect">09 · In Retrospect</a>
+            </div>
+            <button class="lamp-contents-toggle" type="button" id="lamp-contents-toggle" aria-expanded="false" aria-controls="lamp-contents-panel">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                Contents
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+            </button>
+        </nav>
         <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0E0E0E] transition-colors duration-200">
             <div class="max-w-5xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
                 © 2026 Yang Lu. Built clean, with vibes.
@@ -1651,6 +1739,38 @@
                 window.addEventListener('load', scheduleUpdate);
                 window.addEventListener('pageshow', scheduleUpdate);
                 scheduleUpdate();
+            })();
+        </script>
+        <script>
+            // The contents menu is opt-in and automatically dismisses during scrolling.
+            (function () {
+                const nav = document.getElementById('lamp-contents');
+                const toggle = document.getElementById('lamp-contents-toggle');
+                const panel = document.getElementById('lamp-contents-panel');
+                if (!nav || !toggle || !panel) return;
+
+                function setOpen(open) {
+                    nav.dataset.open = String(open);
+                    toggle.setAttribute('aria-expanded', String(open));
+                    panel.hidden = !open;
+                }
+
+                toggle.addEventListener('click', () => setOpen(panel.hidden));
+                panel.addEventListener('click', event => {
+                    if (event.target.closest('a[href^="#"]')) setOpen(false);
+                });
+                document.addEventListener('pointerdown', event => {
+                    if (!nav.contains(event.target)) setOpen(false);
+                });
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape' && !panel.hidden) {
+                        setOpen(false);
+                        toggle.focus();
+                    }
+                });
+                window.addEventListener('scroll', () => {
+                    if (!panel.hidden) setOpen(false);
+                }, { passive: true });
             })();
         </script>
     </body>

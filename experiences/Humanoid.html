@@ -63,7 +63,10 @@
 
     <script>
         (function () {
-            const fromColourMode = sessionStorage.getItem('portfolio-colour-return') === '1';
+            const fromColourMode = (
+                    sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                    sessionStorage.getItem('portfolio-colour-return') === '1'
+                );
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const useDark = !fromColourMode && (
@@ -94,28 +97,28 @@
 
     <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
         <article class="space-y-5">
-            
+
             <div class="space-y-2">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Humanoid</h1>
                     <h2 class="text-base font-semibold text-zinc-600 dark:text-zinc-400 mt-0.5">Mechanical Engineering Intern</h2>
                 </div>
-                
+
                 <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
                     <span>May 2026 — August 2026</span>
                     <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
                     <span>Vancouver, BC</span>
                 </div>
             </div>
-            
+
             <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
-            
+
             <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                 <p>
                     Part of the Vancouver mechanical team, building wheeled and biped platforms. See that <a href="https://thehumanoid.ai/" target="_blank" class="text-zinc-900 dark:text-zinc-50 font-bold underline decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-400 transition-colors">here</a>.
                 </p>
                 <p class="mt-4">
-                    Assisted with the design and testing of various upper body subsystems, including wrist and end-effector. Other tasks included wire harness, actuator, and torso test fixtures. 
+                    Assisted with the design and testing of various upper body subsystems, including wrist and end-effector. Other tasks included wire harness, actuator, and torso test fixtures.
                 </p>
             </div>
 
@@ -126,16 +129,16 @@
                 <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
                     <img src="../images/experiences/13112024_Warehouse_High Res_IT.jpg" alt="Humanoid Pic 2" class="w-full h-full object-cover">
                 </div>
-                
-                <button 
+
+                <button
                    data-video-id="44WPYlAvIK0"
                    aria-label="Watch Humanoid project demonstration video"
                    class="video-modal-trigger group relative aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 block text-left w-full h-full transform transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-md cursor-pointer">
-                    
-                    <img src="https://img.youtube.com/vi/44WPYlAvIK0/maxresdefault.jpg" 
-                         alt="Humanoid Demo Video Thumbnail" 
+
+                    <img src="https://img.youtube.com/vi/44WPYlAvIK0/maxresdefault.jpg"
+                         alt="Humanoid Demo Video Thumbnail"
                          class="w-full h-full object-cover transition duration-300 group-hover:brightness-[0.85] dark:group-hover:brightness-75">
-                    
+
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <div class="bg-black/40 backdrop-blur-sm p-4 rounded-full border border-white/20 text-white shadow-lg transform scale-95 group-hover:scale-100 transition-transform duration-300">
                             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -144,16 +147,16 @@
                         </div>
                     </div>
                 </button>
-                
-                <button 
+
+                <button
                    data-video-id="Y2DhzLPGdwY"
                    aria-label="Watch Humanoid platform performance video"
                    class="video-modal-trigger group relative aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 block text-left w-full h-full transform transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-md cursor-pointer">
-                    
-                    <img src="https://img.youtube.com/vi/Y2DhzLPGdwY/maxresdefault.jpg" 
-                         alt="Humanoid Performance Video Thumbnail" 
+
+                    <img src="https://img.youtube.com/vi/Y2DhzLPGdwY/maxresdefault.jpg"
+                         alt="Humanoid Performance Video Thumbnail"
                          class="w-full h-full object-cover transition duration-300 group-hover:brightness-[0.85] dark:group-hover:brightness-75">
-                    
+
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <div class="bg-black/40 backdrop-blur-sm p-4 rounded-full border border-white/20 text-white shadow-lg transform scale-95 group-hover:scale-100 transition-transform duration-300">
                             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -163,20 +166,20 @@
                     </div>
                 </button>
             </div>
-            
+
         </article>
     </main>
 
     <div id="videoModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-zinc-950/40 dark:bg-black/60 backdrop-blur-md opacity-0 transition-opacity duration-300">
         <div id="modalOutside" class="absolute inset-0 cursor-zoom-out"></div>
-        
+
         <div class="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-zinc-200/10 transform scale-95 transition-transform duration-300">
-            <iframe 
+            <iframe
                 id="modalPlayer"
-                src="" 
+                src=""
                 title="YouTube video player"
                 class="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
             </iframe>
         </div>

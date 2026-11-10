@@ -92,7 +92,7 @@
             @media (prefers-reduced-motion: reduce) {
                 .navigation-veil { transition: none; }
             }
-        
+
             /* Reading progress follows the bottom edge of the sticky header. */
             #reading-progress {
                 position: absolute;
@@ -208,7 +208,8 @@
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
 
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia(
@@ -290,9 +291,9 @@
                     </p>
                 </div>
                 <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="actuation" data-toc-target>
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="actuation" data-toc-target>
                         1. Actuation Architecture
-                    </h3>
+                    </h2>
                     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Choosing how to deliver power across linkages heavily impacts both performance and packaging constraints. Early in the design process, I was keen on a cable-driven approach because it most closely emulated human anatomy. Looking at the trade-offs between the three primary robotic hand configurations:
                     </p>
@@ -356,16 +357,16 @@
                     </p>
                 </div>
                 <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50" id="2-thumb-design" data-toc-target>
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="2-thumb-design" data-toc-target>
                         2. Thumb Design
-                    </h3>
+                    </h2>
                     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The human thumb accounts for roughly 40% of overall hand utility due to its unique opposability. The thumb, and by extension the fingers, suffer from a challenging trade-off between high posability (degrees of freedom) and controllability. Packaging constraints further complicate the design.
                     </p>
                     <div class="space-y-2 mt-4">
-                        <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100" id="cmc-joint-architecture" data-toc-target>
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="cmc-joint-architecture" data-toc-target>
                             2.1 CMC Joint Architecture
-                        </h4>
+                        </h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             The thumb’s opposability primarily originates from the carpometacarpal (CMC) joint located at the base of the thumb. Anatomically, the CMC is a saddle joint capable of multi-axis motion. To simplify the mechanical design, I modelled the joint as a 2-DOF universal joint (u-joint), inspired by a nested camera gimbal.
                         </p>
@@ -382,9 +383,9 @@
                         </p>
                     </div>
                     <div class="space-y-2 mt-4">
-                        <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100" id="tendon-actuation" data-toc-target>
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="tendon-actuation" data-toc-target>
                             2.2 Tendon Actuation
-                        </h4>
+                        </h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             Four cables were dedicated to driving the u-joint itself. Each degree of freedom was controlled antagonistically using paired cables routed to opposite sides of the joint. Knots were used as terminations and cutouts were made to let the tendons swing freely without interference or binding.
                         </p>
@@ -398,9 +399,9 @@
                         </div>
                     </div>
                     <div class="space-y-2 mt-4 pt-2">
-                        <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20" id="decoupling" data-toc-target>
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="decoupling" data-toc-target>
                             2.3 Kinematic Decoupling Strategy
-                        </h4>
+                        </h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             The principal challenge was routing an additional independent tendon required to actuate the thumb’s distal tip without coupling it to the base joint’s movements. I solved this by routing the distal tendon through the concentric center of rotation of the universal joint. This minimized changes in tendon length regardless of base orientation, reducing the need for additional software compensation or active control strategies.
                         </p>
@@ -424,9 +425,9 @@
                     </div>
                 </div>
                 <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="dynamics" data-toc-target>
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="dynamics" data-toc-target>
                         3. Underactuated Dynamics
-                    </h3>
+                    </h2>
                     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Three approaches were considered for finger flexion and extension:
                     </p>
@@ -500,9 +501,9 @@
                         </div>
                     </div>
                     <div class="space-y-2 mt-4">
-                        <h4 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2">
                             Sequential Joint Flexion
-                        </h4>
+                        </h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             I configured the tendon routing geometry and linkage proportions within the fingers to produce a non-uniform mechanical advantage across the joints. During flexion, the proximal joint would rotate first under tendon tension before progressively transferring torque to the medial and distal joints. This underactuated behaviour allowed the fingers to naturally wrap and conform around arbitrary object geometries during grasping.
                         </p>
@@ -512,9 +513,9 @@
                     </div>
                 </div>
                 <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50" id="4-system-integration" data-toc-target>
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="4-system-integration" data-toc-target>
                         4. System Integration
-                    </h3>
+                    </h2>
                     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The palm and the forearm were built as simple routing pieces for the tendons and mounting for the servos. The control stack consisted of a Raspberry Pi commanding seven hobby servos pulling nine tendons through a PCA9685 PWM driver board, allowing for coordinated, multi-DOF grasping sequences.
                     </p>
@@ -528,9 +529,9 @@
                     </div>
                 </div>
                 <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50" id="5-retrospective-and-lessons-learned" data-toc-target>
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="5-retrospective-and-lessons-learned" data-toc-target>
                         5. Retrospective and Lessons Learned
-                    </h3>
+                    </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
                         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
                             <img alt="Hand pose 1" class="w-full h-full object-cover" src="../images/projects/hand/hand_pinch.png"/>
@@ -631,7 +632,7 @@
                 if (event.persisted) revealPage();
             });
         </script>
-    
+
         <script>
             // Track reading progress through the main content, excluding the footer.
             (function () {

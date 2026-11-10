@@ -1,5 +1,6 @@
 const COLOUR_RETURN_KEY = 'portfolio-colour-return';
 const COLOUR_INITIAL_KEY = 'portfolio-colour-initial';
+const COLOUR_ACTIVE_KEY = 'portfolio-colour-active';
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -48,8 +49,12 @@ function initTheme() {
     const navigation = performance.getEntriesByType('navigation')[0];
     const isReload = navigation && navigation.type === 'reload';
 
-    const returningFromColour = !isReload &&
-        sessionStorage.getItem(COLOUR_RETURN_KEY) === '1';
+    if (isReload) sessionStorage.removeItem(COLOUR_ACTIVE_KEY);
+
+    const returningFromColour = !isReload && (
+        sessionStorage.getItem(COLOUR_RETURN_KEY) === '1' ||
+        sessionStorage.getItem(COLOUR_ACTIVE_KEY) === '1'
+    );
 
     let initialTheme = returningFromColour
         ? sessionStorage.getItem(COLOUR_INITIAL_KEY) || fallbackTheme
@@ -92,6 +97,7 @@ function initTheme() {
         }
     }
 
+    sessionStorage.setItem(COLOUR_ACTIVE_KEY, currentTheme === 'colour' ? '1' : '0');
     applyTheme();
 
     themeToggleBtn.addEventListener('click', () => {
@@ -109,6 +115,7 @@ function initTheme() {
             localStorage.setItem('theme', currentTheme);
         }
 
+        sessionStorage.setItem(COLOUR_ACTIVE_KEY, currentTheme === 'colour' ? '1' : '0');
         applyTheme();
     });
 
@@ -116,7 +123,8 @@ function initTheme() {
     window.addEventListener('pageshow', (event) => {
         if (!event.persisted) return;
 
-        if (sessionStorage.getItem(COLOUR_RETURN_KEY) === '1') {
+        if (sessionStorage.getItem(COLOUR_RETURN_KEY) === '1' ||
+            sessionStorage.getItem(COLOUR_ACTIVE_KEY) === '1') {
             initialTheme =
                 sessionStorage.getItem(COLOUR_INITIAL_KEY) || initialTheme;
 
@@ -127,6 +135,7 @@ function initTheme() {
         sessionStorage.removeItem(COLOUR_RETURN_KEY);
         sessionStorage.removeItem(COLOUR_INITIAL_KEY);
 
+        sessionStorage.setItem(COLOUR_ACTIVE_KEY, currentTheme === 'colour' ? '1' : '0');
         applyTheme();
     });
 

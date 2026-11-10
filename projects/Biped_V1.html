@@ -92,7 +92,7 @@
         @media (prefers-reduced-motion: reduce) {
             .navigation-veil { transition: none; }
         }
-        
+
             /* Reading progress follows the bottom edge of the sticky header. */
             #reading-progress {
                 position: absolute;
@@ -209,7 +209,8 @@
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
 
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia(
@@ -737,7 +738,7 @@
                 if (event.persisted) revealPage();
             });
         </script>
-    
+
         <script>
             // Track reading progress through the main content, excluding the footer.
             (function () {

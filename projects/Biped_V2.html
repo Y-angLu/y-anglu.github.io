@@ -92,7 +92,7 @@
             @media (prefers-reduced-motion: reduce) {
                 .navigation-veil { transition: none; }
             }
-        
+
             /* Reading progress follows the bottom edge of the sticky header. */
             #reading-progress {
                 position: absolute;
@@ -208,7 +208,8 @@
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
 
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia(
@@ -440,7 +441,7 @@
                         Using belts also gave me more flexibility in actuator placement, avoiding the need for stacked motors or concentric shafts. However, this decision introduced a new set of design considerations, including belt selection, pulley sizing, alignment, and tensioning, which became a significant part of V2's development.
                     </p>
                 </section>
-                
+
                 <!-- Section 2: Belt and Pulley Design -->
                 <section aria-labelledby="belt-design" class="space-y-4 pt-4">
 
@@ -735,9 +736,9 @@
                         </p>
 
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                            While the selected belts were expected to accommodate the intended 
-                            loading, their capacity was not rigorously validated against manufacturer 
-                            power ratings and service factors. This remained a limitation of the 
+                            While the selected belts were expected to accommodate the intended
+                            loading, their capacity was not rigorously validated against manufacturer
+                            power ratings and service factors. This remained a limitation of the
                             preliminary transmission design.
                         </p>
 
@@ -1018,7 +1019,7 @@
                 if (event.persisted) revealPage();
             });
         </script>
-    
+
         <script>
             // Track reading progress through the main content, excluding the footer.
             (function () {

@@ -92,7 +92,7 @@
             @media (prefers-reduced-motion: reduce) {
                 .navigation-veil { transition: none; }
             }
-        
+
             /* Reading progress follows the bottom edge of the sticky header. */
             #reading-progress {
                 position: absolute;
@@ -208,7 +208,8 @@
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
 
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia(
@@ -432,7 +433,7 @@
                         Although both architectures could be 3D printed, I selected the rolling-element eccentric drive because its geometry seemed better suited to my available manufacturing methods. Its large printable profiles, standard rolling elements, and concentric output offered a promising alternative to conventional gearboxes, with opportunities to further reduce backlash through geometric optimization. Plus, it looked cool!
                     </p>
                 </section>
-                
+
                 <!-- ================================================== -->
                 <!-- 2. Wave Drive Design                                -->
                 <!-- ================================================== -->
@@ -746,7 +747,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- ================================================== -->
                 <!-- 4. In Retrospect                                    -->
                 <!-- ================================================== -->
@@ -878,7 +879,7 @@
                 if (event.persisted) revealPage();
             });
         </script>
-    
+
         <script>
             // Track reading progress through the main content, excluding the footer.
             (function () {

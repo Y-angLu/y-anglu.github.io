@@ -63,7 +63,10 @@
 
     <script>
         (function () {
-            const fromColourMode = sessionStorage.getItem('portfolio-colour-return') === '1';
+            const fromColourMode = (
+                    sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                    sessionStorage.getItem('portfolio-colour-return') === '1'
+                );
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const useDark = !fromColourMode && (
@@ -96,30 +99,30 @@
 
     <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
         <article class="space-y-5">
-            
+
             <!-- Header: Company, Title, and Metadata -->
             <div class="space-y-2">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">Mycro Harvest</h1>
                     <h2 class="text-base font-semibold text-zinc-600 dark:text-zinc-400 mt-0.5">Mechanical Engineering Intern</h2>
                 </div>
-                
+
                 <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
                     <span>May 2024 — August 2024</span>
                     <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
                     <span>Toronto, ON</span>
                 </div>
             </div>
-            
+
             <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
-            
+
             <!-- Brief Summary Line (Placed Above Pictures) -->
             <div class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                 <p>
                     Part of a five person team building autonomous mushroom growth and monitoring systems.
                 </p>
                 <p class="mt-4">
-                    Prototyped, tested, and deployed waterproof sensor enclosures to mushroom farms. Built out other test systems, including a mushroom characterization chamber (MCC). 
+                    Prototyped, tested, and deployed waterproof sensor enclosures to mushroom farms. Built out other test systems, including a mushroom characterization chamber (MCC).
                 </p>
             </div>
 
@@ -138,7 +141,7 @@
                     <img src="../images/experiences/purple_room.png" alt="Grow Room" class="w-full h-full object-cover">
                 </div>
             </div>
-            
+
         </article>
     </main>
 

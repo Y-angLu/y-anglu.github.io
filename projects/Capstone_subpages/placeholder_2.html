@@ -65,7 +65,8 @@
         <script>
             (function () {
                 const fromColourMode =
-                    sessionStorage.getItem('portfolio-colour-return') === '1';
+                    sessionStorage.getItem('portfolio-colour-return') === '1' ||
+                    sessionStorage.getItem('portfolio-colour-active') === '1';
                 const savedTheme = localStorage.getItem('theme');
                 const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 const useDark = !fromColourMode && (
