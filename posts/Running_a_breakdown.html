@@ -59,6 +59,99 @@
                     transition: none;
                 }
             }
+            /* Responsive article navigation, outside the reading column. */
+            .article-toc {
+                position: fixed;
+                top: 88px;
+                left: max(16px, calc(50% - 610px));
+                width: 202px;
+                max-height: calc(100vh - 112px);
+                overflow-y: auto;
+                z-index: 40;
+                padding: 14px 12px;
+                border: 1px solid rgba(161, 161, 170, .22);
+                border-radius: 14px;
+                background: rgba(250, 250, 250, .85);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                scrollbar-width: thin;
+            }
+            html.dark .article-toc {
+                background: rgba(18, 18, 18, .86);
+                border-color: rgba(113, 113, 122, .3);
+            }
+            .toc-label {
+                margin: 0 0 10px 10px;
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: .11em;
+                color: #71717a;
+                text-transform: uppercase;
+            }
+            .toc-link {
+                display: block;
+                border-left: 2px solid transparent;
+                border-radius: 0 5px 5px 0;
+                padding: 7px 8px 7px 10px;
+                color: #71717a;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 1.45;
+                text-decoration: none;
+                transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+            }
+            .toc-link:hover, .toc-link:focus-visible { color: #18181b; background: rgba(161,161,170,.10); }
+            html.dark .toc-link:hover, html.dark .toc-link:focus-visible { color: #fafafa; }
+            .toc-link.is-active { border-left-color: #52525b; color: #18181b; background: rgba(161,161,170,.12); }
+            html.dark .toc-link.is-active { border-left-color: #d4d4d8; color: #fafafa; }
+            .toc-link.toc-sub { padding-left: 20px; font-size: 11px; font-weight: 500; }
+            .toc-mobile-toggle { display: none; }
+            .toc-scrim { display: none; }
+            [data-toc-target] { scroll-margin-top: 76px; }
+            @media (max-width: 1239px) {
+                .article-toc {
+                    top: auto;
+                    left: auto;
+                    right: max(16px, env(safe-area-inset-right));
+                    bottom: calc(78px + env(safe-area-inset-bottom));
+                    width: min(310px, calc(100vw - 32px));
+                    max-height: min(65vh, 430px);
+                    padding: 14px;
+                    z-index: 81;
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transform: translateY(10px) scale(.98);
+                    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+                    box-shadow: 0 12px 36px rgba(0,0,0,.12);
+                }
+                .article-toc.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+                .toc-mobile-toggle {
+                    display: flex;
+                    position: fixed;
+                    right: max(16px, env(safe-area-inset-right));
+                    bottom: calc(18px + env(safe-area-inset-bottom));
+                    z-index: 82;
+                    align-items: center;
+                    gap: 9px;
+                    padding: 12px 16px;
+                    border-radius: 999px;
+                    border: 1px solid #d4d4d8;
+                    background: rgba(250,250,250,.94);
+                    color: #27272a;
+                    box-shadow: 0 5px 22px rgba(0,0,0,.10);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
+                    font-size: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+                html.dark .toc-mobile-toggle { background: rgba(30,30,30,.94); border-color: #52525b; color: #f4f4f5; }
+                .toc-scrim.is-open { display: block; position: fixed; inset: 0; z-index: 80; background: transparent; }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .article-toc, .toc-link { transition: none; }
+            }
         </style>
         <script>
             (function() {
@@ -101,6 +194,23 @@
             </div>
         </header>
 
+        <!-- Desktop sidebar / mobile expandable contents. -->
+        <div class="toc-scrim" id="toc-scrim" aria-hidden="true"></div>
+        <nav class="article-toc" id="article-toc" aria-label="Table of contents">
+            <p class="toc-label">On this page</p>
+            <a class="toc-link" href="#part-one" data-toc-link>Part I · Key Ideas</a>
+            <a class="toc-link toc-sub" href="#pillars" data-toc-link>The Pillars of Running</a>
+            <a class="toc-link toc-sub" href="#types" data-toc-link>Types of Running</a>
+            <a class="toc-link toc-sub" href="#effort" data-toc-link>Classifying the Run</a>
+            <a class="toc-link toc-sub" href="#training-week" data-toc-link>Building a Training Week</a>
+            <a class="toc-link" href="#part-two" data-toc-link>Part II · Science and Numbers</a>
+            <a class="toc-link" href="#resources" data-toc-link>Resources &amp; References</a>
+        </nav>
+        <button class="toc-mobile-toggle" id="toc-toggle" type="button" aria-controls="article-toc" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <span>Contents</span>
+        </button>
+
         <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
             <article class="space-y-5">
 
@@ -119,47 +229,15 @@
                     </p>
                 </div>
 
-                <!-- Separate navigation cards for each part. -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <nav aria-label="Part I contents" class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5 space-y-3">
-                        <div>
-                            <div class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Part I</div>
-                            <h2 class="text-sm font-bold mt-1">Key Ideas</h2>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <a href="#pillars" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors">The Pillars</a>
-                            <a href="#types" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors">Types of Running</a>
-                            <a href="#effort" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors">Understanding Effort</a>
-                            <a href="#training-week" class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors">Training Week</a>
-                        </div>
-                    </nav>
-
-                    <nav aria-label="Part II contents" class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5 space-y-3">
-                        <div>
-                            <div class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Part II</div>
-                            <h2 class="text-sm font-bold mt-1">Science and Numbers</h2>
-                        </div>
-                        <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400">Sections coming soon.</p>
-                    </nav>
-                </div>
-
-                <!-- Quick access to references -->
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Further reading:</span>
-                    <a href="#resources" class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 transition-colors">
-                        Resources &amp; References <span aria-hidden="true">↗</span>
-                    </a>
-                </div>
-
                 <!-- Part I -->
-                <section id="part-one" class="space-y-4 pt-4 scroll-mt-20">
+                <section data-toc-target id="part-one" class="space-y-4 pt-4 scroll-mt-20">
                     <div class="border-b border-zinc-200 dark:border-zinc-800 pb-3">
                         <div class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-1">Part I</div>
                         <h2 class="text-xl sm:text-2xl font-bold tracking-tight">Key Ideas</h2>
                     </div>
 
-                    <section id="pillars" class="space-y-4 scroll-mt-20">
-                        <h3 class="text-xl font-bold">The Pillars of Running</h3>
+                    <section data-toc-target id="pillars" class="space-y-4 scroll-mt-20">
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">The Pillars of Running</h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">From a high level, I believe that distance running can be broken down into three pillars:</p>
                         <ol class="list-decimal list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             <li><strong class="text-zinc-900 dark:text-zinc-100">Aerobic capacity</strong> – How much energy the body can produce using oxygen</li>
@@ -170,8 +248,8 @@
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">Although interconnected, these pillars provide a useful framework for understanding running performance. Nearly every run contributes to improving one or more of them.</p>
                     </section>
 
-                    <section id="types" class="space-y-4 pt-4 scroll-mt-20">
-                        <h3 class="text-xl font-bold">Types of Running</h3>
+                    <section data-toc-target id="types" class="space-y-4 pt-4 scroll-mt-20">
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">Types of Running</h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">Distance-running training can be simplified into three fundamental types:</p>
                         <ol class="list-decimal list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             <li><strong class="text-zinc-900 dark:text-zinc-100">Easy Runs</strong> – Comfortable, low-intensity running</li>
@@ -193,8 +271,8 @@
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">Other workouts, such as intervals and strides, serve more specialized purposes and will be explored later.</p>
                     </section>
 
-                    <section id="effort" class="space-y-4 pt-4 scroll-mt-20">
-                        <h3 class="text-xl font-bold">Classifying the Run</h3>
+                    <section data-toc-target id="effort" class="space-y-4 pt-4 scroll-mt-20">
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">Classifying the Run</h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">Training combines easy, long, and tempo runs to develop all three pillars. A useful way to distinguish them is through rating of perceived exertion (RPE), a subjective measure of effort from 1–10.</p>
                         <ol class="list-decimal list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                             <li><strong class="text-zinc-900 dark:text-zinc-100">Easy (RPE 2–4):</strong> Comfortable enough to hold a conversation.</li>
@@ -215,8 +293,8 @@
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">Why not just run hard every time? Different intensities and durations encourage different adaptations. Easy runs build aerobic fitness with manageable fatigue, long runs develop endurance, and tempo runs improve our ability to sustain faster efforts.</p>
                     </section>
 
-                    <section id="training-week" class="space-y-4 pt-4 scroll-mt-20">
-                        <h3 class="text-xl font-bold">Building a Simple Training Week</h3>
+                    <section data-toc-target id="training-week" class="space-y-4 pt-4 scroll-mt-20">
+                        <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">Building a Simple Training Week</h3>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">An established distance-running routine might include several easy runs, one long run, and one harder workout, such as a tempo run.</p>
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">Most running is kept easy to accumulate training volume without excessive fatigue. Harder workouts provide a greater training stimulus but require more recovery, while long runs add the challenge of duration.</p>
 
@@ -236,7 +314,7 @@
                 </section>
 
                 <!-- Part II placeholder: content to be written later -->
-                <section id="part-two" class="pt-4 scroll-mt-20">
+                <section data-toc-target id="part-two" class="pt-4 scroll-mt-20">
                     <div class="border-t border-zinc-200 dark:border-zinc-800 pt-6">
                         <div class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-1">Part II</div>
                         <h2 class="text-xl sm:text-2xl font-bold tracking-tight">Science and Numbers</h2>
@@ -249,7 +327,7 @@
                 </section>
 
                 <!-- Resources and further reading -->
-                <section id="resources" class="space-y-4 pt-4 scroll-mt-20">
+                <section data-toc-target id="resources" class="space-y-4 pt-4 scroll-mt-20">
                     <div class="border-t border-zinc-200 dark:border-zinc-800 pt-6">
                         <div class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-1">Further Reading</div>
                         <h2 class="text-xl sm:text-2xl font-bold tracking-tight">Resources &amp; References</h2>
@@ -367,6 +445,58 @@
                 window.addEventListener('pageshow', event => {
                     if (event.persisted) revealPage();
                 });
+            })();
+        </script>
+        <script>
+            // Highlight the current section and control the compact mobile menu.
+            (function () {
+                const menu = document.getElementById('article-toc');
+                const toggle = document.getElementById('toc-toggle');
+                const scrim = document.getElementById('toc-scrim');
+                const links = [...menu.querySelectorAll('[data-toc-link]')];
+                const targets = links.map(link => document.getElementById(link.hash.slice(1)));
+                let scheduled = false;
+
+                function setOpen(open) {
+                    menu.classList.toggle('is-open', open);
+                    scrim.classList.toggle('is-open', open);
+                    toggle.setAttribute('aria-expanded', String(open));
+                    toggle.querySelector('span').textContent = open ? 'Close' : 'Contents';
+                }
+
+                function updateActive() {
+                    scheduled = false;
+                    let active = 0;
+                    for (let i = 0; i < targets.length; i++) {
+                        if (targets[i] && targets[i].getBoundingClientRect().top <= 125) active = i;
+                    }
+                    links.forEach((link, index) => {
+                        const selected = index === active;
+                        link.classList.toggle('is-active', selected);
+                        if (selected) link.setAttribute('aria-current', 'location');
+                        else link.removeAttribute('aria-current');
+                    });
+                }
+
+                function scheduleActive() {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(updateActive);
+                }
+
+                toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
+                scrim.addEventListener('click', () => setOpen(false));
+                links.forEach(link => link.addEventListener('click', () => setOpen(false)));
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape') setOpen(false);
+                });
+                window.addEventListener('scroll', scheduleActive, { passive: true });
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 1240) setOpen(false);
+                    scheduleActive();
+                });
+                window.addEventListener('pageshow', () => { setOpen(false); scheduleActive(); });
+                updateActive();
             })();
         </script>
     </body>
