@@ -1079,14 +1079,32 @@
                 function updateActive() {
                     scheduled = false;
                     let active = 0;
-                    for (let i = 0; i < targets.length; i++) {
-                        if (targets[i] && targets[i].getBoundingClientRect().top <= 125) active = i;
+
+                    const scrollBottom = window.scrollY + window.innerHeight;
+                    const documentBottom = document.documentElement.scrollHeight;
+
+                    // Highlight the final section when reaching the bottom.
+                    if (scrollBottom >= documentBottom - 10) {
+                        active = targets.length - 1;
+                    } else {
+                        // Otherwise, highlight the section nearest the top.
+                        for (let i = 0; i < targets.length; i++) {
+                            if (targets[i] &&
+                                targets[i].getBoundingClientRect().top <= 125) {
+                                active = i;
+                            }
+                        }
                     }
+
                     links.forEach((link, index) => {
                         const selected = index === active;
                         link.classList.toggle('is-active', selected);
-                        if (selected) link.setAttribute('aria-current', 'location');
-                        else link.removeAttribute('aria-current');
+
+                        if (selected) {
+                            link.setAttribute('aria-current', 'location');
+                        } else {
+                            link.removeAttribute('aria-current');
+                        }
                     });
                 }
 
