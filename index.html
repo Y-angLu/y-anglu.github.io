@@ -11,7 +11,62 @@
     <meta name="twitter:image" content="">
     <meta property="og:image:width" content="0">
     <meta property="og:image:height" content="0">
-    
+
+    <script>
+        // Select the destination tab before first paint, including return from posts.
+        (function () {
+            const tab = new URLSearchParams(location.search).get('tab');
+            if (tab === 'posts' || location.hash === '#posts') {
+                document.documentElement.classList.add('initial-posts');
+                // The shared entry veil handles all destinations, not just Posts.
+            }
+        })();
+
+        // Match the entry transition on project, experience, and post pages.
+        (function () {
+            const nav = performance.getEntriesByType('navigation')[0];
+            const type = nav && nav.type;
+            const returning = sessionStorage.getItem('portfolio-navigation-pending') === '1';
+            if (returning || type === 'back_forward') {
+                document.documentElement.classList.add('homepage-arriving');
+            }
+            sessionStorage.removeItem('portfolio-navigation-pending');
+        })();
+
+        // Apply the correct theme before the page renders.
+        (function () {
+            try {
+                const saved = localStorage.getItem('theme');
+
+                const navigation = performance.getEntriesByType('navigation')[0];
+                const isReload = navigation?.type === 'reload';
+
+                const returningFromColour =
+                    !isReload &&
+                    sessionStorage.getItem('portfolio-colour-return') === '1';
+
+                const dark = !returningFromColour && (
+                    saved === 'dark' ||
+                    (
+                        saved !== 'light' &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches
+                    )
+                );
+
+                const root = document.documentElement;
+
+                root.classList.toggle('dark', dark);
+                root.classList.toggle('colour-mode', returningFromColour);
+
+                root.style.backgroundColor = dark ? '#121212' : '#fafafa';
+                root.style.colorScheme = dark ? 'dark' : 'light';
+
+            } catch (error) {
+                document.documentElement.style.backgroundColor = '#fafafa';
+            }
+        })();
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -20,7 +75,6 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        // Added clean local system backups if the font takes an extra split-second to load
                         sans: ['Quicksand', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
                     }
                 }
@@ -29,38 +83,212 @@
     </script>
     
     <style>
-        /* Define local Variable Font file link */
         @font-face {
             font-family: 'Quicksand';
             src: url('fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
-            font-weight: 100 900; /* Dynamically covers 400, 500, 600, 700, etc. */
+            font-weight: 100 900;
             font-style: normal;
-            font-display: swap; /* Keeps content visible while the font file loads */
+            font-display: swap;
+        }
+
+        html {
+            background-color: #fafafa;
+        }
+
+        /* Never display About while the Posts tab is being restored. */
+        html.initial-posts #about { display: none !important; }
+        html.initial-posts #posts { display: block !important; }
+
+        /* Match the 320ms full-page veil used by the Running article. */
+        .homepage-navigation-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            background: #fafafa;
+            opacity: 0;
+            transition: opacity 320ms ease;
+        }
+        html.dark .homepage-navigation-veil { background: #121212; }
+        html.homepage-arriving .homepage-navigation-veil,
+        html.homepage-departing .homepage-navigation-veil { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+            .homepage-navigation-veil { transition: none; }
+        }
+
+        /* Gentle tab crossfade without the intermediate blank or wrong tab. */
+        .content-section.tab-entering {
+            animation: tab-reveal 380ms cubic-bezier(.2,.75,.3,1) both;
+        }
+        @keyframes tab-reveal {
+            from { opacity: 0; transform: translateY(7px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .content-section.tab-entering { animation: none; }
+        }
+
+        html.dark {
+            background-color: #121212;
+            color-scheme: dark;
         }
 
         body {
             font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
-        
-        /* Hovering a skill outlines the tile that covers it.
-           Two things this rule has to survive:
-           1. Tailwind's CDN appends its generated sheet AFTER this <style>, so a
-              bare `.tile-hl` ties with `.border-zinc-200` / `.shadow-sm` and loses.
-              `a.tile-hl` (0,1,1) and `.dark a.tile-hl` (0,2,1) outrank both those
-              and the `.dark .dark\:border-zinc-800` rule (0,2,0).
-           2. `outline` is used rather than border-color or box-shadow because no
-              utility on the tiles sets it, so there is nothing to fight. It also
-              follows border-radius and never affects layout. */
+
         a.tile-hl {
             outline: 2px solid #18181b;
             outline-offset: -1px;
         }
+
         .dark a.tile-hl {
             outline-color: #fafafa;
         }
+
+        /* Colour Mode: the background fades in instead of switching abruptly. */
+        body {
+            position: relative;
+            isolation: isolate;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: url("images/colour.png") center / cover no-repeat;
+            opacity: 0;
+            transition: opacity 1100ms ease;
+        }
+
+        html.colour-mode body::before {
+            opacity: 1;
+        }
+
+        /* A little breathing room for the tilted cards. */
+        #projects-grid,
+        #experiences-grid {
+            transition: row-gap 850ms ease, column-gap 850ms ease;
+        }
+
+        html.colour-mode #projects-grid,
+        html.colour-mode #experiences-grid {
+            row-gap: 1.6rem;
+            column-gap: 1.4rem;
+        }
+
+        /* Each card gets a different, deterministic position and rhythm. */
+        #projects-grid > a,
+        #experiences-grid > a {
+            position: relative;
+            z-index: 0;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+            transform-origin: center;
+            transition:
+                transform 1250ms cubic-bezier(.18, 1.42, .28, 1),
+                background-color 850ms ease,
+                border-color 450ms ease,
+                box-shadow 850ms ease;
+            will-change: transform;
+        }
+
+        html.colour-mode #projects-grid > a,
+        html.colour-mode #experiences-grid > a {
+            background-color: var(--playful-color, #EAA7C7);
+            border-color: rgb(24 24 27 / 18%);
+            box-shadow: 0 9px 24px rgb(32 25 50 / 11%);
+            transform:
+                translate3d(var(--scatter-x, 0px), var(--scatter-y, 0px), 0)
+                rotate(var(--scatter-angle, 0deg));
+        }
+
+        /* A separate inner animation keeps the entry transition smooth. */
+        html.colour-mode .playful-inner {
+            animation: playful-bob var(--bob-duration, 5s) ease-in-out
+                var(--bob-delay, 0s) infinite alternate;
+        }
+
+        @keyframes playful-bob {
+            from { transform: translateY(-3px) rotate(-.45deg); }
+            to   { transform: translateY(4px) rotate(.45deg); }
+        }
+
+        html.colour-mode #projects-grid > a:hover,
+        html.colour-mode #experiences-grid > a:hover,
+        html.colour-mode #projects-grid > a:focus-visible,
+        html.colour-mode #experiences-grid > a:focus-visible {
+            z-index: 5;
+            transform: translate3d(0, -8px, 0) rotate(0deg) scale(1.035);
+            background-color: var(--playful-color, #EAA7C7);
+            box-shadow: 0 18px 35px rgb(32 25 50 / 18%);
+            transition-duration: 300ms;
+        }
+
+        html.colour-mode #projects-grid > a:hover .playful-inner,
+        html.colour-mode #experiences-grid > a:hover .playful-inner,
+        html.colour-mode #projects-grid > a:focus-visible .playful-inner,
+        html.colour-mode #experiences-grid > a:focus-visible .playful-inner {
+            animation-play-state: paused;
+        }
+
+        /* Keep the card contents legible on all seven opaque colours. */
+        html.colour-mode #projects-grid > a h3,
+        html.colour-mode #experiences-grid > a h3,
+        html.colour-mode #experiences-grid > a p {
+            color: #18181b;
+        }
+
+        /* The image panel remains neutral, so photos and renders stay clear. */
+        html.colour-mode #about aside {
+            background-color: rgb(255 255 255 / 78%);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Colour Mode applies to the actual post card, not its wrapper. */
+        #posts a.post-tile {
+            transition: background-color 850ms ease, border-color 450ms ease,
+                        box-shadow 450ms ease, transform 450ms ease;
+        }
+
+        html.colour-mode #posts a.post-tile {
+            background-color: #EAA7C7;
+            border-color: rgb(24 24 27 / 18%);
+            box-shadow: 0 9px 24px rgb(32 25 50 / 11%);
+        }
+
+        html.colour-mode #posts a.post-tile h3,
+        html.colour-mode #posts a.post-tile p,
+        html.colour-mode #posts a.post-tile span {
+            color: #18181b;
+        }
+
+        html.colour-mode #posts a.post-tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 28px rgb(32 25 50 / 17%);
+        }
+
+        html.colour-mode footer {
+            background-color: transparent;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before,
+            #projects-grid > a,
+            #experiences-grid > a {
+                transition-duration: 0.01ms;
+            }
+
+            html.colour-mode .playful-inner {
+                animation: none;
+            }
+        }
     </style>
 </head>
+
 <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+    <div class="homepage-navigation-veil" aria-hidden="true"></div>
 
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
@@ -76,6 +304,20 @@
                     <svg id="theme-toggle-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.22 4.22l1.59 1.59m12.38 12.38l1.59 1.59M3 12h2.25m13.5 0H21M5.81 18.19l-1.59 1.59m14.22-14.22l-1.59 1.59M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"></path>
                     </svg>
+                    <svg
+                        id="theme-toggle-colour"
+                        class="w-4 h-4 hidden"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"></path>
+                        <path d="M12 17h.01"></path>
+                    </svg>
                 </button>
             </nav>
         </div>
@@ -85,8 +327,6 @@
         
         <section id="about" class="content-section space-y-8">
             
-            <!-- Bio and the skills bubble share one row on large screens; the
-                 bubble drops below the bio and goes full width under lg. -->
             <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 lg:gap-8 items-start">
 
             <div class="space-y-4">
@@ -95,7 +335,7 @@
                 <ul class="list-disc list-inside text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium space-y-1 transition-colors">
                     <li>Mechatronics engineering undergraduate from the University of Waterloo.</li>
                     <li>Mechanical engineer with internships at Humanoid, Proception, Tesla, Sanctuary AI.</li>
-                    <li>Exploring humanoid robotics. Part-time runner. Feel free to reach out!</li>
+                    <li>Passionate about humanoid robotics and running. Feel free to reach out!</li>
                 </ul>
 
                 <div class="pt-1 flex space-x-4 text-xs font-bold">
@@ -104,8 +344,6 @@
                 </div>
             </div>
 
-            <!-- Skills bubble. Pills are rendered from the SKILLS array in
-                 script.js; hovering one outlines the tile that covers it. -->
             <aside class="w-full border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 shadow-sm dark:shadow-none">
                 <div class="flex items-baseline justify-between gap-3">
                     <h2 class="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Skills</h2>
@@ -119,15 +357,19 @@
             <hr class="border-zinc-200 dark:border-zinc-800 transition-colors">
 
             <div class="space-y-4">
-                <h2 class="text-xl font-bold tracking-tight">Projects</h2>
+                <div class="flex items-baseline justify-between gap-4">
+                    <h2 class="text-xl font-bold tracking-tight">Projects</h2>
+                    <p class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Most recent first</p>
+                </div>
+                
                 <div id="projects-grid" class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     
-                    <!--<a href="projects/Capstone.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
+                    <a href="projects/Capstone.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="" alt="Nudge + Notice" class="w-full h-full object-contain">
+                            <img src="images/Notify.png" alt="Notify Robots" class="w-full h-full object-contain">
                         </div>
-                        <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Nudge + Notice</h3>
-                    </a>-->
+                        <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Capstone</h3>
+                    </a>
 
                     <a href="projects/Lamp.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
@@ -235,20 +477,28 @@
 
         </section>
 
-        <section id="posts" class="content-section space-y-4 hidden">
-            <h2 class="text-xl font-bold tracking-tight">Posts</h2>
-            
-            <div class="border border-dashed border-zinc-300 rounded-xl p-8 bg-white flex flex-col items-center justify-center text-center space-y-2">
-                <div class="flex items-center space-x-2">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-zinc-500"></span>
-                    </span>
-                    <h3 class="text-sm font-bold tracking-tight text-zinc-700">Work in Progress</h3>
+<section id="posts" class="content-section hidden">
+            <div class="max-w-3xl mx-auto space-y-6">
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-center">Posts</h2>
+
+                <div class="flex flex-col gap-4">
+                    <a href="posts/Running_a_breakdown.html"
+                       class="post-tile group flex w-full items-center justify-between gap-5 p-5 sm:p-6
+                              bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800
+                              rounded-xl shadow-sm dark:shadow-none
+                              hover:border-zinc-400 dark:hover:border-zinc-600
+                              transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+                        <div class="space-y-1.5">
+                            <h3 class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                                Running - A Breakdown
+                            </h3>
+                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                                Science behind running and run training
+                            </p>
+                        </div>
+                        <span aria-hidden="true" class="flex-none text-lg text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">↗</span>
+                    </a>
                 </div>
-                <p class="text-zinc-500 text-xs font-medium max-w-xs">
-                    Writing about interests. Coming soon!
-                </p>
             </div>
         </section>
 
@@ -261,5 +511,6 @@
     </footer>
 
     <script src="script.js"></script>
+
 </body>
 </html>

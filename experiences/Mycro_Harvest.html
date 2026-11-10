@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experience: Mycro Harvest</title>
-    
-    <!-- Custom Browser Favicon Symbol -->
-    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
 
+    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
     <link rel="preload" href="../fonts/Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    
-    <!-- Tailwind CSS v3 CDN (Stable for Class-Based Dark Mode) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -23,9 +19,9 @@
                     }
                 }
             }
-        }
+        };
     </script>
-    
+
     <style>
         @font-face {
             font-family: 'Quicksand';
@@ -38,23 +34,53 @@
         body {
             font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
+
+        .navigation-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            background: #fafafa;
+            opacity: 0;
+            transition: opacity 320ms ease;
+        }
+
+        html.dark .navigation-veil {
+            background: #121212;
+        }
+
+        html.page-arriving .navigation-veil,
+        html.page-departing .navigation-veil {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .navigation-veil {
+                transition: none;
+            }
+        }
     </style>
 
-    <!-- NATIVE PERSISTENCE SCRIPT: Executes instantly to prevent dark mode flash -->
     <script>
-        (function() {
+        (function () {
+            const fromColourMode = sessionStorage.getItem('portfolio-colour-return') === '1';
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+            const useDark = !fromColourMode && (
+                savedTheme === 'dark' || (!savedTheme && systemPrefersDark)
+            );
+            const root = document.documentElement;
+
+            root.classList.toggle('dark', useDark);
+            root.classList.add('page-arriving');
+            root.style.backgroundColor = useDark ? '#121212' : '#fafafa';
+            root.style.colorScheme = useDark ? 'dark' : 'light';
         })();
     </script>
 </head>
 <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+
+    <div class="navigation-veil" aria-hidden="true"></div>
 
     <!-- Fixed navigation bar -->
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
@@ -79,7 +105,7 @@
                 </div>
                 
                 <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
-                    <span>May 2024 — Aug 2024</span>
+                    <span>May 2024 — August 2024</span>
                     <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
                     <span>Toronto, ON</span>
                 </div>
@@ -122,6 +148,61 @@
             © 2026 Yang Lu. Built clean, with vibes.
         </div>
     </footer>
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let navigating = false;
+
+            function revealPage() {
+                navigating = false;
+                root.classList.remove('page-departing');
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        root.classList.remove('page-arriving');
+                    });
+                });
+            }
+
+            revealPage();
+
+            document.addEventListener('click', event => {
+                const link = event.target.closest('a[href]');
+
+                if (
+                    !link || navigating || event.defaultPrevented || event.button !== 0 ||
+                    event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+                    (link.target && link.target !== '_self') ||
+                    link.hasAttribute('download') || reducedMotion.matches
+                ) {
+                    return;
+                }
+
+                const destination = new URL(link.href, window.location.href);
+
+                if (
+                    destination.origin !== window.location.origin ||
+                    !destination.pathname.endsWith('.html') ||
+                    destination.pathname === window.location.pathname
+                ) {
+                    return;
+                }
+
+                event.preventDefault();
+                navigating = true;
+                root.classList.add('page-departing');
+
+                window.setTimeout(() => {
+                    window.location.assign(destination.href);
+                }, 320);
+            });
+
+            window.addEventListener('pageshow', event => {
+                if (event.persisted) revealPage();
+            });
+        })();
+    </script>
 
 </body>
 </html>

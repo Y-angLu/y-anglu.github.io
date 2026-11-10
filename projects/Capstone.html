@@ -2,10 +2,10 @@
 <html class="scroll-smooth" lang="en">
     <head>
         <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="width=device-width,initial-scale=1" name="viewport"/>
         <meta content="Engineering project documentation and technical notes." name="description"/>
         <title>
-            Nudge + Notice
+            Notify Robotics | Capstone
         </title>
         <link href="../images/gear_favicon.png" rel="icon" type="image/png"/>
         <link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
@@ -13,262 +13,592 @@
         </script>
         <script>
             tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
-                    }
-                }
-            }
-        }
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Quicksand', 'sans-serif'],
+                        },
+                    },
+                },
+            };
+        </script>
+        <script>
+            // Initialize the correct theme before the page renders.
+            (function () {
+                const fromColourMode =
+                    sessionStorage.getItem('portfolio-colour-return') === '1';
+
+                const savedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia(
+                    '(prefers-color-scheme: dark)'
+                ).matches;
+
+                // Subpages use Light Mode when entered from Colour Mode.
+                // Otherwise, respect the saved theme preference.
+                const useDark = !fromColourMode && (
+                    savedTheme === 'dark' ||
+                    (!savedTheme && systemPrefersDark)
+                );
+
+                const root = document.documentElement;
+                root.classList.toggle('dark', useDark);
+                root.classList.toggle('colour-mode', fromColourMode);
+                root.classList.add('page-arriving');
+
+                // Set the background immediately to avoid white flashes.
+                root.style.backgroundColor = useDark ? '#121212' : '#fafafa';
+                root.style.colorScheme = useDark ? 'dark' : 'light';
+            })();
         </script>
         <style>
             @font-face {
-            font-family: 'Quicksand';
-            src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
-            font-weight: 100 900;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        body {
-            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-        </style>
-        <script>
-            (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+                font-family: 'Quicksand';
+                src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+                font-weight: 100 900;
+                font-style: normal;
+                font-display: swap;
             }
-        })();
-        </script>
+            :root {
+                --accent: #71717a;
+                --line: #e4e4e7;
+                --muted: #71717a;
+                --paper: #fafafa;
+                --ink: #18181b;
+            }
+            .dark {
+                --accent: #a1a1aa;
+                --line: #343438;
+                --muted: #a1a1aa;
+                --paper: #121212;
+                --ink: #fafafa;
+            }
+            body {
+                font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background: var(--paper);
+                color: var(--ink);
+            }
+            .section-rule { border-top: 2px solid var(--ink); }
+            .eyebrow {
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: .17em;
+                text-transform: uppercase;
+                color: var(--muted);
+            }
+            .chapter {
+                display: grid;
+                grid-template-columns: 34px minmax(0, 1fr);
+                gap: 16px;
+                align-items: baseline;
+                padding-top: 16px;
+            }
+            .chapter-num {
+                font-size: 13px;
+                font-weight: 800;
+                color: var(--accent);
+                font-variant-numeric: tabular-nums;
+            }
+            .chapter-title {
+                font-size: clamp(20px, 3vw, 24px);
+                font-weight: 800;
+                letter-spacing: -.04em;
+            }
+            .chapter-body { margin-left: 50px; }
+            @media (max-width: 640px) {
+                .chapter-body { margin-left: 0; }
+            }
+            .note-card {
+                border: 1px solid var(--line);
+                border-radius: 0.75rem;
+                overflow: hidden;
+                background: rgba(255, 255, 255, .48);
+                transition: border-color .2s;
+            }
+            .dark .note-card { background: rgba(255, 255, 255, .025); }
+            .note-card:hover { border-color: var(--accent); }
+            .note-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+            .tag {
+                border: 1px solid var(--line);
+                padding: 7px 12px;
+                border-radius: 999px;
+                font-size: 11px;
+                font-weight: 800;
+                transition: border-color .2s;
+            }
+            .tag:hover { border-color: var(--accent); }
+            /* Match the technical-note navigation bubbles to their cards. */
+            html.colour-mode .tag.colour-tag,
+            html.colour-mode.dark .tag.colour-tag {
+                background: var(--note-colour);
+                color: #18181b;
+                border-color: rgb(24 24 27 / 18%);
+            }
+            html.colour-mode .tag.colour-tag:hover,
+            html.colour-mode.dark .tag.colour-tag:hover {
+                border-color: #18181b;
+                filter: brightness(0.96);
+            }
+            html.colour-mode .tag.colour-tag:focus-visible {
+                outline: 2px solid #18181b;
+                outline-offset: 3px;
+            }
+
+            .notify-banner { background: #34383b; }
+            .footer-banner { height: clamp(180px, 28vw, 360px); }
+            .footer-banner img { width: 100%; height: 100%; object-fit: cover; }
+            @media (prefers-reduced-motion: reduce) {
+                .note-card, .tag { transition: none; }
+            }
+
+            /* Subtle transitions between portfolio pages. */
+            @keyframes page-enter {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            main {
+                animation: page-enter 300ms ease-out both;
+            }
+
+            body.page-leaving main {
+                opacity: 0;
+                transform: translateY(-4px);
+                transition: opacity 180ms ease, transform 180ms ease;
+                animation: none;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                main {
+                    animation: none;
+                }
+
+                body.page-leaving main {
+                    transition: none;
+                }
+            }
+
+            /* Full-viewport navigation veil: covers background and content together. */
+            .navigation-veil {
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                pointer-events: none;
+                background: #fafafa;
+                opacity: 0;
+                transition: opacity 320ms ease;
+            }
+
+            html.dark .navigation-veil {
+                background: #121212;
+            }
+
+            html.page-arriving .navigation-veil,
+            html.page-departing .navigation-veil {
+                opacity: 1;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .navigation-veil { transition: none; }
+            }
+        
+            /* Reading progress follows the bottom edge of the sticky header. */
+            #reading-progress {
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: #71717a;
+                transform: scaleX(0);
+                transform-origin: left center;
+                pointer-events: none;
+                will-change: transform;
+            }
+
+            html.dark #reading-progress {
+                background: #a1a1aa;
+            }
+
+            /* Technical notes use the homepage Colour Mode thumbnail palette. */
+            html.colour-mode .note-card.colour-note {
+                background: var(--note-colour);
+                border-color: rgb(24 24 27 / 18%);
+                color: #18181b;
+            }
+
+            html.colour-mode.dark .note-card.colour-note {
+                background: var(--note-colour);
+                border-color: rgb(24 24 27 / 25%);
+                color: #18181b;
+            }
+
+            html.colour-mode .note-card.colour-note:hover,
+            html.colour-mode.dark .note-card.colour-note:hover {
+                border-color: #18181b;
+            }
+
+            html.colour-mode .note-card.colour-note .eyebrow,
+            html.colour-mode .note-card.colour-note h3,
+            html.colour-mode .note-card.colour-note p,
+            html.colour-mode .note-card.colour-note .note-arrow,
+            html.colour-mode .note-card.colour-note .note-link {
+                color: #18181b;
+            }
+
+            html.colour-mode .note-card.colour-note .note-arrow,
+            html.colour-mode .note-card.colour-note .note-link {
+                opacity: .75;
+            }
+
+            html.colour-mode .note-card.colour-note:hover .note-arrow,
+            html.colour-mode .note-card.colour-note:hover .note-link {
+                opacity: 1;
+            }
+        </style>
     </head>
-    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
-        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-            <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../index.html">
-                    <svg aria-hidden="true" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
-                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
-                        </path>
-                    </svg>
+    <body class="antialiased transition-colors duration-200">
+        <div aria-hidden="true" class="navigation-veil">
+        </div>
+        <header class="sticky top-0 z-50 backdrop-blur-xl border-b border-zinc-200/80 dark:border-zinc-800 bg-white/85 dark:bg-[#121212]/85">
+            <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
+                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center gap-2" href="../index.html">
+                    <span aria-hidden="true">
+                        ←
+                    </span>
                     Back to Home
                 </a>
             </div>
+            <div id="reading-progress" aria-hidden="true"></div>
         </header>
-        <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
-            <article class="space-y-5">
-                <div class="space-y-2">
-                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">
-                        Nudge + Notice
+        <main>
+            <!-- ================= HERO BANNER ================= -->
+            <section class="notify-banner relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
+                <!-- Background Image -->
+                <div aria-hidden="true" class="absolute inset-0 bg-cover bg-center" style="background-image: url('../images/projects/capstone/header.png');">
+                </div>
+                <!-- Hero Content -->
+                <div class="relative max-w-5xl mx-auto px-6 pt-20 pb-14 sm:pt-28 sm:pb-20 min-h-[340px] sm:min-h-[420px] flex flex-col justify-end">
+                    <!-- Project Category & Timeline -->
+                    <div class="text-[11px] font-bold uppercase tracking-[.14em] text-white/75 mb-4">
+                        Capstone / FYDP  ·  September 2026 — Present
+                    </div>
+                    <!-- Project Title -->
+                    <h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-tight text-white">
+                        Notify Robots
                     </h1>
-                    <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
-                        <span>
+                    <!-- Subtitle -->
+                    <p class="mt-2 text-base sm:text-xl font-semibold text-white/85">
+                        Notice + Nudge
+                    </p>
+                    <!-- Description -->
+                    <p class="mt-5 max-w-xl text-sm sm:text-base font-medium leading-relaxed text-white/85">
+                        Notify Robots explores physical, expressive alternatives to digital alerts through two robots: Notice and Nudge.
+                    </p>
+                </div>
+            </section>
+            <!-- ================= PROJECT INFORMATION ================= -->
+            <section class="max-w-5xl mx-auto px-6 pt-8 pb-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 border-t-2 border-zinc-900 dark:border-zinc-100">
+                    <!-- Type -->
+                    <div class="py-4 px-3 sm:px-4">
+                        <div class="eyebrow">
+                            Type
+                        </div>
+                        <div class="text-sm font-bold mt-2 leading-relaxed">
+                            Capstone / FYDP
+                        </div>
+                    </div>
+                    <!-- Timeline -->
+                    <div class="py-4 px-3 sm:px-4 border-l border-zinc-200 dark:border-zinc-800">
+                        <div class="eyebrow">
+                            Timeline
+                        </div>
+                        <div class="text-sm font-bold mt-2 leading-relaxed">
                             September 2026 — Present
-                        </span>
-                        <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">
-                            •
-                        </span>
-                        <span>
-                            Capstone/FYDP
-                        </span>
+                        </div>
                     </div>
-                    <div class="flex flex-wrap gap-2 py-1 mt-1">
-                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_1.html">
-                            Subpage 1
-                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
-                                ↗
-                            </span>
-                        </a>
-                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_2.html">
-                            Subpage 2
-                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
-                                ↗
-                            </span>
-                        </a>
-                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_3.html">
-                            Subpage 3
-                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
-                                ↗
-                            </span>
-                        </a>
-                        <a class="px-3 py-1 text-xs font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_4.html">
-                            Subpage 4
-                            <span aria-hidden="true" class="ml-1 text-zinc-400 dark:text-zinc-500">
-                                ↗
-                            </span>
-                        </a>
+                    <!-- Group -->
+                    <div class="py-4 px-3 sm:px-4 border-t md:border-t-0 md:border-l border-zinc-200 dark:border-zinc-800">
+                        <div class="eyebrow">
+                            Group
+                        </div>
+                        <div class="text-sm font-bold mt-2 leading-relaxed">
+                            <a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/ethancpwoo/">
+                                Ethan
+                            </a>
+                            ,
+                            <a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/rrahul04/">
+                                Rahul
+                            </a>
+                            ,
+                            <a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/nathanielli/">
+                                Nathaniel
+                            </a>
+                            ,
+                            <a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/1neelp/">
+                                Neel
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Responsibilities -->
+                    <div class="py-4 px-3 sm:px-4 border-l border-t md:border-t-0 border-zinc-200 dark:border-zinc-800">
+                        <div class="eyebrow">
+                            Responsibilities
+                        </div>
+                        <div class="text-sm font-bold mt-2 leading-relaxed">
+                            Mechanical + Industrial
+                        </div>
                     </div>
                 </div>
-                <hr class="border-zinc-200 dark:border-zinc-800 transition-colors"/>
-                <div class="space-y-4">
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        [Write a concise project introduction: what you are building, why it matters, and what makes the engineering challenging. Aim for two to four sentences.]
+            </section>
+            <section class="max-w-5xl mx-auto px-6 pt-6 pb-3">
+                <div aria-label="Technical subpages" class="flex flex-wrap gap-2">
+                    <a class="tag colour-tag" style="--note-colour: #EAA7C7;" href="Capstone_subpages/placeholder_1.html">
+                        Modeling & Actuator Sizing ↗
+                    </a>
+                    <a class="tag colour-tag" style="--note-colour: #EAC119;" href="Capstone_subpages/placeholder_2.html">
+                        Kinematic Linkage Design ↗
+                    </a>
+                    <a class="tag colour-tag" style="--note-colour: #808BC5;" href="Capstone_subpages/placeholder_3.html">
+                        General Mechanical Design  ↗
+                    </a>
+                    <a class="tag colour-tag" style="--note-colour: #9ED6DF;" href="Capstone_subpages/placeholder_4.html">
+                        Industrial Design + Art ↗
+                    </a>
+                </div>
+            </section>
+            <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="overview">
+                <div class="section-rule chapter">
+                    <span class="chapter-num">
+                        01
+                    </span>
+                    <h2 class="chapter-title">
+                        Project Overview
+                    </h2>
+                </div>
+                <div class="chapter-body mt-7">
+                    <p class="max-w-2xl text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                        Notify Robots is our final-year design project exploring how robots can communicate through safe physical interaction. Notice monitors for important events within the home while Nudge approaches users to deliver a gentle physical alert.
                     </p>
-                    <!-- OPTIONAL HERO IMAGE: uncomment and update the path when the image exists.
-   <figure class="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30">
-    <img src="../../images/projects/project-name/hero.jpg" alt="[Project overview]" class="w-full h-auto object-contain" loading="lazy">
-   </figure>
-   -->
-                </div>
-                <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-                        1. Project Overview
-                    </h3>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        [Describe the objective, system-level concept, and scope. This landing page should be readable on its own; reserve the longer derivations and technical detail for the subpages.]
+                    <p class="max-w-2xl mt-4 text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                        This page highlights my contributions to the mechanical and industrial design work. For the full project write-up, visit the
+                        <a class="font-bold underline underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://mte-capstone-design-website.vercel.app/" rel="noopener noreferrer" target="_blank">
+                            official Notify Robotics website
+                        </a>
+                        .
                     </p>
                 </div>
-                <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-                        2. System Summary
-                    </h3>
-                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-                        <table class="w-full text-left text-sm border-collapse">
-                            <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium">
-                                <tr>
-                                    <th class="p-4 w-1/3 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
-                                        Point 1
-                                    </th>
-                                    <td class="p-4">
-                                        Info
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="p-4 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
-                                        Point 2
-                                    </th>
-                                    <td class="p-4">
-                                        Info
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="p-4 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
-                                        Point 3
-                                    </th>
-                                    <td class="p-4">
-                                        Info
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="p-4 font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800/50" scope="row">
-                                        Point 4
-                                    </th>
-                                    <td class="p-4">
-                                        Info
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            </section>
+            <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="technical-notes">
+                <div class="section-rule chapter">
+                    <span class="chapter-num">
+                        02
+                    </span>
+                    <h2 class="chapter-title">
+                        Technical Documentation
+                    </h2>
                 </div>
-                <div class="space-y-4 pt-4" id="technical-notes">
-                    <div>
-                        <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-                            3. Subpages
-                        </h3>
-                        <p class="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                            Detailed design work, organized by topic.
-                        </p>
-                    </div>
+                <div class="chapter-body mt-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_1.html">
-                            <div class="flex justify-between items-start gap-3">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #EAA7C7;" href="Capstone_subpages/placeholder_1.html">
+                            <div class="flex justify-between">
+                                <span class="eyebrow">
                                     01 / Technical note
                                 </span>
-                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                <span class="note-arrow">
                                     ↗
                                 </span>
                             </div>
-                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                                Subpage 1
+                            <h3 class="text-xl font-bold mt-5">
+                                Modeling + Actuator Sizing
                             </h3>
-                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
-                                Summary 1
+                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+                                Modeling wheel and leg dynamics to estimate torque requirements and size actuators.
                             </p>
-                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
-                                Read technical note →
+                            <span class="note-link mt-auto pt-6 text-xs font-bold">
+                                Explore documentation →
                             </span>
                         </a>
-                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_2.html">
-                            <div class="flex justify-between items-start gap-3">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #EAC119;" href="Capstone_subpages/placeholder_2.html">
+                            <div class="flex justify-between">
+                                <span class="eyebrow">
                                     02 / Technical note
                                 </span>
-                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                <span class="note-arrow">
                                     ↗
                                 </span>
                             </div>
-                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                                Subpage 2
+                            <h3 class="text-xl font-bold mt-5">
+                                Kinematic Linkage Design
                             </h3>
-                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
-                                Summary 2
+                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+                                Creating the gravity compensating and sensitive contact mechanisms behind Nudge's expressions and tap.
                             </p>
-                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
-                                Read technical note →
+                            <span class="note-link mt-auto pt-6 text-xs font-bold">
+                                Explore documentation →
                             </span>
                         </a>
-                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_3.html">
-                            <div class="flex justify-between items-start gap-3">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #808BC5;" href="Capstone_subpages/placeholder_3.html">
+                            <div class="flex justify-between">
+                                <span class="eyebrow">
                                     03 / Technical note
                                 </span>
-                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                <span class="note-arrow">
                                     ↗
                                 </span>
                             </div>
-                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                                Subpage 2
+                            <h3 class="text-xl font-bold mt-5">
+                                General Mechanical Design
                             </h3>
-                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
-                                Summary 2
+                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+                                Designing Nudge’s packaging, structure, and safe-contact mechanisms.
                             </p>
-                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
-                                Read technical note →
+                            <span class="note-link mt-auto pt-6 text-xs font-bold">
+                                Explore documentation →
                             </span>
                         </a>
-                        <a class="group block border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors shadow-sm dark:shadow-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="Capstone_subpages/placeholder_4.html">
-                            <div class="flex justify-between items-start gap-3">
-                                <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #9ED6DF;" href="Capstone_subpages/placeholder_4.html">
+                            <div class="flex justify-between">
+                                <span class="eyebrow">
                                     04 / Technical note
                                 </span>
-                                <span aria-hidden="true" class="text-sm text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                                <span class="note-arrow">
                                     ↗
                                 </span>
                             </div>
-                            <h3 class="mt-3 text-base font-bold text-zinc-900 dark:text-zinc-50">
-                                Subpage 4
+                            <h3 class="text-xl font-bold mt-5">
+                                Industrial Design + Art
                             </h3>
-                            <p class="mt-2 text-sm font-medium leading-relaxed text-zinc-600 dark:text-zinc-400">
-                                Summary 4
+                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+                                Developing the form, visual identity, and expressive motions of Nudge and Notice.
                             </p>
-                            <span class="inline-block mt-4 text-[11px] font-bold text-zinc-500 dark:text-zinc-400">
-                                Read technical note →
+                            <span class="note-link mt-auto pt-6 text-xs font-bold">
+                                Explore documentation →
                             </span>
                         </a>
                     </div>
                 </div>
-                <div class="space-y-4 pt-4">
-                    <h3 class="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-                        4. Current Progress & Next Steps
-                    </h3>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Note
+            </section>
+            <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="summary">
+                <div class="section-rule chapter">
+                    <span class="chapter-num">
+                        03
+                    </span>
+                    <h2 class="chapter-title">
+                        TL;DR
+                    </h2>
+                </div>
+                <div class="chapter-body mt-7">
+                    <p class="max-w-2xl text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                        A high level summary highlighting the work it took to bring Nudge and Notice to reality.
+                    </p>
+                    <p class="max-w-2xl mt-4 text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                        This section is currently under construction.
                     </p>
                 </div>
-            </article>
+            </section>
         </main>
-        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
-            <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+        <footer class="border-t border-zinc-200 dark:border-zinc-800">
+            <div class="footer-banner relative overflow-hidden">
+                <img alt="Notify Robotics footer banner" class="w-full h-full object-cover" loading="lazy" src="../images/projects/capstone/footer.png"/>
+            </div>
+            <div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] font-bold text-zinc-400">
                 © 2026 Yang Lu. Built clean, with vibes.
             </div>
         </footer>
+        <script>
+            // Reveal the destination page after its initial background is painted.
+            const root = document.documentElement;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let navigating = false;
+
+            function revealPage() {
+                navigating = false;
+                root.classList.remove('page-departing');
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        root.classList.remove('page-arriving');
+                    });
+                });
+            }
+
+            revealPage();
+
+            document.addEventListener('click', event => {
+                const link = event.target.closest('a[href]');
+
+                if (!link || navigating || event.defaultPrevented || event.button !== 0 ||
+                    event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+                    (link.target && link.target !== '_self') ||
+                    link.hasAttribute('download') || reducedMotion.matches) return;
+
+                const destination = new URL(link.href, window.location.href);
+
+                if (destination.origin !== window.location.origin ||
+                    !destination.pathname.endsWith('.html') ||
+                    destination.pathname === window.location.pathname) return;
+
+                event.preventDefault();
+                navigating = true;
+                root.classList.add('page-departing');
+
+                window.setTimeout(() => {
+                    window.location.assign(destination.href);
+                }, 320);
+            });
+
+            window.addEventListener('pageshow', event => {
+                if (event.persisted) revealPage();
+            });
+        </script>
+    
+        <script>
+            // Track reading progress through the main content, excluding the footer.
+            (function () {
+                const bar = document.getElementById('reading-progress');
+                const main = document.querySelector('main');
+                const header = document.querySelector('header');
+
+                if (!bar || !main || !header) return;
+
+                let pending = false;
+
+                function updateProgress() {
+                    const rect = main.getBoundingClientRect();
+                    const top = rect.top + window.scrollY;
+                    const bottom = top + main.offsetHeight;
+                    const start = top - header.offsetHeight;
+                    const end = bottom - window.innerHeight;
+                    const distance = end - start;
+                    const fraction = distance > 0
+                        ? (window.scrollY - start) / distance
+                        : 1;
+
+                    bar.style.transform = `scaleX(${Math.max(0, Math.min(1, fraction))})`;
+                    pending = false;
+                }
+
+                function scheduleUpdate() {
+                    if (pending) return;
+                    pending = true;
+                    requestAnimationFrame(updateProgress);
+                }
+
+                window.addEventListener('scroll', scheduleUpdate, { passive: true });
+                window.addEventListener('resize', scheduleUpdate);
+                window.addEventListener('load', scheduleUpdate);
+                window.addEventListener('pageshow', scheduleUpdate);
+                scheduleUpdate();
+            })();
+        </script>
     </body>
 </html>

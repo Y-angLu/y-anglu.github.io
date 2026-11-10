@@ -1,104 +1,834 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write-up: Coming Soon</title>
-    
-    <link class="favicon" rel="icon" type="image/png" href="../images/gear_favicon.png">
+<html class="scroll-smooth" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>
+            Project: Wheeled Biped V1
+        </title>
+        <link class="favicon" href="../images/gear_favicon.png" rel="icon" type="image/png"/>
+        <link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
+        <script src="https://cdn.tailwindcss.com">
+        </script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Quicksand', 'sans-serif'],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            @font-face {
+                font-family: 'Quicksand';
+                src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+                font-weight: 100 900;
+                font-style: normal;
+                font-display: swap;
+            }
 
-    <link rel="preload" href="../fonts/Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
-                    }
+            body {
+                font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            }
+
+            /* Subtle transitions between portfolio pages. */
+            @keyframes page-enter {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
                 }
             }
-        }
-    </script>
-    
-    <style>
-        @font-face {
-            font-family: 'Quicksand';
-            src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
-            font-weight: 100 900;
-            font-style: normal;
-            font-display: swap;
-        }
 
-        body {
-            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-    </style>
-
-    <script>
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+            main {
+                animation: page-enter 300ms ease-out both;
             }
-            
-            document.documentElement.classList.remove('no-js');
-        })();
-    </script>
-</head>
-<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200 flex flex-col min-h-screen">
 
-    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-        <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-            <a href="../index.html" class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
-                </svg>
-                Back to Home
-            </a>
-        </div>
-    </header>
+            body.page-leaving main {
+                opacity: 0;
+                transform: translateY(-4px);
+                transition: opacity 180ms ease, transform 180ms ease;
+                animation: none;
+            }
 
-    <main class="flex-1 w-full max-w-3xl mx-auto px-6 flex flex-col items-center justify-center py-12">
+            @media (prefers-reduced-motion: reduce) {
+                main {
+                    animation: none;
+                }
+
+                body.page-leaving main {
+                    transition: none;
+                }
+            }
+
+        /* Full-viewport navigation veil: covers background and content together. */
+        .navigation-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            background: #fafafa;
+            opacity: 0;
+            transition: opacity 320ms ease;
+        }
+
+        html.dark .navigation-veil {
+            background: #121212;
+        }
+
+        html.page-arriving .navigation-veil,
+        html.page-departing .navigation-veil {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .navigation-veil { transition: none; }
+        }
         
-        <div class="flex flex-col items-center text-center space-y-6 max-w-sm">
-            
-            <div class="w-14 h-14 bg-zinc-100 dark:bg-zinc-800/40 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 shadow-sm">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"></path>
-                </svg>
+            /* Reading progress follows the bottom edge of the sticky header. */
+            #reading-progress {
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: #71717a;
+                transform: scaleX(0);
+                transform-origin: left center;
+                pointer-events: none;
+                will-change: transform;
+            }
+
+            html.dark #reading-progress {
+                background: #a1a1aa;
+            }
+
+            /* Responsive article navigation, outside the reading column. */
+            .article-toc {
+                position: fixed;
+                top: 88px;
+                left: max(16px, calc(50% - 610px));
+                width: 202px;
+                max-height: calc(100vh - 112px);
+                overflow-y: auto;
+                z-index: 40;
+                padding: 14px 12px;
+                border: 1px solid rgba(161, 161, 170, .22);
+                border-radius: 14px;
+                background: rgba(250, 250, 250, .85);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                scrollbar-width: thin;
+            }
+            html.dark .article-toc {
+                background: rgba(18, 18, 18, .86);
+                border-color: rgba(113, 113, 122, .3);
+            }
+            .toc-label {
+                margin: 0 0 10px 10px;
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: .11em;
+                color: #71717a;
+                text-transform: uppercase;
+            }
+            .toc-link {
+                display: block;
+                border-left: 2px solid transparent;
+                border-radius: 0 5px 5px 0;
+                padding: 7px 8px 7px 10px;
+                color: #71717a;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 1.45;
+                text-decoration: none;
+                transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+            }
+            .toc-link:hover, .toc-link:focus-visible { color: #18181b; background: rgba(161,161,170,.10); }
+            html.dark .toc-link:hover, html.dark .toc-link:focus-visible { color: #fafafa; }
+            .toc-link.is-active { border-left-color: #52525b; color: #18181b; background: rgba(161,161,170,.12); }
+            html.dark .toc-link.is-active { border-left-color: #d4d4d8; color: #fafafa; }
+            .toc-link.toc-sub { padding-left: 20px; font-size: 11px; font-weight: 500; }
+            .toc-mobile-toggle { display: none; }
+            .toc-scrim { display: none; }
+            [data-toc-target] { scroll-margin-top: 76px; }
+            @media (max-width: 1239px) {
+                .article-toc {
+                    top: auto;
+                    left: auto;
+                    right: max(16px, env(safe-area-inset-right));
+                    bottom: calc(78px + env(safe-area-inset-bottom));
+                    width: min(310px, calc(100vw - 32px));
+                    max-height: min(65vh, 430px);
+                    padding: 14px;
+                    z-index: 81;
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transform: translateY(10px) scale(.98);
+                    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+                    box-shadow: 0 12px 36px rgba(0,0,0,.12);
+                }
+                .article-toc.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+                .toc-mobile-toggle {
+                    display: flex;
+                    position: fixed;
+                    right: max(16px, env(safe-area-inset-right));
+                    bottom: calc(18px + env(safe-area-inset-bottom));
+                    z-index: 82;
+                    align-items: center;
+                    gap: 9px;
+                    padding: 12px 16px;
+                    border-radius: 999px;
+                    border: 1px solid #d4d4d8;
+                    background: rgba(250,250,250,.94);
+                    color: #27272a;
+                    box-shadow: 0 5px 22px rgba(0,0,0,.10);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
+                    font-size: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+                html.dark .toc-mobile-toggle { background: rgba(30,30,30,.94); border-color: #52525b; color: #f4f4f5; }
+                .toc-scrim.is-open { display: block; position: fixed; inset: 0; z-index: 80; background: transparent; }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .article-toc, .toc-link { transition: none; }
+            }
+        </style>
+        <script>
+            // Initialize the correct theme before the page renders.
+            (function () {
+                const fromColourMode =
+                    sessionStorage.getItem('portfolio-colour-return') === '1';
+
+                const savedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia(
+                    '(prefers-color-scheme: dark)'
+                ).matches;
+
+                // Subpages use Light Mode when entered from Colour Mode.
+                // Otherwise, respect the saved theme preference.
+                const useDark = !fromColourMode && (
+                    savedTheme === 'dark' ||
+                    (!savedTheme && systemPrefersDark)
+                );
+
+                const root = document.documentElement;
+                root.classList.toggle('dark', useDark);
+                root.classList.add('page-arriving');
+
+                // Set the background immediately to avoid white flashes.
+                root.style.backgroundColor = useDark ? '#121212' : '#fafafa';
+                root.style.colorScheme = useDark ? 'dark' : 'light';
+            })();
+        </script>
+        <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+    </head>
+    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+        <div class="navigation-veil" aria-hidden="true"></div>
+        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+            <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../index.html">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>
+                    Back to Home
+                </a>
             </div>
 
-            <div class="space-y-3">
-                <span class="inline-block px-3 py-1 text-[10px] font-bold tracking-widest uppercase bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-500 dark:text-zinc-400 rounded-full border border-zinc-300/30 dark:border-zinc-700/30">
-                    Work in Progress
-                </span>
-                
-                <h1 class="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                    Documentation Pending
-                </h1>
-                
-                <p class="text-zinc-500 dark:text-zinc-400 font-medium text-sm leading-relaxed">
-                    Currently compiling the details. Check back soon for the full write-up!
+            <div
+                id="reading-progress"
+                aria-hidden="true"
+            ></div>
+        </header>
+        <!-- Desktop sidebar / mobile expandable contents. -->
+        <div class="toc-scrim" id="toc-scrim" aria-hidden="true"></div>
+        <nav class="article-toc" id="article-toc" aria-label="Table of contents">
+            <p class="toc-label">On this page</p>
+                <a class="toc-link" href="#gearbox-selection" data-toc-link>1. Actuator Selection</a>
+                <a class="toc-link toc-sub" href="#actuator-qualities" data-toc-link>What Makes a Good Actuator?</a>
+                <a class="toc-link toc-sub" href="#reduction-inertia" data-toc-link>Reduction & Reflected Inertia</a>
+                <a class="toc-link toc-sub" href="#backdrivability" data-toc-link>Backdrivability & Transparency</a>
+                <a class="toc-link toc-sub" href="#quasi-direct-drive" data-toc-link>Quasi-Direct Drive</a>
+                <a class="toc-link" href="#capstan-effect" data-toc-link>2. Capstan Drive Mechanics</a>
+                <a class="toc-link toc-sub" href="#compliance-backlash" data-toc-link>Backlash & Compliance</a>
+                <a class="toc-link toc-sub" href="#control-bandwidth" data-toc-link>Control Bandwidth</a>
+                <a class="toc-link" href="#actuator-sizing" data-toc-link>3. V1 Design & Implementation</a>
+                <a class="toc-link" href="#pivot" data-toc-link>4. Why I Moved Away</a>
+        </nav>
+        <button class="toc-mobile-toggle" id="toc-toggle" type="button" aria-controls="article-toc" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <span>Contents</span>
+        </button>
+        <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+            <article class="space-y-5">
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">
+                        Wheeled Biped - V1
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                        <span>
+                            July 2024 — August 2024
+                        </span>
+                        <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">
+                            •
+                        </span>
+                        <span>
+                            Personal Project
+                        </span>
+                        <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">
+                            •
+                        </span>
+                        <span>
+                            First Iteration
+                        </span>
+                    </div>
+                </div>
+                <hr class="border-zinc-200 dark:border-zinc-800"/>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    My long-term goal in building these robots was to eventually tackle the challenge of a humanoid biped. Knowing the difficulty of bipedal locomotion, I saw a wheeled biped as a useful intermediate step. Wheels simplified locomotion while preserving the challenges of articulated legs and dynamic balance.
                 </p>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    I began V1 toward the end of the summer term. Having relied primarily on hobby servos in previous robots, I wanted to better understand the motors and transmissions driving each joint. Inspired by
+                    <a class="text-zinc-900 dark:text-zinc-50 font-bold underline decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-400 transition-colors" href="https://hackaday.io/project/176726-stanley-the-capstan-based-quadruped-kit" target="_blank">
+                        Stanley
+                    </a>
+                    , a rope-driven quadruped, I decided to explore capstan drives as a potential low-reduction, near-zero-backlash transmission.
+                </p>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    The broader wheeled-biped engineering carries over into V2 and my capstone project, where I explore leg optimization, dynamic modeling, actuator sizing, and system integration.
+                </p>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    This page instead focuses on robotic actuator design, capstan mechanics, and the trade-offs that led me away from rope-driven transmissions.
+                </p>
+                <section aria-labelledby="gearbox-selection" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="gearbox-selection" data-toc-target>
+                        1. Actuator Selection
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="actuator-qualities" data-toc-target>
+                        1.1 What Makes a Good Actuator?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For V1, I wanted to understand what makes an actuator suitable for a dynamic robot.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The main considerations were torque density, speed, efficiency, backdrivability, and reliability. Ideally, an actuator would produce high joint torque while introducing minimal resistance to external forces. In practice, these characteristics compete, particularly when selecting the transmission ratio.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="reduction-inertia" data-toc-target>
+                        1.2 Reduction Ratio and Reflected Inertia
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Electric motors generally operate at higher speeds and lower torques than robotic joints require. A gearbox trades motor speed for output torque:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[\omega_{\mathrm{out}}=\frac{\omega_m}{N},\qquad \tau_{\mathrm{out}}\approx\eta N\tau_m\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            N = reduction ratio; η = forward transmission efficiency.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The less obvious consequence of increasing reduction is
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            reflected inertia
+                        </strong>
+                        : the motor's rotational inertia as experienced at the output joint.
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[J_{\mathrm{reflected}}=N^2J_m\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            J
+                            <sub>
+                                m
+                            </sub>
+                            = motor rotor inertia; ideal rigid transmission.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Doubling the reduction ratio quadruples the reflected motor inertia. While higher reduction allows smaller motors to generate greater joint torque, it also increases resistance to external acceleration. This is particularly undesirable for joints that need to respond quickly to impacts or changes in loading.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="backdrivability" data-toc-target>
+                        1.3 Backdrivability and Transparency
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Two characteristics I became interested in were
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            backdrivability
+                        </strong>
+                        and
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            transparency
+                        </strong>
+                        .
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Backdrivability is the ability of an external joint torque to drive the motor backward through the transmission. Transparency describes how little the actuator's own inertia, friction, backlash, and compliance interfere with external forces.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For an ideal, unpowered rigid transmission:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[\tau_{\mathrm{ext}}=\left(J_L+N^2J_m\right)\ddot{\theta}\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            J
+                            <sub>
+                                L
+                            </sub>
+                            = load inertia; θ̈ = joint angular acceleration.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Real transmissions introduce additional resistance through friction, stiction, and other losses.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        An important distinction is that
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            efficiency and transparency are not equivalent
+                        </strong>
+                        . Even a hypothetical 100%-efficient gearbox retains its reflected inertia. Real gearbox efficiency is also nonlinear, varying with torque, speed, and direction of motion.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        These effects contribute to the actuator's apparent resistance to acceleration. Friction and control behaviour can make this resistance vary with operating conditions, rather than behaving like a constant inertia.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For a dynamic robot, I wanted joints that could respond to external disturbances without excessive mechanical resistance. Higher transparency also makes proprioceptive force estimation more practical, since motor current and joint measurements provide a more predictable indication of external loading when transmission losses are small.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="quasi-direct-drive" data-toc-target>
+                        1.4 Quasi-Direct Drive
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This led me toward
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            quasi-direct-drive (QDD)
+                        </strong>
+                        actuators: high-torque motors paired with relatively low reduction ratios.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Lower reduction limits reflected inertia and can reduce friction and backlash, improving backdrivability and torque control. These characteristics are particularly useful for a balancing robot, where the wheels and legs must continuously respond to ground forces and disturbances.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The ideal would be a compact, high-torque actuator with minimal parasitic driving and backdriving resistance, high stiffness, and negligible backlash.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        However, low reduction also means greater motor torque and current requirements. High torque density can come at the expense of continuous performance when thermal management is insufficient. Sealing, lubrication, and bearing design introduce further compromises between mechanical resistance, packaging, and long-term reliability.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        QDD offered a promising direction, particularly for its low reflected inertia and potential for backdrivability. For V1, I chose to explore a capstan-based QDD actuator, hoping to achieve these characteristics through a low-ratio, near-zero-backlash rope transmission.
+                    </p>
+                </section>
+                <section aria-labelledby="capstan-effect" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="capstan-effect" data-toc-target>
+                        2. Capstan Drive Mechanics
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        A capstan drive transmits torque through tensioned rope wrapped around rotating drums. Without meshing gear teeth, it offers the potential for minimal backlash and good backdrivability. However, its performance depends on rope tension, friction, stiffness, and mechanical design.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2">
+                        2.1 Torque Transmission and the Capstan Effect
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Capstan drives rely on friction between the rope and drum to transmit torque. The difference in rope tension produces torque about the drum axis:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[\tau=(T_{\mathrm{high}}-T_{\mathrm{low}})r\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            \(T_{\mathrm{high}}\), \(T_{\mathrm{low}}\) = rope tensions; \(r\) = effective drum radius.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The maximum tension ratio before slipping is governed by the
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            capstan equation
+                        </strong>
+                        :
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[\frac{T_{\mathrm{high}}}{T_{\mathrm{low}}}\leq e^{\mu\theta}\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            \(\mu\) = rope–drum friction coefficient; \(\theta\) = wrap angle in radians.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Increasing wrap angle exponentially increases the available tension ratio, while pretension helps maintain engagement and sufficient tension under changing loads.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For a wheeled biped, frequent torque reversals make maintaining tension particularly important. Insufficient pretension risks slack or slip, while excessive pretension increases bearing loads, cable stress, and wear. Higher cable loads may also require thicker rope, affecting bending fatigue, terminations, and packaging.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2">
+                        2.2 Reduction Ratio and Mechanical Design
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The capstan equation describes frictional traction, not the reduction ratio. Assuming no slip, the effective drum radii determine the reduction:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[N=\frac{r_{\mathrm{out}}}{r_{\mathrm{in}}}\qquad \tau_{\mathrm{out}}\approx\eta N\tau_{\mathrm{in}}\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            \(r_{\mathrm{in}}\), \(r_{\mathrm{out}}\) = effective drum radii; \(\eta\) = forward efficiency.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For V1, I considered a reduction of approximately 8:1, consistent with the QDD approach.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        A key packaging constraint was the
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            D/d ratio
+                        </strong>
+                        (drum diameter to cable diameter). Thicker cables generally require larger minimum bending diameters to limit fatigue and maintain service life.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This limits the minimum input drum diameter. At a fixed reduction ratio, a larger input drum requires a proportionally larger output drum, quickly increasing the transmission's footprint.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The rope also required sufficient wrap angle, secure terminations, and a tensioning mechanism. My configuration used separate input and output axes, further complicating packaging within the leg.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="compliance-backlash" data-toc-target>
+                        2.3 Backlash, Compliance, and Transparency
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The main attraction of capstan drives was their potential for near-zero geometric backlash. With sufficient pretension, the rope remains engaged without the clearance associated with meshing gear teeth.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        However,
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            low backlash does not necessarily mean high stiffness or transparency
+                        </strong>
+                        .
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Synthetic cables such as Dyneema and Vectran exhibit compliance, hysteresis, and varying degrees of creep. Their effective stiffness depends on braid construction, pretension, and loading history, making simple linear elastic models unreliable without experimental characterization.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Rope stretch allows relative displacement between the motor and joint, affecting position accuracy and torque transmission. Friction from rope bending and microslip introduces additional losses and direction-dependent behavior.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For a balancing robot, I wanted predictable joint responses to external forces. Low backlash was attractive, but compliance and friction complicated the goal of high transparency.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="control-bandwidth" data-toc-target>
+                        2.4 Compliance and Control Bandwidth
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Rope compliance also affects the actuator's dynamic response. Rather than behaving as a single rigid inertia, the motor and load form a
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            two-inertia system
+                        </strong>
+                        coupled by the rope's effective torsional stiffness.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For an ideal, undamped model with inertias and stiffness referred to the same shaft:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[\omega_{\mathrm{ar}}=\sqrt{\frac{k}{J_L}}\qquad \omega_{\mathrm{r}}=\sqrt{k\left(\frac{1}{J_m}+\frac{1}{J_L}\right)}\]
+                        </div>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                            \(k\) = effective torsional stiffness; \(J_m\), \(J_L\) = motor and load inertias referred to the same shaft.
+                        </p>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Lower rope stiffness reduces these frequencies, bringing flexible dynamics closer to the intended control bandwidth. Near resonance, the transmission can amplify oscillations and introduce phase changes that complicate feedback control.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For a wheeled biped, where actuators must respond quickly to disturbances, these flexible dynamics can limit achievable control bandwidth. Some compliance is useful for absorbing impacts, but uncontrolled elasticity makes precise torque and position control more difficult.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2">
+                        2.5 Reliability and Long-Term Performance
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Maintaining consistent transmission behavior also presents practical challenges.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Rope creep and relaxation can alter pretension and stiffness over time, while repeated loading may introduce wear and changes in friction. Terminations must securely hold the cable without slipping or creating excessive stress concentrations.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        These effects can require periodic retensioning or recalibration, adding maintenance and mechanical complexity.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Ultimately, the challenge was not simply achieving a low-backlash reduction, but maintaining
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            stiffness, transparency, and predictable torque transmission
+                        </strong>
+                        in a compact, reliable actuator.
+                    </p>
+                </section>
+                <section aria-labelledby="actuator-sizing" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="actuator-sizing" data-toc-target>
+                        3. V1 Design and Implementation
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For V1, I estimated joint torque requirements and reduction ratios by benchmarking actuator specifications from other wheeled bipeds. With limited development time, this provided a practical starting point, but it did not account for differences in leg geometry, mass distribution, or dynamic loading.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        A more rigorous approach involves modeling the robot's kinematics and dynamics to establish joint torque - speed requirements, then selecting motors and transmissions based on peak and continuous performance, thermal limits, and reflected inertia.
+                        <strong class="text-zinc-900 dark:text-zinc-100">
+                            I explore this process in greater depth in V2 and my capstone project
+                        </strong>
+                        .
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I ultimately built a functioning leg incorporating the capstan transmissions. With the school year approaching, I disassembled the prototype and shifted my focus toward learning about motor control strategies and planning for the next biped iteration.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+                        <!-- Row 1 -->
+                        <!-- Image 01 -->
+                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
+                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+                                Image placeholder 01
+                            </span>
+                        </div>
+                        <!-- Image 02 -->
+                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
+                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+                                Image placeholder 02
+                            </span>
+                        </div>
+                        <!-- Row 2 -->
+                        <!-- Image 03 -->
+                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
+                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+                                Image placeholder 03
+                            </span>
+                        </div>
+                        <!-- Image 04 -->
+                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
+                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+                                Image placeholder 04
+                            </span>
+                        </div>
+                        <!-- Row 3 -->
+                        <!-- Image 05 -->
+                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
+                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+                                Image placeholder 05
+                            </span>
+                        </div>
+                        <!-- Image 06 -->
+                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
+                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+                                Image placeholder 06
+                            </span>
+                        </div>
+                    </div>
+                </section>
+                <section aria-labelledby="pivot" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="pivot" data-toc-target>
+                        4. Why I Moved Away from Capstan Drives
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Although promising in theory, integrating the capstan transmission into a functioning leg revealed several practical challenges:
+                    </p>
+                    <ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Pretension:
+                            </strong>
+                            Difficult to maintain consistent rope tension during assembly and adjustment.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Packaging:
+                            </strong>
+                            Large drums, cable thickness, and precise drum spacing complicated the design.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                System complexity:
+                            </strong>
+                            Rope routing, terminations, and tensioning hardware added assembly challenges.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Dynamic performance:
+                            </strong>
+                            Compliance, friction, and hysteresis raised concerns about transparency and control bandwidth, although these effects were not experimentally characterized.
+                        </li>
+                    </ul>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        In retrospect, V1 reinforced the importance of evaluating an actuator as a complete system. Backlash, efficiency, backdrivability, stiffness, and transparency are distinct characteristics; improving one does not necessarily improve the others.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        While I ultimately moved away from capstan drives, the capstan effect remains useful in other applications, particularly cable-driven robotic hands, where friction can secure terminations but complicate precise force transmission.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For V2, I moved toward a more conventional actuator architecture while retaining the same priorities: sufficient torque, low reflected inertia, good backdrivability, and predictable force transmission. V2 builds on these lessons through leg optimization, dynamic modeling, and systematic actuator sizing, with further development continuing into my capstone project.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="Biped_V2.html">
+                            Wheeled Biped V2 →
+                        </a>
+                        <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="Capstone.html">
+                            Capstone →
+                        </a>
+                    </div>
+                </section>
+            </article>
+        </main>
+        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+            <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+                © 2026 Yang Lu. Built clean, with vibes.
             </div>
+        </footer>
+        <script>
+            // Reveal the destination page after its initial background is painted.
+            const root = document.documentElement;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let navigating = false;
 
-        </div>
+            function revealPage() {
+                navigating = false;
+                root.classList.remove('page-departing');
 
-    </main>
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        root.classList.remove('page-arriving');
+                    });
+                });
+            }
 
-    <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
-        <div class="max-w-3xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
-            © 2026 Yang Lu. Built clean, with vibes.
-        </div>
-    </footer>
+            revealPage();
 
-</body>
+            document.addEventListener('click', event => {
+                const link = event.target.closest('a[href]');
+
+                if (!link || navigating || event.defaultPrevented || event.button !== 0 ||
+                    event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+                    (link.target && link.target !== '_self') ||
+                    link.hasAttribute('download') || reducedMotion.matches) return;
+
+                const destination = new URL(link.href, window.location.href);
+
+                if (destination.origin !== window.location.origin ||
+                    !destination.pathname.endsWith('.html') ||
+                    destination.pathname === window.location.pathname) return;
+
+                event.preventDefault();
+                navigating = true;
+                root.classList.add('page-departing');
+
+                window.setTimeout(() => {
+                    window.location.assign(destination.href);
+                }, 320);
+            });
+
+            window.addEventListener('pageshow', event => {
+                if (event.persisted) revealPage();
+            });
+        </script>
+    
+        <script>
+            // Track reading progress through the main content, excluding the footer.
+            (function () {
+                const bar = document.getElementById('reading-progress');
+                const main = document.querySelector('main');
+                const header = document.querySelector('header');
+
+                if (!bar || !main || !header) return;
+
+                let pending = false;
+
+                function updateProgress() {
+                    const rect = main.getBoundingClientRect();
+                    const top = rect.top + window.scrollY;
+                    const bottom = top + main.offsetHeight;
+                    const start = top - header.offsetHeight;
+                    const end = bottom - window.innerHeight;
+                    const distance = end - start;
+                    const fraction = distance > 0
+                        ? (window.scrollY - start) / distance
+                        : 1;
+
+                    bar.style.transform = `scaleX(${Math.max(0, Math.min(1, fraction))})`;
+                    pending = false;
+                }
+
+                function scheduleUpdate() {
+                    if (pending) return;
+                    pending = true;
+                    requestAnimationFrame(updateProgress);
+                }
+
+                window.addEventListener('scroll', scheduleUpdate, { passive: true });
+                window.addEventListener('resize', scheduleUpdate);
+                window.addEventListener('load', scheduleUpdate);
+                window.addEventListener('pageshow', scheduleUpdate);
+                scheduleUpdate();
+            })();
+        </script>
+        <script>
+            // Highlight the current section and control the compact mobile menu.
+            (function () {
+                const menu = document.getElementById('article-toc');
+                const toggle = document.getElementById('toc-toggle');
+                const scrim = document.getElementById('toc-scrim');
+                const links = [...menu.querySelectorAll('[data-toc-link]')];
+                const targets = links.map(link => document.getElementById(link.hash.slice(1)));
+                let scheduled = false;
+
+                function setOpen(open) {
+                    menu.classList.toggle('is-open', open);
+                    scrim.classList.toggle('is-open', open);
+                    toggle.setAttribute('aria-expanded', String(open));
+                    toggle.querySelector('span').textContent = open ? 'Close' : 'Contents';
+                }
+
+                function updateActive() {
+                    scheduled = false;
+                    let active = 0;
+                    for (let i = 0; i < targets.length; i++) {
+                        if (targets[i] && targets[i].getBoundingClientRect().top <= 125) active = i;
+                    }
+                    links.forEach((link, index) => {
+                        const selected = index === active;
+                        link.classList.toggle('is-active', selected);
+                        if (selected) link.setAttribute('aria-current', 'location');
+                        else link.removeAttribute('aria-current');
+                    });
+                }
+
+                function scheduleActive() {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(updateActive);
+                }
+
+                toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
+                scrim.addEventListener('click', () => setOpen(false));
+                links.forEach(link => link.addEventListener('click', () => setOpen(false)));
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape') setOpen(false);
+                });
+                window.addEventListener('scroll', scheduleActive, { passive: true });
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 1240) setOpen(false);
+                    scheduleActive();
+                });
+                window.addEventListener('pageshow', () => { setOpen(false); scheduleActive(); });
+                updateActive();
+            })();
+        </script>
+    </body>
 </html>
+
