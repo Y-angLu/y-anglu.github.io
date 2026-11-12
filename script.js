@@ -357,15 +357,10 @@ function initSkills() {
         }
     });
 
-    SKILLS.forEach(skill => {
-        const page = skill.href.split('#')[0];
-        const pill = document.createElement('a');
-
-        pill.href = skill.href;
-        pill.className = PILL_CLASSES;
-        pill.textContent = skill.label;
-        pill.title = skill.from;
-
+    // Skills are present in HTML so they remain discoverable without JavaScript.
+    // Bind the same tile highlighting to those existing anchors; never append duplicates.
+    container.querySelectorAll('a[href]').forEach(pill => {
+        const page = pill.getAttribute('href').split('#')[0];
         const tile = tiles.get(page);
 
         if (tile) {
@@ -377,8 +372,6 @@ function initSkills() {
             pill.addEventListener('focus', on);
             pill.addEventListener('blur', off);
         }
-
-        container.appendChild(pill);
     });
 }
 

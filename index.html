@@ -22,35 +22,59 @@
 
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Person",
-                "@id": "https://y-anglu.github.io/#person",
-                "name": "Yang Lu",
-                "url": "https://y-anglu.github.io/",
-                "email": "mailto:y494lu@uwaterloo.ca",
-                "description": "University of Waterloo mechatronics engineering student focused on mechanical engineering for robotics, especially actuation, mechanisms, and mechanical design.",
-                "affiliation": {
-                    "@type": "CollegeOrUniversity",
-                    "name": "University of Waterloo"
-                },
-                "knowsAbout": [
-                    "Robotics", "Mechanical Engineering", "Robotic Actuation",
-                    "Mechanism Design", "Mechanical Design", "Actuator Sizing", "Kinematics"
-                ],
-                "sameAs": ["https://www.linkedin.com/in/yang--lu/"]
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Person",
+            "@id": "https://y-anglu.github.io/#person",
+            "name": "Yang Lu",
+            "url": "https://y-anglu.github.io/",
+            "email": "mailto:y494lu@uwaterloo.ca",
+            "description": "University of Waterloo mechatronics engineering student focused on mechanical engineering for robotics, especially actuation, mechanisms, and mechanical design.",
+            "affiliation": {
+                "@type": "CollegeOrUniversity",
+                "name": "University of Waterloo"
             },
-            {
-                "@type": "ProfilePage",
-                "@id": "https://y-anglu.github.io/#profile",
-                "url": "https://y-anglu.github.io/",
-                "name": "Yang Lu | Robotics & Mechanical Engineering Portfolio",
-                "mainEntity": {"@id": "https://y-anglu.github.io/#person"},
-                "inLanguage": "en"
+            "knowsAbout": [
+                "Robotics",
+                "Mechanical Engineering",
+                "Robotic Actuation",
+                "Mechanism Design",
+                "Mechanical Design",
+                "Actuator Sizing",
+                "Kinematics",
+                "Robotics Mechanical Design",
+                "Mechanical Mechanism Development",
+                "Robotic Transmission Design",
+                "Robot Dynamics",
+                "Mechatronics"
+            ],
+            "sameAs": [
+                "https://www.linkedin.com/in/yang--lu/"
+            ]
+        },
+        {
+            "@type": "ProfilePage",
+            "@id": "https://y-anglu.github.io/#profile",
+            "url": "https://y-anglu.github.io/",
+            "name": "Yang Lu | Robotics & Mechanical Engineering Portfolio",
+            "mainEntity": {
+                "@id": "https://y-anglu.github.io/#person"
+            },
+            "inLanguage": "en"
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://y-anglu.github.io/#website",
+            "url": "https://y-anglu.github.io/",
+            "name": "Yang Lu | Engineering Portfolio",
+            "inLanguage": "en",
+            "publisher": {
+                "@id": "https://y-anglu.github.io/#person"
             }
-        ]
-    }
+        }
+    ]
+}
     </script>
 
     <link class="favicon" rel="icon" type="image/png" href="images/gear_favicon.png">
@@ -379,6 +403,11 @@
             <div class="space-y-4">
                 <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Yang Lu</h1>
 
+                <div class="space-y-1">
+                    <p class="text-sm font-bold text-zinc-800 dark:text-zinc-200">Mechanical Design · Robotic Actuation</p>
+                    <p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Open to 2027 New Grad Roles</p>
+                </div>
+
                 <ul class="list-disc list-inside text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium space-y-1 transition-colors">
                     <li>Mechatronics engineering undergraduate from the University of Waterloo.</li>
                     <li>Mechanical engineer with internships at Humanoid, Proception, Tesla, Sanctuary AI.</li>
@@ -396,7 +425,22 @@
                     <h2 class="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Skills</h2>
                     <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-300 dark:text-zinc-600">Jump to</span>
                 </div>
-                <div id="skills-index" class="flex flex-wrap gap-1.5 mt-3"></div>
+                <div id="skills-index" class="flex flex-wrap gap-1.5 mt-3">
+                    <a href="projects/Biped_V1.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Biped_V1">Actuator Theory</a>
+                    <a href="projects/Capstone.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Capstone">System Modeling</a>
+                    <a href="projects/Capstone.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Capstone">Linkage Kinematics</a>
+                    <a href="projects/Capstone.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Capstone">Actuator Sizing</a>
+                    <a href="projects/Wave_Actuator.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Wave_Actuator">Gearbox Selection</a>
+                    <a href="projects/Hand.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Robotic Hand">Kinematic Decoupling</a>
+                    <a href="projects/Quadruped.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Quadruped">Inverse Kinematics</a>
+                    <a href="projects/Capstone.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Capstone">Gravity Compensation</a>
+                    <a href="projects/Biped_V1.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Biped_V1">Capstan Drive</a>
+                    <a href="projects/Hand.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Robotic Hand">Underactuated Dynamics</a>
+                    <a href="projects/Wave_Actuator.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Wave_Actuator">Wave Drive</a>
+                    <a href="projects/Quadruped.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Quadruped">Gait and Step Generation</a>
+                    <a href="projects/Biped_V2.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Biped_V2">Belt + Pulley</a>
+                    <a href="projects/Lamp.html" class="px-2.5 py-0.5 text-[11px] font-semibold bg-zinc-200/60 dark:bg-zinc-800/50 text-zinc-700 dark:text-zinc-300 rounded-full border border-zinc-300/30 dark:border-zinc-700/30 hover:bg-zinc-300/60 dark:hover:bg-zinc-700/50 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-zinc-100 transition-colors cursor-pointer" title="Lamp">Product Design</a>
+                </div>
             </aside>
 
             </div>
@@ -413,49 +457,49 @@
 
                     <a href="projects/Capstone.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Notify.png" alt="Notify Robots" class="w-full h-full object-contain">
+                            <img src="images/Notify.png" alt="Notify Robots wheeled biped robot project artwork" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Capstone</h3>
                     </a>
 
                     <a href="projects/Lamp.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Lamp.png" alt="Lamp" class="w-full h-full object-contain">
+                            <img src="images/Lamp.png" alt="Lamp product design project render" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Lamp</h3>
                     </a>
 
                     <a href="projects/Biped_V2.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Biped_Assembly.jpg" alt="Biped V2" class="w-full h-full object-contain">
+                            <img src="images/Biped_Assembly.jpg" alt="CAD assembly of wheeled biped robot with belt-driven legs" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Biped V2</h3>
                     </a>
 
                     <a href="projects/Wave_Actuator.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Actuator_Assembly.jpg" alt="Wave Actuator" class="w-full h-full object-contain">
+                            <img src="images/Actuator_Assembly.jpg" alt="Assembly of custom rolling-element wave drive actuator" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Wave Actuator</h3>
                     </a>
 
                     <a href="projects/Biped_V1.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Biped_V1.jpg" alt="Biped V1" class="w-full h-full object-contain">
+                            <img src="images/Biped_V1.jpg" alt="First wheeled biped robot mechanical design and capstan drive concept" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Biped V1</h3>
                     </a>
 
                     <a href="projects/Quadruped.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Quadruped_Assembly.jpg" alt="Quadruped" class="w-full h-full object-contain">
+                            <img src="images/Quadruped_Assembly.jpg" alt="Quadruped robot mechanical assembly with linkage-driven legs" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Quadruped</h3>
                     </a>
 
                     <a href="projects/Hand.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
                         <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                            <img src="images/Hand_Assembly.jpg" alt="Robotic Hand" class="w-full h-full object-contain">
+                            <img src="images/Hand_Assembly.jpg" alt="Robotic hand mechanism assembly" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Robotic Hand</h3>
                     </a>
@@ -478,42 +522,42 @@
                             <div class="absolute top-2 right-2 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm z-10 uppercase tracking-wider">
                                 Most Recent
                             </div>
-                            <img src="images/Humanoid_Robots.jpg" alt="Humanoid" class="w-full h-full object-contain">
+                            <img src="images/Humanoid_Robots.jpg" alt="Humanoid robots from engineering experience" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Humanoid</h3>
                         <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">May 2026 — Aug 2026</p>
                     </a>
 
                     <a href="experiences/Proception_AI.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
-                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Proception_Hand.jpg" alt="Proception AI" class="w-full h-full object-contain">
+                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Proception_Hand.jpg" alt="Robotic hand from Proception AI engineering experience" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Proception AI</h3>
                         <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">Sep 2025 — Apr 2026</p>
                     </a>
 
                     <a href="experiences/Tesla.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
-                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Tesla_Model3.jpg" alt="Tesla" class="w-full h-full object-contain">
+                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Tesla_Model3.jpg" alt="Tesla Model 3 vehicle" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Tesla</h3>
                         <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">Jan 2025 — Apr 2025</p>
                     </a>
 
                     <a href="experiences/Mycro_Harvest.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
-                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Mycroharvest_Enclosure.jpg" alt="Mycro Harvest" class="w-full h-full object-contain">
+                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Mycroharvest_Enclosure.jpg" alt="Mechanical enclosure for Mycro Harvest project" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Mycro Harvest</h3>
                         <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">May 2024 — Aug 2024</p>
                     </a>
 
                     <a href="experiences/Sanctuary_AI.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
-                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Sanctuary_Phoenix.jpg" alt="Sanctuary AI" class="w-full h-full object-contain">
+                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Sanctuary_Phoenix.jpg" alt="Sanctuary AI Phoenix humanoid robot" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Sanctuary AI</h3>
                         <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">Sep 2023 — Dec 2023</p>
                     </a>
 
                     <a href="experiences/Neurocage_Systems.html" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between">
-                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Neurocage_Enclosure.jpg" alt="Neurocage Systems" class="w-full h-full object-contain">
+                        <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">                            <img src="images/Neurocage_Enclosure.jpg" alt="Neurocage Systems mechanical enclosure" class="w-full h-full object-contain">
                         </div>
                         <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">Neurocage Systems</h3>
                         <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">Jan 2023 — Apr 2023</p>
@@ -553,7 +597,7 @@
 
     <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
         <div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
-            © 2026 Yang Lu. Built clean, with vibes.
+            © 2026 Yang Lu.
         </div>
     </footer>
 
