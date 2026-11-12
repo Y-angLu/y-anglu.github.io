@@ -80,6 +80,7 @@ function initTheme() {
 
         root.style.backgroundColor = isDark ? '#121212' : '#fafafa';
         root.style.colorScheme = isDark ? 'dark' : 'light';
+        themeToggleBtn.setAttribute('aria-label', `Change color theme (currently ${currentTheme})`);
 
         moonIcon.classList.add('hidden');
         sunIcon.classList.add('hidden');
@@ -200,6 +201,9 @@ function initTabs() {
         document.documentElement.classList.remove('initial-posts');
         activeSection = sectionId;
         updateActiveNavStyles(sectionId);
+        document.querySelectorAll('nav button.nav-link[aria-controls]').forEach(button => {
+            button.setAttribute('aria-pressed', String(button.getAttribute('aria-controls') === sectionId));
+        });
 
         if (!isInitial && !options.instant) {
             // Restart the animation even after a quick tab switch.

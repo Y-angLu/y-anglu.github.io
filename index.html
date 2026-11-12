@@ -3,14 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yang's Portfolio</title>
+    <title>Yang Lu | Robotics Mechanical Design & Actuation Portfolio</title>
+    <meta name="description" content="Yang Lu is a University of Waterloo mechatronics engineering student focused on mechanical engineering for robotics: actuation, mechanisms, and mechanical design. Explore technical projects and engineering experience.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://y-anglu.github.io/">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Yang Lu | Engineering Portfolio">
+    <meta property="og:title" content="Yang Lu | Robotics Mechanical Design & Actuation Portfolio">
+    <meta property="og:description" content="Robotics mechanical engineering portfolio by Yang Lu, featuring robotic actuation, mechanism design, and mechanical engineering projects.">
+    <meta property="og:url" content="https://y-anglu.github.io/">
+    <meta property="og:image" content="https://y-anglu.github.io/images/Notify.png">
+    <meta property="og:image:alt" content="Notify Robots project artwork from Yang Lu's engineering portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Yang Lu | Robotics Mechanical Design Portfolio">
+    <meta name="twitter:description" content="Robotics mechanical engineering projects in actuation, mechanisms, and mechanical design by Yang Lu.">
+    <meta name="twitter:image" content="https://y-anglu.github.io/images/Notify.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": "https://y-anglu.github.io/#person",
+                "name": "Yang Lu",
+                "url": "https://y-anglu.github.io/",
+                "email": "mailto:y494lu@uwaterloo.ca",
+                "description": "University of Waterloo mechatronics engineering student focused on mechanical engineering for robotics, especially actuation, mechanisms, and mechanical design.",
+                "affiliation": {
+                    "@type": "CollegeOrUniversity",
+                    "name": "University of Waterloo"
+                },
+                "knowsAbout": [
+                    "Robotics", "Mechanical Engineering", "Robotic Actuation",
+                    "Mechanism Design", "Mechanical Design", "Actuator Sizing", "Kinematics"
+                ],
+                "sameAs": ["https://www.linkedin.com/in/yang--lu/"]
+            },
+            {
+                "@type": "ProfilePage",
+                "@id": "https://y-anglu.github.io/#profile",
+                "url": "https://y-anglu.github.io/",
+                "name": "Yang Lu | Robotics & Mechanical Engineering Portfolio",
+                "mainEntity": {"@id": "https://y-anglu.github.io/#person"},
+                "inLanguage": "en"
+            }
+        ]
+    }
+    </script>
 
     <link class="favicon" rel="icon" type="image/png" href="images/gear_favicon.png">
-
-    <meta property="og:image" content="">
-    <meta name="twitter:image" content="">
-    <meta property="og:image:width" content="0">
-    <meta property="og:image:height" content="0">
 
     <script>
         // Select the destination tab before first paint, including return from posts.
@@ -297,11 +340,11 @@
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
             <a href="#" onclick="showSection('about')" class="font-bold tracking-tight text-base text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition">Yang Lu</a>
-            <nav class="flex space-x-6 text-xs font-bold items-center">
-                <button onclick="showSection('about')" class="nav-link text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 focus:outline-none transition cursor-pointer">About</button>
-                <button onclick="showSection('posts')" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer">Posts</button>
+            <nav aria-label="Primary navigation" class="flex space-x-6 text-xs font-bold items-center">
+                <button onclick="showSection('about')" aria-controls="about" aria-pressed="true" class="nav-link text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 focus:outline-none transition cursor-pointer">About</button>
+                <button onclick="showSection('posts')" aria-controls="posts" aria-pressed="false" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer">Posts</button>
 
-                <button id="theme-toggle" class="p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" aria-label="Toggle Theme">
+                <button id="theme-toggle" class="p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" aria-label="Change color theme" title="Change color theme">
                     <svg id="theme-toggle-moon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path>
                     </svg>
@@ -327,7 +370,7 @@
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+    <main id="main-content" tabindex="-1" class="max-w-5xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
 
         <section id="about" class="content-section space-y-8">
 
@@ -344,7 +387,7 @@
 
                 <div class="pt-1 flex space-x-4 text-xs font-bold">
                     <a href="mailto:y494lu@uwaterloo.ca" class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors">Email</a>
-                    <a href="https://www.linkedin.com/in/yang--lu/" target="_blank" class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/yang--lu/" target="_blank" rel="noopener noreferrer" class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors">LinkedIn</a>
                 </div>
             </div>
 
