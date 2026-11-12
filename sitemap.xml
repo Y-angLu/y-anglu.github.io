@@ -1,2 +1,61 @@
-<?xml version='1.0' encoding='utf-8'?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://y-anglu.github.io/</loc></url><url><loc>https://y-anglu.github.io/projects/Biped_V1.html</loc></url><url><loc>https://y-anglu.github.io/projects/Biped_V2.html</loc></url><url><loc>https://y-anglu.github.io/projects/Capstone.html</loc></url><url><loc>https://y-anglu.github.io/projects/Hand.html</loc></url><url><loc>https://y-anglu.github.io/projects/Lamp.html</loc></url><url><loc>https://y-anglu.github.io/projects/Quadruped.html</loc></url><url><loc>https://y-anglu.github.io/projects/Wave_Actuator.html</loc></url><url><loc>https://y-anglu.github.io/projects/Capstone_subpages/actuator_sizing.html</loc></url><url><loc>https://y-anglu.github.io/projects/Capstone_subpages/concept_development.html</loc></url><url><loc>https://y-anglu.github.io/experiences/Humanoid.html</loc></url><url><loc>https://y-anglu.github.io/experiences/Mycro_Harvest.html</loc></url><url><loc>https://y-anglu.github.io/experiences/Neurocage_Systems.html</loc></url><url><loc>https://y-anglu.github.io/experiences/Proception_AI.html</loc></url><url><loc>https://y-anglu.github.io/experiences/Sanctuary_AI.html</loc></url><url><loc>https://y-anglu.github.io/experiences/Tesla.html</loc></url><url><loc>https://y-anglu.github.io/posts/Running_a_breakdown.html</loc></url></urlset>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://y-anglu.github.io/</loc>
+    </url>
+
+    <!-- Engineering Projects -->
+    <url>
+        <loc>https://y-anglu.github.io/projects/Capstone.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Biped_V1.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Biped_V2.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Wave_Actuator.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Quadruped.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Hand.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Lamp.html</loc>
+    </url>
+
+    <!-- Capstone Technical Documentation -->
+    <url>
+        <loc>https://y-anglu.github.io/projects/Capstone_subpages/concept_development.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/projects/Capstone_subpages/actuator_sizing.html</loc>
+    </url>
+
+    <!-- Engineering Experience -->
+    <url>
+        <loc>https://y-anglu.github.io/experiences/Humanoid.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/experiences/Proception_AI.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/experiences/Tesla.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/experiences/Sanctuary_AI.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/experiences/Mycro_Harvest.html</loc>
+    </url>
+    <url>
+        <loc>https://y-anglu.github.io/experiences/Neurocage_Systems.html</loc>
+    </url>
+
+</urlset>
