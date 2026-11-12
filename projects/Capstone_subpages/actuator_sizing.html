@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>
+            Notify Robots | Modeling &amp; Actuator Sizing
+        </title>
+        <link class="favicon" href="../../images/gear_favicon.png" rel="icon" type="image/png"/>
+        <link as="font" crossorigin="" href="../../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
+        <script src="https://cdn.tailwindcss.com">
+        </script>
+        <script>
+            tailwind.config = {
+                         darkMode: 'class',
+                         theme: {
+                             extend: {
+                                 fontFamily: {
+                                     sans: ['Quicksand', 'sans-serif'],
+                                 },
+                             },
+                         },
+                     };
+        </script>
+        <style>
+            @font-face {
+                         font-family: 'Quicksand';
+                         src: url('../../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+                         font-weight: 100 900;
+                         font-style: normal;
+                         font-display: swap;
+                     }
+
+                     body {
+                         font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                     }
+
+                     /* Subtle transitions between portfolio pages. */
+                     @keyframes page-enter {
+                         from {
+                             opacity: 0;
+                             transform: translateY(8px);
+                         }
+
+                         to {
+                             opacity: 1;
+                             transform: translateY(0);
+                         }
+                     }
+
+                     main {
+                         animation: page-enter 300ms ease-out both;
+                     }
+
+                     body.page-leaving main {
+                         opacity: 0;
+                         transform: translateY(-4px);
+                         transition: opacity 180ms ease, transform 180ms ease;
+                         animation: none;
+                     }
+
+                     @media (prefers-reduced-motion: reduce) {
+                         main {
+                             animation: none;
+                         }
+
+                         body.page-leaving main {
+                             transition: none;
+                         }
+                     }
+
+                 /* Full-viewport navigation veil: covers background and content together. */
+                 .navigation-veil {
+                     position: fixed;
+                     inset: 0;
+                     z-index: 9999;
+                     pointer-events: none;
+                     background: #fafafa;
+                     opacity: 0;
+                     transition: opacity 320ms ease;
+                 }
+
+                 html.dark .navigation-veil {
+                     background: #121212;
+                 }
+
+                 html.page-arriving .navigation-veil,
+                 html.page-departing .navigation-veil {
+                     opacity: 1;
+                 }
+
+                 @media (prefers-reduced-motion: reduce) {
+                     .navigation-veil { transition: none; }
+                 }
+
+                     /* Reading progress follows the bottom edge of the sticky header. */
+                     #reading-progress {
+                         position: absolute;
+                         bottom: -1px;
+                         left: 0;
+                         width: 100%;
+                         height: 2px;
+                         background: #71717a;
+                         transform: scaleX(0);
+                         transform-origin: left center;
+                         pointer-events: none;
+                         will-change: transform;
+                     }
+
+                     html.dark #reading-progress {
+                         background: #a1a1aa;
+                     }
+
+                     /* Responsive article navigation, outside the reading column. */
+                     .article-toc {
+                         position: fixed;
+                         top: 88px;
+                         left: max(16px, calc(50% - 610px));
+                         width: 202px;
+                         max-height: calc(100vh - 112px);
+                         overflow-y: auto;
+                         z-index: 40;
+                         padding: 14px 12px;
+                         border: 1px solid rgba(161, 161, 170, .22);
+                         border-radius: 14px;
+                         background: rgba(250, 250, 250, .85);
+                         backdrop-filter: blur(14px);
+                         -webkit-backdrop-filter: blur(14px);
+                         scrollbar-width: thin;
+                     }
+                     html.dark .article-toc {
+                         background: rgba(18, 18, 18, .86);
+                         border-color: rgba(113, 113, 122, .3);
+                     }
+                     .toc-label {
+                         margin: 0 0 10px 10px;
+                         font-size: 10px;
+                         font-weight: 700;
+                         letter-spacing: .11em;
+                         color: #71717a;
+                         text-transform: uppercase;
+                     }
+                     .toc-link {
+                         display: block;
+                         border-left: 2px solid transparent;
+                         border-radius: 0 5px 5px 0;
+                         padding: 7px 8px 7px 10px;
+                         color: #71717a;
+                         font-size: 12px;
+                         font-weight: 600;
+                         line-height: 1.45;
+                         text-decoration: none;
+                         transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+                     }
+                     .toc-link:hover, .toc-link:focus-visible { color: #18181b; background: rgba(161,161,170,.10); }
+                     html.dark .toc-link:hover, html.dark .toc-link:focus-visible { color: #fafafa; }
+                     .toc-link.is-active { border-left-color: #52525b; color: #18181b; background: rgba(161,161,170,.12); }
+                     html.dark .toc-link.is-active { border-left-color: #d4d4d8; color: #fafafa; }
+                     .toc-link.toc-sub { padding-left: 20px; font-size: 11px; font-weight: 500; }
+                     .toc-mobile-toggle { display: none; }
+                     .toc-scrim { display: none; }
+                     [data-toc-target] { scroll-margin-top: 76px; }
+                     @media (max-width: 1239px) {
+                         .article-toc {
+                             top: auto;
+                             left: auto;
+                             right: max(16px, env(safe-area-inset-right));
+                             bottom: calc(78px + env(safe-area-inset-bottom));
+                             width: min(310px, calc(100vw - 32px));
+                             max-height: min(65vh, 430px);
+                             padding: 14px;
+                             z-index: 81;
+                             opacity: 0;
+                             visibility: hidden;
+                             pointer-events: none;
+                             transform: translateY(10px) scale(.98);
+                             transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+                             box-shadow: 0 12px 36px rgba(0,0,0,.12);
+                         }
+                         .article-toc.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+                         .toc-mobile-toggle {
+                             display: flex;
+                             position: fixed;
+                             right: max(16px, env(safe-area-inset-right));
+                             bottom: calc(18px + env(safe-area-inset-bottom));
+                             z-index: 82;
+                             align-items: center;
+                             gap: 9px;
+                             padding: 12px 16px;
+                             border-radius: 999px;
+                             border: 1px solid #d4d4d8;
+                             background: rgba(250,250,250,.94);
+                             color: #27272a;
+                             box-shadow: 0 5px 22px rgba(0,0,0,.10);
+                             backdrop-filter: blur(14px);
+                             -webkit-backdrop-filter: blur(14px);
+                             font-size: 12px;
+                             font-weight: 700;
+                             cursor: pointer;
+                         }
+                         html.dark .toc-mobile-toggle { background: rgba(30,30,30,.94); border-color: #52525b; color: #f4f4f5; }
+                         .toc-scrim.is-open { display: block; position: fixed; inset: 0; z-index: 80; background: transparent; }
+                     }
+                     @media (prefers-reduced-motion: reduce) {
+                         .article-toc, .toc-link { transition: none; }
+                     }
+
+                     /* Keep the article centered when the lightbox locks page scrolling. */
+                     html {
+                         scrollbar-gutter: stable;
+                     }
+
+                     /* Figure viewer: flat, restrained, and consistent with the article. */
+                     [data-lightbox-item] {
+                         cursor: zoom-in;
+                         transition: border-color 220ms ease, background-color 220ms ease;
+                     }
+
+                     [data-lightbox-item]:hover,
+                     [data-lightbox-item]:focus-visible {
+                         border-color: #a1a1aa;
+                         outline-offset: 3px;
+                     }
+
+                     .image-lightbox {
+                         position: fixed;
+                         inset: 0;
+                         z-index: 1000;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         padding: 24px;
+                         background: rgb(24 24 27 / 28%);
+                         opacity: 0;
+                         visibility: hidden;
+                         pointer-events: none;
+                         transition: opacity 240ms ease, visibility 240ms ease;
+                     }
+
+                     .dark .image-lightbox {
+                         background: rgb(0 0 0 / 46%);
+                     }
+
+                     .image-lightbox.is-open {
+                         opacity: 1;
+                         visibility: visible;
+                         pointer-events: auto;
+                     }
+
+                     .image-lightbox-content {
+                         position: relative;
+                         width: min(100%, 1040px);
+                         max-height: min(90vh, 980px);
+                         display: flex;
+                         flex-direction: column;
+                         align-items: center;
+                         gap: 12px;
+                         padding: 46px 52px 22px;
+                         border: 1px solid #e4e4e7;
+                         border-radius: 12px;
+                         background: #fafafa;
+                         color: #27272a;
+                         opacity: 0;
+                         transform: translateY(6px);
+                         transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.75,.3,1);
+                     }
+
+                     .image-lightbox.is-open .image-lightbox-content {
+                         opacity: 1;
+                         transform: translateY(0);
+                     }
+
+                     .dark .image-lightbox-content {
+                         background: #1c1c1f;
+                         border-color: #3f3f46;
+                         color: #f4f4f5;
+                     }
+
+                     .image-lightbox-media {
+                         width: 100%;
+                         min-height: 0;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         overflow: auto;
+                         border-radius: 8px;
+                         transition: opacity 160ms ease;
+                     }
+
+                     .image-lightbox-media.is-changing,
+                     .image-lightbox-caption.is-changing {
+                         opacity: .25;
+                     }
+
+                     .image-lightbox-media img {
+                         display: block;
+                         max-width: 100%;
+                         max-height: 75vh;
+                         width: auto;
+                         height: auto;
+                         object-fit: contain;
+                         border-radius: 6px;
+                     }
+
+                     .image-lightbox-placeholder {
+                         width: min(100%, 680px);
+                         min-height: 180px;
+                         padding: 28px;
+                         display: flex;
+                         flex-direction: column;
+                         align-items: center;
+                         justify-content: center;
+                         gap: 12px;
+                         text-align: center;
+                         border: 1px dashed #a1a1aa;
+                         border-radius: 8px;
+                         background: #f4f4f5;
+                         color: #71717a;
+                     }
+
+                     .dark .image-lightbox-placeholder {
+                         background: #27272a;
+                         color: #d4d4d8;
+                     }
+
+                     .image-lightbox-caption {
+                         max-width: 680px;
+                         text-align: center;
+                         font-size: 13px;
+                         line-height: 1.6;
+                         color: #52525b;
+                         transition: opacity 160ms ease;
+                     }
+
+                     .dark .image-lightbox-caption {
+                         color: #d4d4d8;
+                     }
+
+                     .image-lightbox-counter {
+                         font-size: 11px;
+                         font-weight: 600;
+                         letter-spacing: .05em;
+                         color: #71717a;
+                     }
+
+                     .image-lightbox-control {
+                         position: absolute;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         width: 34px;
+                         height: 34px;
+                         border: 1px solid #e4e4e7;
+                         border-radius: 8px;
+                         background: #fafafa;
+                         color: #3f3f46;
+                         font-size: 21px;
+                         cursor: pointer;
+                         transition: background-color 180ms ease, border-color 180ms ease;
+                     }
+
+                     .dark .image-lightbox-control {
+                         background: #1c1c1f;
+                         border-color: #52525b;
+                         color: #f4f4f5;
+                     }
+
+                     .image-lightbox-control:hover,
+                     .image-lightbox-control:focus-visible {
+                         background: #e4e4e7;
+                         border-color: #a1a1aa;
+                     }
+
+                     .dark .image-lightbox-control:hover,
+                     .dark .image-lightbox-control:focus-visible {
+                         background: #3f3f46;
+                     }
+
+                     .image-lightbox-close { top: 10px; right: 12px; }
+                     .image-lightbox-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+                     .image-lightbox-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+                     @media (max-width: 640px) {
+                         .image-lightbox { padding: 14px; }
+
+                         .image-lightbox-content {
+                             max-height: 88vh;
+                             padding: 48px 16px 62px;
+                         }
+
+                         .image-lightbox-media img { max-height: 65vh; }
+                         .image-lightbox-prev { left: 16px; top: auto; bottom: 12px; transform: none; }
+                         .image-lightbox-next { right: 16px; top: auto; bottom: 12px; transform: none; }
+                     }
+
+                     @media (prefers-reduced-motion: reduce) {
+                         .image-lightbox, .image-lightbox-content, .image-lightbox-media,
+                         .image-lightbox-caption, .image-lightbox-control, [data-lightbox-item] {
+                             transition: none !important;
+                         }
+                     }
+        </style>
+        <script>
+            // Initialize the correct theme before the page renders.
+                     (function () {
+                         const fromColourMode =
+                             (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                              sessionStorage.getItem('portfolio-colour-return') === '1');
+
+                         const savedTheme = localStorage.getItem('theme');
+                         const systemPrefersDark = window.matchMedia(
+                             '(prefers-color-scheme: dark)'
+                         ).matches;
+
+                         // Subpages use Light Mode when entered from Colour Mode.
+                         // Otherwise, respect the saved theme preference.
+                         const useDark = !fromColourMode && (
+                             savedTheme === 'dark' ||
+                             (!savedTheme && systemPrefersDark)
+                         );
+
+                         const root = document.documentElement;
+                         root.classList.toggle('dark', useDark);
+                         root.classList.add('page-arriving');
+
+                         // Set the background immediately to avoid white flashes.
+                         root.style.backgroundColor = useDark ? '#121212' : '#fafafa';
+                         root.style.colorScheme = useDark ? 'dark' : 'light';
+                     })();
+        </script>
+        <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+    </head>
+    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+        <div aria-hidden="true" class="navigation-veil">
+        </div>
+        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+            <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../Capstone.html">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>
+                    Back to Capstone
+                </a>
+            </div>
+            <div aria-hidden="true" id="reading-progress">
+            </div>
+        </header>
+        <!-- Desktop sidebar / mobile expandable contents. -->
+        <div aria-hidden="true" class="toc-scrim" id="toc-scrim">
+        </div>
+        <nav aria-label="Table of contents" class="article-toc" id="article-toc">
+            <p class="toc-label">
+                On this page
+            </p>
+            <a class="toc-link" data-toc-link="" href="#section-1">
+                1. Starting with a Simplified Model
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-1-1">
+                Newton–Euler Model
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-2">
+                2. Developing a More Representative Model
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-2-1">
+                Lagrangian Formulation
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-2-2">
+                Linearization and State-Space Representation
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-2-3">
+                LQR Controller
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-3">
+                3. Refining the Model
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-3-1">
+                Variable Height and External Disturbances
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-3-2">
+                Updating the Mass and Inertia Model
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-3-3">
+                Simplifying the Height Adjustment
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-3-4">
+                Final Model and Limitations
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-4">
+                4. Sizing the Wheel Actuators
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-4-1">
+                Estimating Mass and Inertia
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-4-2">
+                Defining the Loading Requirements
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-4-3">
+                Estimating Peak Wheel Torque
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-4-4">
+                Estimating RMS Wheel Torque
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-5">
+                5. Sizing the Height &amp; Nudging Actuators
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-1">
+                Proposed Height and Nudging Mechanism
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-2">
+                Estimating the Nudging and Gravity Loads
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-3">
+                Peak and RMS Leg Torque
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-4">
+                What the Estimates Could and Could Not Tell Us
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-5">
+                Summary of Theoretical Torque Requirements
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-6">
+                6. From Theoretical Torque to Motor Selection
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-6-1">
+                Why Direct Drive?
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-6-2">
+                Selecting the GB7215
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-6-3">
+                Controller and Practical Integration
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-6-4">
+                Thermal Considerations and Selection
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-7">
+                7. Limitations and Next Steps
+            </a>
+        </nav>
+        <button aria-controls="article-toc" aria-expanded="false" class="toc-mobile-toggle" id="toc-toggle" type="button">
+            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
+                </path>
+            </svg>
+            <span>
+                Contents
+            </span>
+        </button>
+        <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+            <article class="space-y-5">
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">
+                        Modeling &amp; Actuator Sizing
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                        <span>
+                            Capstone / FYDP
+                        </span>
+                        <span>
+                            •
+                        </span>
+                        <span>
+                            September 2026 — Present
+                        </span>
+                        <span>
+                            •
+                        </span>
+                        <span>
+                            Notify Robots
+                        </span>
+                    </div>
+                </div>
+                <hr class="border-zinc-200 dark:border-zinc-800"/>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    Once we had a rough idea of Nudge’s size, wheel layout, and the way it would interact with people, the next step was to determine the actuators that would drive the joints.
+                </p>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    To determine the required actuator torques and speeds without actually building Nudge, we would need to model Nudge and simulate different situations and load cases that we could expect it to see. Half because I wanted to learn, and half because I didn’t know how much detail to model in, I started with a simpler model, then added complexity to address some of the model’s shortcomings, and only when a specific design question needed to be answered.
+                </p>
+                <section aria-labelledby="section-1" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-1">
+                        1. Starting with a Simplified Model
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-1">
+                        1.1 Newton–Euler Model
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I started by treating Nudge as a simplified wheeled inverted pendulum, with the body represented as a point mass at a fixed distance above the wheel axle. Using Newton–Euler equations, I could relate the wheel torque, horizontal acceleration, and body pitch to get a first approximation of how Nudge would behave.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The model was useful for understanding the basic dynamics, but it made several assumptions that weren't representative of the actual design. Most notably, it neglected the distributed masses and rotational inertias of the wheels and body, and assumed a fixed center of mass relative to the axle.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/newton_euler_1.png"
+                                alt="Initial simplified model derivations."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/newton_euler_2.png"
+                                alt="Initial simplified model derivations."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </section>
+                <section aria-labelledby="section-2" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-2">
+                        2. Developing a More Representative Model
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-1">
+                        2.1 Lagrangian Formulation
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        To address these shortcomings, I developed a new kinematic model that accounted for the different masses and inertias of the system. I used a Lagrangian formulation because it provided a convenient way to derive the equations of motion and incorporate additional degrees of freedom as the model became more complex.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For the initial formulation, I kept the body height fixed and described the system using two generalized coordinates: horizontal wheel displacement
+                        <em>
+                            r
+                        </em>
+                        and body pitch angle
+                        <em>
+                            θ
+                        </em>
+                        .
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Using the kinetic and potential energies of the system, I derived the equations of motion through the Euler–Lagrange equation:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[L=T-V,\qquad \frac{d}{dt}\left(\frac{\partial L}{\partial \dot q_i}\right)-\frac{\partial L}{\partial q_i}=Q_i\]
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Here,
+                        <em>
+                            L
+                        </em>
+                        is the Lagrangian and
+                        <em>
+                            Qᵢ
+                        </em>
+                        represents the generalized forces acting on the system. The resulting equations could be written in the standard manipulator form:
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[M(q)\ddot q+C(q,\dot q)\dot q+G(q)=Q\]
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This provided a more flexible starting point for modeling Nudge's dynamics while retaining a relatively simple two-degree-of-freedom system.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/lagrangian_1.png"
+                                alt="Lagragian derivation with masses modeled."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/lagrangian_2.png"
+                                alt="Lagragian derivation with masses modeled."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-2">
+                        2.2 Linearization and State-Space Representation
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With the nonlinear equations of motion derived, I linearized the system around its upright equilibrium. This allowed me to express the dynamics in state-space form and use standard linear control techniques.
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[x=\begin{bmatrix}r &amp; \theta &amp; \dot r &amp; \dot\theta\end{bmatrix}^{T},\qquad \dot x=Ax+Bu\]
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Here,
+                        <em>
+                            u
+                        </em>
+                        represents the applied wheel torque. Using estimated mass and geometry parameters, I calculated the state-space matrices in MATLAB, providing a basis for feedback control and disturbance simulations.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-3">
+                        2.3 LQR Controller
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        To stabilize the model, I implemented a Linear Quadratic Regulator (LQR), which calculates a feedback gain by minimizing a cost function that penalizes state deviations and control effort.
+                    </p>
+                    <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+                        <div class="text-base sm:text-lg overflow-x-auto">
+                            \[J=\int_0^\infty (x^TQx+u^TRu)\,dt,\qquad u=-Kx\]
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The weighting matrices
+                        <em>
+                            Q
+                        </em>
+                        and
+                        <em>
+                            R
+                        </em>
+                        determine the relative importance of maintaining the desired state and limiting the applied wheel torque. The controller stabilized the model following an initial pitch disturbance. I didn't spend much time tuning it, since my main objective was to estimate actuator requirements rather than optimize balancing performance.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/linearization_1.png"
+                                alt="Linearization around equilibrium point and applying LQR."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/linearization_2.png"
+                                alt="Linearization around equilibrium point and applying LQR."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </section>
+                <section aria-labelledby="section-3" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-3">
+                        3. Refining the Model
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-1">
+                        3.1 Variable Height and External Disturbances
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With a working controller, I began extending the model to better represent how Nudge would operate. Two important additions were the ability to change the body's height and the inclusion of external forces acting on the robot.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I introduced a variable body height,
+                        <em>
+                            h(t)
+                        </em>
+                        , to account for the motion of Nudge's legs. This meant that the body's center of mass was no longer fixed relative to the wheel axle, and its vertical motion would influence the system's dynamics.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I also introduced an external force disturbance into the equations of motion, allowing me to simulate forces acting on Nudge independently of wheel torque. These additions gave me a more general model, although they also increased the complexity of the equations and simulations.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/variable_height_1.png"
+                                alt="Defining new model with variable height and repeating the process."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/variable_height_2.png"
+                                alt="Defining new model with variable height and repeating the process."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-2">
+                        3.2 Updating the Mass and Inertia Model
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Around this time, the rest of Nudge's mechanical architecture was beginning to take shape. We had moved toward a bulbous body supported by two large wheels, with the leg mechanisms and actuators enclosed inside the wheels.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I updated the model to distinguish between three main components: the
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            rotating wheel rims
+                        </strong>
+                        , the
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            stationary internal frames
+                        </strong>
+                        , and the
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            moving body
+                        </strong>
+                        . The rims contributed rotational inertia about the axle, while the internal frames carried the actuators without spinning with the rims. The body contributed its own mass and inertia, with its position determined by the leg height.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Separating these components allowed me to use more realistic mass and inertia estimates from our developing CAD models rather than treating the robot as a single concentrated mass.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/new_mass_1.png"
+                                alt="Adding in distinction of masses between rim, frame, and body."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/new_mass_2.png"
+                                alt="Adding in distinction of masses between rim, frame, and body."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-3">
+                        3.3 Simplifying the Height Adjustment
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Although I had introduced variable height into the model, I began questioning whether it was necessary for actuator sizing. Nudge wasn't intended to make rapid or continuous height adjustments. Its height actuators would spend much of their time stationary, with relatively slow movements used for expression and positioning.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        There was also a practical simulation issue. Because I hadn't imposed physical limits on height, and the controller didn't heavily penalize deviations in that state, some initial simulations allowed the body to accelerate upward unrealistically, effectively flying away from the wheel assembly. The resulting motion and inertia effects overwhelmed the rest of the simulated response. This was a consequence of the unconstrained model, not a behavior I expected from the real robot.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Rather than model the full coupled wheel and height-actuator dynamics, I decided to evaluate wheel torque requirements at several
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            fixed body heights
+                        </strong>
+                        . This would show how the center-of-mass position affected the system without requiring a complete leg-actuator and constraint model.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-4">
+                        3.4 Final Model and Limitations
+                    </h3>
+                    <div class="max-w-md mx-auto py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/final_matlab_model_1.png"
+                                alt="Final MATLAB model using a fixed height model. The external disturbance could be modified by its pulse and components to closely study Nudge's behaviours and torques."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The final model used for wheel actuator sizing was a fixed-height wheeled inverted pendulum with the more detailed masses and inertias of the rotating rims, stationary frames, and moving body. It retained the external force disturbance input, allowing me to evaluate wheel torque under different loading conditions.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            Several non-ideal effects were not included in the model:
+                        </strong>
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Mechanical losses:
+                            </strong>
+                            Bearing friction, transmission losses, and other resistive effects.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Actuator characteristics:
+                            </strong>
+                            Rotor inertia, motor dynamics, and electrical limitations.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Wheel–ground interaction:
+                            </strong>
+                            Traction limits, tire deformation, and slipping.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Physical constraints:
+                            </strong>
+                            Joint travel limits, actuator speed limits, and torque saturation.
+                        </li>
+                    </ul>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The main reason was time, along with a lack of reliable parameters for some of these effects.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Fortunately, the initial simulations produced relatively modest torque requirements. Although the unconstrained controller could theoretically request more torque or speed than a real motor could deliver, the simulated demands did not suggest that saturation would dominate the cases I was studying. I decided that this level of detail, combined with reasonable loss estimates and safety margins, was sufficient for an initial sizing exercise.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We also had some flexibility because Nudge's architecture and requirements were still being developed. Rather than treating the simulation as a final validation, I used it to guide actuator selection and identify what would need to be checked once we had hardware.
+                    </p>
+                </section>
+                <section aria-labelledby="section-4" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-4">
+                        4. Sizing the Wheel Actuators
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-1">
+                        4.1 Estimating Mass and Inertia
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Before running the finalized MATLAB model, I needed estimates for Nudge's wheel, body, and frame masses and inertias, along with its wheel radius and equilibrium body height.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We wanted a small, approachable robot that could be picked up and comfortably interact with people. Based on its intended contact height, comparable home robots, and packaging needs, we settled on a roughly 275 × 275 mm footprint and 300 mm nominal height.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I then broke Nudge into three main components: the rotating wheel rims, the internal frames containing the actuators, and the moving body. Using preliminary CAD geometry, estimated material densities, and an electronics component list, I approximated their masses, centers of mass, and rotational inertias.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Because the design was still evolving, these were simplified CAD and component estimates rather than measured mass properties.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/size.png"
+                                alt="Approximating the maximum envelope of Nudge based on a typical person's shin length, a chair, and other home robots."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/mass.png"
+                                alt="Mass and inertia estimation based on simplified CAD model, material properties, and component list. Also compared the final mass to other robots in the space to verify the numbers."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-2">
+                        4.2 Defining the Loading Requirements
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Two team-developed targets guided the simulations: a maximum travel speed of 1.58 m/s and a 12 N nudging force. The reasoning behind these requirements is covered on the
+                        <a class="font-bold text-zinc-900 dark:text-zinc-100 underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300" href="https://mte-capstone-design-website.vercel.app/">
+                            official Capstone page
+                        </a>
+                        ; here, I focused on translating them into actuator loads.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-3">
+                        4.3 Estimating Peak Wheel Torque
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For peak wheel torque, I used the expected reaction force during a nudge as the main loading case. When Nudge pushes against a person, the equal and opposite contact force acts as an external disturbance on the robot. I applied this disturbance in the MATLAB model and evaluated the wheel torque required to maintain balance.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I tested different LQR cost-function weights rather than relying on one controller setting. Pitch and displacement varied, and some configurations became unstable, but peak torque stayed near 2 N·m across both wheels (about 1 N·m each) in the successful test cases.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"
+                                alt="Initial run (without cost and weight adjustments)."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/peak_wheel_2.png"
+                                alt="Trying different relative cost function values yielded similar-ish performance, signaling that the initial disturbance could dominate the initial response."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-4">
+                        4.4 Estimating RMS Wheel Torque
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Our current plan is for Nudge to tow Notice, the second robot in the Notify family, as they move around together. I therefore included towing and towing-related acceleration and braking in the representative operating cycle, using an assumed combined load of 10 kg. These are preliminary loading assumptions rather than measured towing requirements.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The resulting RMS estimate was 0.29 N·m across both wheels, or approximately 0.147 N·m per wheel.
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-zinc-100/70 dark:bg-zinc-800/40">
+                                <tr>
+                                    <th class="px-4 py-3 font-bold">
+                                        Operating state
+                                    </th>
+                                    <th class="px-4 py-3 font-bold">
+                                        Duration
+                                    </th>
+                                    <th class="px-4 py-3 font-bold">
+                                        Assumption
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Nudging
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        5 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        One nudge
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Acceleration / braking
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        4 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        3 s acceleration + 1 s braking
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Driving
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        180 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        Travel at maximum speed
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Towing Notice
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        300 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        10 kg assumed combined load
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Towing acceleration / braking
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        6 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        3 s acceleration + 3 s braking
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-bold">
+                                        Total
+                                    </td>
+                                    <td class="px-4 py-3 font-bold">
+                                        495 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        Idle torque assumed negligible in this cycle
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/rms_wheel_1.png"
+                                alt="Estimating RMS torque requirement off a simulated cycle, pt.1"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/rms_wheel_2.png"
+                                alt="Estimating RMS torque requirement off a simulated cycle, pt.2"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        These estimates exclude friction, drivetrain losses, traction limits, and actuator saturation. They also depend on the assumed duty cycle, so they are preliminary sizing inputs rather than validated requirements.
+                    </p>
+                </section>
+                <section aria-labelledby="section-5" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-5">
+                        5. Sizing the Height &amp; Nudging Actuators
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-1">
+                        5.1 Proposed Height and Nudging Mechanism
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Unlike the wheel actuators, the leg actuators had to do more than one job: support and adjust the body height, produce expressive movements, and help drive the nudging head. At this stage, we had not finalized either the leg linkage or how the head would connect to it, so I could not calculate a reliable torque profile from actual linkage geometry.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Our working concept was a four-bar or six-bar height mechanism with
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            gravity compensation
+                        </strong>
+                        , coupled to a differential head linkage. Extending the two legs together would move the head upward and forward to nudge the user, while extending them by different amounts could tilt the head. We also intended to put a spring in series with the head so its deflection could be used to estimate contact force.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The head would likely follow an arc, but force sharing and mechanical advantage would depend on the final linkage geometry.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/ascento_gcm.jpeg"
+                                alt="Example of a 1 DoF, gravity compensated leg mechanism, used by Ascento. They use a torsion spring at the knee."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/bump_idea_1.jpg"
+                                alt="First sketch of the differential mechanism."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-2">
+                        5.2 Estimating the Nudging and Gravity Loads
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        As with the wheel sizing, I used nudging as the peak loading case. Here, however, I estimated the torque the leg actuators would need to generate the target head contact force, rather than the wheel torque needed to resist its reaction. For this first estimate, I treated the head force as acting at the end of an equivalent lever arm. Our target was
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            12 N of contact force
+                        </strong>
+                        , but the direction of that force was not fixed. The horizontal and vertical components could create opposing moments about the mechanism, potentially reducing the net torque in some configurations. This was useful design flexibility, but not something I could count on without a defined linkage.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I therefore used an illustrative
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            8.5 N effective load at a 150 mm lever arm
+                        </strong>
+                        to establish the scale of the nudging demand. This was a working assumption rather than a proven worst case: a different contact direction, head position, or linkage mechanical advantage could increase or decrease the required motor torque. The 12 N contact target itself was also adjustable if necessary.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/peak_leg.png"
+                                alt="Estimated loading from nudging action."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/leg_body_weight.png"
+                                alt="FBD of approximated loading from body in relation to the GCM"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I then accounted for the weight of the body. I assumed that the gravity-compensation mechanism would offset approximately
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            85% of the supported body weight
+                        </strong>
+                        , leaving the actuators responsible for the remaining
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            15%
+                        </strong>
+                        . For a first-pass moment arm, I used the wheel radius as a simple upper-scale geometric reference, although the actual linkage lever arm would almost certainly be different. This 85% compensation figure was not based on a finished spring design; it was an explicit assumption that would need to be checked over the entire height range.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-3">
+                        5.3 Peak and RMS Leg Torque
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Using the assumed nudging load and equivalent lever arm from Section 5.2, the calculated
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            peak torque was 0.85 N·m per actuator
+                        </strong>
+                        , before adding losses or safety margins. To estimate continuous loading, I also needed a representative duty cycle rather than assuming that the actuator would operate at its peak torque all the time.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/leg_calc_1.png"
+                                alt="Notes and thought process behind very simplified estimation of peak leg loading due to nudging reactions. Some terminology might be slightly incorrect."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/leg_calc_2.png"
+                                alt="RMS calculations and a couple more justifications."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I used a simplified cycle consisting of two nudges over 10 seconds, followed by five minutes of expressive movement. For the expressive portion, I assumed roughly half the nudging torque demand. The handwritten calculation also includes a small additional holding-load term. These were deliberately simple assumptions, since neither the final mechanism nor its real usage pattern was established.
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+                                <tr>
+                                    <th class="px-4 py-3 font-bold">
+                                        Operating state
+                                    </th>
+                                    <th class="px-4 py-3 font-bold">
+                                        Duration
+                                    </th>
+                                    <th class="px-4 py-3 font-bold">
+                                        Assumed torque
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-zinc-700 dark:text-zinc-300 font-medium">
+                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
+                                    <td class="px-4 py-3">
+                                        Two nudges
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        10 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.85 + 0.01575 N·m
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
+                                    <td class="px-4 py-3">
+                                        Expressive motion
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        300 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.425 + 0.01575 N·m
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
+                                    <td class="px-4 py-3 font-bold">
+                                        Total cycle
+                                    </td>
+                                    <td class="px-4 py-3 font-bold">
+                                        310 s
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        Assumed repeatable duty cycle
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Weighting each state by its duration gave an estimated
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            RMS torque of 0.461 N·m per leg actuator
+                        </strong>
+                        , before margins. This is useful for initial thermal screening, but it depends heavily on the assumed duty cycle and on the still-unverified holding-load estimate.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-4">
+                        5.4 What the Estimates Could and Could Not Tell Us
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The unresolved linkage remained the largest uncertainty: mechanical advantage and gravity compensation could change considerably through the stroke. These were not verified worst-case torques.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        There was some room to adjust the design if the numbers proved too demanding. The head could potentially be brought closer to the body, the contact-force direction or target could change, and the leg transmission ratio could be increased. Because Nudge was intended to make relatively slow expressive height adjustments rather than jump or move dynamically, trading some speed for additional torque was a reasonable option. The series spring would also provide a way to estimate head contact force, although it would not eliminate backlash, friction, compliance, or sensing errors elsewhere in the mechanism.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-5">
+                        5.5 Summary of Theoretical Torque Requirements
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For initial actuator screening, I applied a safety factor of 2 to the theoretical peak and RMS torque estimates. All values below are positive torque magnitudes, per actuator.
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+                                <tr>
+                                    <th class="px-4 py-3 font-bold">
+                                        Actuator
+                                    </th>
+                                    <th class="px-4 py-3 font-bold">
+                                        Peak torque (SF = 2)
+                                    </th>
+                                    <th class="px-4 py-3 font-bold">
+                                        RMS torque (SF = 2)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-zinc-700 dark:text-zinc-300 font-medium">
+                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
+                                    <td class="px-4 py-3">
+                                        Wheel (each)
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        2.00 N·m
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.294 N·m
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
+                                    <td class="px-4 py-3">
+                                        Leg (each)
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        1.70 N·m
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.922 N·m
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This factor is a
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            preliminary allowance for uncertain masses and linkage geometry, unmodeled friction and mechanical losses, idealized disturbances, and other non-ideal behaviour
+                        </strong>
+                        . It is not a measured efficiency or a substitute for checking torque–speed curves, thermal limits, traction, and the eventual mechanism.
+                    </p>
+                </section>
+                <section aria-labelledby="section-6" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-6">
+                        6. From Theoretical Torque to Motor Selection
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With the theoretical torque requirements established, a motor needed to be chosen for both the wheels and the height-adjustment mechanisms. We preferred four identical actuators to simplify sourcing, packaging, software, and spares, even if that meant oversizing one application.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-1">
+                        Why Direct Drive?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Our torque requirements made direct drive a realistic option. Without a gearbox, motor position corresponds directly to joint position, with no gearbox backlash or transmission compliance to account for. That is particularly useful for the legs, where backdrivability and predictable torque control matter. Just as importantly, it avoids designing and integrating four gearboxes. The tradeoff is a larger motor that must produce the full joint torque at the required speed.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-2">
+                        Selecting the GB7215
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I selected the
+                        <a class="font-bold underline underline-offset-2 hover:text-zinc-900 dark:hover:text-white" href="https://steadywin-motor.com/collections/pm-series/products/small-brushless-servo-motor-hollow-flat-gimbal-servo-drone-gimbal-camera-motor-3" rel="noopener noreferrer" target="_blank">
+                            SteadyWin GB7215
+                        </a>
+                        , an enclosed, flat BLDC gimbal motor, as our leading candidate. Its published ratings can be compared directly against the torque requirements from Section 5, which already include a safety factor of two.
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <table class="w-full text-sm text-left text-zinc-700 dark:text-zinc-300">
+                            <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100 font-bold">
+                                <tr>
+                                    <th class="px-4 py-3">
+                                        Requirement
+                                    </th>
+                                    <th class="px-4 py-3">
+                                        Wheel
+                                    </th>
+                                    <th class="px-4 py-3">
+                                        Leg
+                                    </th>
+                                    <th class="px-4 py-3">
+                                        GB7215 rating
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Peak torque
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        2.00 N·m
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        1.70 N·m
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        3.70 N·m
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        RMS / rated torque
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.294 N·m
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.922 N·m
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        1.20 N·m rated
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        Peak current
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        4.88 A
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        4.15 A
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        16.0 A peak
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        RMS / rated current
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        0.72 A
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        2.25 A
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        2.90 A rated
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The current estimates use the manufacturer’s torque constant of
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            0.41 N·m/A
+                        </strong>
+                        and \(I=\tau/K_t\), assuming consistent current definitions. The closest continuous-duty case is the leg: its estimated 0.922 N·m RMS is about
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            77% of the motor’s 1.20 N·m rated torque
+                        </strong>
+                        . The wheel’s 2.00 N·m peak is about 54% of the advertised 3.70 N·m peak.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Speed also fits on paper. At our target travel speed of 1.58 m/s with 210 mm diameter wheels, direct drive requires approximately
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            144 RPM
+                        </strong>
+                        , below the motor’s rated 354 RPM and peak 516 RPM. These separate torque and speed ratings are encouraging, but they do not establish the available torque at every speed or the allowable duration of peak loading. The leg’s maximum required speed also depends on the final linkage geometry.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The GB7215 matches our
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            24 V
+                        </strong>
+                        system, and its enclosed, flat construction is convenient for the internal wheel frames. We still need to account for the output mounting and bearing loads; an enclosed motor does not automatically mean its bearings can carry every external wheel load.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/steadywin.png"
+                                alt="Our selected motor: SteadyWin GB7215 gimbal motor."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/actuator_size/moteus.png"
+                                alt="Our selected controller: Moteus-r5 motor controller."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-3">
+                        Controller and Practical Integration
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We chose the
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            moteus r5
+                        </strong>
+                        for field-oriented control, encoder support, and a well-documented development workflow. Our previous experience with proprietary motor-controller firmware, particularly MyActuator, involved more time than we wanted to spend on documentation and communication issues. Using one motor-controller combination across all four joints should make integration and troubleshooting more straightforward.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Because the capstone schedule leaves little room for a separate motor-validation phase, we plan to purchase
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            five GB7215 motors and five moteus r5 controllers
+                        </strong>
+                        : four for Nudge and one spare set.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-4">
+                        Thermal Considerations and Selection
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The main remaining concern is continuous heating in the legs, particularly when holding position at low speed. The motor’s 1.20 N·m rated torque exceeds our estimated 0.922 N·m RMS requirement, but the manufacturer’s rating depends on its test and cooling conditions. A teammate is exploring whether the wheel design can move air around the motors; that could help while driving, but cannot be assumed to provide sufficient cooling when stationary. Heat conduction through the motor housing and frame will matter as well.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        On the information available before purchasing, the GB7215 offers a practical combination of torque, speed, current demand, and packaging without a gearbox. We are treating it as our selected prototype motor, while recognizing that the manufacturer’s ratings are not a substitute for performance in the assembled robot.
+                    </p>
+                </section>
+                <section aria-labelledby="section-7" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-7">
+                        7. Limitations and Next Steps
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This work was completed before purchasing or building the actuator assemblies. The requirements come from simplified models, estimated mass properties, assumed nudging loads, and an expected duty cycle, so the resulting torque margins should be treated as design estimates rather than measured performance.
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Motor capability:
+                            </strong>
+                            Rated and peak torque exceed our estimates, but torque available at speed, peak duration, and thermal conditions remain unverified.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Mechanical model:
+                            </strong>
+                            Final masses, linkage mechanical advantage, friction, and gravity compensation may change the actual torque demands.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Integration:
+                            </strong>
+                            Encoder alignment, motor mounting, bearing loads, and cooling depend on the final wheel assembly.
+                        </li>
+                    </ul>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Before purchasing the actuators and motor controllers, a teammate did also run a simple CAD model in MuJoCo to verify the numbers, and calculated lower torque estimates than what was shown in this post. 
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Given our timeline, we will move directly into procurement and integration rather than run a full characterization program first. The purpose of the modeling was to narrow the uncertainty enough to make a defensible hardware decision before building; the prototype will ultimately show where those assumptions need to be revised.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        On to building!
+                    </p>
+                </section>
+            </article>
+        </main>
+        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+            <div class="max-w-3xl mx-auto px-6 py-7">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-3">
+                    Capstone pages
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="../Capstone.html">
+                        &larr; Capstone Overview
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="concept_development.html">
+                        Concept Development &amp; Design Decisions
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 rounded-full px-3 py-2" href="actuator_sizing.html" aria-current="page">
+                        Modeling &amp; Actuator Sizing
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_2.html">
+                        Kinematic Linkage Design
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_3.html">
+                        General Mechanical Design
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_4.html">
+                        Industrial Design &amp; Art
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <script>
+            // Reveal the destination page after its initial background is painted.
+                     const root = document.documentElement;
+                     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+                     let navigating = false;
+
+                     function revealPage() {
+                         navigating = false;
+                         root.classList.remove('page-departing');
+
+                         requestAnimationFrame(() => {
+                             requestAnimationFrame(() => {
+                                 root.classList.remove('page-arriving');
+                             });
+                         });
+                     }
+
+                     revealPage();
+
+                     document.addEventListener('click', event => {
+                         const link = event.target.closest('a[href]');
+
+                         if (!link || navigating || event.defaultPrevented || event.button !== 0 ||
+                             event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+                             (link.target && link.target !== '_self') ||
+                             link.hasAttribute('download') || reducedMotion.matches) return;
+
+                         const destination = new URL(link.href, window.location.href);
+
+                         if (destination.origin !== window.location.origin ||
+                             !destination.pathname.endsWith('.html') ||
+                             destination.pathname === window.location.pathname) return;
+
+                         event.preventDefault();
+                         navigating = true;
+                         root.classList.add('page-departing');
+
+                         window.setTimeout(() => {
+                             window.location.assign(destination.href);
+                         }, 320);
+                     });
+
+                     window.addEventListener('pageshow', event => {
+                         if (event.persisted) revealPage();
+                     });
+        </script>
+        <script>
+            // Track reading progress through the main content, excluding the footer.
+                     (function () {
+                         const bar = document.getElementById('reading-progress');
+                         const main = document.querySelector('main');
+                         const header = document.querySelector('header');
+
+                         if (!bar || !main || !header) return;
+
+                         let pending = false;
+
+                         function updateProgress() {
+                             const rect = main.getBoundingClientRect();
+                             const top = rect.top + window.scrollY;
+                             const bottom = top + main.offsetHeight;
+                             const start = top - header.offsetHeight;
+                             const end = bottom - window.innerHeight;
+                             const distance = end - start;
+                             const fraction = distance > 0
+                                 ? (window.scrollY - start) / distance
+                                 : 1;
+
+                             bar.style.transform = `scaleX(${Math.max(0, Math.min(1, fraction))})`;
+                             pending = false;
+                         }
+
+                         function scheduleUpdate() {
+                             if (pending) return;
+                             pending = true;
+                             requestAnimationFrame(updateProgress);
+                         }
+
+                         window.addEventListener('scroll', scheduleUpdate, { passive: true });
+                         window.addEventListener('resize', scheduleUpdate);
+                         window.addEventListener('load', scheduleUpdate);
+                         window.addEventListener('pageshow', scheduleUpdate);
+                         scheduleUpdate();
+                     })();
+        </script>
+        <script>
+            // Highlight the current section and control the compact mobile menu.
+                     (function () {
+                         const menu = document.getElementById('article-toc');
+                         const toggle = document.getElementById('toc-toggle');
+                         const scrim = document.getElementById('toc-scrim');
+                         const links = [...menu.querySelectorAll('[data-toc-link]')];
+                         const targets = links.map(link => document.getElementById(link.hash.slice(1)));
+                         let scheduled = false;
+
+                         function setOpen(open) {
+                             menu.classList.toggle('is-open', open);
+                             scrim.classList.toggle('is-open', open);
+                             toggle.setAttribute('aria-expanded', String(open));
+                             toggle.querySelector('span').textContent = open ? 'Close' : 'Contents';
+                         }
+
+                         function updateActive() {
+                             scheduled = false;
+                             let active = 0;
+                             for (let i = 0; i < targets.length; i++) {
+                                 if (targets[i] && targets[i].getBoundingClientRect().top <= 125) active = i;
+                             }
+                             // At the bottom, the final section may never reach the header threshold.
+                             const atBottom = window.innerHeight + window.scrollY >=
+                                 document.documentElement.scrollHeight - 3;
+                             if (atBottom) active = links.length - 1;
+
+                             links.forEach((link, index) => {
+                                 const selected = index === active;
+                                 link.classList.toggle('is-active', selected);
+                                 if (selected) link.setAttribute('aria-current', 'location');
+                                 else link.removeAttribute('aria-current');
+                             });
+                         }
+
+                         function scheduleActive() {
+                             if (scheduled) return;
+                             scheduled = true;
+                             requestAnimationFrame(updateActive);
+                         }
+
+                         toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
+                         scrim.addEventListener('click', () => setOpen(false));
+                         links.forEach(link => link.addEventListener('click', () => setOpen(false)));
+                         document.addEventListener('keydown', event => {
+                             if (event.key === 'Escape') setOpen(false);
+                         });
+                         window.addEventListener('scroll', scheduleActive, { passive: true });
+                         window.addEventListener('resize', () => {
+                             if (window.innerWidth >= 1240) setOpen(false);
+                             scheduleActive();
+                         });
+                         window.addEventListener('pageshow', () => { setOpen(false); scheduleActive(); });
+                         updateActive();
+                     })();
+        </script>
+        <!-- Accessible, page-wide image viewer. -->
+        <div aria-hidden="true" aria-label="Image viewer" aria-modal="true" class="image-lightbox" id="image-lightbox" role="dialog">
+            <div class="image-lightbox-content">
+                <button aria-label="Close image viewer" class="image-lightbox-control image-lightbox-close" id="lightbox-close" type="button">
+                    ×
+                </button>
+                <button aria-label="Previous image" class="image-lightbox-control image-lightbox-prev" id="lightbox-prev" type="button">
+                    ‹
+                </button>
+                <button aria-label="Next image" class="image-lightbox-control image-lightbox-next" id="lightbox-next" type="button">
+                    ›
+                </button>
+                <div class="image-lightbox-media" id="lightbox-media">
+                </div>
+                <div class="image-lightbox-caption" id="lightbox-caption">
+                </div>
+                <div aria-live="polite" class="image-lightbox-counter" id="lightbox-counter">
+                </div>
+            </div>
+        </div>
+        <script>
+            (function () {
+                         const viewer = document.getElementById('image-lightbox');
+                         const media = document.getElementById('lightbox-media');
+                         const caption = document.getElementById('lightbox-caption');
+                         const counter = document.getElementById('lightbox-counter');
+                         const closeButton = document.getElementById('lightbox-close');
+                         const previousButton = document.getElementById('lightbox-prev');
+                         const nextButton = document.getElementById('lightbox-next');
+                         const items = [...document.querySelectorAll('main [data-lightbox-item]')];
+                         let currentIndex = -1;
+                         let previousFocus = null;
+                         let touchStartX = null;
+
+                         let changeTimer = null;
+
+                         function render(index) {
+                             currentIndex = (index + items.length) % items.length;
+                             const item = items[currentIndex];
+                             const source = item.querySelector('img');
+                             const figureCaption = item.querySelector('figcaption');
+                             const description = item.dataset.caption ||
+                                 (figureCaption && figureCaption.textContent.trim()) ||
+                                 (source && source.alt) || item.innerText.trim().replace(/\s+/g, ' ');
+
+                             media.replaceChildren();
+                             if (source && source.getAttribute('src')) {
+                                 const image = document.createElement('img');
+                                 image.src = source.currentSrc || source.src;
+                                 image.alt = source.alt || description;
+                                 media.appendChild(image);
+                             } else {
+                                 const placeholder = document.createElement('div');
+                                 placeholder.className = 'image-lightbox-placeholder';
+                                 const title = document.createElement('strong');
+                                 title.textContent = item.querySelector('span')?.textContent.trim() || description;
+                                 const note = document.createElement('span');
+                                 note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
+                                 placeholder.append(title, note);
+                                 media.appendChild(placeholder);
+                             }
+                             caption.textContent = description;
+                             counter.textContent = `${currentIndex + 1} / ${items.length}`;
+                         }
+
+                         function navigate(index) {
+                             if (changeTimer) clearTimeout(changeTimer);
+                             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                                 render(index);
+                                 return;
+                             }
+                             media.classList.add('is-changing');
+                             caption.classList.add('is-changing');
+                             changeTimer = setTimeout(() => {
+                                 render(index);
+                                 media.classList.remove('is-changing');
+                                 caption.classList.remove('is-changing');
+                                 changeTimer = null;
+                             }, 125);
+                         }
+
+                         function open(index) {
+                             if (!items.length) return;
+                             previousFocus = document.activeElement;
+                             render(index);
+                             viewer.classList.add('is-open');
+                             viewer.setAttribute('aria-hidden', 'false');
+                             document.body.style.overflow = 'hidden';
+                             closeButton.focus();
+                         }
+
+                         function close() {
+                             if (changeTimer) clearTimeout(changeTimer);
+                             changeTimer = null;
+                             media.classList.remove('is-changing');
+                             caption.classList.remove('is-changing');
+                             viewer.classList.remove('is-open');
+                             viewer.setAttribute('aria-hidden', 'true');
+                             document.body.style.overflow = '';
+                             currentIndex = -1;
+                             if (previousFocus && previousFocus.focus) previousFocus.focus();
+                         }
+
+                         items.forEach((item, index) => {
+                             item.addEventListener('click', () => open(index));
+                             item.addEventListener('keydown', event => {
+                                 if (event.key === 'Enter' || event.key === ' ') {
+                                     event.preventDefault();
+                                     open(index);
+                                 }
+                             });
+                         });
+
+                         closeButton.addEventListener('click', close);
+                         previousButton.addEventListener('click', () => navigate(currentIndex - 1));
+                         nextButton.addEventListener('click', () => navigate(currentIndex + 1));
+                         viewer.addEventListener('click', event => {
+                             if (event.target === viewer) close();
+                         });
+                         document.addEventListener('keydown', event => {
+                             if (currentIndex < 0) return;
+                             if (event.key === 'Escape') close();
+                             if (event.key === 'ArrowLeft') navigate(currentIndex - 1);
+                             if (event.key === 'ArrowRight') navigate(currentIndex + 1);
+                             if (event.key === 'Tab') {
+                                 const controls = [closeButton, previousButton, nextButton];
+                                 const index = controls.indexOf(document.activeElement);
+                                 if (event.shiftKey && index === 0) {
+                                     event.preventDefault();
+                                     nextButton.focus();
+                                 } else if (!event.shiftKey && index === controls.length - 1) {
+                                     event.preventDefault();
+                                     closeButton.focus();
+                                 }
+                             }
+                         });
+                         media.addEventListener('touchstart', event => {
+                             touchStartX = event.changedTouches[0].screenX;
+                         }, { passive: true });
+                         media.addEventListener('touchend', event => {
+                             if (touchStartX === null) return;
+                             const difference = event.changedTouches[0].screenX - touchStartX;
+                             if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
+                             touchStartX = null;
+                         }, { passive: true });
+                     })();
+        </script>
+    </body>
+</html>

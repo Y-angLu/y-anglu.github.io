@@ -209,7 +209,7 @@
             @media (prefers-reduced-motion: reduce) {
                 .navigation-veil { transition: none; }
             }
-        
+
             /* Reading progress follows the bottom edge of the sticky header. */
             #reading-progress {
                 position: absolute;
@@ -263,6 +263,93 @@
             html.colour-mode .note-card.colour-note:hover .note-link {
                 opacity: 1;
             }
+            /* Compact linked takeaways; images remain separate from the cards. */
+            .tldr-highlight {
+                display: block;
+                max-width: 42rem;
+                padding: 1.15rem 1.25rem 0;
+                border: 1px solid var(--line);
+                border-radius: 0.75rem;
+                background: rgba(113, 113, 122, 0.045);
+                color: inherit;
+                text-decoration: none;
+                overflow: hidden;
+                transition: border-color 180ms ease, background-color 180ms ease;
+            }
+
+            .dark .tldr-highlight {
+                background: rgba(255, 255, 255, 0.035);
+            }
+
+            .tldr-highlight:hover,
+            .tldr-highlight:focus-visible {
+                border-color: #a1a1aa;
+                background: rgba(113, 113, 122, 0.075);
+            }
+
+            .tldr-highlight:focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 3px;
+            }
+
+            .tldr-read-more {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 1rem;
+                margin-top: 0.9rem;
+                padding: 0.75rem 0;
+                border-top: 1px solid var(--line);
+                color: #71717a;
+                font-size: 0.75rem;
+                font-weight: 700;
+                transition: color 180ms ease;
+            }
+
+            .dark .tldr-read-more { color: #a1a1aa; }
+            .tldr-highlight:hover .tldr-read-more,
+            .tldr-highlight:focus-visible .tldr-read-more { color: var(--ink); }
+
+            .tldr-read-more-arrow {
+                font-size: 1rem;
+                transition: transform 180ms ease;
+            }
+
+            .tldr-highlight:hover .tldr-read-more-arrow,
+            .tldr-highlight:focus-visible .tldr-read-more-arrow {
+                transform: translateX(4px);
+            }
+
+            html.colour-mode .tldr-highlight,
+            html.colour-mode.dark .tldr-highlight {
+                background: var(--note-colour);
+                border-color: rgb(24 24 27 / 18%);
+                color: #18181b;
+            }
+
+            html.colour-mode .tldr-highlight:hover,
+            html.colour-mode .tldr-highlight:focus-visible {
+                border-color: #18181b;
+            }
+
+            html.colour-mode .tldr-highlight p,
+            html.colour-mode .tldr-highlight strong,
+            html.colour-mode .tldr-read-more,
+            html.colour-mode.dark .tldr-highlight p,
+            html.colour-mode.dark .tldr-highlight strong,
+            html.colour-mode.dark .tldr-read-more {
+                color: #18181b;
+            }
+
+            html.colour-mode .tldr-read-more,
+            html.colour-mode.dark .tldr-read-more {
+                border-top-color: rgb(24 24 27 / 18%);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .tldr-highlight, .tldr-read-more, .tldr-read-more-arrow { transition: none; }
+            }
+
             .capstone-contents {
                 position: fixed;
                 right: max(1rem, env(safe-area-inset-right));
@@ -341,7 +428,8 @@
                     Back to Home
                 </a>
             </div>
-            <div id="reading-progress" aria-hidden="true"></div>
+            <div aria-hidden="true" id="reading-progress">
+            </div>
         </header>
         <main>
             <!-- ================= HERO BANNER ================= -->
@@ -424,22 +512,6 @@
                     </div>
                 </div>
             </section>
-            <section class="max-w-5xl mx-auto px-6 pt-6 pb-3">
-                <div aria-label="Technical subpages" class="flex flex-wrap gap-2">
-                    <a class="tag colour-tag" style="--note-colour: #EAA7C7;" href="Capstone_subpages/placeholder_1.html">
-                        Modeling & Actuator Sizing ↗
-                    </a>
-                    <a class="tag colour-tag" style="--note-colour: #EAC119;" href="Capstone_subpages/placeholder_2.html">
-                        Kinematic Linkage Design ↗
-                    </a>
-                    <a class="tag colour-tag" style="--note-colour: #808BC5;" href="Capstone_subpages/placeholder_3.html">
-                        General Mechanical Design  ↗
-                    </a>
-                    <a class="tag colour-tag" style="--note-colour: #9ED6DF;" href="Capstone_subpages/placeholder_4.html">
-                        Industrial Design + Art ↗
-                    </a>
-                </div>
-            </section>
             <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="overview">
                 <div class="section-rule chapter">
                     <span class="chapter-num">
@@ -473,10 +545,29 @@
                 </div>
                 <div class="chapter-body mt-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #EAA7C7;" href="Capstone_subpages/placeholder_1.html">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/concept_development.html" style="--note-colour: #94B447;">
                             <div class="flex justify-between">
                                 <span class="eyebrow">
                                     01 / Technical note
+                                </span>
+                                <span class="note-arrow">
+                                    ↗
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold mt-5">
+                                Concept Development &amp; Design Decisions
+                            </h3>
+                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+                                Comparing architectures and explaining the decisions behind Nudge’s design.
+                            </p>
+                            <span class="note-link mt-auto pt-6 text-xs font-bold">
+                                Explore documentation →
+                            </span>
+                        </a>
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/actuator_sizing.html" style="--note-colour: #EAA7C7;">
+                            <div class="flex justify-between">
+                                <span class="eyebrow">
+                                    02 / Technical note
                                 </span>
                                 <span class="note-arrow">
                                     ↗
@@ -492,10 +583,10 @@
                                 Explore documentation →
                             </span>
                         </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #EAC119;" href="Capstone_subpages/placeholder_2.html">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/placeholder_2.html" style="--note-colour: #EAC119;">
                             <div class="flex justify-between">
                                 <span class="eyebrow">
-                                    02 / Technical note
+                                    03 / Technical note
                                 </span>
                                 <span class="note-arrow">
                                     ↗
@@ -511,10 +602,10 @@
                                 Explore documentation →
                             </span>
                         </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #808BC5;" href="Capstone_subpages/placeholder_3.html">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/placeholder_3.html" style="--note-colour: #808BC5;">
                             <div class="flex justify-between">
                                 <span class="eyebrow">
-                                    03 / Technical note
+                                    04 / Technical note
                                 </span>
                                 <span class="note-arrow">
                                     ↗
@@ -530,10 +621,10 @@
                                 Explore documentation →
                             </span>
                         </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" style="--note-colour: #9ED6DF;" href="Capstone_subpages/placeholder_4.html">
+                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/placeholder_4.html" style="--note-colour: #9ED6DF;">
                             <div class="flex justify-between">
                                 <span class="eyebrow">
-                                    04 / Technical note
+                                    05 / Technical note
                                 </span>
                                 <span class="note-arrow">
                                     ↗
@@ -562,27 +653,120 @@
                     </h2>
                 </div>
                 <div class="chapter-body mt-7">
-                    <p class="max-w-2xl text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                        A high level summary highlighting the work it took to bring Nudge and Notice to reality.
-                    </p>
-                    <p class="max-w-2xl mt-4 text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                        This section is currently under construction.
-                    </p>
+                    <div class="space-y-9 sm:space-y-11">
+                        <!-- TL;DR 01: Concept Development -->
+                        <div class="space-y-3" style="--note-colour: #94B447;">
+                            <a class="tldr-highlight group" href="Capstone_subpages/concept_development.html">
+                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                                Evaluated
+                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                    locomotion and interaction concepts
+                                </strong>
+                                to define Nudge’s wheeled-biped architecture, height-adjustable legs, and compliant nudging approach.
+                            </p>
+                                <span class="tldr-read-more">
+                                    <span>Read the technical note</span>
+                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
+                                </span>
+                            </a>
+                            <div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                                <img alt="Concept development and architecture" class="w-full h-full object-cover" src="../images/projects/capstone/design_ideation.png"/>
+                            </div>
+                        </div>
+                        <!-- TL;DR 02: Dynamic Modeling & Control -->
+                        <div class="space-y-3" style="--note-colour: #EAA7C7;">
+                            <a class="tldr-highlight group" href="Capstone_subpages/actuator_sizing.html">
+                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                                Derived and linearized a 
+                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                    Lagrangian wheeled-biped model in MATLAB
+                                </strong>
+                                , then designed an
+                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                    LQR controller 
+                                </strong>
+                                to simulate stabilization.
+                            </p>
+                                <span class="tldr-read-more">
+                                    <span>Read the technical note</span>
+                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
+                                </span>
+                            </a>
+                            <!--<div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                                <img alt="Motor and controller selection" class="w-full h-full object-cover" src="../images/projects/capstone/tldr_02.png"/>
+                            </div>-->
+                        </div>
+                        <!-- TL;DR 03: Actuator Sizing -->
+                        <div class="space-y-3" style="--note-colour: #EAC119;">
+                            <a class="tldr-highlight group" href="Capstone_subpages/actuator_sizing.html">
+                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                                Modeled driving, nudging reaction forces, and leg loading to
+                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                    calculate peak and RMS torque requirements
+                                </strong>
+                                for the wheel and height actuators.
+                            </p>
+                                <span class="tldr-read-more">
+                                    <span>Read the technical note</span>
+                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
+                                </span>
+                            </a>
+                            <div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                                <img alt="MATLAB dynamics and LQR simulation" class="w-full h-full object-cover" src="../images/projects/capstone/final_matlab_model_1.png"/>
+                            </div>
+                        </div>
+                        <!-- TL;DR 04: Motor Selection -->
+                        <div class="space-y-3" style="--note-colour: #808BC5;">
+                            <a class="tldr-highlight group" href="Capstone_subpages/actuator_sizing.html">
+                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
+                                Selected the 
+                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                    24 V SteadyWin GB7215 direct-drive BLDC motor and moteus r5 controller
+                                </strong>
+                                based on torque, current, speed, and packaging requirements.
+                            </p>
+                                <span class="tldr-read-more">
+                                    <span>Read the technical note</span>
+                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
+                                </span>
+                            </a>
+                            <!--<div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+                                <img alt="Motor and controller selection" class="w-full h-full object-cover" src="../images/projects/capstone/tldr_04.png"/>
+                            </div>-->
+                        </div>
+                        <p class="max-w-2xl pt-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+                            In progress — more updates to come.
+                        </p>
+                    </div>
                 </div>
             </section>
         </main>
         <!-- Compact chapter navigation, matching the Lamp page. -->
-        <nav class="capstone-contents" aria-label="Capstone page chapters" data-open="false" id="capstone-contents">
-            <div class="capstone-contents-panel" id="capstone-contents-panel" hidden>
-                <div class="px-2 pb-2 text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">On this page</div>
-                <a href="#overview">01 · Project Overview</a>
-                <a href="#technical-notes">02 · Technical Documentation</a>
-                <a href="#summary">03 · TL;DR</a>
+        <nav aria-label="Capstone page chapters" class="capstone-contents" data-open="false" id="capstone-contents">
+            <div class="capstone-contents-panel" hidden="" id="capstone-contents-panel">
+                <div class="px-2 pb-2 text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">
+                    On this page
+                </div>
+                <a href="#overview">
+                    01 · Project Overview
+                </a>
+                <a href="#technical-notes">
+                    02 · Technical Documentation
+                </a>
+                <a href="#summary">
+                    03 · TL;DR
+                </a>
             </div>
-            <button class="capstone-contents-toggle" type="button" id="capstone-contents-toggle" aria-expanded="false" aria-controls="capstone-contents-panel">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <button aria-controls="capstone-contents-panel" aria-expanded="false" class="capstone-contents-toggle" id="capstone-contents-toggle" type="button">
+                <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+                    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
+                    </path>
+                </svg>
                 Contents
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+                <svg aria-hidden="true" fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="13">
+                    <path d="m6 15 6-6 6 6">
+                    </path>
+                </svg>
             </button>
         </nav>
         <footer class="border-t border-zinc-200 dark:border-zinc-800">
@@ -639,7 +823,6 @@
                 if (event.persisted) revealPage();
             });
         </script>
-    
         <script>
             // Track reading progress through the main content, excluding the footer.
             (function () {

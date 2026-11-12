@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>
+            Notify Robots | Concept Development &amp; Design Decisions
+        </title>
+        <link class="favicon" href="../../images/gear_favicon.png" rel="icon" type="image/png"/>
+        <link as="font" crossorigin="" href="../../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
+        <script src="https://cdn.tailwindcss.com">
+        </script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Quicksand', 'sans-serif'],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            @font-face {
+                font-family: 'Quicksand';
+                src: url('../../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+                font-weight: 100 900;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            body {
+                font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            }
+
+            /* Subtle transitions between portfolio pages. */
+            @keyframes page-enter {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            main {
+                animation: page-enter 300ms ease-out both;
+            }
+
+            body.page-leaving main {
+                opacity: 0;
+                transform: translateY(-4px);
+                transition: opacity 180ms ease, transform 180ms ease;
+                animation: none;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                main {
+                    animation: none;
+                }
+
+                body.page-leaving main {
+                    transition: none;
+                }
+            }
+
+        /* Full-viewport navigation veil: covers background and content together. */
+        .navigation-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            background: #fafafa;
+            opacity: 0;
+            transition: opacity 320ms ease;
+        }
+
+        html.dark .navigation-veil {
+            background: #121212;
+        }
+
+        html.page-arriving .navigation-veil,
+        html.page-departing .navigation-veil {
+            opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .navigation-veil { transition: none; }
+        }
+
+            /* Reading progress follows the bottom edge of the sticky header. */
+            #reading-progress {
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: #71717a;
+                transform: scaleX(0);
+                transform-origin: left center;
+                pointer-events: none;
+                will-change: transform;
+            }
+
+            html.dark #reading-progress {
+                background: #a1a1aa;
+            }
+
+            /* Responsive article navigation, outside the reading column. */
+            .article-toc {
+                position: fixed;
+                top: 88px;
+                left: max(16px, calc(50% - 610px));
+                width: 202px;
+                max-height: calc(100vh - 112px);
+                overflow-y: auto;
+                z-index: 40;
+                padding: 14px 12px;
+                border: 1px solid rgba(161, 161, 170, .22);
+                border-radius: 14px;
+                background: rgba(250, 250, 250, .85);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                scrollbar-width: thin;
+            }
+            html.dark .article-toc {
+                background: rgba(18, 18, 18, .86);
+                border-color: rgba(113, 113, 122, .3);
+            }
+            .toc-label {
+                margin: 0 0 10px 10px;
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: .11em;
+                color: #71717a;
+                text-transform: uppercase;
+            }
+            .toc-link {
+                display: block;
+                border-left: 2px solid transparent;
+                border-radius: 0 5px 5px 0;
+                padding: 7px 8px 7px 10px;
+                color: #71717a;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 1.45;
+                text-decoration: none;
+                transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+            }
+            .toc-link:hover, .toc-link:focus-visible { color: #18181b; background: rgba(161,161,170,.10); }
+            html.dark .toc-link:hover, html.dark .toc-link:focus-visible { color: #fafafa; }
+            .toc-link.is-active { border-left-color: #52525b; color: #18181b; background: rgba(161,161,170,.12); }
+            html.dark .toc-link.is-active { border-left-color: #d4d4d8; color: #fafafa; }
+            .toc-link.toc-sub { padding-left: 20px; font-size: 11px; font-weight: 500; }
+            .toc-mobile-toggle { display: none; }
+            .toc-scrim { display: none; }
+            [data-toc-target] { scroll-margin-top: 76px; }
+            @media (max-width: 1239px) {
+                .article-toc {
+                    top: auto;
+                    left: auto;
+                    right: max(16px, env(safe-area-inset-right));
+                    bottom: calc(78px + env(safe-area-inset-bottom));
+                    width: min(310px, calc(100vw - 32px));
+                    max-height: min(65vh, 430px);
+                    padding: 14px;
+                    z-index: 81;
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transform: translateY(10px) scale(.98);
+                    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+                    box-shadow: 0 12px 36px rgba(0,0,0,.12);
+                }
+                .article-toc.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+                .toc-mobile-toggle {
+                    display: flex;
+                    position: fixed;
+                    right: max(16px, env(safe-area-inset-right));
+                    bottom: calc(18px + env(safe-area-inset-bottom));
+                    z-index: 82;
+                    align-items: center;
+                    gap: 9px;
+                    padding: 12px 16px;
+                    border-radius: 999px;
+                    border: 1px solid #d4d4d8;
+                    background: rgba(250,250,250,.94);
+                    color: #27272a;
+                    box-shadow: 0 5px 22px rgba(0,0,0,.10);
+                    backdrop-filter: blur(14px);
+                    -webkit-backdrop-filter: blur(14px);
+                    font-size: 12px;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+                html.dark .toc-mobile-toggle { background: rgba(30,30,30,.94); border-color: #52525b; color: #f4f4f5; }
+                .toc-scrim.is-open { display: block; position: fixed; inset: 0; z-index: 80; background: transparent; }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .article-toc, .toc-link { transition: none; }
+            }
+/* Keep the article centered when the lightbox locks page scrolling. */
+                html {
+                    scrollbar-gutter: stable;
+                }
+
+                /* Figure viewer: flat, restrained, and consistent with the article. */
+                [data-lightbox-item] {
+                    cursor: zoom-in;
+                    transition: border-color 220ms ease, background-color 220ms ease;
+                }
+
+                [data-lightbox-item]:hover,
+                [data-lightbox-item]:focus-visible {
+                    border-color: #a1a1aa;
+                    outline-offset: 3px;
+                }
+
+                .image-lightbox {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 1000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 24px;
+                    background: rgb(24 24 27 / 28%);
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transition: opacity 240ms ease, visibility 240ms ease;
+                }
+
+                .dark .image-lightbox {
+                    background: rgb(0 0 0 / 46%);
+                }
+
+                .image-lightbox.is-open {
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: auto;
+                }
+
+                .image-lightbox-content {
+                    position: relative;
+                    width: min(100%, 1040px);
+                    max-height: min(88vh, 960px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 46px 58px 22px;
+                    border: 1px solid #e4e4e7;
+                    border-radius: 12px;
+                    background: #fafafa;
+                    color: #27272a;
+                    opacity: 0;
+                    transform: translateY(6px);
+                    transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.75,.3,1);
+                }
+
+                .image-lightbox.is-open .image-lightbox-content {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .dark .image-lightbox-content {
+                    background: #1c1c1f;
+                    border-color: #3f3f46;
+                    color: #f4f4f5;
+                }
+
+                .image-lightbox-media {
+                    width: 100%;
+                    min-height: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: auto;
+                    border-radius: 8px;
+                    transition: opacity 160ms ease;
+                }
+
+                .image-lightbox-media.is-changing,
+                .image-lightbox-caption.is-changing {
+                    opacity: .25;
+                }
+
+                .image-lightbox-media img {
+                    display: block;
+                    max-width: 100%;
+                    max-height: 70vh;
+                    width: auto;
+                    height: auto;
+                    object-fit: contain;
+                    border-radius: 6px;
+                }
+
+                .image-lightbox-placeholder {
+                    width: min(100%, 680px);
+                    min-height: 180px;
+                    padding: 28px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 12px;
+                    text-align: center;
+                    border: 1px dashed #a1a1aa;
+                    border-radius: 8px;
+                    background: #f4f4f5;
+                    color: #71717a;
+                }
+
+                .dark .image-lightbox-placeholder {
+                    background: #27272a;
+                    color: #d4d4d8;
+                }
+
+                .image-lightbox-caption {
+                    max-width: 680px;
+                    text-align: center;
+                    font-size: 13px;
+                    line-height: 1.6;
+                    color: #52525b;
+                    transition: opacity 160ms ease;
+                }
+
+                .dark .image-lightbox-caption {
+                    color: #d4d4d8;
+                }
+
+                .image-lightbox-counter {
+                    font-size: 11px;
+                    font-weight: 600;
+                    letter-spacing: .05em;
+                    color: #71717a;
+                }
+
+                .image-lightbox-control {
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 34px;
+                    height: 34px;
+                    border: 1px solid #e4e4e7;
+                    border-radius: 8px;
+                    background: #fafafa;
+                    color: #3f3f46;
+                    font-size: 21px;
+                    cursor: pointer;
+                    transition: background-color 180ms ease, border-color 180ms ease;
+                }
+
+                .dark .image-lightbox-control {
+                    background: #1c1c1f;
+                    border-color: #52525b;
+                    color: #f4f4f5;
+                }
+
+                .image-lightbox-control:hover,
+                .image-lightbox-control:focus-visible {
+                    background: #e4e4e7;
+                    border-color: #a1a1aa;
+                }
+
+                .dark .image-lightbox-control:hover,
+                .dark .image-lightbox-control:focus-visible {
+                    background: #3f3f46;
+                }
+
+                .image-lightbox-close { top: 10px; right: 12px; }
+                .image-lightbox-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+                .image-lightbox-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+                @media (max-width: 640px) {
+                    .image-lightbox { padding: 14px; }
+
+                    .image-lightbox-content {
+                        max-height: 86vh;
+                        padding: 48px 16px 62px;
+                    }
+
+                    .image-lightbox-media img { max-height: 62vh; }
+                    .image-lightbox-prev { left: 16px; top: auto; bottom: 12px; transform: none; }
+                    .image-lightbox-next { right: 16px; top: auto; bottom: 12px; transform: none; }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .image-lightbox, .image-lightbox-content, .image-lightbox-media,
+                    .image-lightbox-caption, .image-lightbox-control, [data-lightbox-item] {
+                        transition: none !important;
+                    }
+                }
+              </style>
+        <script>
+            // Initialize the correct theme before the page renders.
+            (function () {
+                const fromColourMode =
+                    (sessionStorage.getItem('portfolio-colour-active') === '1' ||
+                     sessionStorage.getItem('portfolio-colour-return') === '1');
+
+                const savedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia(
+                    '(prefers-color-scheme: dark)'
+                ).matches;
+
+                // Subpages use Light Mode when entered from Colour Mode.
+                // Otherwise, respect the saved theme preference.
+                const useDark = !fromColourMode && (
+                    savedTheme === 'dark' ||
+                    (!savedTheme && systemPrefersDark)
+                );
+
+                const root = document.documentElement;
+                root.classList.toggle('dark', useDark);
+                root.classList.add('page-arriving');
+
+                // Set the background immediately to avoid white flashes.
+                root.style.backgroundColor = useDark ? '#121212' : '#fafafa';
+                root.style.colorScheme = useDark ? 'dark' : 'light';
+            })();
+        </script>
+        <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
+    </head>
+    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+        <div aria-hidden="true" class="navigation-veil">
+        </div>
+        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+            <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../Capstone.html">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>
+                    Back to Capstone
+                </a>
+            </div>
+            <div aria-hidden="true" id="reading-progress">
+            </div>
+        </header>
+        <!-- Desktop sidebar / mobile expandable contents. -->
+        <div aria-hidden="true" class="toc-scrim" id="toc-scrim">
+        </div>
+        <nav aria-label="Table of contents" class="article-toc" id="article-toc">
+            <p class="toc-label">
+                On this page
+            </p>
+            <a class="toc-link" data-toc-link="" href="#section-1">
+                1. Where It All Started
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-1-1">
+                What is a Capstone?
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-1-2">
+                Early Ideation
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-1-4">
+                Why Physical Notifications?
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-1-3">
+                The Birth of Notice
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-2">
+                2. Choosing a Locomotion Architecture
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-2-1">
+                Why a Wheeled Biped?
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-3">
+                3. The Nudging Mechanism
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-3-1">
+                From Finger to Head Bump
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-4">
+                4. Designing the Body
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-4-1">
+                Hiding the Legs
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-4-4">
+                A Robot That Isn&rsquo;t Afraid to Fall
+            </a>
+            <a class="toc-link" data-toc-link="" href="#section-5">
+                5. The Leg Mechanism
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-1">
+                How Many Degrees of Freedom?
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-2">
+                Choosing a Linkage
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-3">
+                To Spring or Not to Spring?
+            </a>
+            <a class="toc-link toc-sub" data-toc-link="" href="#section-5-4">
+                Bringing It All Together
+            </a>
+        </nav>
+        <button aria-controls="article-toc" aria-expanded="false" class="toc-mobile-toggle" id="toc-toggle" type="button">
+            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
+                </path>
+            </svg>
+            <span>
+                Contents
+            </span>
+        </button>
+        <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+            <article class="space-y-5">
+                <div class="space-y-2">
+                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">
+                        Concept Development &amp; Design Decisions
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+                        <span>
+                            Capstone / FYDP
+                        </span>
+                        <span>
+                            &bull;
+                        </span>
+                        <span>
+                            September 2026 &mdash; Present
+                        </span>
+                        <span>
+                            &bull;
+                        </span>
+                        <span>
+                            Notify Robots
+                        </span>
+                    </div>
+                </div>
+                <hr class="border-zinc-200 dark:border-zinc-800"/>
+                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                    From early sketches and ideation to the embedded wheeled-biped architecture, this is how Nudge&rsquo;s design came together.
+                </p>
+                <section aria-labelledby="section-1" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-1">
+                        1. Where It All Started
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-1">
+                        What is Capstone?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Capstone, or our Final Year Design Project (FYDP), is a year-long engineering project where a team of students takes an idea from concept to a working prototype. It&rsquo;s a chance to apply what we&rsquo;ve learned to something we actually want to build.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-2">
+                        Early Ideation
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I think we knew pretty early on that we wanted to build something for the home. Home robotics is one of the most exciting spaces right now (in my opinion), largely because of the challenges of designing robots to live alongside people, especially human-robot interaction.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/1x_neo.png"
+                                alt="1X's Neo"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/sunday_memo.png"
+                                alt="Sunday's Memo"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We wanted to build something that did a seemingly simple task, but did it well and with personality. A lot of this came from my time working around humanoid robots, and companies like Fauna and Sunday that put so much thought into how a robot looks, feels, and fits into people&rsquo;s lives.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            Utility and personality
+                        </strong>
+                        became the two driving principles behind Nudge.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/early_ideation_1.png"
+                                alt="Initial ideation. What should it do?"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/early_ideation_2.png"
+                                alt="Initial ideation. What's the relationship with the user?"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Our first idea was a small autonomous robot that could push in chairs, close cabinets, and do other little things around the house. That was actually where the name
+                        <em>
+                            Nudge
+                        </em>
+                        came from. We eventually realized that safely manipulating heavy, unpredictable objects was a much bigger challenge than the utility justified.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-4">
+                        Why Physical Notifications?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The name stuck, though, and eventually inspired the idea of
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            physical notifications
+                        </strong>
+                        . Rather than moving objects, what if Nudge could move around the home and gently get someone&rsquo;s attention? It was still a simple task, but one that felt more useful and gave us room to explore personality through movement.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/phone_notifications.jpg"
+                                alt="Too many notifications, all of it through a screen. What if we could provide a hardware layer between someone and what's actually important?"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/headbutt.jpg"
+                                alt="Gentle ways to get someone's attention immediately pointed us to our pets."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I also liked that notifications didn&rsquo;t always have to come from a screen or speaker. Nudge could come find someone, get their attention, and communicate through movement and touch. It felt like a fun way to explore human-robot interaction without needing a robot that could manipulate everything around the house.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-3">
+                        The Birth of Notice
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        One issue was that Nudge alone would be very hardware-heavy, with relatively little software scope. Its small, soft design was important for safe physical interaction, but also limited its ability to see things like countertops and stovetops.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We initially considered a telescoping arm, but eventually realized the two responsibilities didn&rsquo;t really belong on the same robot. Monitoring the home is relatively static, while delivering notifications is much more dynamic.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/notice_ideation_1.png"
+                                alt="Initial concepts of the telescoping mechanism within Nudge."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/notice_ideation_2.png"
+                                alt="The first sketch of Nudge and Notice."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        That&rsquo;s how
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            Notice
+                        </strong>
+                        came about: a taller, lightweight companion responsible for observing the environment, with Nudge acting as its mobile counterpart to relay information and interact with the user.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With their roles established, we could finally start thinking about what they should look like. Given our time constraints, Notice has taken a backseat as a simpler, caster-mounted tripod design.
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            The rest of this page focuses on Nudge.
+                        </strong>
+                    </p>
+                </section>
+                <section aria-labelledby="section-2" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-2">
+                        2. Choosing a Locomotion Architecture
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The first big question was how Nudge was going to get around. We narrowed it down to four main options:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Wheeled base:
+                            </strong>
+                            Something like a Roomba or Matic.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Segway:
+                            </strong>
+                            A two-wheeled balancing robot.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Quadruped:
+                            </strong>
+                            With or without wheels.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Wheeled biped:
+                            </strong>
+                            Two wheels with articulated legs.
+                        </li>
+                    </ul>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-1">
+                        Why a Wheeled Biped?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Our concern with a conventional wheeled base or Segway was that they didn&rsquo;t offer much in terms of character or expression. I wanted to avoid Nudge becoming just another appliance that happened to move around the house. We wanted people to interact with it as something with personality, rather than purely a tool.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/matic_vacuum.jpg"
+                                alt="Matic vacuum. Useful? Yes. But I don't feel particularly attached to it."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/quadruped.png"
+                                alt="Might be too literal of an example, but it's hard not to see it."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The quadruped had almost the opposite problem. Four legs felt a little too animal-like for the character we were imagining. It also offered capabilities we didn&rsquo;t really need, like greater load capacity, static stability, and obstacle traversal, at the cost of additional weight and complexity.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            The wheeled biped felt like the right middle ground.
+                        </strong>
+                        Two wheels would provide efficient movement around the home, while the legs could give Nudge a sense of character through changes in height, posture, and movement.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/r2d2.jpg"
+                                alt="One of the most famous wheeled bipeds, who also primarily uses body roll (tilting) to express itself."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/rai.jpg"
+                                alt="Even with wheels, two legs just feels familiar. Wheeled biped by RAI."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        It offered a simpler and lighter alternative to a quadruped without sacrificing the capabilities we actually cared about. Of course, having only two wheels meant we&rsquo;d have to deal with balancing, but that was a trade-off we were willing to make.
+                    </p>
+                </section>
+                <section aria-labelledby="section-3" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-3">
+                        3. The Nudging Mechanism
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With the locomotion architecture decided, the nudging mechanism went through quite a few iterations.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        My original idea was a multi-DOF, finger-like probe extending from Nudge&rsquo;s head. Beyond giving it a unique look, I thought a highly poseable finger could enable different nudging gestures to communicate the priority of notifications. I was also pretty excited by the idea of building a tendon-driven mechanism, partly as a tribute to my time working with humanoid hands at Proception.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/nudge_idea_1.png"
+                                alt="Initial concept of the finger-like nudging mechanism."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/nudge_idea_2.jpg"
+                                alt="Attempt to classify different priorities and their associated nudging action."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <!-- Image placeholder: Nudge Ideation.pdf; original nudging sketches -->
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        However, the feedback was that it looked a little strange, and the complexity didn&rsquo;t really fit the simplicity we were going for. Adding force sensors, lights, and multiple actuators to a small probe also started to feel impractical.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-1">
+                        From Finger to Head Bump
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Instead, we moved toward something inspired by how pets interact with people:
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            a gentle head bump.
+                        </strong>
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We still wanted different notification behaviors, from a quick tap to a more persistent nudge. The challenge became expressing those priorities through the body and head, rather than adding more joints to a finger.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/bump_idea_1.jpg"
+                                alt="First sketch of the differential mechanism."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/bump_idea_2.jpg"
+                                alt="Trying to capture Nudge's personality."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The idea was to link the head directly to the leg mechanisms, removing the need for dedicated nudging actuators. Through a differential linkage, independent leg movement would tilt the head in the opposite direction, while moving both legs together would push the head forward to nudge the user.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This meant the head could contribute to Nudge&rsquo;s personality through passive movement, while still delivering a controlled physical notification. Adding a series elastic element (SEA) would also let us measure contact force through spring deflection, without introducing another actuator.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Finally, we wanted to give Nudge a light-up nose that doubles as an acknowledgment button. Beyond making it visually distinct in a sea of nose-less humanoids, the idea was to combine physical contact, light, movement, and potentially sound to communicate different notification priorities. The nose button was another small nod to how people interact with pets and added haptic feedback to the user experience.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/nose_expression_1.jpg"
+                                alt="Trying to figure out head rotation and expression."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/nose_expression_2.jpg"
+                                alt="Finding its form."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <!-- Image placeholder: Design Log (nudge, height).pdf; industrial design sketches -->
+                </section>
+                <section aria-labelledby="section-4" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-4">
+                        4. Designing the Body
+                    </h2>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-1">
+                        Soft Exterior &amp; Hidden Legs
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We knew pretty early on that Nudge was going to be round, soft, and a little bulbous, inspired by characters like Baymax from
+                        <em>
+                            Big Hero 6
+                        </em>
+                        . I wanted it to look approachable enough that someone would instinctively feel comfortable touching or picking it up.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        That meant hiding the exposed legs, joints, and linkages commonly found on quadrupeds and wheeled bipeds. In particular, we wanted to eliminate the awkward gap between the wheels and the body.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/baymax.jpg"
+                                alt="Not only did I like Baymax for his shape, but it was interesting because like Nudge, Baymax must rely on his body to convey emotion."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/edges.jpg"
+                                alt="Edges, pinch points, hard edges, exposed linkages and mechanisms - everything Nudge is trying not to be."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This led to the idea of
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            embedding the height-adjustment mechanisms inside the wheels themselves
+                        </strong>
+                        , using large, externally mounted rim wheels.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        There were a few reasons this made sense. Larger wheels would handle small floor obstacles better, while providing more room to package the mechanisms. They also avoided the enclosed wheel wells of a Roomba-style base, where I was worried debris could accumulate and make maintenance difficult.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        There was also a useful mechanical benefit: keeping the actuators in the internal wheel frames meant they could stay low instead of being lifted with the body. That reduced the moving mass, helped keep the center of mass down, and made the height-adjustment job a little easier.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/monowheel.jpg"
+                                alt="Cool but practical?"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/NUS_robomaster.jpg"
+                                alt="One of the only examples of the proposed embedded leg design idea we found. In this case, the leg actuators are still housed in the body. NUS RoboMaster."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Of course, larger wheels meant more rotating mass and inertia, but they also fit Nudge&rsquo;s intended shape surprisingly well. At that point, why not make the wheels a major part of the body itself?
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-4">
+                        A Robot That Isn&rsquo;t Afraid to Fall
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        While thinking about round, soft characters, I remembered the punching bag Po uses in
+                        <em>
+                            Kung Fu Panda
+                        </em>
+                        , which always rights itself after being knocked over.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        That got me thinking:
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            what if Nudge wasn&rsquo;t afraid to fall over?
+                        </strong>
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/round_1.jpg"
+                                alt="Made to be hit and get back up from any angle."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/round_2.jpg"
+                                alt="But how round?"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Rather than relying entirely on active balancing to keep it safe, we wanted the mechanical design itself to make unexpected contact and tipping less concerning. Three things became especially important:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Low kinetic energy:
+                            </strong>
+                            Keep Nudge lightweight and limit its movement speed.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Low center of mass:
+                            </strong>
+                            Place as much weight as possible near the ground.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Low rotational inertia:
+                            </strong>
+                            Reduce the energy involved when the body tips or rotates.
+                        </li>
+                    </ul>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The embedded-wheel architecture fit nicely into this idea. We could mount the actuators low inside the wheels, keeping their mass close to the ground and avoiding the need to lift them with the body. Combined with a wide stance and soft, rounded exterior, this could make Nudge more resistant to tipping and potentially capable of passively righting itself.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With that, we had arrived at the overall architecture we wanted for Nudge:
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            a small, soft wheeled biped with hidden legs, expressive body movement, and a mechanically linked head for physical notifications.
+                        </strong>
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/first_CAD.jpg"
+                                alt="First CAD model of Nudge, meant for sizing and mass estimation."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/CAM.jpg"
+                                alt="One of the ideas explored was an asymmetrical egg shaped profile, with a tread running on the outside. By rotating the cam, nudge could move its body up and down. This was later determined to not be feasible (belt tension, balancing)."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </section>
+                <section aria-labelledby="section-5" class="space-y-4 pt-4">
+                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-5">
+                        5. The Leg Mechanism
+                    </h2>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With Nudge&rsquo;s overall architecture decided, the next question was how much movement the legs needed and how to achieve it with a compact, practical mechanism.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-1">
+                        How Many Degrees of Freedom?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Most wheeled bipeds we looked at used either one or two degrees of freedom (DOF) per leg. I had previously built 2-DOF legs for my quadruped and wheeled biped projects, which allowed the wheels to move both vertically and horizontally relative to the body.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/locomotion_arc_1.png"
+                                alt="Researching different locomotion architectures."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/locomotion_arc_2.png"
+                                alt="Ascento, a major inspiration to me, famously uses a one dof leg with a gravity compensation mechanism."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For Nudge, though, that felt unnecessary. We weren&rsquo;t planning on climbing obstacles, jumping, or doing anything particularly dynamic. Most of its expressive movements would happen while stationary, with the legs mainly responsible for raising, lowering, and tilting the body.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            This made a 1-DOF leg much easier to justify.
+                        </strong>
+                        Each leg would independently control its height, allowing Nudge to raise and lower its body or lean from side to side. Turning could be handled through differential wheel speeds, without needing additional leg articulation.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Ultimately, this gave us the movements we wanted with fewer actuators, less weight, and a much simpler mechanical system.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-2">
+                        Choosing a Linkage
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        With the required motion reduced to a single degree of freedom per leg, the next challenge was finding a compact mechanism that could raise and lower the body while fitting inside the wheels.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        We considered a few mechanisms, including simple rotating arms, four-bar linkages, and constrained lifting systems using lead screws or belts.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/embed_wheel_1.jpg"
+                                alt="Early ideation of leg and actuator packaging in the wheel, with the actuators mounted inside and low on the wheel frame."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/embed_wheel_2.jpg"
+                                alt="More ideation. I was quite convinced that using linear SEAs would be the best option given the size and the relatively static requirements of the legs, but decided that the complexity was not worth it."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        A simple arm was attractive for its simplicity, but would move the body along an arc rather than vertically. A lead screw could hold the body at a fixed height without continuous motor torque, but would make backdrivability and sensing external forces more difficult.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            The four-bar linkage seemed like the best compromise.
+                        </strong>
+                        It offered a more controlled body trajectory, relatively simple packaging, and the possibility of adding gravity compensation.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-3">
+                        To Spring or Not to Spring?
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        One idea I kept coming back to was gravity compensation.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Since Nudge&rsquo;s legs would move relatively slowly, through a small range of motion, and spend plenty of time stationary, it seemed like a particularly good application for a
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            gravity compensation mechanism (GCM)
+                        </strong>
+                        .
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The idea was to use a spring to support much of the body&rsquo;s weight, reducing the continuous torque required from the height actuators. This could let us use smaller motors while keeping the legs easier to move.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/ascento_gcm.jpeg"
+                                alt="Replicating Ascento's GCM setup seemed like the best path forward."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/extension_gcm.jpg"
+                                alt="Example of a GCM using an extension spring. Bad picture, but wanted to thank the channel Peng ZhiHui as a major inspiration for me pursuing robotics. The robot pictured has more DoFs than Nudge and Ascento."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The other question was how much compliance and force sensing we actually needed.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        There were two main approaches:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Quasi-direct drive (QDD):
+                            </strong>
+                            Use a low-reduction, backdrivable actuator and estimate external forces through motor current.
+                        </li>
+                        <li>
+                            <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                                Series elastic actuation (SEA):
+                            </strong>
+                            Add a compliant element in series with the actuator and measure its deflection to estimate force.
+                        </li>
+                    </ul>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        An SEA would offer more direct force measurement and passive compliance, but also introduce additional components, sensors, and mechanical complexity.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/MIT_cheetah.jpg"
+                                alt="MIT mini cheetah. Probably the most well known QDD actuator application."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/apptronik_apollo.jpg"
+                                alt="SEAs have been declining in use. I think? Apptronik's Apollo is one of the only humanoids still using them."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        For Nudge, I wasn&rsquo;t convinced that the legs needed that level of force sensing. We weren&rsquo;t trying to walk over rough terrain or perform highly dynamic movements, and much of the interaction with the user would happen through the head rather than the wheels.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+                            My preference was to keep the legs as simple as possible:
+                        </strong>
+                        a low-ratio, backdrivable actuator paired with gravity compensation, provided we could find a motor that met the torque requirements.
+                    </p>
+                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-4">
+                        Bringing It All Together
+                    </h3>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The nudging mechanism was a slightly different story. Unlike the legs, the head needed to make controlled physical contact with people, so measuring the actual contact force was much more important.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        This made a series elastic element at the head easier to justify. We could use the existing leg actuators to generate the nudging motion, while a spring and sensor at the contact point would provide force feedback without adding another motor.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/notice_and_nudge.jpg"
+                                alt="Some art I drew for Notice and Nudge."
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30"
+                            data-lightbox-item="" role="button" tabindex="0" aria-label="Expand image">
+                            <img src="../../images/projects/capstone/concept_dev/finding_form.jpg"
+                                alt="Some form finding. I was experimenting with using the body to imply a mouth, but that might be a bit creepy."
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        There were still plenty of details to work out, particularly the linkage geometry, spring selection, and how accurately we could estimate forces through the actuators.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        Nevertheless, we finally had a direction for Nudge. Questions remained about how the mechanism would work, whether we could fit everything inside the wheels, and how well our ideas would hold up through modeling and prototyping. But for the first time, the different parts of Nudge felt like they were coming together.
+                    </p>
+                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        The next step was figuring out whether we could actually make it work.
+                    </p>
+                </section>
+            </article>
+        </main>
+        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+            <div class="max-w-3xl mx-auto px-6 py-7">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-3">
+                    Capstone pages
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="../Capstone.html">
+                        &larr; Capstone Overview
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 rounded-full px-3 py-2" href="concept_development.html" aria-current="page">
+                        Concept Development &amp; Design Decisions
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="actuator_sizing.html">
+                        Modeling &amp; Actuator Sizing
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_2.html">
+                        Kinematic Linkage Design
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_3.html">
+                        General Mechanical Design
+                    </a>
+                    <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_4.html">
+                        Industrial Design &amp; Art
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <script>
+            // Reveal the destination page after its initial background is painted.
+            const root = document.documentElement;
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            let navigating = false;
+
+            function revealPage() {
+                navigating = false;
+                root.classList.remove('page-departing');
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        root.classList.remove('page-arriving');
+                    });
+                });
+            }
+
+            revealPage();
+
+            document.addEventListener('click', event => {
+                const link = event.target.closest('a[href]');
+
+                if (!link || navigating || event.defaultPrevented || event.button !== 0 ||
+                    event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
+                    (link.target && link.target !== '_self') ||
+                    link.hasAttribute('download') || reducedMotion.matches) return;
+
+                const destination = new URL(link.href, window.location.href);
+
+                if (destination.origin !== window.location.origin ||
+                    !destination.pathname.endsWith('.html') ||
+                    destination.pathname === window.location.pathname) return;
+
+                event.preventDefault();
+                navigating = true;
+                root.classList.add('page-departing');
+
+                window.setTimeout(() => {
+                    window.location.assign(destination.href);
+                }, 320);
+            });
+
+            window.addEventListener('pageshow', event => {
+                if (event.persisted) revealPage();
+            });
+        </script>
+        <script>
+            // Track reading progress through the main content, excluding the footer.
+            (function () {
+                const bar = document.getElementById('reading-progress');
+                const main = document.querySelector('main');
+                const header = document.querySelector('header');
+
+                if (!bar || !main || !header) return;
+
+                let pending = false;
+
+                function updateProgress() {
+                    const rect = main.getBoundingClientRect();
+                    const top = rect.top + window.scrollY;
+                    const bottom = top + main.offsetHeight;
+                    const start = top - header.offsetHeight;
+                    const end = bottom - window.innerHeight;
+                    const distance = end - start;
+                    const fraction = distance > 0
+                        ? (window.scrollY - start) / distance
+                        : 1;
+
+                    bar.style.transform = `scaleX(${Math.max(0, Math.min(1, fraction))})`;
+                    pending = false;
+                }
+
+                function scheduleUpdate() {
+                    if (pending) return;
+                    pending = true;
+                    requestAnimationFrame(updateProgress);
+                }
+
+                window.addEventListener('scroll', scheduleUpdate, { passive: true });
+                window.addEventListener('resize', scheduleUpdate);
+                window.addEventListener('load', scheduleUpdate);
+                window.addEventListener('pageshow', scheduleUpdate);
+                scheduleUpdate();
+            })();
+        </script>
+        <script>
+            // Highlight the current section and control the compact mobile menu.
+            (function () {
+                const menu = document.getElementById('article-toc');
+                const toggle = document.getElementById('toc-toggle');
+                const scrim = document.getElementById('toc-scrim');
+                const links = [...menu.querySelectorAll('[data-toc-link]')];
+                const targets = links.map(link => document.getElementById(link.hash.slice(1)));
+                let scheduled = false;
+
+                function setOpen(open) {
+                    menu.classList.toggle('is-open', open);
+                    scrim.classList.toggle('is-open', open);
+                    toggle.setAttribute('aria-expanded', String(open));
+                    toggle.querySelector('span').textContent = open ? 'Close' : 'Contents';
+                }
+
+                function updateActive() {
+                    scheduled = false;
+                    let active = 0;
+                    for (let i = 0; i < targets.length; i++) {
+                        if (targets[i] && targets[i].getBoundingClientRect().top <= 125) active = i;
+                    }
+                    // At the bottom, the final section may never reach the header threshold.
+                    const atBottom = window.innerHeight + window.scrollY >=
+                        document.documentElement.scrollHeight - 3;
+                    if (atBottom) active = links.length - 1;
+
+                    links.forEach((link, index) => {
+                        const selected = index === active;
+                        link.classList.toggle('is-active', selected);
+                        if (selected) link.setAttribute('aria-current', 'location');
+                        else link.removeAttribute('aria-current');
+                    });
+                }
+
+                function scheduleActive() {
+                    if (scheduled) return;
+                    scheduled = true;
+                    requestAnimationFrame(updateActive);
+                }
+
+                toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
+                scrim.addEventListener('click', () => setOpen(false));
+                links.forEach(link => link.addEventListener('click', () => setOpen(false)));
+                document.addEventListener('keydown', event => {
+                    if (event.key === 'Escape') setOpen(false);
+                });
+                window.addEventListener('scroll', scheduleActive, { passive: true });
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= 1240) setOpen(false);
+                    scheduleActive();
+                });
+                window.addEventListener('pageshow', () => { setOpen(false); scheduleActive(); });
+                updateActive();
+            })();
+        </script>
+        <!-- Accessible, page-wide image viewer. -->
+<div aria-hidden="true" aria-label="Image viewer" aria-modal="true" class="image-lightbox" id="image-lightbox" role="dialog">
+<div class="image-lightbox-content">
+<button aria-label="Close image viewer" class="image-lightbox-control image-lightbox-close" id="lightbox-close" type="button">
+         ×
+        </button>
+<button aria-label="Previous image" class="image-lightbox-control image-lightbox-prev" id="lightbox-prev" type="button">
+         ‹
+        </button>
+<button aria-label="Next image" class="image-lightbox-control image-lightbox-next" id="lightbox-next" type="button">
+         ›
+        </button>
+<div class="image-lightbox-media" id="lightbox-media">
+</div>
+<div class="image-lightbox-caption" id="lightbox-caption">
+</div>
+<div aria-live="polite" class="image-lightbox-counter" id="lightbox-counter">
+</div>
+</div>
+</div>
+<script>
+       (function () {
+                    const viewer = document.getElementById('image-lightbox');
+                    const media = document.getElementById('lightbox-media');
+                    const caption = document.getElementById('lightbox-caption');
+                    const counter = document.getElementById('lightbox-counter');
+                    const closeButton = document.getElementById('lightbox-close');
+                    const previousButton = document.getElementById('lightbox-prev');
+                    const nextButton = document.getElementById('lightbox-next');
+                    const items = [...document.querySelectorAll('main [data-lightbox-item]')];
+                    let currentIndex = -1;
+                    let previousFocus = null;
+                    let touchStartX = null;
+
+                    let changeTimer = null;
+
+                    function render(index) {
+                        currentIndex = (index + items.length) % items.length;
+                        const item = items[currentIndex];
+                        const source = item.querySelector('img');
+                        const figureCaption = item.querySelector('figcaption');
+                        const description = item.dataset.caption ||
+                            (figureCaption && figureCaption.textContent.trim()) ||
+                            (source && source.alt) || item.innerText.trim().replace(/\s+/g, ' ');
+
+                        media.replaceChildren();
+                        if (source && source.getAttribute('src')) {
+                            const image = document.createElement('img');
+                            image.src = source.currentSrc || source.src;
+                            image.alt = source.alt || description;
+                            media.appendChild(image);
+                        } else {
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'image-lightbox-placeholder';
+                            const title = document.createElement('strong');
+                            title.textContent = item.querySelector('span')?.textContent.trim() || description;
+                            const note = document.createElement('span');
+                            note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
+                            placeholder.append(title, note);
+                            media.appendChild(placeholder);
+                        }
+                        caption.textContent = description;
+                        counter.textContent = `${currentIndex + 1} / ${items.length}`;
+                    }
+
+                    function navigate(index) {
+                        if (changeTimer) clearTimeout(changeTimer);
+                        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                            render(index);
+                            return;
+                        }
+                        media.classList.add('is-changing');
+                        caption.classList.add('is-changing');
+                        changeTimer = setTimeout(() => {
+                            render(index);
+                            media.classList.remove('is-changing');
+                            caption.classList.remove('is-changing');
+                            changeTimer = null;
+                        }, 125);
+                    }
+
+                    function open(index) {
+                        if (!items.length) return;
+                        previousFocus = document.activeElement;
+                        render(index);
+                        viewer.classList.add('is-open');
+                        viewer.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden';
+                        closeButton.focus();
+                    }
+
+                    function close() {
+                        if (changeTimer) clearTimeout(changeTimer);
+                        changeTimer = null;
+                        media.classList.remove('is-changing');
+                        caption.classList.remove('is-changing');
+                        viewer.classList.remove('is-open');
+                        viewer.setAttribute('aria-hidden', 'true');
+                        document.body.style.overflow = '';
+                        currentIndex = -1;
+                        if (previousFocus && previousFocus.focus) previousFocus.focus();
+                    }
+
+                    items.forEach((item, index) => {
+                        item.addEventListener('click', () => open(index));
+                        item.addEventListener('keydown', event => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                open(index);
+                            }
+                        });
+                    });
+
+                    closeButton.addEventListener('click', close);
+                    previousButton.addEventListener('click', () => navigate(currentIndex - 1));
+                    nextButton.addEventListener('click', () => navigate(currentIndex + 1));
+                    viewer.addEventListener('click', event => {
+                        if (event.target === viewer) close();
+                    });
+                    document.addEventListener('keydown', event => {
+                        if (currentIndex < 0) return;
+                        if (event.key === 'Escape') close();
+                        if (event.key === 'ArrowLeft') navigate(currentIndex - 1);
+                        if (event.key === 'ArrowRight') navigate(currentIndex + 1);
+                        if (event.key === 'Tab') {
+                            const controls = [closeButton, previousButton, nextButton];
+                            const index = controls.indexOf(document.activeElement);
+                            if (event.shiftKey && index === 0) {
+                                event.preventDefault();
+                                nextButton.focus();
+                            } else if (!event.shiftKey && index === controls.length - 1) {
+                                event.preventDefault();
+                                closeButton.focus();
+                            }
+                        }
+                    });
+                    media.addEventListener('touchstart', event => {
+                        touchStartX = event.changedTouches[0].screenX;
+                    }, { passive: true });
+                    media.addEventListener('touchend', event => {
+                        if (touchStartX === null) return;
+                        const difference = event.changedTouches[0].screenX - touchStartX;
+                        if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
+                        touchStartX = null;
+                    }, { passive: true });
+                })();
+      </script>
+    </body>
+</html>
