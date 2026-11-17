@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-
 <html class="scroll-smooth" lang="en">
-<head>
-<!-- Search, sharing and structured metadata (nonvisual) -->
-<meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." name="description"/>
-<meta content="index, follow, max-image-preview:large" name="robots"/>
-<link href="https://y-anglu.github.io/projects/Capstone_subpages/actuator_sizing.html" rel="canonical"/>
-<meta content="article" property="og:type"/>
-<meta content="Yang Lu | Engineering Portfolio" property="og:site_name"/>
-<meta content="Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu" property="og:title"/>
-<meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." property="og:description"/>
-<meta content="https://y-anglu.github.io/projects/Capstone_subpages/actuator_sizing.html" property="og:url"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu" name="twitter:title"/>
-<meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." name="twitter:description"/>
-<meta content="https://y-anglu.github.io/images/Notify.png" property="og:image"/>
-<meta content="https://y-anglu.github.io/images/Notify.png" name="twitter:image"/>
-<script type="application/ld+json">
+ <head>
+  <!-- Search, sharing and structured metadata (nonvisual) -->
+  <meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." name="description"/>
+  <meta content="index, follow, max-image-preview:large" name="robots"/>
+  <link href="https://y-anglu.github.io/projects/Capstone_subpages/actuator_sizing.html" rel="canonical"/>
+  <meta content="article" property="og:type"/>
+  <meta content="Yang Lu | Engineering Portfolio" property="og:site_name"/>
+  <meta content="Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu" property="og:title"/>
+  <meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." property="og:description"/>
+  <meta content="https://y-anglu.github.io/projects/Capstone_subpages/actuator_sizing.html" property="og:url"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu" name="twitter:title"/>
+  <meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." name="twitter:description"/>
+  <meta content="https://y-anglu.github.io/images/Notify.png" property="og:image"/>
+  <meta content="https://y-anglu.github.io/images/Notify.png" name="twitter:image"/>
+  <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "TechArticle",
@@ -49,14 +48,16 @@
     ]
 }
 </script>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu</title>
-<link class="favicon" href="../../images/gear_favicon.png" rel="icon" type="image/png">
-<link as="font" crossorigin="" href="../../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
-<script src="https://cdn.tailwindcss.com">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu
+  </title>
+  <link class="favicon" href="../../images/gear_favicon.png" rel="icon" type="image/png"/>
+  <link as="font" crossorigin="" href="../../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf">
+   <script src="https://cdn.tailwindcss.com">
 </script>
-<script>
+   <script>
             tailwind.config = {
                          darkMode: 'class',
                          theme: {
@@ -68,7 +69,7 @@
                          },
                      };
         </script>
-<style>
+   <style>
             @font-face {
                          font-family: 'Quicksand';
                          src: url('../../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
@@ -487,8 +488,34 @@
             .overview-fact strong { font-size: 14px; font-weight: 700; }
             .overview-number { color: #71717a; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
 
+
+/* Summary thumbnails: maintain visible inset from the frame on mobile and desktop. */
+.overview-image.summary-thumbnail {
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.overview-image.summary-thumbnail img {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    border-radius: 8px;
+}
+@media (min-width: 640px) {
+    .overview-image.summary-thumbnail img {
+        top: 12px;
+        left: 12px;
+        width: calc(100% - 24px);
+        height: calc(100% - 24px);
+    }
+}
 </style>
-<script>
+   <script>
             // Initialize the correct theme before the page renders.
                      (function () {
                          const fromColourMode =
@@ -516,1109 +543,1142 @@
                          root.style.colorScheme = useDark ? 'dark' : 'light';
                      })();
         </script>
-<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
-</link></meta></meta></head>
-<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
-<div aria-hidden="true" class="navigation-veil">
-</div>
-<header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-<div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-<a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../Capstone.html">
-<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
-</path>
-</svg>
-                    Back to Capstone
-                </a>
-</div>
-<div aria-hidden="true" id="reading-progress">
-</div>
-</header>
-<!-- Desktop sidebar / mobile expandable contents. -->
-<div aria-hidden="true" class="toc-scrim" id="toc-scrim">
-</div>
-<nav aria-label="Table of contents" class="article-toc" id="article-toc">
-<p class="toc-label">
-                On this page
-            </p>
-<a class="toc-link" data-toc-link="" href="#overview">Project Overview</a><a class="toc-link" data-toc-link="" href="#technical-writeup">Technical write-up</a><a class="toc-link" data-toc-link="" href="#section-1">
-                1. Starting with a Simplified Model
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-1-1">
-                Newton–Euler Model
-            </a>
-<a class="toc-link" data-toc-link="" href="#section-2">
-                2. Developing a More Representative Model
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-2-1">
-                Lagrangian Formulation
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-2-2">
-                Linearization and State-Space Representation
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-2-3">
-                LQR Controller
-            </a>
-<a class="toc-link" data-toc-link="" href="#section-3">
-                3. Refining the Model
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-3-1">
-                Variable Height and External Disturbances
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-3-2">
-                Updating the Mass and Inertia Model
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-3-3">
-                Simplifying the Height Adjustment
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-3-4">
-                Final Model and Limitations
-            </a>
-<a class="toc-link" data-toc-link="" href="#section-4">
-                4. Sizing the Wheel Actuators
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-4-1">
-                Estimating Mass and Inertia
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-4-2">
-                Defining the Loading Requirements
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-4-3">
-                Estimating Peak Wheel Torque
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-4-4">
-                Estimating RMS Wheel Torque
-            </a>
-<a class="toc-link" data-toc-link="" href="#section-5">
-                5. Sizing the Height &amp; Nudging Actuators
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-5-1">
-                Proposed Height and Nudging Mechanism
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-5-2">
-                Estimating the Nudging and Gravity Loads
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-5-3">
-                Peak and RMS Leg Torque
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-5-4">
-                What the Estimates Could and Could Not Tell Us
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-5-5">
-                Summary of Theoretical Torque Requirements
-            </a>
-<a class="toc-link" data-toc-link="" href="#section-6">
-                6. From Theoretical Torque to Motor Selection
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-6-1">
-                Why Direct Drive?
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-6-2">
-                Selecting the GB7215
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-6-3">
-                Controller and Practical Integration
-            </a>
-<a class="toc-link toc-sub" data-toc-link="" href="#section-6-4">
-                Thermal Considerations and Selection
-            </a>
-<a class="toc-link" data-toc-link="" href="#section-7">
-                7. Limitations and Next Steps
-            </a>
-</nav>
-<button aria-controls="article-toc" aria-expanded="false" class="toc-mobile-toggle" id="toc-toggle" type="button">
-<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="16">
-<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
-</path>
-</svg>
-<span>
-                Contents
-            </span>
-</button>
-<main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
-<section aria-labelledby="overview-title" class="space-y-7 pb-12" data-toc-target="" id="overview">
-<div class="space-y-2">
-<p class="overview-eyebrow">Capstone / FYDP • September 2026 — Present • Notify Robots</p>
-<div class="flex flex-wrap items-end justify-between gap-3">
-<div class="space-y-1"><h1 class="text-3xl sm:text-4xl font-bold tracking-tight" id="overview-title">Modeling &amp; Actuator Sizing</h1><p class="text-sm font-medium text-zinc-600 dark:text-zinc-300">Using robot dynamics and simulated loads to establish actuator requirements for Nudge.</p></div>
-<a class="text-xs font-bold underline underline-offset-4 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white" href="#technical-writeup">Technical write-up ↓</a>
-</div>
-</div>
-<!-- The overview's skills are adjacent to the hero, not a separate section at the bottom. -->
-<div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] gap-4 items-stretch">
-<figure data-lightbox-item tabindex="0" role="button" aria-label="Expand image" class="overview-image aspect-[16/10] sm:aspect-auto sm:min-h-[265px] p-3">
-<img alt="Modeling &amp; Actuator Sizing project image" fetchpriority="high" src="../../images/projects/capstone/actuator_size/final_matlab_model_1.png"/>
-</figure>
-<aside aria-label="Project skills and tools" class="overview-skills-panel">
-<div>
-<h2 class="text-sm font-bold">Technical Overview</h2>
-</div>
-<div class="overview-skills-group">
-<h3>Engineering</h3>
-<p>Dynamic modeling<br/>Actuator sizing<br/>Load estimation</p>
-</div>
-<div class="overview-skills-group">
-<h3>Analysis &amp; Methods</h3>
-<p>Lagrangian mechanics<br/>State-space modeling<br/>LQR control</p>
-</div>
-<div class="overview-skills-group">
-<h3>Tools &amp; Technologies</h3>
-<p>MATLAB<br/>Numerical simulation<br/>Torque analysis</p>
-</div>
-</aside>
-</div>
-
-<div class="space-y-4">
-    <!-- Design Highlights -->
-    <div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2">
-        <h2 class="text-lg sm:text-xl font-bold">Design highlights</h2>
-    </div>
-
-    <div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
-        <div class="overview-feature">
-            <span class="overview-number">01 / MODELING</span>
-            <h3>From simple to representative</h3>
-            <p>Progressed from a Newton–Euler approximation to a Lagrangian model with more realistic mass and inertia.</p>
-        </div>
-
-        <div class="overview-feature">
-            <span class="overview-number">02 / CONTROL</span>
-            <h3>Balancing and disturbances</h3>
-            <p>Linearized the dynamics and explored LQR response to height changes and external nudging forces.</p>
-        </div>
-
-        <div class="overview-feature">
-            <span class="overview-number">03 / SIZING</span>
-            <h3>Torque requirements</h3>
-            <p>Used simulated wheel and leg loading to estimate peak and RMS torque requirements before motor selection.</p>
-        </div>
-    </div>
-
-    <!-- Two-Image Gallery -->
-    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-        <figure
-            data-lightbox-item
-            tabindex="0"
-            role="button"
-            aria-label="Expand image"
-            class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden"
-        >
-            <img
-                src="../../images/projects/capstone/actuator_size/lagrangian_1.png"
-                alt="Modeling & Actuator Sizing project image"
-                class="block w-full h-full !object-contain rounded-lg"
-                loading="lazy"
-            >
-        </figure>
-
-        <figure
-            data-lightbox-item
-            tabindex="0"
-            role="button"
-            aria-label="Expand image"
-            class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden"
-        >
-            <img
-                src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"
-                alt="Modeling & Actuator Sizing project image"
-                class="block w-full h-full !object-contain rounded-lg"
-                loading="lazy"
-            >
-        </figure>
-    </div>
-</div>
-
-<!-- Project Result -->
-<div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4">
-    <h2 class="text-sm font-bold">Result</h2>
-    <p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">
-        The model provides a traceable basis for selecting actuators, while making assumptions and unmodeled losses explicit.
-    </p>
-</div>
-
-<!-- Technical Write-Up Link -->
-<div class="flex justify-end pt-1">
-    <a class="overview-cta" href="#technical-writeup">
-        Read the full write-up <span aria-hidden="true">↓</span>
+  </link>
+ </head>
+ <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+  <div aria-hidden="true" class="navigation-veil">
+  </div>
+  <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+   <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+    <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../Capstone.html">
+     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+      </path>
+     </svg>
+     Back to Capstone
     </a>
-</div>
-
-</section>
-
-<!-- Technical Write-Up -->
-<article
-    class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7"
-    data-toc-target=""
-    id="technical-writeup"
->
-    <div class="flex items-center justify-between gap-3">
-        <h2 class="text-xl sm:text-2xl font-bold">Technical write-up</h2>
-        <a
-            class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-            href="#overview"
-        >
-            ↑ Overview
-        </a>
+   </div>
+   <div aria-hidden="true" id="reading-progress">
+   </div>
+  </header>
+  <!-- Desktop sidebar / mobile expandable contents. -->
+  <div aria-hidden="true" class="toc-scrim" id="toc-scrim">
+  </div>
+  <nav aria-label="Table of contents" class="article-toc" id="article-toc">
+   <p class="toc-label">
+    On this page
+   </p>
+   <a class="toc-link" data-toc-link="" href="#overview">
+    Project Overview
+   </a>
+   <a class="toc-link" data-toc-link="" href="#technical-writeup">
+    Technical write-up
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-1">
+    1. Starting with a Simplified Model
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-1-1">
+    Newton–Euler Model
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-2">
+    2. Developing a More Representative Model
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-2-1">
+    Lagrangian Formulation
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-2-2">
+    Linearization and State-Space Representation
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-2-3">
+    LQR Controller
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-3">
+    3. Refining the Model
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-3-1">
+    Variable Height and External Disturbances
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-3-2">
+    Updating the Mass and Inertia Model
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-3-3">
+    Simplifying the Height Adjustment
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-3-4">
+    Final Model and Limitations
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-4">
+    4. Sizing the Wheel Actuators
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-4-1">
+    Estimating Mass and Inertia
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-4-2">
+    Defining the Loading Requirements
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-4-3">
+    Estimating Peak Wheel Torque
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-4-4">
+    Estimating RMS Wheel Torque
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-5">
+    5. Sizing the Height &amp; Nudging Actuators
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-5-1">
+    Proposed Height and Nudging Mechanism
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-5-2">
+    Estimating the Nudging and Gravity Loads
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-5-3">
+    Peak and RMS Leg Torque
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-5-4">
+    What the Estimates Could and Could Not Tell Us
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-5-5">
+    Summary of Theoretical Torque Requirements
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-6">
+    6. From Theoretical Torque to Motor Selection
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-6-1">
+    Why Direct Drive?
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-6-2">
+    Selecting the GB7215
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-6-3">
+    Controller and Practical Integration
+   </a>
+   <a class="toc-link toc-sub" data-toc-link="" href="#section-6-4">
+    Thermal Considerations and Selection
+   </a>
+   <a class="toc-link" data-toc-link="" href="#section-7">
+    7. Limitations and Next Steps
+   </a>
+  </nav>
+  <button aria-controls="article-toc" aria-expanded="false" class="toc-mobile-toggle" id="toc-toggle" type="button">
+   <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
+    </path>
+   </svg>
+   <span>
+    Contents
+   </span>
+  </button>
+  <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+   <section aria-labelledby="overview-title" class="space-y-7 pb-12" data-toc-target="" id="overview">
+    <div class="space-y-2">
+     <p class="overview-eyebrow">
+      Capstone / FYDP • September 2026 — Present • Notify Robots
+     </p>
+     <div class="flex flex-wrap items-end justify-between gap-3">
+      <div class="space-y-1">
+       <h1 class="text-3xl sm:text-4xl font-bold tracking-tight" id="overview-title">
+        Modeling &amp; Actuator Sizing
+       </h1>
+       <p class="text-sm font-medium text-zinc-600 dark:text-zinc-300">
+        Using robot dynamics and simulated loads to establish actuator requirements for Nudge.
+       </p>
+      </div>
+      <a class="text-xs font-bold underline underline-offset-4 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white" href="#technical-writeup">
+       Technical write-up ↓
+      </a>
+     </div>
     </div>
-
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                    Once we had a rough idea of Nudge’s size, wheel layout, and the way it would interact with people, the next step was to determine the actuators that would drive the joints.
-                </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                    To determine the required actuator torques and speeds without actually building Nudge, we would need to model Nudge and simulate different situations and load cases that we could expect it to see. Half because I wanted to learn, and half because I didn’t know how much detail to model in, I started with a simpler model, then added complexity to address some of the model’s shortcomings, and only when a specific design question needed to be answered.
-                </p>
-<section aria-labelledby="section-1" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-1">
-                        1. Starting with a Simplified Model
-                    </h2>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-1">
-                        1.1 Newton–Euler Model
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I started by treating Nudge as a simplified wheeled inverted pendulum, with the body represented as a point mass at a fixed distance above the wheel axle. Using Newton–Euler equations, I could relate the wheel torque, horizontal acceleration, and body pitch to get a first approximation of how Nudge would behave.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The model was useful for understanding the basic dynamics, but it made several assumptions that weren't representative of the actual design. Most notably, it neglected the distributed masses and rotational inertias of the wheels and body, and assumed a fixed center of mass relative to the axle.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Initial simplified model derivations." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/newton_euler_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Initial simplified model derivations." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/newton_euler_2.png"/>
-</div>
-</div>
-</section>
-<section aria-labelledby="section-2" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-2">
-                        2. Developing a More Representative Model
-                    </h2>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-1">
-                        2.1 Lagrangian Formulation
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        To address these shortcomings, I developed a new kinematic model that accounted for the different masses and inertias of the system. I used a Lagrangian formulation because it provided a convenient way to derive the equations of motion and incorporate additional degrees of freedom as the model became more complex.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        For the initial formulation, I kept the body height fixed and described the system using two generalized coordinates: horizontal wheel displacement
-                        <em>
-                            r
-                        </em>
-                        and body pitch angle
-                        <em>
-                            θ
-                        </em>
-                        .
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Using the kinetic and potential energies of the system, I derived the equations of motion through the Euler–Lagrange equation:
-                    </p>
-<div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
-<div class="text-base sm:text-lg overflow-x-auto">
-                            \[L=T-V,\qquad \frac{d}{dt}\left(\frac{\partial L}{\partial \dot q_i}\right)-\frac{\partial L}{\partial q_i}=Q_i\]
-                        </div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Here,
-                        <em>
-                            L
-                        </em>
-                        is the Lagrangian and
-                        <em>
-                            Qᵢ
-                        </em>
-                        represents the generalized forces acting on the system. The resulting equations could be written in the standard manipulator form:
-                    </p>
-<div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
-<div class="text-base sm:text-lg overflow-x-auto">
-                            \[M(q)\ddot q+C(q,\dot q)\dot q+G(q)=Q\]
-                        </div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        This provided a more flexible starting point for modeling Nudge's dynamics while retaining a relatively simple two-degree-of-freedom system.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Lagragian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Lagragian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_2.png"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-2">
-                        2.2 Linearization and State-Space Representation
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        With the nonlinear equations of motion derived, I linearized the system around its upright equilibrium. This allowed me to express the dynamics in state-space form and use standard linear control techniques.
-                    </p>
-<div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
-<div class="text-base sm:text-lg overflow-x-auto">
-                            \[x=\begin{bmatrix}r &amp; \theta &amp; \dot r &amp; \dot\theta\end{bmatrix}^{T},\qquad \dot x=Ax+Bu\]
-                        </div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Here,
-                        <em>
-                            u
-                        </em>
-                        represents the applied wheel torque. Using estimated mass and geometry parameters, I calculated the state-space matrices in MATLAB, providing a basis for feedback control and disturbance simulations.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-3">
-                        2.3 LQR Controller
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        To stabilize the model, I implemented a Linear Quadratic Regulator (LQR), which calculates a feedback gain by minimizing a cost function that penalizes state deviations and control effort.
-                    </p>
-<div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
-<div class="text-base sm:text-lg overflow-x-auto">
-                            \[J=\int_0^\infty (x^TQx+u^TRu)\,dt,\qquad u=-Kx\]
-                        </div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The weighting matrices
-                        <em>
-                            Q
-                        </em>
-                        and
-                        <em>
-                            R
-                        </em>
-                        determine the relative importance of maintaining the desired state and limiting the applied wheel torque. The controller stabilized the model following an initial pitch disturbance. I didn't spend much time tuning it, since my main objective was to estimate actuator requirements rather than optimize balancing performance.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Linearization around equilibrium point and applying LQR." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/linearization_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Linearization around equilibrium point and applying LQR." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/linearization_2.png"/>
-</div>
-</div>
-</section>
-<section aria-labelledby="section-3" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-3">
-                        3. Refining the Model
-                    </h2>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-1">
-                        3.1 Variable Height and External Disturbances
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        With a working controller, I began extending the model to better represent how Nudge would operate. Two important additions were the ability to change the body's height and the inclusion of external forces acting on the robot.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I introduced a variable body height,
-                        <em>
-                            h(t)
-                        </em>
-                        , to account for the motion of Nudge's legs. This meant that the body's center of mass was no longer fixed relative to the wheel axle, and its vertical motion would influence the system's dynamics.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I also introduced an external force disturbance into the equations of motion, allowing me to simulate forces acting on Nudge independently of wheel torque. These additions gave me a more general model, although they also increased the complexity of the equations and simulations.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Defining new model with variable height and repeating the process." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/variable_height_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Defining new model with variable height and repeating the process." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/variable_height_2.png"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-2">
-                        3.2 Updating the Mass and Inertia Model
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Around this time, the rest of Nudge's mechanical architecture was beginning to take shape. We had moved toward a bulbous body supported by two large wheels, with the leg mechanisms and actuators enclosed inside the wheels.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I updated the model to distinguish between three main components: the
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            rotating wheel rims
-                        </strong>
-                        , the
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            stationary internal frames
-                        </strong>
-                        , and the
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            moving body
-                        </strong>
-                        . The rims contributed rotational inertia about the axle, while the internal frames carried the actuators without spinning with the rims. The body contributed its own mass and inertia, with its position determined by the leg height.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Separating these components allowed me to use more realistic mass and inertia estimates from our developing CAD models rather than treating the robot as a single concentrated mass.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Adding in distinction of masses between rim, frame, and body." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/new_mass_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Adding in distinction of masses between rim, frame, and body." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/new_mass_2.png"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-3">
-                        3.3 Simplifying the Height Adjustment
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Although I had introduced variable height into the model, I began questioning whether it was necessary for actuator sizing. Nudge wasn't intended to make rapid or continuous height adjustments. Its height actuators would spend much of their time stationary, with relatively slow movements used for expression and positioning.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        There was also a practical simulation issue. Because I hadn't imposed physical limits on height, and the controller didn't heavily penalize deviations in that state, some initial simulations allowed the body to accelerate upward unrealistically, effectively flying away from the wheel assembly. The resulting motion and inertia effects overwhelmed the rest of the simulated response. This was a consequence of the unconstrained model, not a behavior I expected from the real robot.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Rather than model the full coupled wheel and height-actuator dynamics, I decided to evaluate wheel torque requirements at several
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            fixed body heights
-                        </strong>
-                        . This would show how the center-of-mass position affected the system without requiring a complete leg-actuator and constraint model.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-4">
-                        3.4 Final Model and Limitations
-                    </h3>
-<div class="max-w-md mx-auto py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="MATLAB simulation of fixed-height wheeled inverted pendulum dynamics and external disturbance response" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/final_matlab_model_1.png"/>
-</div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The final model used for wheel actuator sizing was a fixed-height wheeled inverted pendulum with the more detailed masses and inertias of the rotating rims, stationary frames, and moving body. It retained the external force disturbance input, allowing me to evaluate wheel torque under different loading conditions.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            Several non-ideal effects were not included in the model:
-                        </strong>
-</p>
-<ul class="list-disc pl-6 space-y-2">
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Mechanical losses:
-                            </strong>
-                            Bearing friction, transmission losses, and other resistive effects.
-                        </li>
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Actuator characteristics:
-                            </strong>
-                            Rotor inertia, motor dynamics, and electrical limitations.
-                        </li>
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Wheel–ground interaction:
-                            </strong>
-                            Traction limits, tire deformation, and slipping.
-                        </li>
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Physical constraints:
-                            </strong>
-                            Joint travel limits, actuator speed limits, and torque saturation.
-                        </li>
-</ul>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The main reason was time, along with a lack of reliable parameters for some of these effects.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Fortunately, the initial simulations produced relatively modest torque requirements. Although the unconstrained controller could theoretically request more torque or speed than a real motor could deliver, the simulated demands did not suggest that saturation would dominate the cases I was studying. I decided that this level of detail, combined with reasonable loss estimates and safety margins, was sufficient for an initial sizing exercise.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        We also had some flexibility because Nudge's architecture and requirements were still being developed. Rather than treating the simulation as a final validation, I used it to guide actuator selection and identify what would need to be checked once we had hardware.
-                    </p>
-</section>
-<section aria-labelledby="section-4" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-4">
-                        4. Sizing the Wheel Actuators
-                    </h2>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-1">
-                        4.1 Estimating Mass and Inertia
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Before running the finalized MATLAB model, I needed estimates for Nudge's wheel, body, and frame masses and inertias, along with its wheel radius and equilibrium body height.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        We wanted a small, approachable robot that could be picked up and comfortably interact with people. Based on its intended contact height, comparable home robots, and packaging needs, we settled on a roughly 275 × 275 mm footprint and 300 mm nominal height.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I then broke Nudge into three main components: the rotating wheel rims, the internal frames containing the actuators, and the moving body. Using preliminary CAD geometry, estimated material densities, and an electronics component list, I approximated their masses, centers of mass, and rotational inertias.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Because the design was still evolving, these were simplified CAD and component estimates rather than measured mass properties.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Approximating the maximum envelope of Nudge based on a typical person's shin length, a chair, and other home robots." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/size.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Mass and inertia estimation based on simplified CAD model, material properties, and component list. Also compared the final mass to other robots in the space to verify the numbers." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/mass.png"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-2">
-                        4.2 Defining the Loading Requirements
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Two team-developed targets guided the simulations: a maximum travel speed of 1.58 m/s and a 12 N nudging force. The reasoning behind these requirements is covered on the
-                        <a class="font-bold text-zinc-900 dark:text-zinc-100 underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300" href="https://mte-capstone-design-website.vercel.app/">
-                            official Capstone page
-                        </a>
-                        ; here, I focused on translating them into actuator loads.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-3">
-                        4.3 Estimating Peak Wheel Torque
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        For peak wheel torque, I used the expected reaction force during a nudge as the main loading case. When Nudge pushes against a person, the equal and opposite contact force acts as an external disturbance on the robot. I applied this disturbance in the MATLAB model and evaluated the wheel torque required to maintain balance.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I tested different LQR cost-function weights rather than relying on one controller setting. Pitch and displacement varied, and some configurations became unstable, but peak torque stayed near 2 N·m across both wheels (about 1 N·m each) in the successful test cases.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Initial run (without cost and weight adjustments)." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Trying different relative cost function values yielded similar-ish performance, signaling that the initial disturbance could dominate the initial response." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/peak_wheel_2.png"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-4">
-                        4.4 Estimating RMS Wheel Torque
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Our current plan is for Nudge to tow Notice, the second robot in the Notify family, as they move around together. I therefore included towing and towing-related acceleration and braking in the representative operating cycle, using an assumed combined load of 10 kg. These are preliminary loading assumptions rather than measured towing requirements.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The resulting RMS estimate was 0.29 N·m across both wheels, or approximately 0.147 N·m per wheel.
-                    </p>
-<div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-<table class="w-full text-left text-sm">
-<thead class="bg-zinc-100/70 dark:bg-zinc-800/40">
-<tr>
-<th class="px-4 py-3 font-bold">
-                                        Operating state
-                                    </th>
-<th class="px-4 py-3 font-bold">
-                                        Duration
-                                    </th>
-<th class="px-4 py-3 font-bold">
-                                        Assumption
-                                    </th>
-</tr>
-</thead>
-<tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
-<tr>
-<td class="px-4 py-3">
-                                        Nudging
-                                    </td>
-<td class="px-4 py-3">
-                                        5 s
-                                    </td>
-<td class="px-4 py-3">
-                                        One nudge
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        Acceleration / braking
-                                    </td>
-<td class="px-4 py-3">
-                                        4 s
-                                    </td>
-<td class="px-4 py-3">
-                                        3 s acceleration + 1 s braking
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        Driving
-                                    </td>
-<td class="px-4 py-3">
-                                        180 s
-                                    </td>
-<td class="px-4 py-3">
-                                        Travel at maximum speed
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        Towing Notice
-                                    </td>
-<td class="px-4 py-3">
-                                        300 s
-                                    </td>
-<td class="px-4 py-3">
-                                        10 kg assumed combined load
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        Towing acceleration / braking
-                                    </td>
-<td class="px-4 py-3">
-                                        6 s
-                                    </td>
-<td class="px-4 py-3">
-                                        3 s acceleration + 3 s braking
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3 font-bold">
-                                        Total
-                                    </td>
-<td class="px-4 py-3 font-bold">
-                                        495 s
-                                    </td>
-<td class="px-4 py-3">
-                                        Idle torque assumed negligible in this cycle
-                                    </td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Estimating RMS torque requirement off a simulated cycle, pt.1" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/rms_wheel_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Estimating RMS torque requirement off a simulated cycle, pt.2" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/rms_wheel_2.png"/>
-</div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        These estimates exclude friction, drivetrain losses, traction limits, and actuator saturation. They also depend on the assumed duty cycle, so they are preliminary sizing inputs rather than validated requirements.
-                    </p>
-</section>
-<section aria-labelledby="section-5" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-5">
-                        5. Sizing the Height &amp; Nudging Actuators
-                    </h2>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-1">
-                        5.1 Proposed Height and Nudging Mechanism
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Unlike the wheel actuators, the leg actuators had to do more than one job: support and adjust the body height, produce expressive movements, and help drive the nudging head. At this stage, we had not finalized either the leg linkage or how the head would connect to it, so I could not calculate a reliable torque profile from actual linkage geometry.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Our working concept was a four-bar or six-bar height mechanism with
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            gravity compensation
-                        </strong>
-                        , coupled to a differential head linkage. Extending the two legs together would move the head upward and forward to nudge the user, while extending them by different amounts could tilt the head. We also intended to put a spring in series with the head so its deflection could be used to estimate contact force.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The head would likely follow an arc, but force sharing and mechanical advantage would depend on the final linkage geometry.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Example of a 1 DoF, gravity compensated leg mechanism, used by Ascento. They use a torsion spring at the knee." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/ascento_gcm.jpeg"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="First sketch of the differential mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/bump_idea_1.jpg"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-2">
-                        5.2 Estimating the Nudging and Gravity Loads
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        As with the wheel sizing, I used nudging as the peak loading case. Here, however, I estimated the torque the leg actuators would need to generate the target head contact force, rather than the wheel torque needed to resist its reaction. For this first estimate, I treated the head force as acting at the end of an equivalent lever arm. Our target was
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            12 N of contact force
-                        </strong>
-                        , but the direction of that force was not fixed. The horizontal and vertical components could create opposing moments about the mechanism, potentially reducing the net torque in some configurations. This was useful design flexibility, but not something I could count on without a defined linkage.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I therefore used an illustrative
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            8.5 N effective load at a 150 mm lever arm
-                        </strong>
-                        to establish the scale of the nudging demand. This was a working assumption rather than a proven worst case: a different contact direction, head position, or linkage mechanical advantage could increase or decrease the required motor torque. The 12 N contact target itself was also adjustable if necessary.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Estimated loading from nudging action." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/peak_leg.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="FBD of approximated loading from body in relation to the GCM" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/leg_body_weight.png"/>
-</div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I then accounted for the weight of the body. I assumed that the gravity-compensation mechanism would offset approximately
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            85% of the supported body weight
-                        </strong>
-                        , leaving the actuators responsible for the remaining
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            15%
-                        </strong>
-                        . For a first-pass moment arm, I used the wheel radius as a simple upper-scale geometric reference, although the actual linkage lever arm would almost certainly be different. This 85% compensation figure was not based on a finished spring design; it was an explicit assumption that would need to be checked over the entire height range.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-3">
-                        5.3 Peak and RMS Leg Torque
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Using the assumed nudging load and equivalent lever arm from Section 5.2, the calculated
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            peak torque was 0.85 N·m per actuator
-                        </strong>
-                        , before adding losses or safety margins. To estimate continuous loading, I also needed a representative duty cycle rather than assuming that the actuator would operate at its peak torque all the time.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="Notes and thought process behind very simplified estimation of peak leg loading due to nudging reactions. Some terminology might be slightly incorrect." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/leg_calc_1.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="RMS calculations and a couple more justifications." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/leg_calc_2.png"/>
-</div>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I used a simplified cycle consisting of two nudges over 10 seconds, followed by five minutes of expressive movement. For the expressive portion, I assumed roughly half the nudging torque demand. The handwritten calculation also includes a small additional holding-load term. These were deliberately simple assumptions, since neither the final mechanism nor its real usage pattern was established.
-                    </p>
-<div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-<table class="w-full text-left text-sm">
-<thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
-<tr>
-<th class="px-4 py-3 font-bold">
-                                        Operating state
-                                    </th>
-<th class="px-4 py-3 font-bold">
-                                        Duration
-                                    </th>
-<th class="px-4 py-3 font-bold">
-                                        Assumed torque
-                                    </th>
-</tr>
-</thead>
-<tbody class="text-zinc-700 dark:text-zinc-300 font-medium">
-<tr class="border-t border-zinc-200 dark:border-zinc-800">
-<td class="px-4 py-3">
-                                        Two nudges
-                                    </td>
-<td class="px-4 py-3">
-                                        10 s
-                                    </td>
-<td class="px-4 py-3">
-                                        0.85 + 0.01575 N·m
-                                    </td>
-</tr>
-<tr class="border-t border-zinc-200 dark:border-zinc-800">
-<td class="px-4 py-3">
-                                        Expressive motion
-                                    </td>
-<td class="px-4 py-3">
-                                        300 s
-                                    </td>
-<td class="px-4 py-3">
-                                        0.425 + 0.01575 N·m
-                                    </td>
-</tr>
-<tr class="border-t border-zinc-200 dark:border-zinc-800">
-<td class="px-4 py-3 font-bold">
-                                        Total cycle
-                                    </td>
-<td class="px-4 py-3 font-bold">
-                                        310 s
-                                    </td>
-<td class="px-4 py-3">
-                                        Assumed repeatable duty cycle
-                                    </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Weighting each state by its duration gave an estimated
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            RMS torque of 0.461 N·m per leg actuator
-                        </strong>
-                        , before margins. This is useful for initial thermal screening, but it depends heavily on the assumed duty cycle and on the still-unverified holding-load estimate.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-4">
-                        5.4 What the Estimates Could and Could Not Tell Us
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The unresolved linkage remained the largest uncertainty: mechanical advantage and gravity compensation could change considerably through the stroke. These were not verified worst-case torques.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        There was some room to adjust the design if the numbers proved too demanding. The head could potentially be brought closer to the body, the contact-force direction or target could change, and the leg transmission ratio could be increased. Because Nudge was intended to make relatively slow expressive height adjustments rather than jump or move dynamically, trading some speed for additional torque was a reasonable option. The series spring would also provide a way to estimate head contact force, although it would not eliminate backlash, friction, compliance, or sensing errors elsewhere in the mechanism.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-5">
-                        5.5 Summary of Theoretical Torque Requirements
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        For initial actuator screening, I applied a safety factor of 2 to the theoretical peak and RMS torque estimates. All values below are positive torque magnitudes, per actuator.
-                    </p>
-<div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-<table class="w-full text-left text-sm">
-<thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
-<tr>
-<th class="px-4 py-3 font-bold">
-                                        Actuator
-                                    </th>
-<th class="px-4 py-3 font-bold">
-                                        Peak torque (SF = 2)
-                                    </th>
-<th class="px-4 py-3 font-bold">
-                                        RMS torque (SF = 2)
-                                    </th>
-</tr>
-</thead>
-<tbody class="text-zinc-700 dark:text-zinc-300 font-medium">
-<tr class="border-t border-zinc-200 dark:border-zinc-800">
-<td class="px-4 py-3">
-                                        Wheel (each)
-                                    </td>
-<td class="px-4 py-3">
-                                        2.00 N·m
-                                    </td>
-<td class="px-4 py-3">
-                                        0.294 N·m
-                                    </td>
-</tr>
-<tr class="border-t border-zinc-200 dark:border-zinc-800">
-<td class="px-4 py-3">
-                                        Leg (each)
-                                    </td>
-<td class="px-4 py-3">
-                                        1.70 N·m
-                                    </td>
-<td class="px-4 py-3">
-                                        0.922 N·m
-                                    </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        This factor is a
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            preliminary allowance for uncertain masses and linkage geometry, unmodeled friction and mechanical losses, idealized disturbances, and other non-ideal behaviour
-                        </strong>
-                        . It is not a measured efficiency or a substitute for checking torque–speed curves, thermal limits, traction, and the eventual mechanism.
-                    </p>
-</section>
-<section aria-labelledby="section-6" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-6">
-                        6. From Theoretical Torque to Motor Selection
-                    </h2>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        With the theoretical torque requirements established, a motor needed to be chosen for both the wheels and the height-adjustment mechanisms. We preferred four identical actuators to simplify sourcing, packaging, software, and spares, even if that meant oversizing one application.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-1">
-                        6.1 Why Direct Drive?
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Our torque requirements made direct drive a realistic option. Without a gearbox, motor position corresponds directly to joint position, with no gearbox backlash or transmission compliance to account for. That is particularly useful for the legs, where backdrivability and predictable torque control matter. Just as importantly, it avoids designing and integrating four gearboxes. The tradeoff is a larger motor that must produce the full joint torque at the required speed.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-2">
-                        6.2 Selecting the GB7215
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I selected the
-                        <a class="font-bold underline underline-offset-2 hover:text-zinc-900 dark:hover:text-white" href="https://steadywin-motor.com/collections/pm-series/products/small-brushless-servo-motor-hollow-flat-gimbal-servo-drone-gimbal-camera-motor-3" rel="noopener noreferrer" target="_blank">
-                            SteadyWin GB7215
-                        </a>
-                        , an enclosed, flat BLDC gimbal motor, as our leading candidate. Its published ratings can be compared directly against the torque requirements from Section 5, which already include a safety factor of two.
-                    </p>
-<div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-<table class="w-full text-sm text-left text-zinc-700 dark:text-zinc-300">
-<thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100 font-bold">
-<tr>
-<th class="px-4 py-3">
-                                        Requirement
-                                    </th>
-<th class="px-4 py-3">
-                                        Wheel
-                                    </th>
-<th class="px-4 py-3">
-                                        Leg
-                                    </th>
-<th class="px-4 py-3">
-                                        GB7215 rating
-                                    </th>
-</tr>
-</thead>
-<tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
-<tr>
-<td class="px-4 py-3">
-                                        Peak torque
-                                    </td>
-<td class="px-4 py-3">
-                                        2.00 N·m
-                                    </td>
-<td class="px-4 py-3">
-                                        1.70 N·m
-                                    </td>
-<td class="px-4 py-3">
-                                        3.70 N·m
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        RMS / rated torque
-                                    </td>
-<td class="px-4 py-3">
-                                        0.294 N·m
-                                    </td>
-<td class="px-4 py-3">
-                                        0.922 N·m
-                                    </td>
-<td class="px-4 py-3">
-                                        1.20 N·m rated
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        Peak current
-                                    </td>
-<td class="px-4 py-3">
-                                        4.88 A
-                                    </td>
-<td class="px-4 py-3">
-                                        4.15 A
-                                    </td>
-<td class="px-4 py-3">
-                                        16.0 A peak
-                                    </td>
-</tr>
-<tr>
-<td class="px-4 py-3">
-                                        RMS / rated current
-                                    </td>
-<td class="px-4 py-3">
-                                        0.72 A
-                                    </td>
-<td class="px-4 py-3">
-                                        2.25 A
-                                    </td>
-<td class="px-4 py-3">
-                                        2.90 A rated
-                                    </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The current estimates use the manufacturer’s torque constant of
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            0.41 N·m/A
-                        </strong>
-                        and \(I=\tau/K_t\), assuming consistent current definitions. The closest continuous-duty case is the leg: its estimated 0.922 N·m RMS is about
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            77% of the motor’s 1.20 N·m rated torque
-                        </strong>
-                        . The wheel’s 2.00 N·m peak is about 54% of the advertised 3.70 N·m peak.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Speed also fits on paper. At our target travel speed of 1.58 m/s with 210 mm diameter wheels, direct drive requires approximately
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            144 RPM
-                        </strong>
-                        , below the motor’s rated 354 RPM and peak 516 RPM. These separate torque and speed ratings are encouraging, but they do not establish the available torque at every speed or the allowable duration of peak loading. The leg’s maximum required speed also depends on the final linkage geometry.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The GB7215 matches our
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            24 V
-                        </strong>
-                        system, and its enclosed, flat construction is convenient for the internal wheel frames. We still need to account for the output mounting and bearing loads; an enclosed motor does not automatically mean its bearings can carry every external wheel load.
-                    </p>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="SteadyWin GB7215 motor selected for Notify robot actuation" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/steadywin.png"/>
-</div>
-<div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-<img alt="moteus r5 motor controller selected for Notify robots" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/moteus.png"/>
-</div>
-</div>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-3">
-                        6.3 Controller and Practical Integration
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        We chose the
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            moteus r5
-                        </strong>
-                        for field-oriented control, encoder support, and a well-documented development workflow. Our previous experience with proprietary motor-controller firmware, particularly MyActuator, involved more time than we wanted to spend on documentation and communication issues. Using one motor-controller combination across all four joints should make integration and troubleshooting more straightforward.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Because the capstone schedule leaves little room for a separate motor-validation phase, we plan to purchase
-                        <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                            five GB7215 motors and five moteus r5 controllers
-                        </strong>
-                        : four for Nudge and one spare set.
-                    </p>
-<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-4">
-                        6.4 Thermal Considerations and Selection
-                    </h3>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        The main remaining concern is continuous heating in the legs, particularly when holding position at low speed. The motor’s 1.20 N·m rated torque exceeds our estimated 0.922 N·m RMS requirement, but the manufacturer’s rating depends on its test and cooling conditions. A teammate is exploring whether the wheel design can move air around the motors; that could help while driving, but cannot be assumed to provide sufficient cooling when stationary. Heat conduction through the motor housing and frame will matter as well.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        On the information available before purchasing, the GB7215 offers a practical combination of torque, speed, current demand, and packaging without a gearbox. We are treating it as our selected prototype motor, while recognizing that the manufacturer’s ratings are not a substitute for performance in the assembled robot.
-                    </p>
-</section>
-<section aria-labelledby="section-7" class="space-y-4 pt-4">
-<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-7">
-                        7. Limitations and Next Steps
-                    </h2>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        This work was completed before purchasing or building the actuator assemblies. The requirements come from simplified models, estimated mass properties, assumed nudging loads, and an expected duty cycle, so the resulting torque margins should be treated as design estimates rather than measured performance.
-                    </p>
-<ul class="list-disc pl-6 space-y-2 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Motor capability:
-                            </strong>
-                            Rated and peak torque exceed our estimates, but torque available at speed, peak duration, and thermal conditions remain unverified.
-                        </li>
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Mechanical model:
-                            </strong>
-                            Final masses, linkage mechanical advantage, friction, and gravity compensation may change the actual torque demands.
-                        </li>
-<li>
-<strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                Integration:
-                            </strong>
-                            Encoder alignment, motor mounting, bearing loads, and cooling depend on the final wheel assembly.
-                        </li>
-</ul>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Before purchasing the actuators and motor controllers, a teammate did also run a simple CAD model in MuJoCo to verify the numbers, and calculated lower torque estimates than what was shown in this post. 
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        Given our timeline, we will move directly into procurement and integration rather than run a full characterization program first. The purpose of the modeling was to narrow the uncertainty enough to make a defensible hardware decision before building; the prototype will ultimately show where those assumptions need to be revised.
-                    </p>
-<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        On to building!
-                    </p>
-</section>
-</article>
-</main>
-<footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
-<div class="max-w-3xl mx-auto px-6 py-7">
-<p class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-3">
-                    Capstone pages
-                </p>
-<div class="flex flex-wrap gap-2">
-<a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="../Capstone.html">
-                        ← Capstone Overview
-                    </a>
-<a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="concept_development.html">
-                        Concept Development &amp; Design Decisions
-                    </a>
-<a aria-current="page" class="inline-block text-xs font-semibold text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 rounded-full px-3 py-2" href="actuator_sizing.html">
-                        Modeling &amp; Actuator Sizing
-                    </a>
-<a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_2.html">
-                        Kinematic Linkage Design
-                    </a>
-<a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_3.html">
-                        General Mechanical Design
-                    </a>
-<a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_4.html">
-                        Industrial Design &amp; Art
-                    </a>
-</div>
-</div>
-</footer>
-<script>
+    <!-- The overview's skills are adjacent to the hero, not a separate section at the bottom. -->
+    <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] gap-4 items-stretch">
+     <figure aria-label="Expand image" class="overview-image aspect-[16/10] sm:aspect-auto sm:min-h-[265px] p-3" data-lightbox-item="" role="button" tabindex="0">
+      <img alt="Modeling &amp; Actuator Sizing project image" fetchpriority="high" src="../../images/projects/capstone/actuator_size/final_matlab_model_1.png"/>
+     </figure>
+     <aside aria-label="Project skills and tools" class="overview-skills-panel">
+      <div>
+       <h2 class="text-sm font-bold">
+        Technical Overview
+       </h2>
+      </div>
+      <div class="overview-skills-group">
+       <h3>
+        Engineering
+       </h3>
+       <p>
+        Dynamic modeling
+        <br/>
+        Actuator sizing
+        <br/>
+        Load estimation
+       </p>
+      </div>
+      <div class="overview-skills-group">
+       <h3>
+        Analysis &amp; Methods
+       </h3>
+       <p>
+        Lagrangian mechanics
+        <br/>
+        State-space modeling
+        <br/>
+        LQR control
+       </p>
+      </div>
+      <div class="overview-skills-group">
+       <h3>
+        Tools &amp; Technologies
+       </h3>
+       <p>
+        MATLAB
+        <br/>
+        Numerical simulation
+        <br/>
+        Torque analysis
+       </p>
+      </div>
+     </aside>
+    </div>
+    <div class="space-y-4">
+     <!-- Design Highlights -->
+     <div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+      <h2 class="text-lg sm:text-xl font-bold">
+       Design highlights
+      </h2>
+     </div>
+     <div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
+      <div class="overview-feature">
+       <span class="overview-number">
+        01 / MODELING
+       </span>
+       <h3>
+        From simple to representative
+       </h3>
+       <p>
+        Progressed from a Newton–Euler approximation to a Lagrangian model with more realistic mass and inertia.
+       </p>
+      </div>
+      <div class="overview-feature">
+       <span class="overview-number">
+        02 / CONTROL
+       </span>
+       <h3>
+        Balancing and disturbances
+       </h3>
+       <p>
+        Linearized the dynamics and explored LQR response to height changes and external nudging forces.
+       </p>
+      </div>
+      <div class="overview-feature">
+       <span class="overview-number">
+        03 / SIZING
+       </span>
+       <h3>
+        Torque requirements
+       </h3>
+       <p>
+        Used simulated wheel and leg loading to estimate peak and RMS torque requirements before motor selection.
+       </p>
+      </div>
+     </div>
+     <!-- Two-Image Gallery -->
+     <div class="grid grid-cols-2 gap-3 sm:gap-4">
+      <figure aria-label="Expand image" class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Modeling &amp; Actuator Sizing project image" class="block w-full h-full !object-contain rounded-lg" loading="lazy" src="../../images/projects/capstone/actuator_size/lagrangian_1.png"/>
+      </figure>
+      <figure aria-label="Expand image" class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Modeling &amp; Actuator Sizing project image" class="block w-full h-full !object-contain rounded-lg" loading="lazy" src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"/>
+      </figure>
+     </div>
+    </div>
+    <!-- Project Result -->
+    <div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+     <h2 class="text-sm font-bold">
+      Result
+     </h2>
+     <p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">
+      The model provides a traceable basis for selecting actuators, while making assumptions and unmodeled losses explicit.
+     </p>
+    </div>
+    <!-- Technical Write-Up Link -->
+    <div class="flex justify-end pt-1">
+     <a class="overview-cta" href="#technical-writeup">
+      Read the full write-up
+      <span aria-hidden="true">
+       ↓
+      </span>
+     </a>
+    </div>
+   </section>
+   <!-- Technical Write-Up -->
+   <article class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7" data-toc-target="" id="technical-writeup">
+    <div class="flex items-center justify-between gap-3">
+     <h2 class="text-xl sm:text-2xl font-bold">
+      Technical write-up
+     </h2>
+     <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" href="#overview">
+      ↑ Overview
+     </a>
+    </div>
+    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+     Once we had a rough idea of Nudge’s size, wheel layout, and the way it would interact with people, the next step was to determine the actuators that would drive the joints.
+    </p>
+    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+     To determine the required actuator torques and speeds without actually building Nudge, we would need to model Nudge and simulate different situations and load cases that we could expect it to see. Half because I wanted to learn, and half because I didn’t know how much detail to model in, I started with a simpler model, then added complexity to address some of the model’s shortcomings, and only when a specific design question needed to be answered.
+    </p>
+    <section aria-labelledby="section-1" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-1">
+      1. Starting with a Simplified Model
+     </h2>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-1-1">
+      1.1 Newton–Euler Model
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I started by treating Nudge as a simplified wheeled inverted pendulum, with the body represented as a point mass at a fixed distance above the wheel axle. Using Newton–Euler equations, I could relate the wheel torque, horizontal acceleration, and body pitch to get a first approximation of how Nudge would behave.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The model was useful for understanding the basic dynamics, but it made several assumptions that weren't representative of the actual design. Most notably, it neglected the distributed masses and rotational inertias of the wheels and body, and assumed a fixed center of mass relative to the axle.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Initial simplified model derivations." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/newton_euler_1.png">
+       </img>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Initial simplified model derivations." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/newton_euler_2.png">
+       </img>
+      </div>
+     </div>
+    </section>
+    <section aria-labelledby="section-2" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-2">
+      2. Developing a More Representative Model
+     </h2>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-1">
+      2.1 Lagrangian Formulation
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      To address these shortcomings, I developed a new kinematic model that accounted for the different masses and inertias of the system. I used a Lagrangian formulation because it provided a convenient way to derive the equations of motion and incorporate additional degrees of freedom as the model became more complex.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      For the initial formulation, I kept the body height fixed and described the system using two generalized coordinates: horizontal wheel displacement
+      <em>
+       r
+      </em>
+      and body pitch angle
+      <em>
+       θ
+      </em>
+      .
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Using the kinetic and potential energies of the system, I derived the equations of motion through the Euler–Lagrange equation:
+     </p>
+     <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+      <div class="text-base sm:text-lg overflow-x-auto">
+       \[L=T-V,\qquad \frac{d}{dt}\left(\frac{\partial L}{\partial \dot q_i}\right)-\frac{\partial L}{\partial q_i}=Q_i\]
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Here,
+      <em>
+       L
+      </em>
+      is the Lagrangian and
+      <em>
+       Qᵢ
+      </em>
+      represents the generalized forces acting on the system. The resulting equations could be written in the standard manipulator form:
+     </p>
+     <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+      <div class="text-base sm:text-lg overflow-x-auto">
+       \[M(q)\ddot q+C(q,\dot q)\dot q+G(q)=Q\]
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      This provided a more flexible starting point for modeling Nudge's dynamics while retaining a relatively simple two-degree-of-freedom system.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Lagragian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Lagragian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_2.png"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-2">
+      2.2 Linearization and State-Space Representation
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      With the nonlinear equations of motion derived, I linearized the system around its upright equilibrium. This allowed me to express the dynamics in state-space form and use standard linear control techniques.
+     </p>
+     <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+      <div class="text-base sm:text-lg overflow-x-auto">
+       \[x=\begin{bmatrix}r &amp; \theta &amp; \dot r &amp; \dot\theta\end{bmatrix}^{T},\qquad \dot x=Ax+Bu\]
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Here,
+      <em>
+       u
+      </em>
+      represents the applied wheel torque. Using estimated mass and geometry parameters, I calculated the state-space matrices in MATLAB, providing a basis for feedback control and disturbance simulations.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-3">
+      2.3 LQR Controller
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      To stabilize the model, I implemented a Linear Quadratic Regulator (LQR), which calculates a feedback gain by minimizing a cost function that penalizes state deviations and control effort.
+     </p>
+     <div class="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30 px-5 py-5 text-center space-y-2">
+      <div class="text-base sm:text-lg overflow-x-auto">
+       \[J=\int_0^\infty (x^TQx+u^TRu)\,dt,\qquad u=-Kx\]
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The weighting matrices
+      <em>
+       Q
+      </em>
+      and
+      <em>
+       R
+      </em>
+      determine the relative importance of maintaining the desired state and limiting the applied wheel torque. The controller stabilized the model following an initial pitch disturbance. I didn't spend much time tuning it, since my main objective was to estimate actuator requirements rather than optimize balancing performance.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Linearization around equilibrium point and applying LQR." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/linearization_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Linearization around equilibrium point and applying LQR." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/linearization_2.png"/>
+      </div>
+     </div>
+    </section>
+    <section aria-labelledby="section-3" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-3">
+      3. Refining the Model
+     </h2>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-1">
+      3.1 Variable Height and External Disturbances
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      With a working controller, I began extending the model to better represent how Nudge would operate. Two important additions were the ability to change the body's height and the inclusion of external forces acting on the robot.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I introduced a variable body height,
+      <em>
+       h(t)
+      </em>
+      , to account for the motion of Nudge's legs. This meant that the body's center of mass was no longer fixed relative to the wheel axle, and its vertical motion would influence the system's dynamics.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I also introduced an external force disturbance into the equations of motion, allowing me to simulate forces acting on Nudge independently of wheel torque. These additions gave me a more general model, although they also increased the complexity of the equations and simulations.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Defining new model with variable height and repeating the process." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/variable_height_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Defining new model with variable height and repeating the process." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/variable_height_2.png"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-2">
+      3.2 Updating the Mass and Inertia Model
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Around this time, the rest of Nudge's mechanical architecture was beginning to take shape. We had moved toward a bulbous body supported by two large wheels, with the leg mechanisms and actuators enclosed inside the wheels.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I updated the model to distinguish between three main components: the
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       rotating wheel rims
+      </strong>
+      , the
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       stationary internal frames
+      </strong>
+      , and the
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       moving body
+      </strong>
+      . The rims contributed rotational inertia about the axle, while the internal frames carried the actuators without spinning with the rims. The body contributed its own mass and inertia, with its position determined by the leg height.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Separating these components allowed me to use more realistic mass and inertia estimates from our developing CAD models rather than treating the robot as a single concentrated mass.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Adding in distinction of masses between rim, frame, and body." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/new_mass_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Adding in distinction of masses between rim, frame, and body." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/new_mass_2.png"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-3">
+      3.3 Simplifying the Height Adjustment
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Although I had introduced variable height into the model, I began questioning whether it was necessary for actuator sizing. Nudge wasn't intended to make rapid or continuous height adjustments. Its height actuators would spend much of their time stationary, with relatively slow movements used for expression and positioning.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      There was also a practical simulation issue. Because I hadn't imposed physical limits on height, and the controller didn't heavily penalize deviations in that state, some initial simulations allowed the body to accelerate upward unrealistically, effectively flying away from the wheel assembly. The resulting motion and inertia effects overwhelmed the rest of the simulated response. This was a consequence of the unconstrained model, not a behavior I expected from the real robot.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Rather than model the full coupled wheel and height-actuator dynamics, I decided to evaluate wheel torque requirements at several
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       fixed body heights
+      </strong>
+      . This would show how the center-of-mass position affected the system without requiring a complete leg-actuator and constraint model.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-3-4">
+      3.4 Final Model and Limitations
+     </h3>
+     <div class="max-w-md mx-auto py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="MATLAB simulation of fixed-height wheeled inverted pendulum dynamics and external disturbance response" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/final_matlab_model_1.png"/>
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The final model used for wheel actuator sizing was a fixed-height wheeled inverted pendulum with the more detailed masses and inertias of the rotating rims, stationary frames, and moving body. It retained the external force disturbance input, allowing me to evaluate wheel torque under different loading conditions.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       Several non-ideal effects were not included in the model:
+      </strong>
+     </p>
+     <ul class="list-disc pl-6 space-y-2">
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Mechanical losses:
+       </strong>
+       Bearing friction, transmission losses, and other resistive effects.
+      </li>
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Actuator characteristics:
+       </strong>
+       Rotor inertia, motor dynamics, and electrical limitations.
+      </li>
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Wheel–ground interaction:
+       </strong>
+       Traction limits, tire deformation, and slipping.
+      </li>
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Physical constraints:
+       </strong>
+       Joint travel limits, actuator speed limits, and torque saturation.
+      </li>
+     </ul>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The main reason was time, along with a lack of reliable parameters for some of these effects.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Fortunately, the initial simulations produced relatively modest torque requirements. Although the unconstrained controller could theoretically request more torque or speed than a real motor could deliver, the simulated demands did not suggest that saturation would dominate the cases I was studying. I decided that this level of detail, combined with reasonable loss estimates and safety margins, was sufficient for an initial sizing exercise.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      We also had some flexibility because Nudge's architecture and requirements were still being developed. Rather than treating the simulation as a final validation, I used it to guide actuator selection and identify what would need to be checked once we had hardware.
+     </p>
+    </section>
+    <section aria-labelledby="section-4" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-4">
+      4. Sizing the Wheel Actuators
+     </h2>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-1">
+      4.1 Estimating Mass and Inertia
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Before running the finalized MATLAB model, I needed estimates for Nudge's wheel, body, and frame masses and inertias, along with its wheel radius and equilibrium body height.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      We wanted a small, approachable robot that could be picked up and comfortably interact with people. Based on its intended contact height, comparable home robots, and packaging needs, we settled on a roughly 275 × 275 mm footprint and 300 mm nominal height.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I then broke Nudge into three main components: the rotating wheel rims, the internal frames containing the actuators, and the moving body. Using preliminary CAD geometry, estimated material densities, and an electronics component list, I approximated their masses, centers of mass, and rotational inertias.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Because the design was still evolving, these were simplified CAD and component estimates rather than measured mass properties.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Approximating the maximum envelope of Nudge based on a typical person's shin length, a chair, and other home robots." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/size.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Mass and inertia estimation based on simplified CAD model, material properties, and component list. Also compared the final mass to other robots in the space to verify the numbers." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/mass.png"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-2">
+      4.2 Defining the Loading Requirements
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Two team-developed targets guided the simulations: a maximum travel speed of 1.58 m/s and a 12 N nudging force. The reasoning behind these requirements is covered on the
+      <a class="font-bold text-zinc-900 dark:text-zinc-100 underline underline-offset-2 hover:text-zinc-600 dark:hover:text-zinc-300" href="https://mte-capstone-design-website.vercel.app/">
+       official Capstone page
+      </a>
+      ; here, I focused on translating them into actuator loads.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-3">
+      4.3 Estimating Peak Wheel Torque
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      For peak wheel torque, I used the expected reaction force during a nudge as the main loading case. When Nudge pushes against a person, the equal and opposite contact force acts as an external disturbance on the robot. I applied this disturbance in the MATLAB model and evaluated the wheel torque required to maintain balance.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I tested different LQR cost-function weights rather than relying on one controller setting. Pitch and displacement varied, and some configurations became unstable, but peak torque stayed near 2 N·m across both wheels (about 1 N·m each) in the successful test cases.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Initial run (without cost and weight adjustments)." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Trying different relative cost function values yielded similar-ish performance, signaling that the initial disturbance could dominate the initial response." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/peak_wheel_2.png"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-4-4">
+      4.4 Estimating RMS Wheel Torque
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Our current plan is for Nudge to tow Notice, the second robot in the Notify family, as they move around together. I therefore included towing and towing-related acceleration and braking in the representative operating cycle, using an assumed combined load of 10 kg. These are preliminary loading assumptions rather than measured towing requirements.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The resulting RMS estimate was 0.29 N·m across both wheels, or approximately 0.147 N·m per wheel.
+     </p>
+     <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <table class="w-full text-left text-sm">
+       <thead class="bg-zinc-100/70 dark:bg-zinc-800/40">
+        <tr>
+         <th class="px-4 py-3 font-bold">
+          Operating state
+         </th>
+         <th class="px-4 py-3 font-bold">
+          Duration
+         </th>
+         <th class="px-4 py-3 font-bold">
+          Assumption
+         </th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+        <tr>
+         <td class="px-4 py-3">
+          Nudging
+         </td>
+         <td class="px-4 py-3">
+          5 s
+         </td>
+         <td class="px-4 py-3">
+          One nudge
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          Acceleration / braking
+         </td>
+         <td class="px-4 py-3">
+          4 s
+         </td>
+         <td class="px-4 py-3">
+          3 s acceleration + 1 s braking
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          Driving
+         </td>
+         <td class="px-4 py-3">
+          180 s
+         </td>
+         <td class="px-4 py-3">
+          Travel at maximum speed
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          Towing Notice
+         </td>
+         <td class="px-4 py-3">
+          300 s
+         </td>
+         <td class="px-4 py-3">
+          10 kg assumed combined load
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          Towing acceleration / braking
+         </td>
+         <td class="px-4 py-3">
+          6 s
+         </td>
+         <td class="px-4 py-3">
+          3 s acceleration + 3 s braking
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3 font-bold">
+          Total
+         </td>
+         <td class="px-4 py-3 font-bold">
+          495 s
+         </td>
+         <td class="px-4 py-3">
+          Idle torque assumed negligible in this cycle
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Estimating RMS torque requirement off a simulated cycle, pt.1" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/rms_wheel_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Estimating RMS torque requirement off a simulated cycle, pt.2" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/rms_wheel_2.png"/>
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      These estimates exclude friction, drivetrain losses, traction limits, and actuator saturation. They also depend on the assumed duty cycle, so they are preliminary sizing inputs rather than validated requirements.
+     </p>
+    </section>
+    <section aria-labelledby="section-5" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-5">
+      5. Sizing the Height &amp; Nudging Actuators
+     </h2>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-1">
+      5.1 Proposed Height and Nudging Mechanism
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Unlike the wheel actuators, the leg actuators had to do more than one job: support and adjust the body height, produce expressive movements, and help drive the nudging head. At this stage, we had not finalized either the leg linkage or how the head would connect to it, so I could not calculate a reliable torque profile from actual linkage geometry.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Our working concept was a four-bar or six-bar height mechanism with
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       gravity compensation
+      </strong>
+      , coupled to a differential head linkage. Extending the two legs together would move the head upward and forward to nudge the user, while extending them by different amounts could tilt the head. We also intended to put a spring in series with the head so its deflection could be used to estimate contact force.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The head would likely follow an arc, but force sharing and mechanical advantage would depend on the final linkage geometry.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Example of a 1 DoF, gravity compensated leg mechanism, used by Ascento. They use a torsion spring at the knee." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/ascento_gcm.jpeg"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="First sketch of the differential mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/bump_idea_1.jpg"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-2">
+      5.2 Estimating the Nudging and Gravity Loads
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      As with the wheel sizing, I used nudging as the peak loading case. Here, however, I estimated the torque the leg actuators would need to generate the target head contact force, rather than the wheel torque needed to resist its reaction. For this first estimate, I treated the head force as acting at the end of an equivalent lever arm. Our target was
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       12 N of contact force
+      </strong>
+      , but the direction of that force was not fixed. The horizontal and vertical components could create opposing moments about the mechanism, potentially reducing the net torque in some configurations. This was useful design flexibility, but not something I could count on without a defined linkage.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I therefore used an illustrative
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       8.5 N effective load at a 150 mm lever arm
+      </strong>
+      to establish the scale of the nudging demand. This was a working assumption rather than a proven worst case: a different contact direction, head position, or linkage mechanical advantage could increase or decrease the required motor torque. The 12 N contact target itself was also adjustable if necessary.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Estimated loading from nudging action." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/peak_leg.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="FBD of approximated loading from body in relation to the GCM" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/leg_body_weight.png"/>
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I then accounted for the weight of the body. I assumed that the gravity-compensation mechanism would offset approximately
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       85% of the supported body weight
+      </strong>
+      , leaving the actuators responsible for the remaining
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       15%
+      </strong>
+      . For a first-pass moment arm, I used the wheel radius as a simple upper-scale geometric reference, although the actual linkage lever arm would almost certainly be different. This 85% compensation figure was not based on a finished spring design; it was an explicit assumption that would need to be checked over the entire height range.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-3">
+      5.3 Peak and RMS Leg Torque
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Using the assumed nudging load and equivalent lever arm from Section 5.2, the calculated
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       peak torque was 0.85 N·m per actuator
+      </strong>
+      , before adding losses or safety margins. To estimate continuous loading, I also needed a representative duty cycle rather than assuming that the actuator would operate at its peak torque all the time.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="Notes and thought process behind very simplified estimation of peak leg loading due to nudging reactions. Some terminology might be slightly incorrect." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/leg_calc_1.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="RMS calculations and a couple more justifications." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/leg_calc_2.png"/>
+      </div>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I used a simplified cycle consisting of two nudges over 10 seconds, followed by five minutes of expressive movement. For the expressive portion, I assumed roughly half the nudging torque demand. The handwritten calculation also includes a small additional holding-load term. These were deliberately simple assumptions, since neither the final mechanism nor its real usage pattern was established.
+     </p>
+     <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <table class="w-full text-left text-sm">
+       <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+        <tr>
+         <th class="px-4 py-3 font-bold">
+          Operating state
+         </th>
+         <th class="px-4 py-3 font-bold">
+          Duration
+         </th>
+         <th class="px-4 py-3 font-bold">
+          Assumed torque
+         </th>
+        </tr>
+       </thead>
+       <tbody class="text-zinc-700 dark:text-zinc-300 font-medium">
+        <tr class="border-t border-zinc-200 dark:border-zinc-800">
+         <td class="px-4 py-3">
+          Two nudges
+         </td>
+         <td class="px-4 py-3">
+          10 s
+         </td>
+         <td class="px-4 py-3">
+          0.85 + 0.01575 N·m
+         </td>
+        </tr>
+        <tr class="border-t border-zinc-200 dark:border-zinc-800">
+         <td class="px-4 py-3">
+          Expressive motion
+         </td>
+         <td class="px-4 py-3">
+          300 s
+         </td>
+         <td class="px-4 py-3">
+          0.425 + 0.01575 N·m
+         </td>
+        </tr>
+        <tr class="border-t border-zinc-200 dark:border-zinc-800">
+         <td class="px-4 py-3 font-bold">
+          Total cycle
+         </td>
+         <td class="px-4 py-3 font-bold">
+          310 s
+         </td>
+         <td class="px-4 py-3">
+          Assumed repeatable duty cycle
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Weighting each state by its duration gave an estimated
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       RMS torque of 0.461 N·m per leg actuator
+      </strong>
+      , before margins. This is useful for initial thermal screening, but it depends heavily on the assumed duty cycle and on the still-unverified holding-load estimate.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-4">
+      5.4 What the Estimates Could and Could Not Tell Us
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The unresolved linkage remained the largest uncertainty: mechanical advantage and gravity compensation could change considerably through the stroke. These were not verified worst-case torques.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      There was some room to adjust the design if the numbers proved too demanding. The head could potentially be brought closer to the body, the contact-force direction or target could change, and the leg transmission ratio could be increased. Because Nudge was intended to make relatively slow expressive height adjustments rather than jump or move dynamically, trading some speed for additional torque was a reasonable option. The series spring would also provide a way to estimate head contact force, although it would not eliminate backlash, friction, compliance, or sensing errors elsewhere in the mechanism.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-5-5">
+      5.5 Summary of Theoretical Torque Requirements
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      For initial actuator screening, I applied a safety factor of 2 to the theoretical peak and RMS torque estimates. All values below are positive torque magnitudes, per actuator.
+     </p>
+     <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <table class="w-full text-left text-sm">
+       <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+        <tr>
+         <th class="px-4 py-3 font-bold">
+          Actuator
+         </th>
+         <th class="px-4 py-3 font-bold">
+          Peak torque (SF = 2)
+         </th>
+         <th class="px-4 py-3 font-bold">
+          RMS torque (SF = 2)
+         </th>
+        </tr>
+       </thead>
+       <tbody class="text-zinc-700 dark:text-zinc-300 font-medium">
+        <tr class="border-t border-zinc-200 dark:border-zinc-800">
+         <td class="px-4 py-3">
+          Wheel (each)
+         </td>
+         <td class="px-4 py-3">
+          2.00 N·m
+         </td>
+         <td class="px-4 py-3">
+          0.294 N·m
+         </td>
+        </tr>
+        <tr class="border-t border-zinc-200 dark:border-zinc-800">
+         <td class="px-4 py-3">
+          Leg (each)
+         </td>
+         <td class="px-4 py-3">
+          1.70 N·m
+         </td>
+         <td class="px-4 py-3">
+          0.922 N·m
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      This factor is a
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       preliminary allowance for uncertain masses and linkage geometry, unmodeled friction and mechanical losses, idealized disturbances, and other non-ideal behaviour
+      </strong>
+      . It is not a measured efficiency or a substitute for checking torque–speed curves, thermal limits, traction, and the eventual mechanism.
+     </p>
+    </section>
+    <section aria-labelledby="section-6" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-6">
+      6. From Theoretical Torque to Motor Selection
+     </h2>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      With the theoretical torque requirements established, a motor needed to be chosen for both the wheels and the height-adjustment mechanisms. We preferred four identical actuators to simplify sourcing, packaging, software, and spares, even if that meant oversizing one application.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-1">
+      6.1 Why Direct Drive?
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Our torque requirements made direct drive a realistic option. Without a gearbox, motor position corresponds directly to joint position, with no gearbox backlash or transmission compliance to account for. That is particularly useful for the legs, where backdrivability and predictable torque control matter. Just as importantly, it avoids designing and integrating four gearboxes. The tradeoff is a larger motor that must produce the full joint torque at the required speed.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-2">
+      6.2 Selecting the GB7215
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      I selected the
+      <a class="font-bold underline underline-offset-2 hover:text-zinc-900 dark:hover:text-white" href="https://steadywin-motor.com/collections/pm-series/products/small-brushless-servo-motor-hollow-flat-gimbal-servo-drone-gimbal-camera-motor-3" rel="noopener noreferrer" target="_blank">
+       SteadyWin GB7215
+      </a>
+      , an enclosed, flat BLDC gimbal motor, as our leading candidate. Its published ratings can be compared directly against the torque requirements from Section 5, which already include a safety factor of two.
+     </p>
+     <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+      <table class="w-full text-sm text-left text-zinc-700 dark:text-zinc-300">
+       <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100 font-bold">
+        <tr>
+         <th class="px-4 py-3">
+          Requirement
+         </th>
+         <th class="px-4 py-3">
+          Wheel
+         </th>
+         <th class="px-4 py-3">
+          Leg
+         </th>
+         <th class="px-4 py-3">
+          GB7215 rating
+         </th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+        <tr>
+         <td class="px-4 py-3">
+          Peak torque
+         </td>
+         <td class="px-4 py-3">
+          2.00 N·m
+         </td>
+         <td class="px-4 py-3">
+          1.70 N·m
+         </td>
+         <td class="px-4 py-3">
+          3.70 N·m
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          RMS / rated torque
+         </td>
+         <td class="px-4 py-3">
+          0.294 N·m
+         </td>
+         <td class="px-4 py-3">
+          0.922 N·m
+         </td>
+         <td class="px-4 py-3">
+          1.20 N·m rated
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          Peak current
+         </td>
+         <td class="px-4 py-3">
+          4.88 A
+         </td>
+         <td class="px-4 py-3">
+          4.15 A
+         </td>
+         <td class="px-4 py-3">
+          16.0 A peak
+         </td>
+        </tr>
+        <tr>
+         <td class="px-4 py-3">
+          RMS / rated current
+         </td>
+         <td class="px-4 py-3">
+          0.72 A
+         </td>
+         <td class="px-4 py-3">
+          2.25 A
+         </td>
+         <td class="px-4 py-3">
+          2.90 A rated
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The current estimates use the manufacturer’s torque constant of
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       0.41 N·m/A
+      </strong>
+      and \(I=\tau/K_t\), assuming consistent current definitions. The closest continuous-duty case is the leg: its estimated 0.922 N·m RMS is about
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       77% of the motor’s 1.20 N·m rated torque
+      </strong>
+      . The wheel’s 2.00 N·m peak is about 54% of the advertised 3.70 N·m peak.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Speed also fits on paper. At our target travel speed of 1.58 m/s with 210 mm diameter wheels, direct drive requires approximately
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       144 RPM
+      </strong>
+      , below the motor’s rated 354 RPM and peak 516 RPM. These separate torque and speed ratings are encouraging, but they do not establish the available torque at every speed or the allowable duration of peak loading. The leg’s maximum required speed also depends on the final linkage geometry.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The GB7215 matches our
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       24 V
+      </strong>
+      system, and its enclosed, flat construction is convenient for the internal wheel frames. We still need to account for the output mounting and bearing loads; an enclosed motor does not automatically mean its bearings can carry every external wheel load.
+     </p>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="SteadyWin GB7215 motor selected for Notify robot actuation" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/steadywin.png"/>
+      </div>
+      <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
+       <img alt="moteus r5 motor controller selected for Notify robots" class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/moteus.png"/>
+      </div>
+     </div>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-3">
+      6.3 Controller and Practical Integration
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      We chose the
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       moteus r5
+      </strong>
+      for field-oriented control, encoder support, and a well-documented development workflow. Our previous experience with proprietary motor-controller firmware, particularly MyActuator, involved more time than we wanted to spend on documentation and communication issues. Using one motor-controller combination across all four joints should make integration and troubleshooting more straightforward.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Because the capstone schedule leaves little room for a separate motor-validation phase, we plan to purchase
+      <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+       five GB7215 motors and five moteus r5 controllers
+      </strong>
+      : four for Nudge and one spare set.
+     </p>
+     <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-6-4">
+      6.4 Thermal Considerations and Selection
+     </h3>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The main remaining concern is continuous heating in the legs, particularly when holding position at low speed. The motor’s 1.20 N·m rated torque exceeds our estimated 0.922 N·m RMS requirement, but the manufacturer’s rating depends on its test and cooling conditions. A teammate is exploring whether the wheel design can move air around the motors; that could help while driving, but cannot be assumed to provide sufficient cooling when stationary. Heat conduction through the motor housing and frame will matter as well.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      On the information available before purchasing, the GB7215 offers a practical combination of torque, speed, current demand, and packaging without a gearbox. We are treating it as our selected prototype motor, while recognizing that the manufacturer’s ratings are not a substitute for performance in the assembled robot.
+     </p>
+    </section>
+    <section aria-labelledby="section-7" class="space-y-4 pt-4">
+     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="section-7">
+      7. Limitations and Next Steps
+     </h2>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      This work was completed before purchasing or building the actuator assemblies. The requirements come from simplified models, estimated mass properties, assumed nudging loads, and an expected duty cycle, so the resulting torque margins should be treated as design estimates rather than measured performance.
+     </p>
+     <ul class="list-disc pl-6 space-y-2 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Motor capability:
+       </strong>
+       Rated and peak torque exceed our estimates, but torque available at speed, peak duration, and thermal conditions remain unverified.
+      </li>
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Mechanical model:
+       </strong>
+       Final masses, linkage mechanical advantage, friction, and gravity compensation may change the actual torque demands.
+      </li>
+      <li>
+       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
+        Integration:
+       </strong>
+       Encoder alignment, motor mounting, bearing loads, and cooling depend on the final wheel assembly.
+      </li>
+     </ul>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Before purchasing the actuators and motor controllers, a teammate did also run a simple CAD model in MuJoCo to verify the numbers, and calculated lower torque estimates than what was shown in this post.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Given our timeline, we will move directly into procurement and integration rather than run a full characterization program first. The purpose of the modeling was to narrow the uncertainty enough to make a defensible hardware decision before building; the prototype will ultimately show where those assumptions need to be revised.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      On to building!
+     </p>
+    </section>
+   </article>
+  </main>
+  <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+   <div class="max-w-3xl mx-auto px-6 py-7">
+    <p class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-3">
+     Capstone pages
+    </p>
+    <div class="flex flex-wrap gap-2">
+     <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="../Capstone.html">
+      ← Capstone Overview
+     </a>
+     <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="concept_development.html">
+      Concept Development &amp; Design Decisions
+     </a>
+     <a aria-current="page" class="inline-block text-xs font-semibold text-zinc-900 dark:text-zinc-100 border border-zinc-300 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 rounded-full px-3 py-2" href="actuator_sizing.html">
+      Modeling &amp; Actuator Sizing
+     </a>
+     <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_2.html">
+      Kinematic Linkage Design
+     </a>
+     <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_3.html">
+      General Mechanical Design
+     </a>
+     <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="placeholder_4.html">
+      Industrial Design &amp; Art
+     </a>
+    </div>
+   </div>
+  </footer>
+  <script>
             // Reveal the destination page after its initial background is painted.
                      const root = document.documentElement;
                      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1664,7 +1724,7 @@
                          if (event.persisted) revealPage();
                      });
         </script>
-<script>
+  <script>
             // Track reading progress through the main content, excluding the footer.
                      (function () {
                          const bar = document.getElementById('reading-progress');
@@ -1703,7 +1763,7 @@
                          scheduleUpdate();
                      })();
         </script>
-<script>
+  <script>
             // Highlight the current section and control the compact mobile menu.
                      (function () {
                          const menu = document.getElementById('article-toc');
@@ -1760,27 +1820,27 @@
                          updateActive();
                      })();
         </script>
-<!-- Accessible, page-wide image viewer. -->
-<div aria-hidden="true" aria-label="Image viewer" aria-modal="true" class="image-lightbox" id="image-lightbox" role="dialog">
-<div class="image-lightbox-content">
-<button aria-label="Close image viewer" class="image-lightbox-control image-lightbox-close" id="lightbox-close" type="button">
-                    ×
-                </button>
-<button aria-label="Previous image" class="image-lightbox-control image-lightbox-prev" id="lightbox-prev" type="button">
-                    ‹
-                </button>
-<button aria-label="Next image" class="image-lightbox-control image-lightbox-next" id="lightbox-next" type="button">
-                    ›
-                </button>
-<div class="image-lightbox-media" id="lightbox-media">
-</div>
-<div class="image-lightbox-caption" id="lightbox-caption">
-</div>
-<div aria-live="polite" class="image-lightbox-counter" id="lightbox-counter">
-</div>
-</div>
-</div>
-<script>
+  <!-- Accessible, page-wide image viewer. -->
+  <div aria-hidden="true" aria-label="Image viewer" aria-modal="true" class="image-lightbox" id="image-lightbox" role="dialog">
+   <div class="image-lightbox-content">
+    <button aria-label="Close image viewer" class="image-lightbox-control image-lightbox-close" id="lightbox-close" type="button">
+     ×
+    </button>
+    <button aria-label="Previous image" class="image-lightbox-control image-lightbox-prev" id="lightbox-prev" type="button">
+     ‹
+    </button>
+    <button aria-label="Next image" class="image-lightbox-control image-lightbox-next" id="lightbox-next" type="button">
+     ›
+    </button>
+    <div class="image-lightbox-media" id="lightbox-media">
+    </div>
+    <div class="image-lightbox-caption" id="lightbox-caption">
+    </div>
+    <div aria-live="polite" class="image-lightbox-counter" id="lightbox-counter">
+    </div>
+   </div>
+  </div>
+  <script>
             (function () {
                          const viewer = document.getElementById('image-lightbox');
                          const media = document.getElementById('lightbox-media');
@@ -1907,5 +1967,5 @@
                          }, { passive: true });
                      })();
         </script>
-</body>
+ </body>
 </html>
