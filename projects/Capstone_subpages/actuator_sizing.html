@@ -668,19 +668,99 @@
 </div>
 </aside>
 </div>
-<div class="space-y-4">
-<div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2"><h2 class="text-lg sm:text-xl font-bold">Design highlights</h2></div>
-<div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
-<div class="overview-feature"><span class="overview-number">01 / MODELING</span><h3>From simple to representative</h3><p>Progressed from a Newton–Euler approximation to a Lagrangian model with more realistic mass and inertia.</p></div>
-<div class="overview-feature"><span class="overview-number">02 / CONTROL</span><h3>Balancing and disturbances</h3><p>Linearized the dynamics and explored LQR response to height changes and external nudging forces.</p></div>
-<div class="overview-feature"><span class="overview-number">03 / SIZING</span><h3>Torque requirements</h3><p>Used simulated wheel and leg loading to estimate peak and RMS torque requirements before motor selection.</p></div>
-</div>
-<div class="grid grid-cols-2 gap-3 sm:gap-4"><figure data-lightbox-item tabindex="0" role="button" aria-label="Expand image" class="overview-image aspect-[5/4] p-3"><img alt="Modeling &amp; Actuator Sizing project image" loading="lazy" src="../../images/projects/capstone/actuator_size/lagrangian_1.png"/></figure><figure data-lightbox-item tabindex="0" role="button" aria-label="Expand image" class="overview-image aspect-[5/4] p-3"><img alt="Modeling &amp; Actuator Sizing project image" loading="lazy" src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"/></figure></div>
-</div>
-<div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4"><h2 class="text-sm font-bold">Result</h2><p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">The model provides a traceable basis for selecting actuators, while making assumptions and unmodeled losses explicit.</p></div>
-<div class="flex justify-end pt-1"><a class="overview-cta" href="#technical-writeup">Read the full write-up <span aria-hidden="true">↓</span></a></div>
-</section><article class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7" data-toc-target="" id="technical-writeup"><div class="flex items-center justify-between gap-3"><h2 class="text-xl sm:text-2xl font-bold">Technical write-up</h2><a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" href="#overview">↑ Overview</a></div>
 
+<div class="space-y-4">
+    <!-- Design Highlights -->
+    <div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+        <h2 class="text-lg sm:text-xl font-bold">Design highlights</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
+        <div class="overview-feature">
+            <span class="overview-number">01 / MODELING</span>
+            <h3>From simple to representative</h3>
+            <p>Progressed from a Newton–Euler approximation to a Lagrangian model with more realistic mass and inertia.</p>
+        </div>
+
+        <div class="overview-feature">
+            <span class="overview-number">02 / CONTROL</span>
+            <h3>Balancing and disturbances</h3>
+            <p>Linearized the dynamics and explored LQR response to height changes and external nudging forces.</p>
+        </div>
+
+        <div class="overview-feature">
+            <span class="overview-number">03 / SIZING</span>
+            <h3>Torque requirements</h3>
+            <p>Used simulated wheel and leg loading to estimate peak and RMS torque requirements before motor selection.</p>
+        </div>
+    </div>
+
+    <!-- Two-Image Gallery -->
+    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+        <figure
+            data-lightbox-item
+            tabindex="0"
+            role="button"
+            aria-label="Expand image"
+            class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden"
+        >
+            <img
+                src="../../images/projects/capstone/actuator_size/lagrangian_1.png"
+                alt="Modeling & Actuator Sizing project image"
+                class="block w-full h-full !object-contain rounded-lg"
+                loading="lazy"
+            >
+        </figure>
+
+        <figure
+            data-lightbox-item
+            tabindex="0"
+            role="button"
+            aria-label="Expand image"
+            class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden"
+        >
+            <img
+                src="../../images/projects/capstone/actuator_size/peak_wheel_1.png"
+                alt="Modeling & Actuator Sizing project image"
+                class="block w-full h-full !object-contain rounded-lg"
+                loading="lazy"
+            >
+        </figure>
+    </div>
+</div>
+
+<!-- Project Result -->
+<div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+    <h2 class="text-sm font-bold">Result</h2>
+    <p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">
+        The model provides a traceable basis for selecting actuators, while making assumptions and unmodeled losses explicit.
+    </p>
+</div>
+
+<!-- Technical Write-Up Link -->
+<div class="flex justify-end pt-1">
+    <a class="overview-cta" href="#technical-writeup">
+        Read the full write-up <span aria-hidden="true">↓</span>
+    </a>
+</div>
+
+</section>
+
+<!-- Technical Write-Up -->
+<article
+    class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7"
+    data-toc-target=""
+    id="technical-writeup"
+>
+    <div class="flex items-center justify-between gap-3">
+        <h2 class="text-xl sm:text-2xl font-bold">Technical write-up</h2>
+        <a
+            class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+            href="#overview"
+        >
+            ↑ Overview
+        </a>
+    </div>
 
 <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                     Once we had a rough idea of Nudge’s size, wheel layout, and the way it would interact with people, the next step was to determine the actuators that would drive the joints.

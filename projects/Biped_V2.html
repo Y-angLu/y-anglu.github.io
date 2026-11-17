@@ -583,19 +583,87 @@
 </div>
 </aside>
 </div>
-<div class="space-y-4">
-<div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2"><h2 class="text-lg sm:text-xl font-bold">Design highlights</h2></div>
-<div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
-<div class="overview-feature"><span class="overview-number">01 / ARCHITECTURE</span><h3>Parallel actuator placement</h3><p>Placed two actuators side by side and transmitted torque through belts to reduce the leg’s axial width.</p></div>
-<div class="overview-feature"><span class="overview-number">02 / TRANSMISSION</span><h3>Belt and pulley selection</h3><p>Compared pulley ratios, belt widths, and tooth engagement against joint loads and packaging constraints.</p></div>
-<div class="overview-feature"><span class="overview-number">03 / INTEGRATION</span><h3>Tension and load sharing</h3><p>Considered belt alignment and tensioning, including the difficulty of sharing load between parallel belts.</p></div>
-</div>
-<div class="grid grid-cols-2 gap-3 sm:gap-4"><figure class="overview-image aspect-[5/4] p-3"><img alt="Wheeled Biped V2 project image" loading="lazy" src="../images/projects/biped_v2/belt_concept.png"/></figure><figure class="overview-image aspect-[5/4] p-3"><img alt="Wheeled Biped V2 project image" loading="lazy" src="../images/projects/biped_v2/parallel_belts.png"/></figure></div>
-</div>
-<div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4"><h2 class="text-sm font-bold">Result</h2><p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">V2 replaced the capstan concept with a more conventional belt-driven leg, while revealing further opportunities to simplify belt layout and tensioning.</p></div>
-<div class="flex justify-end pt-1"><a class="overview-cta" href="#technical-writeup">Read the full write-up <span aria-hidden="true">↓</span></a></div>
-</section><article class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7" data-toc-target="" id="technical-writeup"><div class="flex items-center justify-between gap-3"><h2 class="text-xl sm:text-2xl font-bold">Technical write-up</h2><a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" href="#overview">↑ Overview</a></div>
 
+<div class="space-y-4">
+    <!-- Design Highlights -->
+    <div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2">
+        <h2 class="text-lg sm:text-xl font-bold">Design highlights</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
+        <div class="overview-feature">
+            <span class="overview-number">01 / ARCHITECTURE</span>
+            <h3>Parallel actuator placement</h3>
+            <p>Placed two actuators side by side and transmitted torque through belts to reduce the leg’s axial width.</p>
+        </div>
+
+        <div class="overview-feature">
+            <span class="overview-number">02 / TRANSMISSION</span>
+            <h3>Belt and pulley selection</h3>
+            <p>Compared pulley ratios, belt widths, and tooth engagement against joint loads and packaging constraints.</p>
+        </div>
+
+        <div class="overview-feature">
+            <span class="overview-number">03 / INTEGRATION</span>
+            <h3>Tension and load sharing</h3>
+            <p>Considered belt alignment and tensioning, including the difficulty of sharing load between parallel belts.</p>
+        </div>
+    </div>
+
+    <!-- Two-Image Gallery -->
+    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+        <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden">
+            <img
+                src="../images/projects/biped_v2/belt_concept.png"
+                alt="Wheeled Biped V2 belt-driven leg concept"
+                class="block w-full h-full !object-contain rounded-lg"
+                loading="lazy"
+            >
+        </figure>
+
+        <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden">
+            <img
+                src="../images/projects/biped_v2/parallel_belts.png"
+                alt="Wheeled Biped V2 parallel belt arrangement"
+                class="block w-full h-full !object-contain rounded-lg"
+                loading="lazy"
+            >
+        </figure>
+    </div>
+</div>
+
+<!-- Project Result -->
+<div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+    <h2 class="text-sm font-bold">Result</h2>
+    <p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">
+        V2 replaced the capstan concept with a more conventional belt-driven leg, while revealing further opportunities to simplify belt layout and tensioning.
+    </p>
+</div>
+
+<!-- Technical Write-Up Link -->
+<div class="flex justify-end pt-1">
+    <a class="overview-cta" href="#technical-writeup">
+        Read the full write-up <span aria-hidden="true">↓</span>
+    </a>
+</div>
+
+</section>
+
+<!-- Technical Write-Up -->
+<article
+    class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7"
+    data-toc-target=""
+    id="technical-writeup"
+>
+    <div class="flex items-center justify-between gap-3">
+        <h2 class="text-xl sm:text-2xl font-bold">Technical write-up</h2>
+        <a
+            class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+            href="#overview"
+        >
+            ↑ Overview
+        </a>
+    </div>
 
 <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                     Following V1, I moved away from capstan drives to develop a second wheeled biped focused on compact leg design and actuator integration. My wave drive actuator and V2's leg architecture were developed in parallel, with each influencing the other's design.
