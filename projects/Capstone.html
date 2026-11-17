@@ -1,21 +1,22 @@
 <!DOCTYPE html>
+
 <html class="scroll-smooth" lang="en">
-    <head>
-        <!-- Search, sharing and structured metadata (nonvisual) -->
-        <meta name="description" content="Notify Robots capstone: wheeled biped design, expressive movement, robot dynamics, mechanism development and actuator sizing.">
-        <meta name="robots" content="index, follow, max-image-preview:large">
-        <link rel="canonical" href="https://y-anglu.github.io/projects/Capstone.html">
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="Yang Lu | Engineering Portfolio">
-        <meta property="og:title" content="Notify Robots | Capstone Project | Yang Lu">
-        <meta property="og:description" content="Notify Robots capstone: wheeled biped design, expressive movement, robot dynamics, mechanism development and actuator sizing.">
-        <meta property="og:url" content="https://y-anglu.github.io/projects/Capstone.html">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Notify Robots | Capstone Project | Yang Lu">
-        <meta name="twitter:description" content="Notify Robots capstone: wheeled biped design, expressive movement, robot dynamics, mechanism development and actuator sizing.">
-        <meta property="og:image" content="https://y-anglu.github.io/images/Notify.png">
-        <meta name="twitter:image" content="https://y-anglu.github.io/images/Notify.png">
-        <script type="application/ld+json">
+<head>
+<!-- Search, sharing and structured metadata (nonvisual) -->
+<meta content="Notify Robots capstone: wheeled biped design, expressive movement, robot dynamics, mechanism development and actuator sizing." name="description"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://y-anglu.github.io/projects/Capstone.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Yang Lu | Engineering Portfolio" property="og:site_name"/>
+<meta content="Notify Robots | Capstone Project | Yang Lu" property="og:title"/>
+<meta content="Notify Robots capstone: wheeled biped design, expressive movement, robot dynamics, mechanism development and actuator sizing." property="og:description"/>
+<meta content="https://y-anglu.github.io/projects/Capstone.html" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Notify Robots | Capstone Project | Yang Lu" name="twitter:title"/>
+<meta content="Notify Robots capstone: wheeled biped design, expressive movement, robot dynamics, mechanism development and actuator sizing." name="twitter:description"/>
+<meta content="https://y-anglu.github.io/images/Notify.png" property="og:image"/>
+<meta content="https://y-anglu.github.io/images/Notify.png" name="twitter:image"/>
+<script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -52,15 +53,14 @@
     ]
 }
 </script>
-
-        <meta charset="utf-8"/>
-        <meta content="width=device-width,initial-scale=1" name="viewport"/>
-        <title>Notify Robots | Capstone Project | Yang Lu</title>
-        <link href="../images/gear_favicon.png" rel="icon" type="image/png"/>
-        <link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
-        <script src="https://cdn.tailwindcss.com">
-        </script>
-        <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Notify Robots | Capstone Project | Yang Lu</title>
+<link href="../images/gear_favicon.png" rel="icon" type="image/png"/>
+<link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
+<script src="https://cdn.tailwindcss.com">
+</script>
+<script>
             tailwind.config = {
                 darkMode: 'class',
                 theme: {
@@ -72,7 +72,7 @@
                 },
             };
         </script>
-        <script>
+<script>
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
@@ -101,7 +101,7 @@
                 root.style.colorScheme = useDark ? 'dark' : 'light';
             })();
         </script>
-        <style>
+<style>
             @font-face {
                 font-family: 'Quicksand';
                 src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
@@ -463,77 +463,304 @@
             @media (prefers-reduced-motion: reduce) {
                 .capstone-contents-toggle, .capstone-contents-panel a { transition: none; }
             }
+                    /* Shared portfolio image viewer */
+            /* Keep the article centered when the lightbox locks page scrolling. */
+                     html {
+                         scrollbar-gutter: stable;
+                     }
+
+                     /* Figure viewer: flat, restrained, and consistent with the article. */
+                     [data-lightbox-item] {
+                         cursor: zoom-in;
+                         transition: border-color 220ms ease, background-color 220ms ease;
+                     }
+
+                     [data-lightbox-item]:hover,
+                     [data-lightbox-item]:focus-visible {
+                         border-color: #a1a1aa;
+                         outline-offset: 3px;
+                     }
+
+                     .image-lightbox {
+                         position: fixed;
+                         inset: 0;
+                         z-index: 1000;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         padding: 24px;
+                         background: rgb(24 24 27 / 28%);
+                         opacity: 0;
+                         visibility: hidden;
+                         pointer-events: none;
+                         transition: opacity 240ms ease, visibility 240ms ease;
+                     }
+
+                     .dark .image-lightbox {
+                         background: rgb(0 0 0 / 46%);
+                     }
+
+                     .image-lightbox.is-open {
+                         opacity: 1;
+                         visibility: visible;
+                         pointer-events: auto;
+                     }
+
+                     .image-lightbox-content {
+                         position: relative;
+                         width: min(100%, 1040px);
+                         max-height: min(90vh, 980px);
+                         display: flex;
+                         flex-direction: column;
+                         align-items: center;
+                         gap: 12px;
+                         padding: 46px 52px 22px;
+                         border: 1px solid #e4e4e7;
+                         border-radius: 12px;
+                         background: #fafafa;
+                         color: #27272a;
+                         opacity: 0;
+                         transform: translateY(6px);
+                         transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.75,.3,1);
+                     }
+
+                     .image-lightbox.is-open .image-lightbox-content {
+                         opacity: 1;
+                         transform: translateY(0);
+                     }
+
+                     .dark .image-lightbox-content {
+                         background: #1c1c1f;
+                         border-color: #3f3f46;
+                         color: #f4f4f5;
+                     }
+
+                     .image-lightbox-media {
+                         width: 100%;
+                         min-height: 0;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         overflow: auto;
+                         border-radius: 8px;
+                         transition: opacity 160ms ease;
+                     }
+
+                     .image-lightbox-media.is-changing,
+                     .image-lightbox-caption.is-changing {
+                         opacity: .25;
+                     }
+
+                     .image-lightbox-media img {
+                         display: block;
+                         max-width: 100%;
+                         max-height: 75vh;
+                         width: auto;
+                         height: auto;
+                         object-fit: contain;
+                         border-radius: 6px;
+                     }
+
+                     .image-lightbox-placeholder {
+                         width: min(100%, 680px);
+                         min-height: 180px;
+                         padding: 28px;
+                         display: flex;
+                         flex-direction: column;
+                         align-items: center;
+                         justify-content: center;
+                         gap: 12px;
+                         text-align: center;
+                         border: 1px dashed #a1a1aa;
+                         border-radius: 8px;
+                         background: #f4f4f5;
+                         color: #71717a;
+                     }
+
+                     .dark .image-lightbox-placeholder {
+                         background: #27272a;
+                         color: #d4d4d8;
+                     }
+
+                     .image-lightbox-caption {
+                         max-width: 680px;
+                         text-align: center;
+                         font-size: 13px;
+                         line-height: 1.6;
+                         color: #52525b;
+                         transition: opacity 160ms ease;
+                     }
+
+                     .dark .image-lightbox-caption {
+                         color: #d4d4d8;
+                     }
+
+                     .image-lightbox-counter {
+                         font-size: 11px;
+                         font-weight: 600;
+                         letter-spacing: .05em;
+                         color: #71717a;
+                     }
+
+                     .image-lightbox-control {
+                         position: absolute;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         width: 34px;
+                         height: 34px;
+                         border: 1px solid #e4e4e7;
+                         border-radius: 8px;
+                         background: #fafafa;
+                         color: #3f3f46;
+                         font-size: 21px;
+                         cursor: pointer;
+                         transition: background-color 180ms ease, border-color 180ms ease;
+                     }
+
+                     .dark .image-lightbox-control {
+                         background: #1c1c1f;
+                         border-color: #52525b;
+                         color: #f4f4f5;
+                     }
+
+                     .image-lightbox-control:hover,
+                     .image-lightbox-control:focus-visible {
+                         background: #e4e4e7;
+                         border-color: #a1a1aa;
+                     }
+
+                     .dark .image-lightbox-control:hover,
+                     .dark .image-lightbox-control:focus-visible {
+                         background: #3f3f46;
+                     }
+
+                     .image-lightbox-close { top: 10px; right: 12px; }
+                     .image-lightbox-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+                     .image-lightbox-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+                     @media (max-width: 640px) {
+                         .image-lightbox { padding: 14px; }
+
+                         .image-lightbox-content {
+                             max-height: 88vh;
+                             padding: 48px 16px 62px;
+                         }
+
+                         .image-lightbox-media img { max-height: 65vh; }
+                         .image-lightbox-prev { left: 16px; top: auto; bottom: 12px; transform: none; }
+                         .image-lightbox-next { right: 16px; top: auto; bottom: 12px; transform: none; }
+                     }
+
+                     @media (prefers-reduced-motion: reduce) {
+                         .image-lightbox, .image-lightbox-content, .image-lightbox-media,
+                         .image-lightbox-caption, .image-lightbox-control, [data-lightbox-item] {
+                             transition: none !important;
+                         }
+                     }
+
         </style>
-    </head>
-    <body class="antialiased transition-colors duration-200">
-        <div aria-hidden="true" class="navigation-veil">
-        </div>
-        <header class="sticky top-0 z-50 backdrop-blur-xl border-b border-zinc-200/80 dark:border-zinc-800 bg-white/85 dark:bg-[#121212]/85">
-            <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
-                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center gap-2" href="../index.html">
-                    <span aria-hidden="true">
+<style>
+/* Editorial, open TL;DR — intentionally distinct from navigation cards. */
+#summary .tldr-highlight, html.colour-mode #summary .tldr-highlight,
+html.colour-mode.dark #summary .tldr-highlight {
+ display:block; max-width:44rem; padding:0; border:0; border-radius:0;
+ background:transparent; color:inherit; overflow:visible;
+}
+#summary .tldr-highlight:hover, #summary .tldr-highlight:focus-visible,
+html.colour-mode #summary .tldr-highlight:hover { background:transparent; border:0; }
+#summary .tldr-highlight p, html.colour-mode #summary .tldr-highlight p,
+html.colour-mode.dark #summary .tldr-highlight p {
+ font-size:clamp(1.02rem, 1.8vw, 1.17rem); line-height:1.8;
+ color:var(--ink); font-weight:500;
+}
+#summary .tldr-highlight strong, html.colour-mode #summary .tldr-highlight strong,
+html.colour-mode.dark #summary .tldr-highlight strong {
+ color:var(--ink); font-weight:800;
+ text-decoration:underline; text-decoration-color:rgba(113,113,122,.35);
+ text-decoration-thickness:2px; text-underline-offset:4px;
+}
+#summary .tldr-highlight::after {content:'Read note ↗';display:inline-block;margin-top:.5rem;
+ font-size:.7rem;font-weight:800;letter-spacing:.02em;color:var(--muted);}
+#summary .tldr-highlight:hover::after { color:var(--ink); }
+#summary .space-y-9 > div, #summary .space-y-11 > div { max-width:44rem; }
+#summary .chapter-body > div { display:grid; gap:0; }
+#summary .chapter-body > div > p { margin-top:0; }
+#technical-notes .note-card { transition:background-color .18s,border-color .18s; }
+#technical-notes .note-card:hover { background:rgba(113,113,122,.045); }
+@media (max-width:640px) { #summary .chapter-body > div {gap:0;} }
+</style><style>
+/* Compact editorial TL;DR: visible as one coherent sequence, not separate cards. */
+.editorial-list { max-width: 860px; border-top: 1px solid var(--line); }
+.editorial-entry { display: grid; grid-template-columns: 28px minmax(0, 1fr) minmax(240px, 40%); column-gap: 20px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.editorial-entry:not(:has(.editorial-thumbnail)) { grid-template-columns: 28px minmax(0, 1fr); padding: 15px 0; }
+.editorial-number { align-self: center; padding-top: 0; font-size: 11px; font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; }
+.editorial-label { display: inline-block; width: fit-content; padding: 2px 0 2px 10px; border-left: 3px solid #a1a1aa; color: var(--muted); font-size: 11px; line-height: 1.35; letter-spacing: .055em; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
+html.dark .editorial-label { border-left-color: #71717a; }
+.editorial-link { display: block; font-size: 16px; line-height: 1.5; font-weight: 550; color: var(--ink); text-decoration: none; }
+.editorial-link strong { font-weight: 800; text-decoration: underline; text-decoration-color: #d4d4d8; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.editorial-link:hover strong { text-decoration-color: currentColor; }
+.editorial-arrow { display: inline; margin-left: 5px; color: var(--muted); font-weight: 800; }
+.editorial-thumbnail { width: 100%; height: 174px; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: #f4f4f5; cursor: zoom-in; }
+.editorial-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 640px) {
+  .editorial-entry { grid-template-columns: 20px minmax(0,1fr) minmax(115px, 40%); column-gap: 10px; padding: 13px 0; }
+  .editorial-entry:not(:has(.editorial-thumbnail)) { grid-template-columns: 20px minmax(0,1fr); padding: 11px 0; }
+  .editorial-thumbnail { height: 116px; border-radius: 10px; }
+  .editorial-link { font-size: 15px; line-height: 1.5; }
+}
+</style></head>
+<body class="antialiased transition-colors duration-200">
+<div aria-hidden="true" class="navigation-veil">
+</div>
+<header class="sticky top-0 z-50 backdrop-blur-xl border-b border-zinc-200/80 dark:border-zinc-800 bg-white/85 dark:bg-[#121212]/85">
+<div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
+<a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center gap-2" href="../index.html">
+<span aria-hidden="true">
                         ←
                     </span>
                     Back to Home
                 </a>
-            </div>
-            <div aria-hidden="true" id="reading-progress">
-            </div>
-        </header>
-        <main>
-            <!-- ================= HERO BANNER ================= -->
-            <section class="notify-banner relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
-                <!-- Background Image -->
-                <div aria-hidden="true" class="absolute inset-0 bg-cover bg-center" style="background-image: url('../images/projects/capstone/header.png');">
-                </div>
-                <!-- Hero Content -->
-                <div class="relative max-w-5xl mx-auto px-6 pt-20 pb-14 sm:pt-28 sm:pb-20 min-h-[340px] sm:min-h-[420px] flex flex-col justify-end">
-                    <!-- Project Category & Timeline -->
-                    <div class="text-[11px] font-bold uppercase tracking-[.14em] text-white/75 mb-4">
+</div>
+<div aria-hidden="true" id="reading-progress">
+</div>
+</header>
+<main>
+<!-- ================= HERO BANNER ================= -->
+<section class="notify-banner relative overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
+<!-- Background Image -->
+<div aria-hidden="true" class="absolute inset-0 bg-cover bg-center" style="background-image: url('../images/projects/capstone/header.png');">
+</div>
+<!-- Hero Content -->
+<div class="relative max-w-5xl mx-auto px-6 pt-20 pb-14 sm:pt-28 sm:pb-20 min-h-[340px] sm:min-h-[420px] flex flex-col justify-end">
+<!-- Project Category & Timeline -->
+<div class="text-[11px] font-bold uppercase tracking-[.14em] text-white/75 mb-4">
                         Capstone / FYDP  ·  September 2026 — Present
                     </div>
-                    <!-- Project Title -->
-                    <h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-tight text-white">
+<!-- Project Title -->
+<h1 class="text-4xl sm:text-6xl font-bold tracking-tight leading-tight text-white">
                         Notify Robots
                     </h1>
-                    <!-- Subtitle -->
-                    <p class="mt-2 text-base sm:text-xl font-semibold text-white/85">
+<!-- Subtitle -->
+<p class="mt-2 text-base sm:text-xl font-semibold text-white/85">
                         Notice + Nudge
                     </p>
-                    <!-- Description -->
-                    <p class="mt-5 max-w-xl text-sm sm:text-base font-medium leading-relaxed text-white/85">
-                        Notify Robots explores physical, expressive alternatives to digital alerts through two robots: Notice and Nudge.
-                    </p>
-                </div>
-            </section>
-            <!-- ================= PROJECT INFORMATION ================= -->
-            <section class="max-w-5xl mx-auto px-6 pt-8 pb-4">
-                <div class="grid grid-cols-2 md:grid-cols-4 border-t-2 border-zinc-900 dark:border-zinc-100">
-                    <!-- Type -->
-                    <div class="py-4 px-3 sm:px-4">
-                        <div class="eyebrow">
-                            Type
-                        </div>
-                        <div class="text-sm font-bold mt-2 leading-relaxed">
-                            Capstone / FYDP
-                        </div>
-                    </div>
-                    <!-- Timeline -->
-                    <div class="py-4 px-3 sm:px-4 border-l border-zinc-200 dark:border-zinc-800">
-                        <div class="eyebrow">
-                            Timeline
-                        </div>
-                        <div class="text-sm font-bold mt-2 leading-relaxed">
-                            September 2026 — Present
-                        </div>
-                    </div>
-                    <!-- Group -->
-                    <div class="py-4 px-3 sm:px-4 border-t md:border-t-0 md:border-l border-zinc-200 dark:border-zinc-800">
-                        <div class="eyebrow">
+<!-- Description -->
+<p class="mt-5 max-w-xl text-sm sm:text-base font-medium leading-relaxed text-white/85">Notify Robots explores physical, expressive alternatives to digital alerts. Notice monitors important events at home, while Nudge approaches users to deliver gentle physical alerts.</p>
+</div>
+</section>
+<!-- ================= PROJECT INFORMATION ================= -->
+<section class="max-w-5xl mx-auto px-6 pt-8 pb-4">
+<div class="grid grid-cols-1 sm:grid-cols-3 border-t-2 border-zinc-900 dark:border-zinc-100">
+<!-- Type -->
+<!-- Timeline -->
+<!-- Group -->
+<div class="py-4 px-3 sm:px-4 md:border-l border-zinc-200 dark:border-zinc-800">
+<div class="eyebrow">
                             Group
                         </div>
-                        <div class="text-sm font-bold mt-2 leading-relaxed">
-                            <a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/ethancpwoo/">
+<div class="text-sm font-bold mt-2 leading-relaxed">
+<a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/ethancpwoo/">
                                 Ethan
                             </a>
                             ,
@@ -548,285 +775,145 @@
                             <a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://www.linkedin.com/in/1neelp/">
                                 Neel
                             </a>
-                        </div>
-                    </div>
-                    <!-- Responsibilities -->
-                    <div class="py-4 px-3 sm:px-4 border-l border-t md:border-t-0 border-zinc-200 dark:border-zinc-800">
-                        <div class="eyebrow">
+</div>
+</div>
+<!-- Responsibilities -->
+<div class="py-4 px-3 sm:px-4 border-l border-zinc-200 dark:border-zinc-800">
+<div class="eyebrow">
                             Responsibilities
                         </div>
-                        <div class="text-sm font-bold mt-2 leading-relaxed">
-                            Mechanical + Industrial
+<div class="text-sm font-bold mt-2 leading-relaxed">
+                            Mechanical & Industrial
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="overview">
-                <div class="section-rule chapter">
-                    <span class="chapter-num">
-                        01
-                    </span>
-                    <h2 class="chapter-title">
-                        Project Overview
-                    </h2>
-                </div>
-                <div class="chapter-body mt-7">
-                    <p class="max-w-2xl text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                        Notify Robots is our final-year design project exploring how robots can communicate through safe physical interaction. Notice monitors for important events within the home while Nudge approaches users to deliver a gentle physical alert.
-                    </p>
-                    <p class="max-w-2xl mt-4 text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                        This page highlights my contributions to the mechanical and industrial design work. For the full project write-up, visit the
-                        <a class="font-bold underline underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://mte-capstone-design-website.vercel.app/" rel="noopener noreferrer" target="_blank">
-                            official Notify Robotics website
-                        </a>
-                        .
-                    </p>
-                </div>
-            </section>
-            <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="technical-notes">
-                <div class="section-rule chapter">
-                    <span class="chapter-num">
-                        02
-                    </span>
-                    <h2 class="chapter-title">
-                        Technical Documentation
-                    </h2>
-                </div>
-                <div class="chapter-body mt-5">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/concept_development.html" style="--note-colour: #94B447;">
-                            <div class="flex justify-between">
-                                <span class="eyebrow">
+</div>
+<div class="py-4 px-3 sm:px-4 border-t sm:border-t-0 sm:border-l border-zinc-200 dark:border-zinc-800"><div class="eyebrow">Team Website</div><div class="text-sm font-bold mt-2 leading-relaxed"><a class="underline decoration-zinc-300 dark:decoration-zinc-600 underline-offset-4 hover:text-zinc-500 dark:hover:text-zinc-300" href="https://mte-capstone-design-website.vercel.app/" rel="noopener noreferrer" target="_blank">Official Project Website ↗</a></div></div></div>
+</section>
+<section class="max-w-5xl mx-auto px-6 pt-5 sm:pt-6 pb-3" id="summary">
+<div class="section-rule chapter">
+<span class="chapter-num">01</span>
+<h2 class="chapter-title">TL;DR</h2>
+</div>
+<div class="chapter-body mt-4"><div class="editorial-list"><div class="editorial-entry"><span class="editorial-number">01</span><div class="editorial-copy"><div class="editorial-label">Concept development</div><a class="editorial-link" href="Capstone_subpages/concept_development.html">Compared locomotion and interaction concepts to define Nudge’s <strong>wheeled-biped architecture</strong>. <span aria-hidden="true" class="editorial-arrow">↗</span></a></div><div aria-label="Expand image: Concept development and architecture" class="editorial-thumbnail" data-lightbox-item="" role="button" tabindex="0"><img alt="Concept development and architecture" loading="lazy" src="../images/projects/capstone/design_ideation.png"/></div></div><div class="editorial-entry"><span class="editorial-number">02</span><div class="editorial-copy"><div class="editorial-label">Modeling &amp; control</div><a class="editorial-link" href="Capstone_subpages/actuator_sizing.html">Derived a <strong>Lagrangian model</strong> and implemented <strong>LQR control</strong> to investigate balancing. <span aria-hidden="true" class="editorial-arrow">↗</span></a></div></div><div class="editorial-entry"><span class="editorial-number">03</span><div class="editorial-copy"><div class="editorial-label">Actuator sizing</div><a class="editorial-link" href="Capstone_subpages/actuator_sizing.html">Simulated driving and nudging loads to determine <strong>peak and RMS torque</strong> requirements. <span aria-hidden="true" class="editorial-arrow">↗</span></a></div><div aria-label="Expand image: MATLAB model and disturbance response" class="editorial-thumbnail" data-lightbox-item="" role="button" tabindex="0"><img alt="MATLAB model and disturbance response" loading="lazy" src="../images/projects/capstone/final_matlab_model_1.png"/></div></div><div class="editorial-entry"><span class="editorial-number">04</span><div class="editorial-copy"><div class="editorial-label">Motor selection</div><a class="editorial-link" href="Capstone_subpages/actuator_sizing.html">Selected a <strong>24 V SteadyWin GB7215</strong> and <strong>moteus r5</strong> based on torque, speed, current, and packaging. <span aria-hidden="true" class="editorial-arrow">↗</span></a></div></div></div></div>
+</section><section class="max-w-5xl mx-auto px-6 pt-5 sm:pt-6 pb-12 sm:pb-16" id="technical-notes">
+<div class="section-rule chapter">
+<span class="chapter-num">02</span>
+<h2 class="chapter-title">Technical Documentation</h2>
+</div>
+<div class="chapter-body mt-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<a class="note-card colour-note group flex flex-col p-4 min-h-[130px]" href="Capstone_subpages/concept_development.html" style="--note-colour: #94B447;">
+<div class="flex justify-between">
+<span class="eyebrow">
                                     01 / Technical note
                                 </span>
-                                <span class="note-arrow">
+<span class="note-arrow">
                                     ↗
                                 </span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-5">
+</div>
+<h3 class="font-bold text-base mt-3">
                                 Concept Development &amp; Design Decisions
                             </h3>
-                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                                 Comparing architectures and explaining the decisions behind Nudge’s design.
                             </p>
-                            <span class="note-link mt-auto pt-6 text-xs font-bold">
-                                Explore documentation →
-                            </span>
-                        </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/actuator_sizing.html" style="--note-colour: #EAA7C7;">
-                            <div class="flex justify-between">
-                                <span class="eyebrow">
+</a>
+<a class="note-card colour-note group flex flex-col p-4 min-h-[130px]" href="Capstone_subpages/actuator_sizing.html" style="--note-colour: #EAA7C7;">
+<div class="flex justify-between">
+<span class="eyebrow">
                                     02 / Technical note
                                 </span>
-                                <span class="note-arrow">
+<span class="note-arrow">
                                     ↗
                                 </span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-5">
-                                Modeling + Actuator Sizing
+</div>
+<h3 class="font-bold text-base mt-3">
+                                Modeling & Actuator Sizing
                             </h3>
-                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                                 Modeling wheel and leg dynamics to estimate torque requirements and size actuators.
                             </p>
-                            <span class="note-link mt-auto pt-6 text-xs font-bold">
-                                Explore documentation →
-                            </span>
-                        </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/placeholder_2.html" style="--note-colour: #EAC119;">
-                            <div class="flex justify-between">
-                                <span class="eyebrow">
+</a>
+<a class="note-card colour-note group flex flex-col p-4 min-h-[130px]" href="Capstone_subpages/placeholder_2.html" style="--note-colour: #EAC119;">
+<div class="flex justify-between">
+<span class="eyebrow">
                                     03 / Technical note
                                 </span>
-                                <span class="note-arrow">
+<span class="note-arrow">
                                     ↗
                                 </span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-5">
+</div>
+<h3 class="font-bold text-base mt-3">
                                 Kinematic Linkage Design
                             </h3>
-                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                                 Creating the gravity compensating and sensitive contact mechanisms behind Nudge's expressions and tap.
                             </p>
-                            <span class="note-link mt-auto pt-6 text-xs font-bold">
-                                Explore documentation →
-                            </span>
-                        </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/placeholder_3.html" style="--note-colour: #808BC5;">
-                            <div class="flex justify-between">
-                                <span class="eyebrow">
+</a>
+<a class="note-card colour-note group flex flex-col p-4 min-h-[130px]" href="Capstone_subpages/placeholder_3.html" style="--note-colour: #808BC5;">
+<div class="flex justify-between">
+<span class="eyebrow">
                                     04 / Technical note
                                 </span>
-                                <span class="note-arrow">
+<span class="note-arrow">
                                     ↗
                                 </span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-5">
+</div>
+<h3 class="font-bold text-base mt-3">
                                 General Mechanical Design
                             </h3>
-                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                                 Designing Nudge’s packaging, structure, and safe-contact mechanisms.
                             </p>
-                            <span class="note-link mt-auto pt-6 text-xs font-bold">
-                                Explore documentation →
-                            </span>
-                        </a>
-                        <a class="note-card colour-note group p-6 flex flex-col min-h-[190px]" href="Capstone_subpages/placeholder_4.html" style="--note-colour: #9ED6DF;">
-                            <div class="flex justify-between">
-                                <span class="eyebrow">
+</a>
+<a class="note-card colour-note group flex flex-col p-4 min-h-[130px]" href="Capstone_subpages/placeholder_4.html" style="--note-colour: #9ED6DF;">
+<div class="flex justify-between">
+<span class="eyebrow">
                                     05 / Technical note
                                 </span>
-                                <span class="note-arrow">
+<span class="note-arrow">
                                     ↗
                                 </span>
-                            </div>
-                            <h3 class="text-xl font-bold mt-5">
-                                Industrial Design + Art
+</div>
+<h3 class="font-bold text-base mt-3">
+                                Industrial Design & Art
                             </h3>
-                            <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-2">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400 mt-1">
                                 Developing the form, visual identity, and expressive motions of Nudge and Notice.
                             </p>
-                            <span class="note-link mt-auto pt-6 text-xs font-bold">
-                                Explore documentation →
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <section class="max-w-5xl mx-auto px-6 pt-8 sm:pt-10 pb-6" id="summary">
-                <div class="section-rule chapter">
-                    <span class="chapter-num">
-                        03
-                    </span>
-                    <h2 class="chapter-title">
-                        TL;DR
-                    </h2>
-                </div>
-                <div class="chapter-body mt-7">
-                    <div class="space-y-9 sm:space-y-11">
-                        <!-- TL;DR 01: Concept Development -->
-                        <div class="space-y-3" style="--note-colour: #94B447;">
-                            <a class="tldr-highlight group" href="Capstone_subpages/concept_development.html">
-                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                                Evaluated
-                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                    locomotion and interaction concepts
-                                </strong>
-                                to define Nudge’s wheeled-biped architecture, height-adjustable legs, and compliant nudging approach.
-                            </p>
-                                <span class="tldr-read-more">
-                                    <span>Read the technical note</span>
-                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
-                                </span>
-                            </a>
-                            <div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                                <img alt="Concept development and architecture" class="w-full h-full object-cover" src="../images/projects/capstone/design_ideation.png"/>
-                            </div>
-                        </div>
-                        <!-- TL;DR 02: Dynamic Modeling & Control -->
-                        <div class="space-y-3" style="--note-colour: #EAA7C7;">
-                            <a class="tldr-highlight group" href="Capstone_subpages/actuator_sizing.html">
-                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                                Derived and linearized a 
-                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                    Lagrangian wheeled-biped model in MATLAB
-                                </strong>
-                                , then designed an
-                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                    LQR controller 
-                                </strong>
-                                to simulate stabilization.
-                            </p>
-                                <span class="tldr-read-more">
-                                    <span>Read the technical note</span>
-                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
-                                </span>
-                            </a>
-                            <!--<div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                                <img alt="Motor and controller selection" class="w-full h-full object-cover" src="../images/projects/capstone/tldr_02.png"/>
-                            </div>-->
-                        </div>
-                        <!-- TL;DR 03: Actuator Sizing -->
-                        <div class="space-y-3" style="--note-colour: #EAC119;">
-                            <a class="tldr-highlight group" href="Capstone_subpages/actuator_sizing.html">
-                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                                Modeled driving, nudging reaction forces, and leg loading to
-                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                    calculate peak and RMS torque requirements
-                                </strong>
-                                for the wheel and height actuators.
-                            </p>
-                                <span class="tldr-read-more">
-                                    <span>Read the technical note</span>
-                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
-                                </span>
-                            </a>
-                            <div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                                <img alt="MATLAB simulation of fixed-height wheeled inverted pendulum dynamics and external disturbance response" class="w-full h-full object-cover" src="../images/projects/capstone/final_matlab_model_1.png"/>
-                            </div>
-                        </div>
-                        <!-- TL;DR 04: Motor Selection -->
-                        <div class="space-y-3" style="--note-colour: #808BC5;">
-                            <a class="tldr-highlight group" href="Capstone_subpages/actuator_sizing.html">
-                                <p class="text-base font-medium leading-relaxed text-zinc-700 dark:text-zinc-300">
-                                Selected the 
-                                <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-                                    24 V SteadyWin GB7215 direct-drive BLDC motor and moteus r5 controller
-                                </strong>
-                                based on torque, current, speed, and packaging requirements.
-                            </p>
-                                <span class="tldr-read-more">
-                                    <span>Read the technical note</span>
-                                    <span class="tldr-read-more-arrow" aria-hidden="true">→</span>
-                                </span>
-                            </a>
-                            <!--<div class="max-w-2xl aspect-video bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                                <img alt="Motor and controller selection" class="w-full h-full object-cover" src="../images/projects/capstone/tldr_04.png"/>
-                            </div>-->
-                        </div>
-                        <p class="max-w-2xl pt-2 text-sm font-semibold text-zinc-500 dark:text-zinc-400">
-                            In progress — more updates to come.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <!-- Compact chapter navigation, matching the Lamp page. -->
-        <nav aria-label="Capstone page chapters" class="capstone-contents" data-open="false" id="capstone-contents">
-            <div class="capstone-contents-panel" hidden="" id="capstone-contents-panel">
-                <div class="px-2 pb-2 text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Compact chapter navigation, matching the Lamp page. -->
+<nav aria-label="Capstone page chapters" class="capstone-contents" data-open="false" id="capstone-contents">
+<div class="capstone-contents-panel" hidden="" id="capstone-contents-panel">
+<div class="px-2 pb-2 text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">
                     On this page
                 </div>
-                <a href="#overview">
-                    01 · Project Overview
-                </a>
-                <a href="#technical-notes">
-                    02 · Technical Documentation
-                </a>
-                <a href="#summary">
-                    03 · TL;DR
-                </a>
-            </div>
-            <button aria-controls="capstone-contents-panel" aria-expanded="false" class="capstone-contents-toggle" id="capstone-contents-toggle" type="button">
-                <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
-                    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
-                    </path>
-                </svg>
+<a href="#summary">01 · TL;DR</a><a href="#technical-notes">02 · Technical Documentation</a>
+</div>
+<button aria-controls="capstone-contents-panel" aria-expanded="false" class="capstone-contents-toggle" id="capstone-contents-toggle" type="button">
+<svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01">
+</path>
+</svg>
                 Contents
                 <svg aria-hidden="true" fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="13">
-                    <path d="m6 15 6-6 6 6">
-                    </path>
-                </svg>
-            </button>
-        </nav>
-        <footer class="border-t border-zinc-200 dark:border-zinc-800">
-            <div class="footer-banner relative overflow-hidden">
-                <img alt="" class="w-full h-full object-cover" loading="lazy" src="../images/projects/capstone/footer.png"/>
-            </div>
-            <div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] font-bold text-zinc-400">
+<path d="m6 15 6-6 6 6">
+</path>
+</svg>
+</button>
+</nav>
+<footer class="border-t border-zinc-200 dark:border-zinc-800">
+<div class="footer-banner relative overflow-hidden">
+<img alt="" class="w-full h-full object-cover" loading="lazy" src="../images/projects/capstone/footer.png"/>
+</div>
+<div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] font-bold text-zinc-400">
                 © 2026 Yang Lu.
             </div>
-        </footer>
-        <script>
+</footer>
+<script>
             // Reveal the destination page after its initial background is painted.
             const root = document.documentElement;
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -872,7 +959,7 @@
                 if (event.persisted) revealPage();
             });
         </script>
-        <script>
+<script>
             // Track reading progress through the main content, excluding the footer.
             (function () {
                 const bar = document.getElementById('reading-progress');
@@ -911,7 +998,7 @@
                 scheduleUpdate();
             })();
         </script>
-        <script>
+<script>
             // The contents menu is opt-in and automatically dismisses during scrolling.
             (function () {
                 const nav = document.getElementById('capstone-contents');
@@ -943,5 +1030,175 @@
                 }, { passive: true });
             })();
         </script>
-    </body>
+<!-- Accessible, page-wide image viewer. -->
+<div aria-hidden="true" aria-label="Image viewer" aria-modal="true" class="image-lightbox" id="image-lightbox" role="dialog">
+<div class="image-lightbox-content">
+<button aria-label="Close image viewer" class="image-lightbox-control image-lightbox-close" id="lightbox-close" type="button">
+                    ×
+                </button>
+<button aria-label="Previous image" class="image-lightbox-control image-lightbox-prev" id="lightbox-prev" type="button">
+                    ‹
+                </button>
+<button aria-label="Next image" class="image-lightbox-control image-lightbox-next" id="lightbox-next" type="button">
+                    ›
+                </button>
+<div class="image-lightbox-media" id="lightbox-media">
+</div>
+<div class="image-lightbox-caption" id="lightbox-caption">
+</div>
+<div aria-live="polite" class="image-lightbox-counter" id="lightbox-counter">
+</div>
+</div>
+</div>
+<script>
+            (function () {
+                         const viewer = document.getElementById('image-lightbox');
+                         const media = document.getElementById('lightbox-media');
+                         const caption = document.getElementById('lightbox-caption');
+                         const counter = document.getElementById('lightbox-counter');
+                         const closeButton = document.getElementById('lightbox-close');
+                         const previousButton = document.getElementById('lightbox-prev');
+                         const nextButton = document.getElementById('lightbox-next');
+                         // Register article images and unfinished image placeholders automatically.
+                         // This keeps the viewer working as placeholder images are replaced later.
+                         document.querySelectorAll('main img').forEach(image => {
+                             if (image.closest('[data-lightbox-item]')) return;
+                             const target = image.parentElement;
+                             if (!target || target.closest('a, button')) return;
+                             target.setAttribute('data-lightbox-item', '');
+                             target.setAttribute('role', 'button');
+                             target.setAttribute('tabindex', '0');
+                             target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
+                         });
+                         document.querySelectorAll('main .aspect-square, main .aspect-video, main [class*="aspect-["]').forEach(target => {
+                             if (target.hasAttribute('data-lightbox-item') || target.querySelector('img, [data-lightbox-item]')) return;
+                             const text = target.textContent.toLowerCase();
+                             if (!text.includes('image placeholder')) return;
+                             target.setAttribute('data-lightbox-item', '');
+                             target.setAttribute('role', 'button');
+                             target.setAttribute('tabindex', '0');
+                             target.setAttribute('aria-label', 'Expand image placeholder');
+                             const labels = [...target.querySelectorAll('div')].filter(el =>
+                                 el.classList.contains('absolute') && el.classList.contains('bottom-3'));
+                             if (labels.length) target.dataset.caption = labels[labels.length - 1].textContent.trim();
+                         });
+                         const items = [...document.querySelectorAll('main [data-lightbox-item]')];
+                         let currentIndex = -1;
+                         let previousFocus = null;
+                         let touchStartX = null;
+
+                         let changeTimer = null;
+
+                         function render(index) {
+                             currentIndex = (index + items.length) % items.length;
+                             const item = items[currentIndex];
+                             const source = item.querySelector('img');
+                             const figureCaption = item.querySelector('figcaption');
+                             const description = item.dataset.caption ||
+                                 (figureCaption && figureCaption.textContent.trim()) ||
+                                 (source && source.alt) || item.innerText.trim().replace(/\s+/g, ' ');
+
+                             media.replaceChildren();
+                             if (source && source.getAttribute('src')) {
+                                 const image = document.createElement('img');
+                                 image.src = source.currentSrc || source.src;
+                                 image.alt = source.alt || description;
+                                 media.appendChild(image);
+                             } else {
+                                 const placeholder = document.createElement('div');
+                                 placeholder.className = 'image-lightbox-placeholder';
+                                 const title = document.createElement('strong');
+                                 title.textContent = item.querySelector('span')?.textContent.trim() || description;
+                                 const note = document.createElement('span');
+                                 note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
+                                 placeholder.append(title, note);
+                                 media.appendChild(placeholder);
+                             }
+                             caption.textContent = description;
+                             counter.textContent = `${currentIndex + 1} / ${items.length}`;
+                         }
+
+                         function navigate(index) {
+                             if (changeTimer) clearTimeout(changeTimer);
+                             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                                 render(index);
+                                 return;
+                             }
+                             media.classList.add('is-changing');
+                             caption.classList.add('is-changing');
+                             changeTimer = setTimeout(() => {
+                                 render(index);
+                                 media.classList.remove('is-changing');
+                                 caption.classList.remove('is-changing');
+                                 changeTimer = null;
+                             }, 125);
+                         }
+
+                         function open(index) {
+                             if (!items.length) return;
+                             previousFocus = document.activeElement;
+                             render(index);
+                             viewer.classList.add('is-open');
+                             viewer.setAttribute('aria-hidden', 'false');
+                             document.body.style.overflow = 'hidden';
+                             closeButton.focus();
+                         }
+
+                         function close() {
+                             if (changeTimer) clearTimeout(changeTimer);
+                             changeTimer = null;
+                             media.classList.remove('is-changing');
+                             caption.classList.remove('is-changing');
+                             viewer.classList.remove('is-open');
+                             viewer.setAttribute('aria-hidden', 'true');
+                             document.body.style.overflow = '';
+                             currentIndex = -1;
+                             if (previousFocus && previousFocus.focus) previousFocus.focus();
+                         }
+
+                         items.forEach((item, index) => {
+                             item.addEventListener('click', () => open(index));
+                             item.addEventListener('keydown', event => {
+                                 if (event.key === 'Enter' || event.key === ' ') {
+                                     event.preventDefault();
+                                     open(index);
+                                 }
+                             });
+                         });
+
+                         closeButton.addEventListener('click', close);
+                         previousButton.addEventListener('click', () => navigate(currentIndex - 1));
+                         nextButton.addEventListener('click', () => navigate(currentIndex + 1));
+                         viewer.addEventListener('click', event => {
+                             if (event.target === viewer) close();
+                         });
+                         document.addEventListener('keydown', event => {
+                             if (currentIndex < 0) return;
+                             if (event.key === 'Escape') close();
+                             if (event.key === 'ArrowLeft') navigate(currentIndex - 1);
+                             if (event.key === 'ArrowRight') navigate(currentIndex + 1);
+                             if (event.key === 'Tab') {
+                                 const controls = [closeButton, previousButton, nextButton];
+                                 const index = controls.indexOf(document.activeElement);
+                                 if (event.shiftKey && index === 0) {
+                                     event.preventDefault();
+                                     nextButton.focus();
+                                 } else if (!event.shiftKey && index === controls.length - 1) {
+                                     event.preventDefault();
+                                     closeButton.focus();
+                                 }
+                             }
+                         });
+                         media.addEventListener('touchstart', event => {
+                             touchStartX = event.changedTouches[0].screenX;
+                         }, { passive: true });
+                         media.addEventListener('touchend', event => {
+                             if (touchStartX === null) return;
+                             const difference = event.changedTouches[0].screenX - touchStartX;
+                             if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
+                             touchStartX = null;
+                         }, { passive: true });
+                     })();
+        </script>
+</body>
 </html>

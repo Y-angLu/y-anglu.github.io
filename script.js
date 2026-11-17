@@ -1,3 +1,4 @@
+
 const COLOUR_RETURN_KEY = 'portfolio-colour-return';
 const COLOUR_INITIAL_KEY = 'portfolio-colour-initial';
 const COLOUR_ACTIVE_KEY = 'portfolio-colour-active';
@@ -6,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initTabs();
     initSkills();
+    initExpandableSkills();
     initPlayfulTiles();
     initSubpageNavigation();
 
@@ -16,13 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.remove('homepage-arriving');
         }));
     }
+
     revealHomepage();
+
     window.addEventListener('pageshow', event => {
         if (event.persisted) {
             document.documentElement.classList.add('homepage-arriving');
-            // On BFCache restoration, the tab and theme pageshow handlers run first.
             requestAnimationFrame(() => requestAnimationFrame(() => {
-                document.documentElement.classList.remove('homepage-arriving', 'homepage-departing');
+                document.documentElement.classList.remove(
+                    'homepage-arriving',
+                    'homepage-departing'
+                );
             }));
         }
     });
@@ -67,7 +73,6 @@ function initTheme() {
     let clickCount = returningFromColour ? 2 : 0;
     let currentTheme = returningFromColour ? 'colour' : initialTheme;
 
-    // Consume the return marker.
     sessionStorage.removeItem(COLOUR_RETURN_KEY);
     sessionStorage.removeItem(COLOUR_INITIAL_KEY);
 
@@ -80,13 +85,16 @@ function initTheme() {
 
         root.style.backgroundColor = isDark ? '#121212' : '#fafafa';
         root.style.colorScheme = isDark ? 'dark' : 'light';
-        themeToggleBtn.setAttribute('aria-label', `Change color theme (currently ${currentTheme})`);
+
+        themeToggleBtn.setAttribute(
+            'aria-label',
+            `Change color theme (currently ${currentTheme})`
+        );
 
         moonIcon.classList.add('hidden');
         sunIcon.classList.add('hidden');
         colourIcon.classList.add('hidden');
 
-        // Display the icon representing the next theme.
         if (clickCount === 0) {
             (initialTheme === 'dark' ? sunIcon : moonIcon)
                 .classList.remove('hidden');
@@ -98,7 +106,11 @@ function initTheme() {
         }
     }
 
-    sessionStorage.setItem(COLOUR_ACTIVE_KEY, currentTheme === 'colour' ? '1' : '0');
+    sessionStorage.setItem(
+        COLOUR_ACTIVE_KEY,
+        currentTheme === 'colour' ? '1' : '0'
+    );
+
     applyTheme();
 
     themeToggleBtn.addEventListener('click', () => {
@@ -116,16 +128,21 @@ function initTheme() {
             localStorage.setItem('theme', currentTheme);
         }
 
-        sessionStorage.setItem(COLOUR_ACTIVE_KEY, currentTheme === 'colour' ? '1' : '0');
+        sessionStorage.setItem(
+            COLOUR_ACTIVE_KEY,
+            currentTheme === 'colour' ? '1' : '0'
+        );
+
         applyTheme();
     });
 
-    // Handle restoration from the browser's back/forward cache.
-    window.addEventListener('pageshow', (event) => {
+    window.addEventListener('pageshow', event => {
         if (!event.persisted) return;
 
-        if (sessionStorage.getItem(COLOUR_RETURN_KEY) === '1' ||
-            sessionStorage.getItem(COLOUR_ACTIVE_KEY) === '1') {
+        if (
+            sessionStorage.getItem(COLOUR_RETURN_KEY) === '1' ||
+            sessionStorage.getItem(COLOUR_ACTIVE_KEY) === '1'
+        ) {
             initialTheme =
                 sessionStorage.getItem(COLOUR_INITIAL_KEY) || initialTheme;
 
@@ -136,7 +153,11 @@ function initTheme() {
         sessionStorage.removeItem(COLOUR_RETURN_KEY);
         sessionStorage.removeItem(COLOUR_INITIAL_KEY);
 
-        sessionStorage.setItem(COLOUR_ACTIVE_KEY, currentTheme === 'colour' ? '1' : '0');
+        sessionStorage.setItem(
+            COLOUR_ACTIVE_KEY,
+            currentTheme === 'colour' ? '1' : '0'
+        );
+
         applyTheme();
     });
 
@@ -152,30 +173,50 @@ function initSubpageNavigation() {
 
     document.addEventListener('click', event => {
         const link = event.target.closest('a[href]');
-        if (!link || event.defaultPrevented || event.button !== 0 ||
-            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
-            link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+
+        if (
+            !link ||
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            link.hasAttribute('download') ||
+            (link.target && link.target !== '_self')
+        ) return;
 
         const destination = new URL(link.href, window.location.href);
-        const isInternalSubpage = destination.origin === location.origin &&
+
+        const isInternalSubpage =
+            destination.origin === location.origin &&
             destination.pathname.endsWith('.html') &&
             destination.pathname !== location.pathname;
+
         if (!isInternalSubpage || navigating) return;
 
         const state = window.getPortfolioThemeState?.();
+
         if (state?.currentTheme === 'colour') {
             sessionStorage.setItem(COLOUR_RETURN_KEY, '1');
-            sessionStorage.setItem(COLOUR_INITIAL_KEY, state.initialTheme);
+            sessionStorage.setItem(
+                COLOUR_INITIAL_KEY,
+                state.initialTheme
+            );
         } else {
             sessionStorage.removeItem(COLOUR_RETURN_KEY);
             sessionStorage.removeItem(COLOUR_INITIAL_KEY);
         }
 
         sessionStorage.setItem('portfolio-navigation-pending', '1');
+
         if (reducedMotion.matches) return;
+
         event.preventDefault();
         navigating = true;
+
         document.documentElement.classList.add('homepage-departing');
+
         setTimeout(() => location.assign(destination.href), 320);
     });
 }
@@ -186,48 +227,66 @@ function initTabs() {
 
     window.showSection = function (sectionId, options = {}) {
         const target = document.getElementById(sectionId);
+
         if (!target || !target.classList.contains('content-section')) return;
 
         const isInitial = activeSection === null;
-        if (!isInitial && activeSection === sectionId && !options.force) return;
+
+        if (!isInitial && activeSection === sectionId && !options.force) {
+            return;
+        }
 
         if (transitionTimer) clearTimeout(transitionTimer);
+
         document.querySelectorAll('.content-section').forEach(section => {
             section.classList.remove('tab-entering');
             section.classList.toggle('hidden', section !== target);
         });
 
-        // Remove the early-render override only after the correct section is selected.
         document.documentElement.classList.remove('initial-posts');
+
         activeSection = sectionId;
         updateActiveNavStyles(sectionId);
-        document.querySelectorAll('nav button.nav-link[aria-controls]').forEach(button => {
-            button.setAttribute('aria-pressed', String(button.getAttribute('aria-controls') === sectionId));
+
+        document.querySelectorAll(
+            'nav button.nav-link[aria-controls]'
+        ).forEach(button => {
+            button.setAttribute(
+                'aria-pressed',
+                String(button.getAttribute('aria-controls') === sectionId)
+            );
         });
 
         if (!isInitial && !options.instant) {
-            // Restart the animation even after a quick tab switch.
             void target.offsetWidth;
             target.classList.add('tab-entering');
+
             transitionTimer = setTimeout(() => {
                 target.classList.remove('tab-entering');
             }, 420);
         }
 
-        if (!isInitial && !options.preserveScroll) window.scrollTo(0, 0);
+        if (!isInitial && !options.preserveScroll) {
+            window.scrollTo(0, 0);
+        }
     };
 
     function tabFromLocation() {
         const requested = new URLSearchParams(location.search).get('tab');
+
         return requested === 'posts' || location.hash === '#posts'
-            ? 'posts' : 'about';
+            ? 'posts'
+            : 'about';
     }
 
     showSection(tabFromLocation(), { instant: true });
 
-    // On browser back/forward, derive the tab from the *current* URL.
-    window.addEventListener('pageshow', (event) => {
-        showSection(tabFromLocation(), { force: true, instant: true, preserveScroll: true });
+    window.addEventListener('pageshow', () => {
+        showSection(tabFromLocation(), {
+            force: true,
+            instant: true,
+            preserveScroll: true
+        });
     });
 }
 
@@ -261,76 +320,20 @@ function updateActiveNavStyles(activeId) {
 }
 
 const SKILLS = [
-    {
-        label: 'Actuator Theory',
-        from: 'Biped_V1',
-        href: 'projects/Biped_V1.html'
-    },
-    {
-        label: 'System Modeling',
-        from: 'Capstone',
-        href: 'projects/Capstone.html'
-    },
-    {
-        label: 'Linkage Kinematics',
-        from: 'Capstone',
-        href: 'projects/Capstone.html'
-    },
-    {
-        label: 'Actuator Sizing',
-        from: 'Capstone',
-        href: 'projects/Capstone.html'
-    },
-    {
-        label: 'Gearbox Selection',
-        from: 'Wave_Actuator',
-        href: 'projects/Wave_Actuator.html'
-    },
-    {
-        label: 'Kinematic Decoupling',
-        from: 'Robotic Hand',
-        href: 'projects/Hand.html'
-    },
-    {
-        label: 'Inverse Kinematics',
-        from: 'Quadruped',
-        href: 'projects/Quadruped.html'
-    },
-    {
-        label: 'Gravity Compensation',
-        from: 'Capstone',
-        href: 'projects/Capstone.html'
-    },
-    {
-        label: 'Capstan Drive',
-        from: 'Biped_V1',
-        href: 'projects/Biped_V1.html'
-    },
-    {
-        label: 'Underactuated Dynamics',
-        from: 'Robotic Hand',
-        href: 'projects/Hand.html'
-    },
-    {
-        label: 'Wave Drive',
-        from: 'Wave_Actuator',
-        href: 'projects/Wave_Actuator.html'
-    },
-    {
-        label: 'Gait and Step Generation',
-        from: 'Quadruped',
-        href: 'projects/Quadruped.html'
-    },
-    {
-        label: 'Belt + Pulley',
-        from: 'Biped_V2',
-        href: 'projects/Biped_V2.html'
-    },
-    {
-        label: 'Product Design',
-        from: 'Lamp',
-        href: 'projects/Lamp.html'
-    }
+    { label: 'Actuator Theory', from: 'Biped_V1', href: 'projects/Biped_V1.html' },
+    { label: 'System Modeling', from: 'Capstone', href: 'projects/Capstone.html' },
+    { label: 'Linkage Kinematics', from: 'Capstone', href: 'projects/Capstone.html' },
+    { label: 'Actuator Sizing', from: 'Capstone', href: 'projects/Capstone.html' },
+    { label: 'Gearbox Selection', from: 'Wave_Actuator', href: 'projects/Wave_Actuator.html' },
+    { label: 'Kinematic Decoupling', from: 'Robotic Hand', href: 'projects/Hand.html' },
+    { label: 'Inverse Kinematics', from: 'Quadruped', href: 'projects/Quadruped.html' },
+    { label: 'Gravity Compensation', from: 'Capstone', href: 'projects/Capstone.html' },
+    { label: 'Capstan Drive', from: 'Biped_V1', href: 'projects/Biped_V1.html' },
+    { label: 'Underactuated Dynamics', from: 'Robotic Hand', href: 'projects/Hand.html' },
+    { label: 'Wave Drive', from: 'Wave_Actuator', href: 'projects/Wave_Actuator.html' },
+    { label: 'Gait and Step Generation', from: 'Quadruped', href: 'projects/Quadruped.html' },
+    { label: 'Belt + Pulley', from: 'Biped_V2', href: 'projects/Biped_V2.html' },
+    { label: 'Product Design', from: 'Lamp', href: 'projects/Lamp.html' }
 ];
 
 const PILL_CLASSES =
@@ -341,42 +344,159 @@ const PILL_CLASSES =
     'transition-colors cursor-pointer';
 
 function initSkills() {
-    const container = document.getElementById('skills-index');
-
-    if (!container) return;
-
+    // Hovering or keyboard-focusing a skill highlights its linked project.
     const tiles = new Map();
 
-    document.querySelectorAll(
-        '#projects-grid > a[href], #experiences-grid > a[href]'
-    ).forEach(tile => {
-        const page = tile.getAttribute('href');
+    document.querySelectorAll('#projects-grid > a[href]').forEach(tile => {
+        const path = new URL(
+            tile.getAttribute('href'),
+            document.baseURI
+        ).pathname;
 
-        if (!tiles.has(page)) {
-            tiles.set(page, tile);
-        }
+        tiles.set(path, tile);
     });
 
-    // Skills are present in HTML so they remain discoverable without JavaScript.
-    // Bind the same tile highlighting to those existing anchors; never append duplicates.
-    container.querySelectorAll('a[href]').forEach(pill => {
-        const page = pill.getAttribute('href').split('#')[0];
-        const tile = tiles.get(page);
+    document.querySelectorAll(
+        '#technical-skills a[href], #skills-index a[href]'
+    ).forEach(skill => {
+        const path = new URL(
+            skill.getAttribute('href'),
+            document.baseURI
+        ).pathname;
 
-        if (tile) {
-            const on = () => tile.classList.add('tile-hl');
-            const off = () => tile.classList.remove('tile-hl');
+        const tile = tiles.get(path);
+        if (!tile) return;
 
-            pill.addEventListener('mouseenter', on);
-            pill.addEventListener('mouseleave', off);
-            pill.addEventListener('focus', on);
-            pill.addEventListener('blur', off);
+        const on = () => tile.classList.add('tile-hl');
+        const off = () => tile.classList.remove('tile-hl');
+
+        skill.addEventListener('mouseenter', on);
+        skill.addEventListener('mouseleave', off);
+        skill.addEventListener('focus', on);
+        skill.addEventListener('blur', off);
+    });
+}
+
+function initExpandableSkills() {
+    const button = document.getElementById('skills-expand');
+    const container = document.getElementById('technical-skills');
+
+    if (!button || !container) return;
+
+    const extras = [...container.querySelectorAll('.extra-skill')];
+    const label = document.getElementById('skills-expand-label');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let animation = null;
+
+    // Set the initial collapsed state.
+    extras.forEach(skill => {
+        skill.hidden = true;
+    });
+
+    label.textContent = `Show ${extras.length} more skills`;
+    button.setAttribute('aria-expanded', 'false');
+
+    button.addEventListener('click', () => {
+        const opening = button.getAttribute('aria-expanded') !== 'true';
+
+        if (animation) {
+            animation.cancel();
+            animation = null;
         }
+
+        const startHeight = container.getBoundingClientRect().height;
+
+        extras.forEach(skill => {
+            skill.hidden = false;
+        });
+
+        const expandedHeight = container.getBoundingClientRect().height;
+
+        const endHeight = opening
+            ? expandedHeight
+            : (() => {
+                extras.forEach(skill => {
+                    skill.hidden = true;
+                });
+
+                const collapsedHeight =
+                    container.getBoundingClientRect().height;
+
+                extras.forEach(skill => {
+                    skill.hidden = false;
+                });
+
+                return collapsedHeight;
+            })();
+
+        button.setAttribute('aria-expanded', String(opening));
+
+        label.textContent = opening
+            ? 'Show fewer skills'
+            : `Show ${extras.length} more skills`;
+
+        if (reducedMotion.matches || !container.animate) {
+            extras.forEach(skill => {
+                skill.hidden = !opening;
+            });
+
+            container.style.height = '';
+            container.style.overflow = '';
+            return;
+        }
+
+        container.style.overflow = 'hidden';
+        container.style.height = `${startHeight}px`;
+
+        animation = container.animate(
+            [
+                { height: `${startHeight}px` },
+                { height: `${endHeight}px` }
+            ],
+            {
+                duration: 330,
+                easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
+            }
+        );
+
+        // Fade and slide additional bubbles into position.
+        extras.forEach((skill, index) => {
+            skill.animate(
+                opening
+                    ? [
+                        { opacity: 0, transform: 'translateY(-5px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ]
+                    : [
+                        { opacity: 1, transform: 'translateY(0)' },
+                        { opacity: 0, transform: 'translateY(-5px)' }
+                    ],
+                {
+                    duration: opening ? 240 : 150,
+                    delay: opening ? Math.min(index * 12, 90) : 0,
+                    easing: 'ease-out'
+                }
+            );
+        });
+
+        const current = animation;
+
+        current.onfinish = () => {
+            if (animation !== current) return;
+
+            extras.forEach(skill => {
+                skill.hidden = !opening;
+            });
+
+            container.style.height = '';
+            container.style.overflow = '';
+            animation = null;
+        };
     });
 }
 
 function initPlayfulTiles() {
-    // Independent colour sequences for Projects and Experiences.
     const grids = [
         {
             selector: '#projects-grid > a',
@@ -410,12 +530,10 @@ function initPlayfulTiles() {
         const tiles = document.querySelectorAll(selector);
 
         tiles.forEach((tile, index) => {
-            // Assign the corresponding colour.
             const colour = colours[index % colours.length];
 
             tile.style.setProperty('--playful-color', colour);
 
-            // Consistent scatter positions.
             const angle = Math.sin(index * 2.37 + scatterSeed) * 5;
             const offsetX = Math.sin(index * 3.13 + scatterSeed + 0.6) * 9;
             const offsetY = Math.cos(index * 2.73 + scatterSeed + 0.2) * 9;
@@ -435,8 +553,9 @@ function initPlayfulTiles() {
                 `${offsetY.toFixed(1)}px`
             );
 
-            // Individual floating animation timing.
-            const bobDuration = 4.2 + ((index + Math.round(scatterSeed)) % 5) * 0.65;
+            const bobDuration =
+                4.2 + ((index + Math.round(scatterSeed)) % 5) * 0.65;
+
             const bobDelay = -(index + scatterSeed) * 0.73;
 
             tile.style.setProperty(
@@ -449,8 +568,6 @@ function initPlayfulTiles() {
                 `${bobDelay.toFixed(2)}s`
             );
 
-            // Wrap tile content so floating and scatter animations
-            // can operate independently.
             if (!tile.querySelector('.playful-inner')) {
                 const inner = document.createElement('div');
 
@@ -464,5 +581,39 @@ function initPlayfulTiles() {
                 tile.appendChild(inner);
             }
         });
+    });
+
+    // Match each skill bubble to its linked project's assigned colour.
+    const projectColours = new Map();
+
+    document.querySelectorAll('#projects-grid > a[href]').forEach(tile => {
+        const path = new URL(
+            tile.getAttribute('href'),
+            document.baseURI
+        ).pathname;
+
+        const colour = tile.style
+            .getPropertyValue('--playful-color')
+            .trim();
+
+        if (colour) {
+            projectColours.set(path, colour);
+        }
+    });
+
+    document.querySelectorAll(
+        '#technical-skills a.skill-chip[href]'
+    ).forEach(skill => {
+        const path = new URL(
+            skill.getAttribute('href'),
+            document.baseURI
+        ).pathname;
+
+        const colour = projectColours.get(path);
+
+        if (!colour) return;
+
+        skill.style.setProperty('--skill-project-colour', colour);
+        skill.setAttribute('data-project-colour', '');
     });
 }

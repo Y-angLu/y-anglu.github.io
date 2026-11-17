@@ -1,21 +1,22 @@
 <!DOCTYPE html>
+
 <html class="scroll-smooth" lang="en">
-    <head>
-        <!-- Search, sharing and structured metadata (nonvisual) -->
-        <meta name="description" content="Design and testing of a 3D-printable 8:1 rolling-element wave transmission for robotic actuation, including torque and backlash characterization.">
-        <meta name="robots" content="index, follow, max-image-preview:large">
-        <link rel="canonical" href="https://y-anglu.github.io/projects/Wave_Actuator.html">
-        <meta property="og:type" content="website">
-        <meta property="og:site_name" content="Yang Lu | Engineering Portfolio">
-        <meta property="og:title" content="Wave Actuator | Yang Lu">
-        <meta property="og:description" content="Design and testing of a 3D-printable 8:1 rolling-element wave transmission for robotic actuation, including torque and backlash characterization.">
-        <meta property="og:url" content="https://y-anglu.github.io/projects/Wave_Actuator.html">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Wave Actuator | Yang Lu">
-        <meta name="twitter:description" content="Design and testing of a 3D-printed 8:1 rolling-element wave transmission for robotic actuation, including torque and backlash characterization.">
-        <meta property="og:image" content="https://y-anglu.github.io/images/Actuator_Assembly.jpg">
-        <meta name="twitter:image" content="https://y-anglu.github.io/images/Actuator_Assembly.jpg">
-        <script type="application/ld+json">
+<head>
+<!-- Search, sharing and structured metadata (nonvisual) -->
+<meta content="Design and testing of a 3D-printable 8:1 rolling-element wave transmission for robotic actuation, including torque and backlash characterization." name="description"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://y-anglu.github.io/projects/Wave_Actuator.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Yang Lu | Engineering Portfolio" property="og:site_name"/>
+<meta content="Wave Actuator | Yang Lu" property="og:title"/>
+<meta content="Design and testing of a 3D-printable 8:1 rolling-element wave transmission for robotic actuation, including torque and backlash characterization." property="og:description"/>
+<meta content="https://y-anglu.github.io/projects/Wave_Actuator.html" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Wave Actuator | Yang Lu" name="twitter:title"/>
+<meta content="Design and testing of a 3D-printed 8:1 rolling-element wave transmission for robotic actuation, including torque and backlash characterization." name="twitter:description"/>
+<meta content="https://y-anglu.github.io/images/Actuator_Assembly.jpg" property="og:image"/>
+<meta content="https://y-anglu.github.io/images/Actuator_Assembly.jpg" name="twitter:image"/>
+<script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -48,15 +49,14 @@
     ]
 }
 </script>
-
-        <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <title>Wave Actuator | Yang Lu</title>
-        <link class="favicon" href="../images/gear_favicon.png" rel="icon" type="image/png"/>
-        <link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
-        <script src="https://cdn.tailwindcss.com">
-        </script>
-        <script>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Wave Actuator | Yang Lu</title>
+<link class="favicon" href="../images/gear_favicon.png" rel="icon" type="image/png">
+<link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf"/>
+<script src="https://cdn.tailwindcss.com">
+</script>
+<script>
             tailwind.config = {
                 darkMode: 'class',
                 theme: {
@@ -68,7 +68,7 @@
                 },
             };
         </script>
-        <style>
+<style>
             @font-face {
                 font-family: 'Quicksand';
                 src: url('../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
@@ -249,8 +249,246 @@
             @media (prefers-reduced-motion: reduce) {
                 .article-toc, .toc-link { transition: none; }
             }
-        </style>
-        <script>
+                    /* Shared portfolio image viewer */
+            /* Keep the article centered when the lightbox locks page scrolling. */
+                     html {
+                         scrollbar-gutter: stable;
+                     }
+
+                     /* Figure viewer: flat, restrained, and consistent with the article. */
+                     [data-lightbox-item] {
+                         cursor: zoom-in;
+                         transition: border-color 220ms ease, background-color 220ms ease;
+                     }
+
+                     [data-lightbox-item]:hover,
+                     [data-lightbox-item]:focus-visible {
+                         border-color: #a1a1aa;
+                         outline-offset: 3px;
+                     }
+
+                     .image-lightbox {
+                         position: fixed;
+                         inset: 0;
+                         z-index: 1000;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         padding: 24px;
+                         background: rgb(24 24 27 / 28%);
+                         opacity: 0;
+                         visibility: hidden;
+                         pointer-events: none;
+                         transition: opacity 240ms ease, visibility 240ms ease;
+                     }
+
+                     .dark .image-lightbox {
+                         background: rgb(0 0 0 / 46%);
+                     }
+
+                     .image-lightbox.is-open {
+                         opacity: 1;
+                         visibility: visible;
+                         pointer-events: auto;
+                     }
+
+                     .image-lightbox-content {
+                         position: relative;
+                         width: min(100%, 1040px);
+                         max-height: min(90vh, 980px);
+                         display: flex;
+                         flex-direction: column;
+                         align-items: center;
+                         gap: 12px;
+                         padding: 46px 52px 22px;
+                         border: 1px solid #e4e4e7;
+                         border-radius: 12px;
+                         background: #fafafa;
+                         color: #27272a;
+                         opacity: 0;
+                         transform: translateY(6px);
+                         transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.75,.3,1);
+                     }
+
+                     .image-lightbox.is-open .image-lightbox-content {
+                         opacity: 1;
+                         transform: translateY(0);
+                     }
+
+                     .dark .image-lightbox-content {
+                         background: #1c1c1f;
+                         border-color: #3f3f46;
+                         color: #f4f4f5;
+                     }
+
+                     .image-lightbox-media {
+                         width: 100%;
+                         min-height: 0;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         overflow: auto;
+                         border-radius: 8px;
+                         transition: opacity 160ms ease;
+                     }
+
+                     .image-lightbox-media.is-changing,
+                     .image-lightbox-caption.is-changing {
+                         opacity: .25;
+                     }
+
+                     .image-lightbox-media img {
+                         display: block;
+                         max-width: 100%;
+                         max-height: 75vh;
+                         width: auto;
+                         height: auto;
+                         object-fit: contain;
+                         border-radius: 6px;
+                     }
+
+                     .image-lightbox-placeholder {
+                         width: min(100%, 680px);
+                         min-height: 180px;
+                         padding: 28px;
+                         display: flex;
+                         flex-direction: column;
+                         align-items: center;
+                         justify-content: center;
+                         gap: 12px;
+                         text-align: center;
+                         border: 1px dashed #a1a1aa;
+                         border-radius: 8px;
+                         background: #f4f4f5;
+                         color: #71717a;
+                     }
+
+                     .dark .image-lightbox-placeholder {
+                         background: #27272a;
+                         color: #d4d4d8;
+                     }
+
+                     .image-lightbox-caption {
+                         max-width: 680px;
+                         text-align: center;
+                         font-size: 13px;
+                         line-height: 1.6;
+                         color: #52525b;
+                         transition: opacity 160ms ease;
+                     }
+
+                     .dark .image-lightbox-caption {
+                         color: #d4d4d8;
+                     }
+
+                     .image-lightbox-counter {
+                         font-size: 11px;
+                         font-weight: 600;
+                         letter-spacing: .05em;
+                         color: #71717a;
+                     }
+
+                     .image-lightbox-control {
+                         position: absolute;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         width: 34px;
+                         height: 34px;
+                         border: 1px solid #e4e4e7;
+                         border-radius: 8px;
+                         background: #fafafa;
+                         color: #3f3f46;
+                         font-size: 21px;
+                         cursor: pointer;
+                         transition: background-color 180ms ease, border-color 180ms ease;
+                     }
+
+                     .dark .image-lightbox-control {
+                         background: #1c1c1f;
+                         border-color: #52525b;
+                         color: #f4f4f5;
+                     }
+
+                     .image-lightbox-control:hover,
+                     .image-lightbox-control:focus-visible {
+                         background: #e4e4e7;
+                         border-color: #a1a1aa;
+                     }
+
+                     .dark .image-lightbox-control:hover,
+                     .dark .image-lightbox-control:focus-visible {
+                         background: #3f3f46;
+                     }
+
+                     .image-lightbox-close { top: 10px; right: 12px; }
+                     .image-lightbox-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+                     .image-lightbox-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+                     @media (max-width: 640px) {
+                         .image-lightbox { padding: 14px; }
+
+                         .image-lightbox-content {
+                             max-height: 88vh;
+                             padding: 48px 16px 62px;
+                         }
+
+                         .image-lightbox-media img { max-height: 65vh; }
+                         .image-lightbox-prev { left: 16px; top: auto; bottom: 12px; transform: none; }
+                         .image-lightbox-next { right: 16px; top: auto; bottom: 12px; transform: none; }
+                     }
+
+                     @media (prefers-reduced-motion: reduce) {
+                         .image-lightbox, .image-lightbox-content, .image-lightbox-media,
+                         .image-lightbox-caption, .image-lightbox-control, [data-lightbox-item] {
+                             transition: none !important;
+                         }
+                     }
+
+        
+/* Project overview shared with the Hand page */
+.overview-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #71717a; }
+            .overview-image { background: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 14px; overflow: hidden; }
+            .dark .overview-image { background: #202023; border-color: #3f3f46; }
+            .overview-image img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 9px; }
+            .overview-feature { border-top: 1px solid #e4e4e7; padding-top: 20px; }
+            .dark .overview-feature { border-color: #3f3f46; }
+            .overview-feature h3 { font-weight: 700; font-size: 15px; margin: 5px 0 7px; }
+            .overview-feature p { font-size: 14px; line-height: 1.85; font-weight: 500; color: #52525b; }
+            .dark .overview-feature p { color: #a1a1aa; }
+            .overview-skill { display: inline-block; font-size: 10px; font-weight: 700; padding: 5px 9px; border-radius: 999px; background: #f4f4f5; border: 1px solid #e4e4e7; color: #52525b; }
+            .dark .overview-skill { background: #27272a; border-color: #3f3f46; color: #d4d4d8; }
+            .overview-cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 18px; border-radius: 10px; background: #18181b; color: white; font-size: 12px; font-weight: 700; transition: transform .2s, background .2s; }
+            .overview-cta:hover { background: #3f3f46; transform: translateY(-2px); }
+            .dark .overview-cta { background: #f4f4f5; color: #18181b; }
+            .dark .overview-cta:hover { background: #d4d4d8; }
+            #technical-writeup, #overview { scroll-margin-top: 78px; }
+
+            /* Compact recruiter-facing project summary */
+
+            /* Compact hero + skills: the same panel stacks naturally on phones. */
+            .overview-skills-panel { min-width: 0; border: 1px solid #e4e4e7; border-radius: 14px; background: #fff; padding: 17px 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 13px; }
+            .dark .overview-skills-panel { background: #202023; border-color: #3f3f46; }
+            .overview-skills-group { min-width: 0; border-top: 1px solid #e4e4e7; padding-top: 10px; }
+            .dark .overview-skills-group { border-color: #3f3f46; }
+            .overview-skills-group h3 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #71717a; margin-bottom: 5px; }
+            .overview-skills-group p { font-size: 12px; line-height: 1.7; font-weight: 600; color: #3f3f46; }
+            .dark .overview-skills-group p { color: #d4d4d8; }
+            @media (max-width: 639px) {
+                .overview-skills-panel { padding: 15px; display: grid; grid-template-columns: minmax(0,1fr); gap: 13px; }
+                .overview-skills-panel > div:first-child { grid-column: 1 / -1; }
+                .overview-skills-group:last-child { grid-column: 1 / -1; }
+                .overview-skills-group p br { display: initial; }
+                .overview-skills-group p { line-height: 1.8; overflow-wrap: normal; }
+            }
+            .overview-fact { border-top: 1px solid #d4d4d8; padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+            .dark .overview-fact { border-color: #52525b; }
+            .overview-fact-label { color: #71717a; font-size: 10px; font-weight: 700; letter-spacing: .075em; text-transform: uppercase; }
+            .overview-fact strong { font-size: 14px; font-weight: 700; }
+            .overview-number { color: #71717a; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+
+</style>
+<script>
             // Initialize the correct theme before the page renders.
             (function () {
                 const fromColourMode =
@@ -278,233 +516,259 @@
                 root.style.colorScheme = useDark ? 'dark' : 'light';
             })();
         </script>
-        <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-        </script>
-    </head>
-    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
-        <div aria-hidden="true" class="navigation-veil">
-        </div>
-        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-            <div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
-                <a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../index.html">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
-                        </path>
-                    </svg>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+</link></meta></meta></head>
+<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+<div aria-hidden="true" class="navigation-veil">
+</div>
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+<div class="max-w-3xl mx-auto px-6 h-12 flex items-center justify-start">
+<a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition flex items-center gap-2" href="../index.html">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+</path>
+</svg>
                     Back to Home
                 </a>
-            </div>
-            <div id="reading-progress" aria-hidden="true"></div>
-        </header>
-        <div class="toc-scrim" id="toc-scrim" aria-hidden="true"></div>
-        <nav class="article-toc" id="article-toc" aria-label="Table of contents">
-            <p class="toc-label">On this page</p>
-            <a class="toc-link" href="#transmission-selection" data-toc-link>1. Transmission Selection</a>
-            <a class="toc-link toc-sub" href="#reduction-methods" data-toc-link>Comparing Reduction Methods</a>
-            <a class="toc-link toc-sub" href="#cycloidal-comparison" data-toc-link>Cycloidal vs. Rolling-Element…</a>
-            <a class="toc-link" href="#wave-drive-mechanics" data-toc-link>2. Wave Drive Design</a>
-            <a class="toc-link toc-sub" href="#mechanism-geometry" data-toc-link>Mechanism and Geometry</a>
-            <a class="toc-link toc-sub" href="#contact-loading" data-toc-link>Contact Loading and Material Selection</a>
-            <a class="toc-link toc-sub" href="#design-iterations" data-toc-link>Backlash and Design Iterations</a>
-            <a class="toc-link" href="#mechanical-design" data-toc-link>3. Mechanical Design</a>
-            <a class="toc-link" href="#retrospect" data-toc-link>4. In Retrospect</a>
-        </nav>
-        <button class="toc-mobile-toggle" id="toc-toggle" type="button" aria-controls="article-toc" aria-expanded="false">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-            <span>Contents</span>
-        </button>
-        <main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
-            <article class="space-y-5">
-                <div class="space-y-2">
-                    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl text-zinc-900 dark:text-zinc-50">
-                        Wave Actuator
-                    </h1>
-                    <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
-                        <span>
-                            December 2024 — January 2025
-                        </span>
-                        <span class="hidden sm:inline text-zinc-300 dark:text-zinc-600">
-                            •
-                        </span>
-                        <span>
-                            Personal Project
-                        </span>
-                    </div>
-                </div>
-                <hr class="border-zinc-200 dark:border-zinc-800"/>
-                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+</div>
+<div aria-hidden="true" id="reading-progress"></div>
+</header>
+<div aria-hidden="true" class="toc-scrim" id="toc-scrim"></div>
+<nav aria-label="Table of contents" class="article-toc" id="article-toc">
+<p class="toc-label">On this page</p>
+<a class="toc-link" data-toc-link="" href="#overview">Project Overview</a><a class="toc-link" data-toc-link="" href="#technical-writeup">Technical write-up</a><a class="toc-link" data-toc-link="" href="#transmission-selection">1. Transmission Selection</a>
+<a class="toc-link toc-sub" data-toc-link="" href="#reduction-methods">Comparing Reduction Methods</a>
+<a class="toc-link toc-sub" data-toc-link="" href="#cycloidal-comparison">Cycloidal vs. Rolling-Element…</a>
+<a class="toc-link" data-toc-link="" href="#wave-drive-mechanics">2. Wave Drive Design</a>
+<a class="toc-link toc-sub" data-toc-link="" href="#mechanism-geometry">Mechanism and Geometry</a>
+<a class="toc-link toc-sub" data-toc-link="" href="#contact-loading">Contact Loading and Material Selection</a>
+<a class="toc-link toc-sub" data-toc-link="" href="#design-iterations">Backlash and Design Iterations</a>
+<a class="toc-link" data-toc-link="" href="#mechanical-design">3. Mechanical Design</a>
+<a class="toc-link" data-toc-link="" href="#retrospect">4. Retrospective and Lessons Learned</a>
+</nav>
+<button aria-controls="article-toc" aria-expanded="false" class="toc-mobile-toggle" id="toc-toggle" type="button">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg>
+<span>Contents</span>
+</button>
+<main class="max-w-3xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]">
+<section aria-labelledby="overview-title" class="space-y-7 pb-12" data-toc-target="" id="overview">
+<div class="space-y-2">
+<p class="overview-eyebrow">December 2024 — January 2025 • Personal Project</p>
+<div class="flex flex-wrap items-end justify-between gap-3">
+<div class="space-y-1"><h1 class="text-3xl sm:text-4xl font-bold tracking-tight" id="overview-title">Wave Actuator</h1><p class="text-sm font-medium text-zinc-600 dark:text-zinc-300">A 3D-printable, low-ratio rolling-element transmission for robotic joints.</p></div>
+<a class="text-xs font-bold underline underline-offset-4 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white" href="#technical-writeup">Technical write-up ↓</a>
+</div>
+</div>
+<!-- The overview's skills are adjacent to the hero, not a separate section at the bottom. -->
+<div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] gap-4 items-stretch">
+<figure class="overview-image aspect-[16/10] sm:aspect-auto sm:min-h-[265px] p-3">
+<img alt="Wave Actuator project image" fetchpriority="high" src="../images/Actuator_Assembly.jpg"/>
+</figure>
+<aside aria-label="Project skills and tools" class="overview-skills-panel">
+<div>
+<h2 class="text-sm font-bold">Technical Overview</h2>
+</div>
+<div class="overview-skills-group">
+<h3>Engineering</h3>
+<p>Gearbox design<br/>Backlash reduction<br/>Material selection</p>
+</div>
+<div class="overview-skills-group">
+<h3>Analysis &amp; Methods</h3>
+<p>Contact mechanics<br/>Profile generation<br/>Torque characterization</p>
+</div>
+<div class="overview-skills-group">
+<h3>Tools &amp; Technologies</h3>
+<p>Onshape & featurescript<br/>SLA 3D Printing</p>
+</div>
+</aside>
+</div>
+<div class="space-y-4">
+<div class="flex items-baseline justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 pb-2"><h2 class="text-lg sm:text-xl font-bold">Design highlights</h2></div>
+<div class="grid sm:grid-cols-3 gap-4 sm:gap-5">
+<div class="overview-feature"><span class="overview-number">01 / MECHANISM</span><h3>Rolling-element reduction</h3><p>Developed an 8:1 transmission using two eccentric stages offset by 180° and roller contacts.</p></div>
+<div class="overview-feature"><span class="overview-number">02 / MANUFACTURING</span><h3>Printable contact geometry</h3><p>Selected larger printable profiles and resin construction, while considering contact stress and clearances.</p></div>
+<div class="overview-feature"><span class="overview-number">03 / TESTING</span><h3>Torque and backlash</h3><p>Measured approximately 13 N·m peak torque and less than 0.5° backlash using a prototype test setup.</p></div>
+</div>
+
+
+<div class="grid grid-cols-2 gap-3 sm:gap-4">
+    <!-- Replace each placeholder with an <img> using class="w-full h-full object-cover rounded-[9px]". -->
+    <figure class="overview-image aspect-[5/4] p-3" data-lightbox-item role="button" tabindex="0" aria-label="Expand overview image placeholder">
+        <div class="w-full h-full rounded-[9px] border border-dashed border-zinc-300 dark:border-zinc-600 flex items-center justify-center text-xs font-semibold text-zinc-400 dark:text-zinc-500" data-image-placeholder="1">Image placeholder</div>
+    </figure>
+    <figure class="overview-image aspect-[5/4] p-3" data-lightbox-item role="button" tabindex="0" aria-label="Expand overview image placeholder">
+        <div class="w-full h-full rounded-[9px] border border-dashed border-zinc-300 dark:border-zinc-600 flex items-center justify-center text-xs font-semibold text-zinc-400 dark:text-zinc-500" data-image-placeholder="2">Image placeholder</div>
+    </figure>
+</div>
+
+</div>
+<div class="grid sm:grid-cols-[120px_1fr] gap-2 sm:gap-5 border-t border-zinc-200 dark:border-zinc-800 pt-4"><h2 class="text-sm font-bold">Result</h2><p class="text-sm leading-6 font-medium text-zinc-600 dark:text-zinc-300">The actuator demonstrated a compact, printable reduction concept; more complete efficiency, stiffness, and wear testing would be needed to validate performance.</p></div>
+<div class="flex justify-end pt-1"><a class="overview-cta" href="#technical-writeup">Read the full write-up <span aria-hidden="true">↓</span></a></div>
+</section><article class="space-y-5 border-t border-zinc-200 dark:border-zinc-800 pt-7" data-toc-target="" id="technical-writeup"><div class="flex items-center justify-between gap-3"><h2 class="text-xl sm:text-2xl font-bold">Technical write-up</h2><a class="text-xs font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" href="#overview">↑ Overview</a></div>
+
+
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                     Following my exploration of capstan drives in
                     <a class="font-bold underline decoration-zinc-300 dark:decoration-zinc-700" href="Biped_V1.html">
                         Wheeled Biped V1
                     </a>
                     , I wanted to develop a more compact, integrated robotic actuator. I was particularly interested in alternative reduction mechanisms that could be manufactured using 3D printing while maintaining low backlash, high torque capacity, and a concentric input-output arrangement.
                 </p>
-                <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                     Development of the wave actuator ran in parallel with Wheeled Biped V2, with the mechanical requirements of each project influencing the other. The final actuator design incorporated two wave drives side by side, an arrangement driven by the packaging and actuation requirements of V2's legs.
                 </p>
-                <section aria-labelledby="transmission-selection" class="space-y-4 pt-4">
-                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="transmission-selection" data-toc-target>
+<section aria-labelledby="transmission-selection" class="space-y-4 pt-4">
+<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="transmission-selection">
                         1. Transmission Selection
                     </h2>
-                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="reduction-methods" data-toc-target>
+<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="reduction-methods">
                         1.1 Comparing Reduction Methods
                     </h3>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         With cost and manufacturing accessibility as major constraints, I wanted to develop a compact, low-reduction quasi-direct-drive (QDD) actuator using primarily 3D-printed components. Beyond minimizing backlash, I was concerned with the strength, wear resistance, and dimensional accuracy of printed transmission components.
                     </p>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         I considered four architectures:
                     </p>
-                    <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
-                        <table class="w-full min-w-[620px] text-sm text-left text-zinc-700 dark:text-zinc-300">
-                            <thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
-                                <tr>
-                                    <th class="p-3 font-bold">
+<div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+<table class="w-full min-w-[620px] text-sm text-left text-zinc-700 dark:text-zinc-300">
+<thead class="bg-zinc-100 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100">
+<tr>
+<th class="p-3 font-bold">
                                         Transmission
                                     </th>
-                                    <th class="p-3 font-bold">
+<th class="p-3 font-bold">
                                         Advantages
                                     </th>
-                                    <th class="p-3 font-bold">
+<th class="p-3 font-bold">
                                         Limitations for My Design
                                     </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
-                                    <td class="p-3 font-bold">
+</tr>
+</thead>
+<tbody>
+<tr class="border-t border-zinc-200 dark:border-zinc-800">
+<td class="p-3 font-bold">
                                         Planetary
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         Compact, efficient, concentric input/output
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         Small printed gear teeth susceptible to deformation and wear; backlash from tooth clearance
                                     </td>
-                                </tr>
-                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
-                                    <td class="p-3 font-bold">
+</tr>
+<tr class="border-t border-zinc-200 dark:border-zinc-800">
+<td class="p-3 font-bold">
                                         Strain Wave
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         High single-stage reduction, minimal backlash
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         Requires a fatigue-resistant flexspline, impractical to manufacture reliably with my FDM printer
                                     </td>
-                                </tr>
-                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
-                                    <td class="p-3 font-bold">
+</tr>
+<tr class="border-t border-zinc-200 dark:border-zinc-800">
+<td class="p-3 font-bold">
                                         Cycloidal
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         High torque capacity, distributed loading, low backlash potential
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         Eccentric disc and output coupling; potentially numerous bearings, pins, and tight-fitting components
                                     </td>
-                                </tr>
-                                <tr class="border-t border-zinc-200 dark:border-zinc-800">
-                                    <td class="p-3 font-bold">
+</tr>
+<tr class="border-t border-zinc-200 dark:border-zinc-800">
+<td class="p-3 font-bold">
                                         Rolling-Element Eccentric (Wave)
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         Concentric layout, larger profile features, standard rolling elements
                                     </td>
-                                    <td class="p-3">
+<td class="p-3">
                                         Less-established performance; sensitive to contact geometry and tolerances
                                     </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+</tr>
+</tbody>
+</table>
+</div>
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Strain-wave drives were ruled out early because of their flexspline requirements and typically high reduction ratios. Planetary drives were more straightforward to manufacture, but their relatively small meshing teeth raised concerns about printed-part durability and backlash.
                     </p>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         This left cycloidal and rolling-element eccentric drives as the most promising options.
                     </p>
-                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" id="cycloidal-comparison" data-toc-target>
+<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="cycloidal-comparison">
                         1.2 Cycloidal vs. Rolling-Element Eccentric Drives
                     </h3>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The rolling-element eccentric drive described by Fritsch et al. (2023) shares a similar reduction principle with cycloidal drives. However, rather than using a rotating cycloidal disc engaging a ring of pins,
       it uses individual rolling elements driven radially by an eccentric crank. These elements follow a stationary gear profile, while a concentric cage constrains their movement and serves as the output.
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-                            <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned htd pulley geometry illustration" class="w-full h-full object-cover"> -->
-                            <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-                                <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+<div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+<!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned htd pulley geometry illustration" class="w-full h-full object-cover"> -->
+<div class="absolute inset-0 flex items-center justify-center p-5 text-center">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                     Image placeholder
                                 </span>
-                            </div>
-                        </div>
-                        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-                            <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned dual-belt arrangement illustration" class="w-full h-full object-cover"> -->
-                            <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-                                <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+</div>
+</div>
+<div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+<!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned dual-belt arrangement illustration" class="w-full h-full object-cover"> -->
+<div class="absolute inset-0 flex items-center justify-center p-5 text-center">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                     Image placeholder
                                 </span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+</div>
+</div>
+</div>
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         For my application, this offered several potential advantages:
                     </p>
-                    <ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">
+<ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">
                                 Fewer purchased components:
                             </strong>
                             A simpler arrangement than the bearing-supported cycloidal designs I was considering.
                         </li>
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">
                                 Larger printable features:
                             </strong>
                             Smooth gear profiles that were easier to manufacture than small meshing teeth.
                         </li>
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">
                                 Load-bearing contacts:
                             </strong>
                             Aluminum rollers providing accurately manufactured contact surfaces, although the printed profile would still experience contact stress and wear.
                         </li>
-                    </ul>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        <strong class="text-zinc-900 dark:text-zinc-100">
+</ul>
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<strong class="text-zinc-900 dark:text-zinc-100">
                             Decision:
                         </strong>
                         Although both architectures could be 3D printed, I selected the rolling-element eccentric drive because its geometry seemed better suited to my available manufacturing methods. Its large printable profiles, standard rolling elements, and concentric output offered a promising alternative to conventional gearboxes, with opportunities to further reduce backlash through geometric optimization. Plus, it looked cool!
                     </p>
-                </section>
-
-                <!-- ================================================== -->
-                <!-- 2. Wave Drive Design                                -->
-                <!-- ================================================== -->
-
-                <section aria-labelledby="wave-drive-mechanics" class="space-y-4 pt-4">
-
-                    <h2
-                        id="wave-drive-mechanics"
-                        class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20"
-                     data-toc-target>
+</section>
+<!-- ================================================== -->
+<!-- 2. Wave Drive Design                                -->
+<!-- ================================================== -->
+<section aria-labelledby="wave-drive-mechanics" class="space-y-4 pt-4">
+<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="wave-drive-mechanics">
                         2. Wave Drive Design
                     </h2>
-
-                    <!-- ============================================== -->
-                    <!-- 2.1 Mechanism and Geometry                     -->
-                    <!-- ============================================== -->
-
-                    <h3
-                        id="mechanism-geometry"
-                        class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2"
-                     data-toc-target>
+<!-- ============================================== -->
+<!-- 2.1 Mechanism and Geometry                     -->
+<!-- ============================================== -->
+<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="mechanism-geometry">
                         2.1 Mechanism and Geometry
                     </h3>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The transmission uses an eccentric crank to press rollers against
                         a stationary outer profile. As described by Fritsch et al., the
                         profile acts as a series of ramps, converting the radial forces
@@ -512,68 +776,58 @@
                         output cage. Torque is therefore transmitted through geometric
                         contact rather than frictional traction.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         An important distinction is that the eccentric does not drive
                         every roller equally. Rollers in favorable contact positions
                         transmit torque, while others are guided through their motion
                         by the cage. The contact geometry determines how effectively
                         each roller contributes to torque transmission.
                     </p>
-
-                    <!-- Image: Annotated Wave Drive Mechanism -->
-                    <div class="aspect-video rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-                            Annotated cross-section: eccentric, rollers, fixed profile,
-                            output cage, and force path
-                        </span>
-                    </div>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<!-- Image pair: Annotated Wave Drive Mechanism -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Annotated cross-section: eccentric, rollers, fixed profile, output cage, and force path</span>
+</div>
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Additional annotated wave drive mechanism image</span>
+</div>
+</div>
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         I generated the transmission geometry using an Onshape FeatureScript
                         adapted from
-                        <a
-                            href="https://www.youtube.com/watch?v=zOLQw-TxE7s"
-                            class="text-zinc-900 dark:text-zinc-100 underline underline-offset-4 hover:opacity-70 transition-opacity"
-                        >
+                        <a class="text-zinc-900 dark:text-zinc-100 underline underline-offset-4 hover:opacity-70 transition-opacity" href="https://www.youtube.com/watch?v=zOLQw-TxE7s">
                             this YouTube tutorial
                         </a>.
                         This allowed me to adjust roller dimensions, eccentricity, and
                         clearances without manually constructing the gear profile.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The final design used an <strong class="text-zinc-900 dark:text-zinc-100">8:1 reduction ratio</strong> and
                         eight aluminum rollers per stage, each 6 mm in
                         diameter and height. These parameters were refined alongside
                         the requirements of Wheeled Biped V2, balancing packaging,
                         roller engagement, and manufacturability.
                     </p>
-
-                    <!-- Image: FeatureScript and Generated Profile -->
-                    <div class="aspect-video rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-                            FeatureScript parameters and generated wave-drive profile
-                        </span>
-                    </div>
-
-                    <!-- ============================================== -->
-                    <!-- 2.2 Contact Loading and Material Selection     -->
-                    <!-- ============================================== -->
-
-                    <h3
-                        id="contact-loading"
-                        class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2"
-                     data-toc-target>
+<!-- Image pair: FeatureScript and Generated Profile -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">FeatureScript parameters and generated wave-drive profile</span>
+</div>
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Additional featurescript and generated profile image</span>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- 2.2 Contact Loading and Material Selection     -->
+<!-- ============================================== -->
+<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="contact-loading">
                         2.2 Contact Loading and Material Selection
                     </h3>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         One of the main challenges was estimating the forces acting
                         on the printed gear profile.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Although each stage contained eight rollers, not all would
                         necessarily carry significant load. Fritsch et al. examine the
                         forces acting on individual rollers and how contact pressure
@@ -581,35 +835,30 @@
                         the load distribution among multiple rollers requires further
                         analysis.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         For my initial calculations, I assumed
                         <strong class="text-zinc-900 dark:text-zinc-100">two effective load-bearing rollers per stage</strong>,
                         with the complete actuator's torque shared equally between
                         its two stages. This was a simplifying assumption rather
                         than a verified contact count.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Using the measured 13 Nm peak static output torque as a
                         reference load, I estimated the average tangential force
                         per loaded roller:
                     </p>
-
-                    <div class="py-2 text-center overflow-x-auto text-zinc-800 dark:text-zinc-100">
+<div class="py-2 text-center overflow-x-auto text-zinc-800 dark:text-zinc-100">
                         \[
                             F_t \approx
                             \frac{T_{\mathrm{out}}}
                             {n_{\mathrm{eff}}r_{\mathrm{eff}}}
                         \]
                     </div>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         With four effective load-bearing rollers across both stages
                         and an assumed effective torque radius of 33.2 mm:
                     </p>
-
-                    <div class="py-2 text-center overflow-x-auto text-zinc-800 dark:text-zinc-100">
+<div class="py-2 text-center overflow-x-auto text-zinc-800 dark:text-zinc-100">
                         \[
                             F_t \approx
                             \frac{13}{4(0.0332)}
@@ -617,32 +866,30 @@
                             \boxed{98\ \mathrm{N}}
                         \]
                     </div>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         This represents an approximate tangential load, not the
                         actual contact-normal force. The latter depends on the
                         profile's pressure angle and may be considerably higher.
                         Uneven load sharing could also concentrate forces on
                         fewer rollers.
                     </p>
-
-                    <!-- Image: Contact Forces and Pressure Angle -->
-                    <div class="aspect-video rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-                            Roller-to-profile contact: normal force, pressure angle,
-                            and tangential contribution to output torque
-                        </span>
-                    </div>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<!-- Image pair: Contact Forces and Pressure Angle -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Roller-to-profile contact: normal force, pressure angle, and tangential contribution to output torque</span>
+</div>
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Additional contact forces and pressure angle image</span>
+</div>
+</div>
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         I selected <strong class="text-zinc-900 dark:text-zinc-100">JLCPCB's 9600 SLA resin</strong> primarily
                         because it was the most accessible manufacturing material
                         available to me. Initial contact calculations gave me
                         reasonable confidence that it could work for a functional
                         prototype.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         A simplified Hertzian line-contact estimate suggested localized
                         pressures on the order of 78 MPa under the assumed loading
                         and geometry. However, the result was sensitive to contact
@@ -650,236 +897,198 @@
                         not be compared directly against the resin's tensile strength
                         to establish a safety factor.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The analysis was therefore useful as an initial assessment
                         rather than proof of continuous load capacity. Long-term
                         deformation, fatigue, and wear remained uncertain.
                     </p>
-
-
-                    <!-- ============================================== -->
-                    <!-- 2.3 Backlash and Design Iterations              -->
-                    <!-- ============================================== -->
-
-                    <h3
-                        id="design-iterations"
-                        class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2"
-                     data-toc-target>
+<!-- ============================================== -->
+<!-- 2.3 Backlash and Design Iterations              -->
+<!-- ============================================== -->
+<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="design-iterations">
                         2.3 Backlash and Design Iterations
                     </h3>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Another focus was minimizing backlash without requiring
                         extremely tight manufacturing tolerances. Several parameters
                         influenced this:
                     </p>
-
-                    <ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Gear-profile geometry:</strong>
+<ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Gear-profile geometry:</strong>
                             Determines contact locations, pressure angles, and
                             sensitivity to clearance.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Eccentricity:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Eccentricity:</strong>
                             Controls radial roller travel and engagement.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Clearance and preload:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Clearance and preload:</strong>
                             Reducing clearance or increasing preload can reduce
                             lost motion, but may increase friction and binding.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Eccentric phasing:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Eccentric phasing:</strong>
                             Offsetting stages balances internal forces and may
                             reduce backlash through opposing contact.
                         </li>
-
-                    </ul>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I used two eccentric stages offset by <strong class="text-zinc-900 dark:text-zinc-100">180&deg;</strong>
+</ul>
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+                        I used two eccentric stages offset by <strong class="text-zinc-900 dark:text-zinc-100">180°</strong>
                         to reduce unbalanced forces and moments, an arrangement also
                         discussed by Fritsch et al. Angular offsets between stages
                         may also reduce backlash, although this depends on the
                         contact geometry and clearances.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         Through several iterations, I refined the profile and
                         clearances to improve engagement while maintaining smooth
                         operation.
                     </p>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         To evaluate backlash, I attached a laser pointer to the
                         output and measured its angular displacement on a wall
                         at a known distance. This provided a simple way to quantify
                         lost motion during direction reversals.
                     </p>
-
-                    <!-- Image: Eccentric Phasing and Backlash Test -->
-                    <div class="aspect-video rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-                            Dual-eccentric arrangement and laser-pointer backlash test
-                        </span>
-                    </div>
-
-                </section>
-
-                <!-- ================================================== -->
-                <!-- 3. Mechanical Design                                -->
-                <!-- ================================================== -->
-                <section aria-labelledby="mechanical-design" class="space-y-4 pt-4">
-                    <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" id="mechanical-design" data-toc-target>
+<!-- Image pair: Eccentric Phasing and Backlash Test -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Dual-eccentric arrangement and laser-pointer backlash test</span>
+</div>
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">Additional eccentric phasing and backlash test image</span>
+</div>
+</div>
+</section>
+<!-- ================================================== -->
+<!-- 3. Mechanical Design                                -->
+<!-- ================================================== -->
+<section aria-labelledby="mechanical-design" class="space-y-4 pt-4">
+<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="mechanical-design">
                         3. Mechanical Design
                     </h2>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         For the motor, I selected an <strong class="text-zinc-900 dark:text-zinc-100">Eaglepower 8308 brushless outrunner</strong>.
             Its pancake geometry and large rotor diameter offered high torque
             density, meeting the requirements I had calculated for Wheeled
             Biped V2. Its popularity in hobby robotics also meant documentation
             and troubleshooting resources were readily available.
                     </p>
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         I paired it with a <strong class="text-zinc-900 dark:text-zinc-100">moteus r4 controller</strong>, an affordable, open-source
             platform offering field-oriented control (FOC) and encoder feedback.
             This allowed me to focus on the mechanical transmission rather
             than developing custom motor-control electronics.
                     </p>
-                    <!-- Mechanical Design Image Gallery -->
-                    <!-- Replace each placeholder with an <img> element when ready. -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
-                        <!-- Image 1: CAD Assembly -->
-                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+<!-- Mechanical Design Image Gallery -->
+<!-- Replace each placeholder with an <img> element when ready. -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+<!-- Image 1: CAD Assembly -->
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                 CAD assembly
                             </span>
-                        </div>
-                        <!-- Image 2: Cross-Section -->
-                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+</div>
+<!-- Image 2: Cross-Section -->
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                 Cross-section
                             </span>
-                        </div>
-                        <!-- Image 3: Eccentric Stages -->
-                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+</div>
+<!-- Image 3: Eccentric Stages -->
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                 Eccentric stages
                             </span>
-                        </div>
-                        <!-- Image 4: Printed Components -->
-                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+</div>
+<!-- Image 4: Printed Components -->
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                 Printed components
                             </span>
-                        </div>
-                        <!-- Image 5: Assembled Actuator -->
-                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+</div>
+<!-- Image 5: Assembled Actuator -->
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                 Assembled actuator
                             </span>
-                        </div>
-                        <!-- Image 6: Test Setup -->
-                        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-                            <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+</div>
+<!-- Image 6: Test Setup -->
+<div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
+<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
                                 Test setup
                             </span>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- ================================================== -->
-                <!-- 4. In Retrospect                                    -->
-                <!-- ================================================== -->
-
-                <section aria-labelledby="retrospect" class="space-y-4 pt-4">
-
-                    <h2
-                        id="retrospect"
-                        class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20"
-                     data-toc-target>
-                        4. In Retrospect
+</div>
+</div>
+</section>
+<!-- ================================================== -->
+<!-- 4. Retrospective and Lessons Learned                                    -->
+<!-- ================================================== -->
+<section aria-labelledby="retrospect" class="space-y-4 pt-4">
+<h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="retrospect">
+                        4. Retrospective and Lessons Learned
                     </h2>
-
-                    <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         The completed actuator achieved
                         <strong class="text-zinc-900 dark:text-zinc-100">13 Nm peak static output torque</strong>,
                         approximately <strong class="text-zinc-900 dark:text-zinc-100">250 rpm maximum output speed</strong>,
-                        and <strong class="text-zinc-900 dark:text-zinc-100">less than 0.5&deg; backlash</strong>.
+                        and <strong class="text-zinc-900 dark:text-zinc-100">less than 0.5° backlash</strong>.
                         While promising, testing was limited as I moved quickly toward
                         integrating the actuator into Wheeled Biped V2.
                     </p>
-
-                    <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 pt-2">
-                        What I Would Do Differently
+<h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 pt-2">
+                        4.1 What I Would Do Differently
                     </h3>
-
-                    <ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Characterization:</strong>
+<ul class="list-disc list-outside ml-5 space-y-3 text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Characterization:</strong>
                             More thoroughly test efficiency, stiffness, continuous torque,
                             and wear.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Simulation:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Simulation:</strong>
                             Use contact analysis and FEA to optimize material usage
                             and identify stress concentrations.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Prototyping:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Prototyping:</strong>
                             Validate a single actuator before committing to the
                             dual-actuator design.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">System integration:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">System integration:</strong>
                             Consider mounting, wiring, and packaging earlier to reduce
                             the actuator's overall size.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Encoder adjustment:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Encoder adjustment:</strong>
                             Improve the encoder mounting and alignment mechanism
                             for easier, more repeatable assembly.
                         </li>
-
-                        <li>
-                            <strong class="text-zinc-900 dark:text-zinc-100">Transmission selection:</strong>
+<li>
+<strong class="text-zinc-900 dark:text-zinc-100">Transmission selection:</strong>
                             In retrospect, a cycloidal drive may have been more practical,
                             given the greater availability of research, design resources,
                             and reference implementations that could have accelerated development.
                         </li>
-
-                    </ul>
-
-                    <!-- Navigation to Related Project -->
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        <a
-                            href="Biped_V2.html"
-                            class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                        >
-                            Wheeled Biped V2 &rarr;
+</ul>
+<!-- Navigation to Related Project -->
+<div class="flex flex-wrap gap-2 pt-2">
+<a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="Biped_V2.html">
+                            Wheeled Biped V2 →
                         </a>
-                    </div>
-
-                </section>
-            </article>
-        </main>
-        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
-            <div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+</div>
+</section>
+</article>
+</main>
+<footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200 mt-8">
+<div class="max-w-3xl mx-auto px-6 py-5 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
                 © 2026 Yang Lu.
             </div>
-        </footer>
-        <script>
+</footer>
+<script>
             // Reveal the destination page after its initial background is painted.
             const root = document.documentElement;
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -925,8 +1134,7 @@
                 if (event.persisted) revealPage();
             });
         </script>
-
-        <script>
+<script>
             // Track reading progress through the main content, excluding the footer.
             (function () {
                 const bar = document.getElementById('reading-progress');
@@ -965,7 +1173,7 @@
                 scheduleUpdate();
             })();
         </script>
-        <script>
+<script>
             // Highlight the current section and control the compact mobile menu.
             (function () {
                 const menu = document.getElementById('article-toc');
@@ -1017,5 +1225,172 @@
                 updateActive();
             })();
         </script>
-    </body>
+<!-- Accessible, page-wide image viewer. -->
+<div aria-hidden="true" aria-label="Image viewer" aria-modal="true" class="image-lightbox" id="image-lightbox" role="dialog">
+<div class="image-lightbox-content">
+<button aria-label="Close image viewer" class="image-lightbox-control image-lightbox-close" id="lightbox-close" type="button">
+                    ×
+                </button>
+<button aria-label="Previous image" class="image-lightbox-control image-lightbox-prev" id="lightbox-prev" type="button">
+                    ‹
+                </button>
+<button aria-label="Next image" class="image-lightbox-control image-lightbox-next" id="lightbox-next" type="button">
+                    ›
+                </button>
+<div class="image-lightbox-media" id="lightbox-media">
+</div>
+<div class="image-lightbox-caption" id="lightbox-caption">
+</div>
+<div aria-live="polite" class="image-lightbox-counter" id="lightbox-counter">
+</div>
+</div>
+</div>
+<script>
+            (function () {
+                         const viewer = document.getElementById('image-lightbox');
+                         const media = document.getElementById('lightbox-media');
+                         const caption = document.getElementById('lightbox-caption');
+                         const counter = document.getElementById('lightbox-counter');
+                         const closeButton = document.getElementById('lightbox-close');
+                         const previousButton = document.getElementById('lightbox-prev');
+                         const nextButton = document.getElementById('lightbox-next');
+                         // Register all image cards, including image slots not yet populated.
+                         // Video buttons and linked images keep their existing behavior.
+                         document.querySelectorAll('main img').forEach(image => {
+                             if (image.closest('[data-lightbox-item], a, button')) return;
+                             const target = image.parentElement;
+                             if (!target) return;
+                             target.setAttribute('data-lightbox-item', '');
+                             target.setAttribute('role', 'button');
+                             target.setAttribute('tabindex', '0');
+                             target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
+                         });
+                         document.querySelectorAll('main .aspect-square, main .aspect-video, main .overview-image').forEach(target => {
+                             if (target.hasAttribute('data-lightbox-item') || target.closest('a, button') ||
+                                 target.querySelector('img, [data-lightbox-item], button, a')) return;
+                             target.setAttribute('data-lightbox-item', '');
+                             target.setAttribute('role', 'button');
+                             target.setAttribute('tabindex', '0');
+                             target.setAttribute('aria-label', 'Expand figure: ' + (target.textContent.trim() || 'Image placeholder'));
+                             target.dataset.caption = target.textContent.trim() || 'Image placeholder';
+                         });
+                         const items = [...document.querySelectorAll('main [data-lightbox-item]')];
+                         let currentIndex = -1;
+                         let previousFocus = null;
+                         let touchStartX = null;
+
+                         let changeTimer = null;
+
+                         function render(index) {
+                             currentIndex = (index + items.length) % items.length;
+                             const item = items[currentIndex];
+                             const source = item.querySelector('img');
+                             const figureCaption = item.querySelector('figcaption');
+                             const description = item.dataset.caption ||
+                                 (figureCaption && figureCaption.textContent.trim()) ||
+                                 (source && source.alt) || item.innerText.trim().replace(/\s+/g, ' ');
+
+                             media.replaceChildren();
+                             if (source && source.getAttribute('src')) {
+                                 const image = document.createElement('img');
+                                 image.src = source.currentSrc || source.src;
+                                 image.alt = source.alt || description;
+                                 media.appendChild(image);
+                             } else {
+                                 const placeholder = document.createElement('div');
+                                 placeholder.className = 'image-lightbox-placeholder';
+                                 const title = document.createElement('strong');
+                                 title.textContent = item.querySelector('span')?.textContent.trim() || description;
+                                 const note = document.createElement('span');
+                                 note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
+                                 placeholder.append(title, note);
+                                 media.appendChild(placeholder);
+                             }
+                             caption.textContent = description;
+                             counter.textContent = `${currentIndex + 1} / ${items.length}`;
+                         }
+
+                         function navigate(index) {
+                             if (changeTimer) clearTimeout(changeTimer);
+                             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                                 render(index);
+                                 return;
+                             }
+                             media.classList.add('is-changing');
+                             caption.classList.add('is-changing');
+                             changeTimer = setTimeout(() => {
+                                 render(index);
+                                 media.classList.remove('is-changing');
+                                 caption.classList.remove('is-changing');
+                                 changeTimer = null;
+                             }, 125);
+                         }
+
+                         function open(index) {
+                             if (!items.length) return;
+                             previousFocus = document.activeElement;
+                             render(index);
+                             viewer.classList.add('is-open');
+                             viewer.setAttribute('aria-hidden', 'false');
+                             document.body.style.overflow = 'hidden';
+                             closeButton.focus();
+                         }
+
+                         function close() {
+                             if (changeTimer) clearTimeout(changeTimer);
+                             changeTimer = null;
+                             media.classList.remove('is-changing');
+                             caption.classList.remove('is-changing');
+                             viewer.classList.remove('is-open');
+                             viewer.setAttribute('aria-hidden', 'true');
+                             document.body.style.overflow = '';
+                             currentIndex = -1;
+                             if (previousFocus && previousFocus.focus) previousFocus.focus();
+                         }
+
+                         items.forEach((item, index) => {
+                             item.addEventListener('click', () => open(index));
+                             item.addEventListener('keydown', event => {
+                                 if (event.key === 'Enter' || event.key === ' ') {
+                                     event.preventDefault();
+                                     open(index);
+                                 }
+                             });
+                         });
+
+                         closeButton.addEventListener('click', close);
+                         previousButton.addEventListener('click', () => navigate(currentIndex - 1));
+                         nextButton.addEventListener('click', () => navigate(currentIndex + 1));
+                         viewer.addEventListener('click', event => {
+                             if (event.target === viewer) close();
+                         });
+                         document.addEventListener('keydown', event => {
+                             if (currentIndex < 0) return;
+                             if (event.key === 'Escape') close();
+                             if (event.key === 'ArrowLeft') navigate(currentIndex - 1);
+                             if (event.key === 'ArrowRight') navigate(currentIndex + 1);
+                             if (event.key === 'Tab') {
+                                 const controls = [closeButton, previousButton, nextButton];
+                                 const index = controls.indexOf(document.activeElement);
+                                 if (event.shiftKey && index === 0) {
+                                     event.preventDefault();
+                                     nextButton.focus();
+                                 } else if (!event.shiftKey && index === controls.length - 1) {
+                                     event.preventDefault();
+                                     closeButton.focus();
+                                 }
+                             }
+                         });
+                         media.addEventListener('touchstart', event => {
+                             touchStartX = event.changedTouches[0].screenX;
+                         }, { passive: true });
+                         media.addEventListener('touchend', event => {
+                             if (touchStartX === null) return;
+                             const difference = event.changedTouches[0].screenX - touchStartX;
+                             if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
+                             touchStartX = null;
+                         }, { passive: true });
+                     })();
+        </script>
+</body>
 </html>
