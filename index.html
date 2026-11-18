@@ -1,26 +1,27 @@
 <!DOCTYPE html>
+
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <title>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
             Yang Lu | Robotics Mechanical Design &amp; Actuation Portfolio
         </title>
-        <meta content="Yang Lu is a University of Waterloo mechatronics engineering student focused on mechanical engineering for robotics: actuation, mechanisms, and mechanical design. Explore technical projects and engineering experience." name="description"/>
-        <meta content="index, follow, max-image-preview:large" name="robots"/>
-        <link href="https://y-anglu.github.io/" rel="canonical"/>
-        <meta content="profile" property="og:type"/>
-        <meta content="Yang Lu | Engineering Portfolio" property="og:site_name"/>
-        <meta content="Yang Lu | Robotics Mechanical Design &amp; Actuation Portfolio" property="og:title"/>
-        <meta content="Robotics mechanical engineering portfolio by Yang Lu, featuring robotic actuation, mechanism design, and mechanical engineering projects." property="og:description"/>
-        <meta content="https://y-anglu.github.io/" property="og:url"/>
-        <meta content="https://y-anglu.github.io/images/Notify.png" property="og:image"/>
-        <meta content="Notify Robots project artwork from Yang Lu's engineering portfolio" property="og:image:alt"/>
-        <meta content="summary_large_image" name="twitter:card"/>
-        <meta content="Yang Lu | Robotics Mechanical Design Portfolio" name="twitter:title"/>
-        <meta content="Robotics engineering projects in actuation, mechanisms, and mechanical design by Yang Lu." name="twitter:description"/>
-        <meta content="https://y-anglu.github.io/images/Notify.png" name="twitter:image"/>
-        <script type="application/ld+json">
+<meta content="Yang Lu is a University of Waterloo mechatronics engineering student focused on mechanical engineering for robotics: actuation, mechanisms, and mechanical design. Explore technical projects and engineering experience." name="description"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://y-anglu.github.io/" rel="canonical"/>
+<meta content="profile" property="og:type"/>
+<meta content="Yang Lu | Engineering Portfolio" property="og:site_name"/>
+<meta content="Yang Lu | Robotics Mechanical Design &amp; Actuation Portfolio" property="og:title"/>
+<meta content="Robotics mechanical engineering portfolio by Yang Lu, featuring robotic actuation, mechanism design, and mechanical engineering projects." property="og:description"/>
+<meta content="https://y-anglu.github.io/" property="og:url"/>
+<meta content="https://y-anglu.github.io/images/Notify.png" property="og:image"/>
+<meta content="Notify Robots project artwork from Yang Lu's engineering portfolio" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Yang Lu | Robotics Mechanical Design Portfolio" name="twitter:title"/>
+<meta content="Robotics engineering projects in actuation, mechanisms, and mechanical design by Yang Lu." name="twitter:description"/>
+<meta content="https://y-anglu.github.io/images/Notify.png" name="twitter:image"/>
+<script type="application/ld+json">
             {
                 "@context": "https://schema.org",
                 "@graph": [
@@ -76,8 +77,8 @@
                 ]
             }
         </script>
-        <link class="favicon" href="images/gear_favicon.png" rel="icon" type="image/png"/>
-        <script>
+<link class="favicon" href="images/gear_favicon.png" rel="icon" type="image/png"/>
+<script>
             // Select the destination tab before first paint, including return from posts.
             (function () {
                 const tab = new URLSearchParams(location.search).get('tab');
@@ -134,10 +135,9 @@
                 }
             })();
         </script>
-        <script src="https://cdn.tailwindcss.com">
-
-        </script>
-        <script>
+<script src="https://cdn.tailwindcss.com">
+</script>
+<script>
             tailwind.config = {
                 darkMode: 'class',
                 theme: {
@@ -149,7 +149,7 @@
                 }
             }
         </script>
-        <style>
+<style>
                     @font-face {
                         font-family: 'Quicksand';
                         src: url('fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
@@ -502,80 +502,563 @@
                         filter: brightness(.94);
                         border-color: rgb(24 24 27 / 45%);
                     }
-        </style>
-    </head>
-    <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
-        <div aria-hidden="true" class="homepage-navigation-veil">
-        </div>
-        <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-            <div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
-                <a class="font-bold tracking-tight text-base text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition" href="#" onclick="showSection('about')">
+        
+
+/* Compact evaluator view: identity first, proficiencies second, scannable results in each row. */
+#simple-portfolio .simple-head { align-items:flex-start; padding-bottom:10px; }
+#simple-portfolio .simple-head h1 { font-size:25px; letter-spacing:-.03em; }
+#simple-portfolio .simple-head p { margin-top:2px; font-size:12px; }
+#simple-portfolio .simple-head-links { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:12px; padding-top:6px; }
+#simple-portfolio .simple-proficiencies { padding:10px 0 12px; border-bottom:1px solid #e4e4e7; margin-bottom:12px; display:grid; gap:4px; }
+#simple-portfolio .simple-proficiencies p { display:grid; grid-template-columns:70px minmax(0,1fr); gap:10px; font-size:11px; line-height:1.45; color:#52525b; }
+#simple-portfolio .simple-proficiencies strong { color:#18181b; font-size:11px; }
+#simple-portfolio .simple-entry summary { min-height:53px; padding:6px 2px; }
+#simple-portfolio .simple-entry-main small { font-size:11px; line-height:1.3; color:#52525b; }
+#simple-portfolio .simple-columns { gap:25px; }
+@media(max-width:720px) { #simple-portfolio .simple-head { flex-direction:column; gap:8px; } #simple-portfolio .simple-head-links { justify-content:flex-start; padding-top:0; } }
+
+/* Subtle expand/collapse cues for both projects and experiences. */
+#simple-portfolio .simple-entry-indicator {
+    display: inline-block;
+    transition: transform 220ms cubic-bezier(.2,.7,.2,1);
+    transform-origin: center;
+}
+#simple-portfolio .simple-entry[open] .simple-entry-indicator {
+    transform: rotate(45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+    #simple-portfolio .simple-entry-indicator { transition: none !important; }
+}
+</style>
+<style>
+
+/* Homepage-only compact evaluation mode */
+#simple-portfolio { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; color:#18181b; font-size:13px; line-height:1.45; }
+#simple-portfolio[hidden] { display:none !important; }
+html.simple-home body { background:#fff !important; color:#18181b !important; }
+html.simple-home #main-content { max-width:1200px; padding-top:18px; padding-bottom:20px; min-height:0; }
+html.simple-home #main-content > .content-section { display:none !important; }
+html.simple-home #simple-portfolio { display:block; }
+html.simple-home #simple-portfolio a { color:#27272a; }
+html.simple-home #simple-portfolio a:hover { text-decoration:underline; }
+.simple-head { display:flex; align-items:end; justify-content:space-between; gap:20px; padding-bottom:14px; border-bottom:1px solid #d4d4d8; }
+.simple-head h1 { font-size:25px; line-height:1.15; font-weight:700; letter-spacing:-.035em; }
+.simple-head p { margin-top:4px; color:#52525b; }
+.simple-head .simple-eyebrow { font-size:10px; font-weight:700; letter-spacing:.14em; color:#71717a; }
+.simple-head-links { flex-shrink:0; font-size:12px; font-weight:600; }
+.simple-instructions { margin:12px 0 15px; color:#52525b; font-size:12px; }
+.simple-columns { display:grid; grid-template-columns:1.15fr 1fr; gap:28px; align-items:start; }
+.simple-columns h2 { font-size:15px; font-weight:700; padding:0 0 9px; border-bottom:2px solid #18181b; display:flex; justify-content:space-between; }
+.simple-columns h2 span { color:#71717a; font-size:12px; font-weight:500; }
+.simple-entry { border-bottom:1px solid #e4e4e7; }
+.simple-entry summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; min-height:57px; padding:8px 2px; }
+.simple-entry summary::-webkit-details-marker { display:none; }
+.simple-entry summary:focus-visible { outline:2px solid #71717a; outline-offset:2px; }
+.simple-entry-main { min-width:0; display:flex; flex-direction:column; gap:2px; }
+.simple-entry-main strong { font-size:13px; font-weight:650; }
+.simple-entry-main small { font-size:11px; color:#71717a; }
+.simple-entry-meta { font-size:10px; color:#71717a; white-space:nowrap; }
+.simple-entry[open] .simple-entry-meta { color:#18181b; }
+.simple-detail { padding:0 12px 14px 2px; color:#3f3f46; font-size:12px; }
+.simple-detail ul { list-style:disc; padding-left:17px; display:grid; gap:5px; }
+.simple-detail a { display:inline-block; margin-top:11px; font-weight:650; text-decoration:underline; text-underline-offset:3px; }
+/* Simple Mode follows light/dark theme, but never uses the colourful backdrop. */
+/* Keep the background image mounted so opacity can interpolate smoothly.
+   Removing background-image or visibility snaps it off immediately. */
+html.simple-home body::before {
+    opacity: 0;
+}
+
+/* Match the view crossfade more closely when entering or leaving Simple Mode. */
+html.colour-mode body::before {
+    transition: opacity 420ms cubic-bezier(.2,.7,.2,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.colour-mode body::before {
+        transition: none;
+    }
+}
+html.simple-home.dark body {
+    background: #121212 !important;
+    color: #f4f4f5 !important;
+}
+html.simple-home.dark #simple-portfolio {
+    color: #f4f4f5;
+}
+html.simple-home.dark #simple-portfolio a {
+    color: #e4e4e7;
+}
+html.simple-home.dark .simple-head,
+html.simple-home.dark .simple-entry {
+    border-color: #3f3f46;
+}
+html.simple-home.dark .simple-head p,
+html.simple-home.dark .simple-instructions,
+html.simple-home.dark .simple-detail,
+html.simple-home.dark .simple-entry-main small,
+html.simple-home.dark .simple-entry-meta,
+html.simple-home.dark .simple-head .simple-eyebrow,
+html.simple-home.dark .simple-columns h2 span {
+    color: #a1a1aa;
+}
+html.simple-home.dark .simple-columns h2 {
+    border-color: #e4e4e7;
+}
+html.simple-home.dark .simple-entry[open] .simple-entry-meta {
+    color: #f4f4f5;
+}
+html.simple-home.dark #simple-mode-toggle {
+    background: #f4f4f5;
+    color: #18181b;
+    border-color: #f4f4f5;
+}
+/* In colour mode, use a neutral light background for the simplified view. */
+html.simple-home.colour-mode body {
+    background: #ffffff !important;
+    color: #18181b !important;
+}
+html.simple-home.colour-mode header {
+    background: rgba(255,255,255,.95) !important;
+    border-color: #e4e4e7 !important;
+}
+html.simple-home.colour-mode #simple-portfolio {
+    color: #18181b;
+}
+html.simple-home.colour-mode #simple-portfolio a {
+    color: #27272a;
+}
+
+html { scrollbar-gutter: stable; }
+#simple-mode-toggle { min-width: 85px; text-align: center; font-size:11px; font-weight:700; padding:5px 9px; border:1px solid currentColor; border-radius:7px; }
+html.simple-home #simple-mode-toggle { background:#18181b; color:white; border-color:#18181b; }
+@media(max-width:720px) { .simple-columns { grid-template-columns:1fr; gap:22px; } .simple-head { align-items:start; } .simple-head h1 { font-size:23px; } .simple-entry summary { min-height:55px; } }
+@media(min-width:1024px) and (min-height:740px) { html.simple-home #main-content { padding-top:24px; } .simple-entry summary { min-height:60px; } }
+/* Simple/full view transitions are handled symmetrically by switchView(). */
+
+
+/* Simple Mode readability: larger type and high-contrast neutral colours. */
+#simple-portfolio {
+    font-size: 15px;
+    line-height: 1.55;
+}
+#simple-portfolio .simple-head h1 {
+    font-size: 28px;
+}
+#simple-portfolio .simple-head p,
+#simple-portfolio .simple-head-links,
+#simple-portfolio .simple-instructions {
+    font-size: 14px;
+}
+#simple-portfolio .simple-head .simple-eyebrow {
+    font-size: 12px;
+}
+#simple-portfolio .simple-proficiencies p,
+#simple-portfolio .simple-proficiencies strong {
+    font-size: 13px;
+    line-height: 1.55;
+}
+#simple-portfolio .simple-proficiencies p {
+    grid-template-columns: 82px minmax(0, 1fr);
+}
+#simple-portfolio .simple-columns h2 {
+    font-size: 17px;
+}
+#simple-portfolio .simple-columns h2 span {
+    font-size: 13px;
+}
+#simple-portfolio .simple-entry summary {
+    min-height: 64px;
+    padding: 9px 2px;
+}
+#simple-portfolio .simple-entry-main strong {
+    font-size: 15px;
+    line-height: 1.4;
+}
+#simple-portfolio .simple-entry-main small {
+    font-size: 13px;
+    line-height: 1.45;
+}
+#simple-portfolio .simple-entry-meta {
+    font-size: 12px;
+}
+#simple-portfolio .simple-detail {
+    font-size: 14px;
+    line-height: 1.6;
+}
+#simple-portfolio .simple-detail ul {
+    gap: 8px;
+}
+html.simple-home:not(.dark) #simple-portfolio .simple-entry-main small,
+html.simple-home:not(.dark) #simple-portfolio .simple-entry-meta,
+html.simple-home:not(.dark) #simple-portfolio .simple-head p,
+html.simple-home:not(.dark) #simple-portfolio .simple-instructions,
+html.simple-home:not(.dark) #simple-portfolio .simple-proficiencies p,
+html.simple-home:not(.dark) #simple-portfolio .simple-columns h2 span {
+    color: #3f3f46;
+}
+html.simple-home.dark #simple-portfolio,
+html.simple-home.dark #simple-portfolio .simple-entry-main strong,
+html.simple-home.dark #simple-portfolio .simple-columns h2,
+html.simple-home.dark #simple-portfolio .simple-proficiencies strong {
+    color: #f4f4f5;
+}
+html.simple-home.dark #simple-portfolio .simple-entry-main small,
+html.simple-home.dark #simple-portfolio .simple-entry-meta,
+html.simple-home.dark #simple-portfolio .simple-head p,
+html.simple-home.dark #simple-portfolio .simple-instructions,
+html.simple-home.dark #simple-portfolio .simple-detail,
+html.simple-home.dark #simple-portfolio .simple-head .simple-eyebrow,
+html.simple-home.dark #simple-portfolio .simple-columns h2 span,
+html.simple-home.dark #simple-portfolio .simple-proficiencies p {
+    color: #d4d4d8;
+}
+html.simple-home.dark #simple-portfolio .simple-proficiencies,
+html.simple-home.dark #simple-portfolio .simple-head,
+html.simple-home.dark #simple-portfolio .simple-entry {
+    border-color: #52525b;
+}
+html.simple-home.dark #simple-portfolio .simple-detail a,
+html.simple-home.dark #simple-portfolio .simple-head-links a {
+    color: #fafafa;
+}
+html.simple-home.dark header {
+    background: rgba(18, 18, 18, .95) !important;
+    border-color: #3f3f46 !important;
+}
+@media (max-width: 720px) {
+    #simple-portfolio .simple-entry summary {
+        min-height: 64px;
+    }
+}
+
+
+/* Shared expansion controls for both projects and experiences. */
+#simple-portfolio .simple-entry-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+#simple-portfolio .simple-entry-indicator {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1;
+    color: #27272a;
+    transition: transform 160ms ease;
+}
+#simple-portfolio .simple-entry[open] .simple-entry-indicator {
+    transform: rotate(45deg);
+}
+html.simple-home.dark #simple-portfolio .simple-entry-indicator {
+    color: #f4f4f5;
+}
+
+/* Redesigned Simple Mode — a quiet, single-screen engineering profile. */
+html.simple-home #main-content {
+    max-width: 1160px;
+    padding-top: 20px;
+    padding-bottom: 28px;
+}
+#simple-portfolio {
+    max-width: 1080px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.48;
+}
+#simple-portfolio .simple-head {
+    align-items: start;
+    gap: 24px;
+    padding: 0 0 14px;
+    border-bottom: 1px solid #d4d4d8;
+}
+#simple-portfolio .simple-head h1 {
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -.045em;
+}
+#simple-portfolio .simple-head p {
+    font-size: 14px;
+    line-height: 1.45;
+    margin-top: 4px;
+}
+#simple-portfolio .simple-head-links {
+    font-size: 13px;
+    gap: 16px;
+    padding-top: 8px;
+}
+#simple-portfolio .simple-proficiencies {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin: 0 0 19px;
+    padding: 12px 0 14px;
+    border-bottom: 1px solid #e4e4e7;
+}
+#simple-portfolio .simple-proficiencies p {
+    display: grid;
+    grid-template-columns: 80px minmax(0,1fr);
+    gap: 12px;
+    font-size: 13px;
+    line-height: 1.45;
+}
+#simple-portfolio .simple-proficiencies strong {
+    font-size: 13px;
+}
+#simple-portfolio .simple-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 38px;
+    align-items: start;
+}
+#simple-portfolio .simple-columns h2 {
+    padding-bottom: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    border-bottom: 2px solid currentColor;
+}
+#simple-portfolio .simple-columns h2 span {
+    font-size: 13px;
+}
+#simple-portfolio .simple-entry {
+    border-bottom: 1px solid #e4e4e7;
+}
+#simple-portfolio .simple-entry summary {
+    min-height: 58px;
+    padding: 8px 3px;
+    gap: 12px;
+    transition: background-color 120ms ease;
+}
+#simple-portfolio .simple-entry summary:hover {
+    background: rgba(113,113,122,.07);
+}
+#simple-portfolio .simple-entry-main {
+    gap: 3px;
+}
+#simple-portfolio .simple-entry-main strong {
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.3;
+}
+#simple-portfolio .simple-entry-main small {
+    font-size: 12.5px;
+    line-height: 1.35;
+}
+#simple-portfolio .simple-entry-meta {
+    font-size: 11.5px;
+    gap: 8px;
+}
+#simple-portfolio .simple-entry-indicator {
+    font-size: 19px;
+    line-height: 1;
+}
+#simple-portfolio .simple-detail {
+    padding: 5px 8px 17px 4px;
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+#simple-portfolio .simple-detail li + li {
+    margin-top: 7px;
+}
+html.simple-home.dark #simple-portfolio .simple-head,
+html.simple-home.dark #simple-portfolio .simple-proficiencies,
+html.simple-home.dark #simple-portfolio .simple-entry {
+    border-color: #52525b;
+}
+html.simple-home.dark #simple-portfolio .simple-entry summary:hover {
+    background: rgba(228,228,231,.07);
+}
+@media (max-width: 760px) {
+    #simple-portfolio .simple-columns {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    #simple-portfolio .simple-head {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #simple-portfolio .simple-head-links {
+        padding-top: 0;
+    }
+    #simple-portfolio .simple-head h1 {
+        font-size: 27px;
+    }
+    #simple-portfolio .simple-entry summary {
+        min-height: 60px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    #simple-portfolio *,
+    #simple-portfolio *::before,
+    #simple-portfolio *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+
+/* Smoothly remove About and Posts from the navigation in Simple Mode.
+   Animate their occupied width as well as opacity to avoid an abrupt jump. */
+header nav [aria-controls="about"],
+header nav [aria-controls="posts"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 1;
+    visibility: visible;
+    transition:
+        max-width 260ms cubic-bezier(.2,.7,.2,1),
+        opacity 180ms ease,
+        margin-left 260ms cubic-bezier(.2,.7,.2,1),
+        visibility 0s linear;
+}
+
+html.simple-home header nav [aria-controls="about"],
+html.simple-home header nav [aria-controls="posts"] {
+    max-width: 0;
+    margin-left: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        max-width 260ms cubic-bezier(.2,.7,.2,1),
+        opacity 180ms ease,
+        margin-left 260ms cubic-bezier(.2,.7,.2,1),
+        visibility 0s linear 260ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    header nav [aria-controls="about"],
+    header nav [aria-controls="posts"] {
+        transition: none !important;
+    }
+}
+
+/* Follow the requested state rather than the delayed native details state. */
+#simple-portfolio .simple-entry[data-target-open="false"] .simple-entry-indicator {
+    transform: rotate(0deg);
+}
+#simple-portfolio .simple-entry[data-target-open="true"] .simple-entry-indicator {
+    transform: rotate(45deg);
+}
+/* Select-to-reveal footer credit; does not affect the centered copyright. */
+.footer-signature {
+    position: relative;
+    display: inline-block;
+}
+.footer-secret {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin-left: 0.65em;
+    white-space: nowrap;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent;
+    font: inherit;
+    letter-spacing: normal;
+    user-select: text;
+    -webkit-user-select: text;
+}
+.footer-secret a,
+.footer-secret a:visited {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+.footer-secret::selection,
+.footer-secret *::selection {
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827;
+    background: #a5d8ff;
+}
+.footer-secret::-moz-selection,
+.footer-secret *::-moz-selection {
+    color: #111827 !important;
+    background: #a5d8ff;
+}
+</style>
+</head>
+<body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
+<div aria-hidden="true" class="homepage-navigation-veil">
+</div>
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+<div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
+<a class="font-bold tracking-tight text-base text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition" href="#" onclick="navigatePortfolioTab('about'); return false;">
                     Yang Lu
                 </a>
-                <nav aria-label="Primary navigation" class="flex space-x-6 text-xs font-bold items-center">
-                    <button aria-controls="about" aria-pressed="true" class="nav-link text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 focus:outline-none transition cursor-pointer" onclick="showSection('about')">
+<nav aria-label="Primary navigation" class="flex space-x-6 text-xs font-bold items-center">
+<button aria-controls="about" aria-pressed="true" class="nav-link text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 focus:outline-none transition cursor-pointer" onclick="navigatePortfolioTab('about'); return false;">
                         About
                     </button>
-                    <button aria-controls="posts" aria-pressed="false" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" onclick="showSection('posts')">
+<button aria-controls="posts" aria-pressed="false" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" onclick="navigatePortfolioTab('posts'); return false;">
                         Posts
                     </button>
-                    <button aria-label="Change color theme" class="p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" id="theme-toggle" title="Change color theme">
-                        <svg class="w-4 h-4" fill="none" id="theme-toggle-moon" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                        </svg>
-                        <svg class="w-4 h-4 hidden" fill="none" id="theme-toggle-sun" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 3v2.25m0 13.5V21M4.22 4.22l1.59 1.59m12.38 12.38l1.59 1.59M3 12h2.25m13.5 0H21M5.81 18.19l-1.59 1.59m14.22-14.22l-1.59 1.59M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" stroke-linecap="round" stroke-linejoin="round">
-                            </path>
-                        </svg>
-                        <svg class="w-4 h-4 hidden" fill="none" id="theme-toggle-colour" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3">
-                            </path>
-                            <path d="M12 17h.01">
-                            </path>
-                        </svg>
-                    </button>
-                </nav>
-            </div>
-        </header>
-        <main class="max-w-5xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]" id="main-content" tabindex="-1">
-            <section class="content-section space-y-5" id="about">
-                <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-4 lg:gap-6 items-start">
-                    <div class="space-y-4">
-                        <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
+<button aria-controls="simple-portfolio" aria-pressed="false" id="simple-mode-toggle" type="button">Simple view</button>
+<button aria-label="Change color theme" class="p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" id="theme-toggle" title="Change color theme">
+<svg class="w-4 h-4" fill="none" id="theme-toggle-moon" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" stroke-linecap="round" stroke-linejoin="round">
+</path>
+</svg>
+<svg class="w-4 h-4 hidden" fill="none" id="theme-toggle-sun" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 3v2.25m0 13.5V21M4.22 4.22l1.59 1.59m12.38 12.38l1.59 1.59M3 12h2.25m13.5 0H21M5.81 18.19l-1.59 1.59m14.22-14.22l-1.59 1.59M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" stroke-linecap="round" stroke-linejoin="round">
+</path>
+</svg>
+<svg class="w-4 h-4 hidden" fill="none" id="theme-toggle-colour" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3">
+</path>
+<path d="M12 17h.01">
+</path>
+</svg>
+</button>
+</nav>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 py-8 min-h-[calc(100vh-3rem)]" id="main-content" tabindex="-1">
+<section class="content-section space-y-5" id="about">
+<div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-4 lg:gap-6 items-start">
+<div class="space-y-4">
+<h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
                             Yang Lu
                         </h1>
-                        <div class="space-y-1">
-                            <p class="text-sm font-bold text-zinc-800 dark:text-zinc-200">
+<div class="space-y-1">
+<p class="text-sm font-bold text-zinc-800 dark:text-zinc-200">
                                 Mechanical Design · Robotic Actuation
                             </p>
-                            <p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+<p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
                                 Open to 2027 New Grad Roles
                             </p>
-                        </div>
-                        <ul class="list-disc list-inside text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium space-y-1 transition-colors">
-                            <li>
+</div>
+<ul class="list-disc list-inside text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium space-y-1 transition-colors">
+<li>
                                 Mechatronics engineering undergraduate at the University of Waterloo.
                             </li>
-                            <li>
+<li>
                                 Previously at Humanoid, Proception AI, Tesla, and Sanctuary AI.
                             </li>
-                        </ul>
-                        <div class="pt-1 flex space-x-4 text-xs font-bold">
-                            <a class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors" href="mailto:y494lu@uwaterloo.ca">
+</ul>
+<div class="pt-1 flex space-x-4 text-xs font-bold">
+<a class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors" href="mailto:y494lu@uwaterloo.ca">
                                 Email
                             </a>
-                            <a class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors" href="https://www.linkedin.com/in/yang--lu/" rel="noopener noreferrer" target="_blank">
+<a class="hover:underline text-zinc-900 dark:text-zinc-50 transition-colors" href="https://www.linkedin.com/in/yang--lu/" rel="noopener noreferrer" target="_blank">
                                 LinkedIn
                             </a>
-                        </div>
-                    </div>
-                    <aside class="w-full border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 bg-white dark:bg-zinc-900/40 shadow-sm dark:shadow-none">
-                        <div class="mb-2.5">
-                            <h2 class="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+</div>
+</div>
+<aside class="w-full border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 bg-white dark:bg-zinc-900/40 shadow-sm dark:shadow-none">
+<div class="mb-2.5">
+<h2 class="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
                                 Tools
                             </h2>
-                            <p aria-label="Software and tools" class="text-[13px] leading-relaxed font-bold text-zinc-900 dark:text-zinc-100">
+<p aria-label="Software and tools" class="text-[13px] leading-relaxed font-bold text-zinc-900 dark:text-zinc-100">
                                 Onshape
                                 <span class="text-zinc-400 dark:text-zinc-500 mx-0.5">
                                     ·
@@ -610,288 +1093,675 @@
                                 </span>
                                 MATLAB
                             </p>
-                        </div>
-                        <div class="border-t border-zinc-200 dark:border-zinc-800 pt-2.5">
-                            <h2 class="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
+</div>
+<div class="border-t border-zinc-200 dark:border-zinc-800 pt-2.5">
+<h2 class="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
                                 Technical Skills
                             </h2>
-                            <div class="flex flex-wrap gap-1.5" id="technical-skills">
-                                <a class="skill-chip skill-link" href="projects/Biped_V1.html">
+<div class="flex flex-wrap gap-1.5" id="technical-skills">
+<a class="skill-chip skill-link" href="projects/Biped_V1.html">
                                     Actuator Theory
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link" href="projects/Capstone.html">
+</a>
+<a class="skill-chip skill-link" href="projects/Capstone.html">
                                     System Modeling
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link" href="projects/Capstone.html">
+</a>
+<a class="skill-chip skill-link" href="projects/Capstone.html">
                                     Linkage Kinematics
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link" href="projects/Capstone.html">
+</a>
+<a class="skill-chip skill-link" href="projects/Capstone.html">
                                     Actuator Sizing
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Wave_Actuator.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Wave_Actuator.html">
                                     Gearbox Selection
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Hand.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Hand.html">
                                     Kinematic Decoupling
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Quadruped.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Quadruped.html">
                                     Inverse Kinematics
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Capstone.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Capstone.html">
                                     Gravity Compensation
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Biped_V1.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Biped_V1.html">
                                     Capstan Drive
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Hand.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Hand.html">
                                     Underactuated Dynamics
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Wave_Actuator.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Wave_Actuator.html">
                                     Wave Drive
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Quadruped.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Quadruped.html">
                                     Gait and Step Generation
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Biped_V2.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Biped_V2.html">
                                     Belt + Pulley
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                                <a class="skill-chip skill-link extra-skill" hidden="" href="projects/Lamp.html">
+</a>
+<a class="skill-chip skill-link extra-skill" hidden="" href="projects/Lamp.html">
                                     Product Design
                                     <span aria-hidden="true">
                                         ↗
                                     </span>
-                                </a>
-                            </div>
-                            <button aria-controls="technical-skills" aria-expanded="false" class="mt-2 flex items-center gap-1 text-[11px] font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 rounded" id="skills-expand" type="button">
-                                <span id="skills-expand-label">
+</a>
+</div>
+<button aria-controls="technical-skills" aria-expanded="false" class="mt-2 flex items-center gap-1 text-[11px] font-bold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 rounded" id="skills-expand" type="button">
+<span id="skills-expand-label">
                                     Show 10 more skills
                                 </span>
-                                <span aria-hidden="true" id="skills-expand-arrow">
+<span aria-hidden="true" id="skills-expand-arrow">
                                     ⌄
                                 </span>
-                            </button>
-                        </div>
-                    </aside>
-                </div>
-                <hr class="border-zinc-200 dark:border-zinc-800 transition-colors"/>
-                <div class="space-y-4">
-                    <div class="flex items-baseline justify-between gap-4">
-                        <h2 class="text-xl font-bold tracking-tight">
+</button>
+</div>
+</aside>
+</div>
+<hr class="border-zinc-200 dark:border-zinc-800 transition-colors"/>
+<div class="space-y-4">
+<div class="flex items-baseline justify-between gap-4">
+<h2 class="text-xl font-bold tracking-tight">
                             Projects
                         </h2>
-                    </div>
-                    <!-- Optimized Project Thumbnails -->
-                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="projects-grid">
-                        <a aria-label="Capstone — open project" class="group lg:col-span-2 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/Notify.png" data-preview-skills="MATLAB Modeling|Actuator Sizing|Linkage Kinematics|Gravity Compensation" href="projects/Capstone.html">
-                            <div class="relative w-full aspect-square lg:aspect-auto lg:flex-1 lg:min-h-0 bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Notify Robots Artwork" class="w-full h-full lg:absolute lg:inset-0 object-cover object-center" src="images/Notify.png" fetchpriority="high" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</div>
+<!-- Optimized Project Thumbnails -->
+<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="projects-grid">
+<a aria-label="Capstone — open project" class="group lg:col-span-2 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/Notify.png" data-preview-skills="MATLAB Modeling|Actuator Sizing|Linkage Kinematics|Gravity Compensation" href="projects/Capstone.html">
+<div class="relative w-full aspect-square lg:aspect-auto lg:flex-1 lg:min-h-0 bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Notify Robots" class="w-full h-full lg:absolute lg:inset-0 object-cover object-center" decoding="async" fetchpriority="high" src="images/Notify.png"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Capstone
                             </h3>
-                        </a>
-                        <a aria-label="Lamp — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/lamp_thumb.png" data-preview-skills="Product Design|User Experience|Concept Development" href="projects/Lamp.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Lamp" class="w-full h-full object-contain" src="images/Lamp.png" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a aria-label="Lamp — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/lamp_thumb.png" data-preview-skills="Product Design|User Experience|Concept Development" href="projects/Lamp.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Lamp" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Lamp.png"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Lamp
                             </h3>
-                        </a>
-                        <a aria-label="Biped V2 — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/biped_v2_thumb.jpg" data-preview-skills="Belt & Pulley Design|Actuator Packaging|Mechanical Integration" href="projects/Biped_V2.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Biped V2" class="w-full h-full object-contain" src="images/Biped_Assembly.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a aria-label="Biped V2 — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/biped_v2_thumb.jpg" data-preview-skills="Belt &amp; Pulley Design|Actuator Packaging|Mechanical Integration" href="projects/Biped_V2.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Wheeled biped v2" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Biped_Assembly.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Biped V2
                             </h3>
-                        </a>
-                        <a aria-label="Wave Actuator — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/actuator_thumb.png" data-preview-skills="Gearbox Design|Contact Mechanics|Backlash Reduction" href="projects/Wave_Actuator.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Wave Actuator" class="w-full h-full object-contain" src="images/Actuator_Assembly.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a aria-label="Wave Actuator — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/actuator_thumb.png" data-preview-skills="Gearbox Design|Contact Mechanics|Backlash Reduction" href="projects/Wave_Actuator.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Wave actuator" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Actuator_Assembly.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Wave Actuator
                             </h3>
-                        </a>
-                        <a aria-label="Biped V1 — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/biped_v1_thumb.png" data-preview-skills="Actuator Theory|Capstan Drives|Backdrivability" href="projects/Biped_V1.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Biped V1" class="w-full h-full object-contain" src="images/Biped_V1.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a aria-label="Biped V1 — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/biped_v1_thumb.png" data-preview-skills="Actuator Theory|Capstan Drives|Backdrivability" href="projects/Biped_V1.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Wheeled biped v1" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Biped_V1.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Biped V1
                             </h3>
-                        </a>
-                        <a aria-label="Quadruped — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/quadruped_thumb.png" data-preview-skills="Parallel Linkages|Inverse Kinematics|Gait Generation" href="projects/Quadruped.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Quadruped" class="w-full h-full object-contain" src="images/Quadruped_Assembly.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a aria-label="Quadruped — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/quadruped_thumb.png" data-preview-skills="Parallel Linkages|Inverse Kinematics|Gait Generation" href="projects/Quadruped.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Quadruped robot" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Quadruped_Assembly.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Quadruped
                             </h3>
-                        </a>
-                        <a aria-label="Robotic Hand — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/hand_thumb.png" data-preview-skills="Tendon Routing|Kinematic Decoupling|Underactuation" href="projects/Hand.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Hand" class="w-full h-full object-contain" src="images/Hand_Assembly.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a aria-label="Robotic Hand — open project" class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" data-preview-image="images/popups/hand_thumb.png" data-preview-skills="Tendon Routing|Kinematic Decoupling|Underactuation" href="projects/Hand.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Robotic hand" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Hand_Assembly.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Robotic Hand
                             </h3>
-                        </a>
-                    </div>
-                </div>
-                <hr class="border-zinc-200 dark:border-zinc-800 transition-colors"/>
-                <div class="space-y-4">
-                    <div class="flex items-baseline justify-between gap-4">
-                        <h2 class="text-xl font-bold tracking-tight">
+</a>
+</div>
+</div>
+<hr class="border-zinc-200 dark:border-zinc-800 transition-colors"/>
+<div class="space-y-4">
+<div class="flex items-baseline justify-between gap-4">
+<h2 class="text-xl font-bold tracking-tight">
                             Experiences
                         </h2>
-                    </div>
-                    <!-- Deprioritized Experience Thumbnails -->
-                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3" id="experiences-grid">
-                        <a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Humanoid.html">
-                            <div class="relative w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <div class="absolute top-2 right-2 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm z-10 uppercase tracking-wider">
+</div>
+<!-- Deprioritized Experience Thumbnails -->
+<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3" id="experiences-grid">
+<a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Humanoid.html">
+<div class="relative w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<div class="absolute top-2 right-2 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-[9px] font-bold px-2 py-0.5 rounded shadow-sm z-10 uppercase tracking-wider">
                                     Most Recent
                                 </div>
-                                <img alt="Humanoid robots from engineering experience" class="w-full h-full object-contain" src="images/Humanoid_Robots.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+<img alt="Humanoid" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Humanoid_Robots.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Humanoid
                             </h3>
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
+<p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
                                 May 2026 — Aug 2026
                             </p>
-                        </a>
-                        <a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Proception_AI.html">
-                            <div class="relative w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Robotic hand from Proception AI engineering experience" class="w-full h-full object-contain" src="images/Proception_Hand.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Proception_AI.html">
+<div class="relative w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Proception AI" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Proception_Hand.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Proception AI
                             </h3>
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
+<p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
                                 Sep 2025 — Apr 2026
                             </p>
-                        </a>
-                        <a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Tesla.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Tesla Model 3 vehicle" class="w-full h-full object-contain" src="images/Tesla_Model3.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Tesla.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Tesla" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Tesla_Model3.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Tesla
                             </h3>
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
+<p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
                                 Jan 2025 — Apr 2025
                             </p>
-                        </a>
-                        <a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Mycro_Harvest.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Mechanical enclosure for Mycro Harvest project" class="w-full h-full object-contain" src="images/Mycroharvest_Enclosure.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Mycro_Harvest.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Mycro Harvest" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Mycroharvest_Enclosure.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Mycro Harvest
                             </h3>
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
+<p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
                                 May 2024 — Aug 2024
                             </p>
-                        </a>
-                        <a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Sanctuary_AI.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Sanctuary AI Phoenix humanoid robot" class="w-full h-full object-contain" src="images/Sanctuary_Phoenix.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Sanctuary_AI.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Sanctuary AI" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Sanctuary_Phoenix.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Sanctuary AI
                             </h3>
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
+<p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
                                 Sep 2023 — Dec 2023
                             </p>
-                        </a>
-                        <a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Neurocage_Systems.html">
-                            <div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
-                                <img alt="Neurocage Systems mechanical enclosure" class="w-full h-full object-contain" src="images/Neurocage_Enclosure.jpg" loading="lazy" decoding="async"/>
-                            </div>
-                            <h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
+</a>
+<a class="group border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 bg-white dark:bg-zinc-900/40 hover:border-zinc-400 dark:hover:border-zinc-600 transition shadow-sm dark:shadow-none flex flex-col justify-between" href="experiences/Neurocage_Systems.html">
+<div class="w-full aspect-square bg-zinc-50 dark:bg-zinc-800/40 rounded-lg overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800">
+<img alt="Neurocage Systems" class="w-full h-full object-contain" decoding="async" loading="lazy" src="images/Neurocage_Enclosure.jpg"/>
+</div>
+<h3 class="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition text-sm mt-3">
                                 Neurocage Systems
                             </h3>
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
+<p class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mt-1">
                                 Jan 2023 — Apr 2023
                             </p>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <section class="content-section hidden" id="posts">
-                <div class="max-w-3xl mx-auto space-y-6">
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-center">
+</a>
+</div>
+</div>
+</section>
+<section class="content-section hidden" id="posts">
+<div class="max-w-3xl mx-auto space-y-6">
+<h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-center">
                         Posts
                     </h2>
-                    <div class="flex flex-col gap-4">
-                        <a class="post-tile group flex w-full items-center justify-between gap-5 p-5 sm:p-6 bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm dark:shadow-none hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="posts/Running_a_breakdown.html">
-                            <div class="space-y-1.5">
-                                <h3 class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
+<div class="flex flex-col gap-4">
+<a class="post-tile group flex w-full items-center justify-between gap-5 p-5 sm:p-6 bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm dark:shadow-none hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" href="posts/Running_a_breakdown.html">
+<div class="space-y-1.5">
+<h3 class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
                                     Running - A Breakdown
                                 </h3>
-                                <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+<p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
                                     Science behind running and run training
                                 </p>
-                            </div>
-                            <span aria-hidden="true" class="flex-none text-lg text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+</div>
+<span aria-hidden="true" class="flex-none text-lg text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
                                 ↗
                             </span>
+</a>
+</div>
+</div>
+</section>
+<section id="simple-portfolio" aria-label="Engineering profile" hidden>
+
+    <!-- Header -->
+    <div class="simple-head">
+        <div class="simple-identity">
+            <h1>Yang Lu</h1>
+            <p>Mechatronics Engineering · University of Waterloo</p>
+            <p>Mechanical design and robotic actuation · Open to 2027 new grad roles</p>
+        </div>
+
+        <div class="simple-head-links">
+            <a href="mailto:y494lu@uwaterloo.ca">Email</a>
+            <a href="https://www.linkedin.com/in/yang--lu/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+            <a href="#" id="simple-back" role="button">Full portfolio ↗</a>
+        </div>
+    </div>
+
+    <!-- Proficiencies -->
+    <div class="simple-proficiencies">
+        <p>
+            <strong>Tools</strong>
+            <span>Onshape · CATIA (V5, 3DX) · Siemens NX · Fusion · Ansys · MATLAB</span>
+        </p>
+
+        <p>
+            <strong>Technical</strong>
+            <span>Mechanism design · Hands · Actuators · GD&amp;T · CNC · Injection molding · 3D-printing</span>
+        </p>
+    </div>
+
+    <!-- Main Columns -->
+    <div class="simple-columns">
+
+        <!-- Projects -->
+        <section aria-label="Projects">
+            <h2>Projects <span>7</span></h2>
+
+            <div class="simple-entries">
+
+                <!-- Capstone -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Capstone</strong>
+                            <small>Wheeled biped · balancing dynamics, actuator sizing, linkage synthesis</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Developing Nudge, a wheeled biped for expressive physical notifications.</li>
+                            <li>Derived and linearized balancing dynamics; estimated wheel and leg actuator torque requirements.</li>
+                            <li>Investigated compact linkages coupling body height and head motion within the wheel envelope.</li>
+                        </ul>
+
+                        <a href="projects/Capstone.html">
+                            View full project page <span aria-hidden="true">↗</span>
                         </a>
                     </div>
-                </div>
-            </section>
-        </main>
-        <footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
-            <div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
-                © 2026 Yang Lu.
-            </div>
-        </footer>
-        <script src="script.js">
+                </details>
 
-        </script>
-        <script>
+                <!-- Wave Actuator -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Wave Actuator</strong>
+                            <small>8:1 QDD transmission · 13 N·m peak, 250 rpm, &lt;0.5° backlash</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Designed an 8:1, dual-eccentric rolling-element transmission with printed profiles.</li>
+                            <li>Fabricated and integrated the prototype with an outrunner motor and FOC controller.</li>
+                            <li>Measured ~13 N·m peak torque, ~250 rpm maximum speed, and &lt;0.5° backlash.</li>
+                        </ul>
+
+                        <a href="projects/Wave_Actuator.html">
+                            View full project page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Biped V2 -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Biped V2</strong>
+                            <small>Robot leg · parallel belt drives, compact actuator packaging</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Compared serial, facing, and side-by-side actuator arrangements.</li>
+                            <li>Selected parallel, belt-driven actuators to reduce axial packaging width.</li>
+                            <li>Evaluated pulley reductions, belt sizing, tensioning, and unequal load sharing.</li>
+                        </ul>
+
+                        <a href="projects/Biped_V2.html">
+                            View full project page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Quadruped -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Quadruped</strong>
+                            <small>12-servo robot · six-bar legs, servo sizing, inverse kinematics</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Designed parallel six-bar leg linkages for a compact quadruped.</li>
+                            <li>Selected 35 mm leg links and sized servos against torque requirements.</li>
+                            <li>Implemented inverse-kinematics-based leg motion.</li>
+                        </ul>
+
+                        <a href="projects/Quadruped.html">
+                            View full project page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Robotic Hand -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Robotic Hand</strong>
+                            <small>Tendon-driven hand · underactuation, kinematic decoupling</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Explored tendon-driven finger actuation and underactuated mechanisms.</li>
+                            <li>Investigated tendon routing and mechanical decoupling of finger motion.</li>
+                            <li>Iterated the design to address packaging and mechanical tradeoffs.</li>
+                        </ul>
+
+                        <a href="projects/Hand.html">
+                            View full project page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Biped V1 -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Biped V1</strong>
+                            <small>Robot leg · capstan drive, pretension and packaging</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Explored capstan transmissions for low-backlash, backdrivable actuation.</li>
+                            <li>Identified practical constraints in rope pretension, drum spacing, and assembly.</li>
+                            <li>Moved toward belt transmissions for the subsequent design iteration.</li>
+                        </ul>
+
+                        <a href="projects/Biped_V1.html">
+                            View full project page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Lamp -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Lamp</strong>
+                            <small>Product design · user experience, concept iteration</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Explored product concepts with an emphasis on user interaction.</li>
+                            <li>Iterated mechanical form and packaging through design development.</li>
+                            <li>Documented design tradeoffs and the resulting concept.</li>
+                        </ul>
+
+                        <a href="projects/Lamp.html">
+                            View full project page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section aria-label="Experience">
+            <h2>Experience <span>6</span></h2>
+
+            <div class="simple-entries">
+
+                <!-- Humanoid -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Humanoid</strong>
+                            <small>Mechanical engineering intern - Alpha humanoid robot</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-date">May 2026 — Aug 2026</span>
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Worked on the custom actuators, arms, wrists, and hands of new-gen Alpha humanoid.</li>
+                            <li>Designed actuator, torso, and wire harness test fixtures in NX for machining.</li>
+                        </ul>
+
+                        <a href="experiences/Humanoid.html">
+                            View full experience page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Proception AI -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Proception AI</strong>
+                            <small>Mechanical engineering intern - Tendon humanoid hands</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-date">Sep 2025 — Apr 2026</span>
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Led the development of a novel wrist concept allowing tendon routing and decoupling.</li>
+                            <li>Tested hand/tendon performance; designed forearm parts, hand soft materials in Fusion.</li>
+                        </ul>
+
+                        <a href="experiences/Proception_AI.html">
+                            View full experience page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Tesla -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Tesla</strong>
+                            <small>Mechanical engineering intern - Seatbelts [safety and restraints]</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-date">Jan 2025 — Apr 2025</span>
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Designed, validated, and installed new restraints system for in-dev car in Catia 3DX.</li>
+                            <li>Modeled injection molded parts in Semi and coordinated its production w/ suppliers.</li>
+                        </ul>
+
+                        <a href="experiences/Tesla.html">
+                            View full experience page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Mycro Harvest -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Mycro Harvest</strong>
+                            <small>Mechanical engineering intern - Automated mushroom farms</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-date">May 2024 — Aug 2024</span>
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Built, tested, and deployed 30+ custom waterproof sensor boxes to mushroom farms.</li>
+                        </ul>
+
+                        <a href="experiences/Mycro_Harvest.html">
+                            View full experience page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Sanctuary AI -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Sanctuary AI</strong>
+                            <small>Mechanical engineering intern - Phoenix humanoid robot</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-date">Sep 2023 — Dec 2023</span>
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Used Onshape to design and test systems and wire routings within Phoenix humanoid.</li>
+                        </ul>
+
+                        <a href="experiences/Sanctuary_AI.html">
+                            View full experience page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+                <!-- Neurocage Systems -->
+                <details class="simple-entry">
+                    <summary>
+                        <span class="simple-entry-main">
+                            <strong>Neurocage Systems</strong>
+                            <small>Mechanical engineering intern - Automated monitoring systems</small>
+                        </span>
+
+                        <span class="simple-entry-meta">
+                            <span class="simple-entry-date">Jan 2023 — Apr 2023</span>
+                            <span class="simple-entry-indicator" aria-hidden="true">+</span>
+                        </span>
+                    </summary>
+
+                    <div class="simple-detail">
+                        <ul>
+                            <li>Made automatic food, drug monitoring/delivery systems for mouse care and research.</li>
+                        </ul>
+
+                        <a href="experiences/Neurocage_Systems.html">
+                            View full experience page <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+    </div>
+</section>
+</main>
+<footer class="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121212] transition-colors duration-200">
+<div class="max-w-5xl mx-auto px-6 py-6 text-center text-[11px] text-zinc-400 font-semibold tracking-wide">
+                <span class="footer-signature">© 2026 Yang Lu.<span class="footer-secret">with help from my beautiful girlfriend <a href="https://www.linkedin.com/in/mariaxu1019/" target="_blank" rel="noopener noreferrer">Maria Xu</a></span></span>
+            </div>
+</footer>
+<script src="script.js">
+</script>
+<script>
             // Project preview: cached decoding, race-safe image changes, and frame-throttled positioning.
             (() => {
                 const cards = [...document.querySelectorAll('#projects-grid > a')];
@@ -1037,5 +1907,190 @@
                 });
             })();
         </script>
-    </body>
+<script>
+(function () {
+    const root = document.documentElement;
+    const toggle = document.getElementById('simple-mode-toggle');
+    const simple = document.getElementById('simple-portfolio');
+    const back = document.getElementById('simple-back');
+    if (!toggle || !simple) return;
+    // The preference is independent of which tab is currently visible.
+    // Posts temporarily hides Simple Mode without disabling the preference.
+    let simplePreferred = false;
+    try {
+        simplePreferred = sessionStorage.getItem('portfolio-simple-home') === 'true';
+    } catch (error) {}
+
+    function isPostsTab() {
+        return document.getElementById('posts')?.style.display !== 'none' &&
+            (root.classList.contains('initial-posts') ||
+             document.querySelector('[aria-controls="posts"]')?.getAttribute('aria-pressed') === 'true');
+    }
+
+    function setSimple(enabled) {
+        root.classList.toggle('simple-home', enabled);
+        simple.hidden = !enabled;
+        toggle.setAttribute('aria-pressed', String(simplePreferred));
+        toggle.textContent = simplePreferred ? 'Full view' : 'Simple view';
+        if (enabled) {
+            // Keep only one expanded entry at a time, avoiding excessive page growth.
+            document.querySelectorAll('#simple-portfolio details').forEach(d => { d.open = false; d.dataset.targetOpen = 'false'; d.getAnimations().forEach(a => a.cancel()); d.style.removeProperty('overflow'); });
+        }
+    }
+    function savePreference() {
+        try {
+            sessionStorage.setItem('portfolio-simple-home', String(simplePreferred));
+        } catch (error) {}
+    }
+
+    // Keep the standard tab navigation, but restore Simple Mode on About.
+    window.navigatePortfolioTab = function (tab) {
+        showSection(tab);
+        setSimple(tab === 'about' && simplePreferred);
+    };
+
+    // Use the same two-phase crossfade in both directions. Waiting for the
+    // outgoing view to fade prevents the full homepage from appearing abruptly.
+    const main = document.getElementById('main-content');
+    const switchMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let switching = false;
+
+    async function switchView(update) {
+        if (switching) return;
+        switching = true;
+        toggle.disabled = true;
+        try {
+            if (switchMotion.matches || !main?.animate) {
+                update();
+                window.scrollTo(0, 0);
+                return;
+            }
+
+            await main.animate(
+                [{ opacity: 1 }, { opacity: 0 }],
+                { duration: 130, easing: 'ease-in', fill: 'forwards' }
+            ).finished;
+
+            update();
+            window.scrollTo(0, 0);
+
+            // Hold the new view invisible until its first frame is ready.
+            const entering = main.animate(
+                [{ opacity: 0 }, { opacity: 1 }],
+                { duration: 190, easing: 'ease-out', fill: 'forwards' }
+            );
+            await entering.finished;
+            entering.cancel();
+        } finally {
+            // Remove any residual animation if interrupted.
+            main?.getAnimations().forEach(animation => animation.cancel());
+            toggle.disabled = false;
+            switching = false;
+        }
+    }
+
+    toggle.addEventListener('click', () => {
+        if (switching) return;
+        switchView(() => {
+            simplePreferred = !simplePreferred;
+            savePreference();
+            if (simplePreferred && isPostsTab()) showSection('about');
+            setSimple(simplePreferred && !isPostsTab());
+        });
+    });
+
+    back.addEventListener('click', event => {
+        event.preventDefault();
+        if (switching) return;
+        switchView(() => {
+            simplePreferred = false;
+            savePreference();
+            setSimple(false);
+        });
+    });
+    // Animate the complete details element as a single box. Animating only
+    // .simple-detail left its padding behind, causing a two-stage collapse.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const animations = new WeakMap();
+
+    function animateEntry(entry, expand) {
+        const previous = animations.get(entry);
+        const currentHeight = previous
+            ? entry.getBoundingClientRect().height
+            : entry.getBoundingClientRect().height;
+
+        if (previous) {
+            previous.cancel();
+            animations.delete(entry);
+        }
+
+        entry.dataset.targetOpen = String(expand);
+
+        if (reduceMotion.matches || !entry.animate) {
+            entry.open = expand;
+            entry.style.removeProperty('overflow');
+            return;
+        }
+
+        // The open attribute stays present throughout closing so content is
+        // never hidden partway through the animation.
+        entry.open = true;
+        const summaryHeight = entry.querySelector('summary').getBoundingClientRect().height;
+        const fullHeight = entry.scrollHeight;
+        const endHeight = expand ? fullHeight : summaryHeight;
+
+        entry.style.overflow = 'hidden';
+        const animation = entry.animate(
+            [
+                { height: `${currentHeight}px` },
+                { height: `${endHeight}px` }
+            ],
+            {
+                duration: 210,
+                easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+                fill: 'forwards'
+            }
+        );
+        animations.set(entry, animation);
+        animation.onfinish = () => {
+            if (animations.get(entry) !== animation) return;
+            // Preserve the final visual height until native details has
+            // settled into its final open/closed layout.
+            entry.open = expand;
+            animations.delete(entry);
+            animation.cancel();
+            entry.style.removeProperty('overflow');
+        };
+    }
+
+    simple.querySelectorAll('details.simple-entry').forEach(entry => {
+        entry.dataset.targetOpen = String(entry.open);
+        entry.querySelector('summary').addEventListener('click', event => {
+            event.preventDefault();
+            const opening = entry.dataset.targetOpen !== 'true';
+            if (opening) {
+                entry.closest('.simple-entries')
+                    .querySelectorAll('details.simple-entry')
+                    .forEach(other => {
+                        if (other !== entry && other.dataset.targetOpen === 'true') {
+                            animateEntry(other, false);
+                        }
+                    });
+            }
+            animateEntry(entry, opening);
+        });
+    });
+    // The URL may request Posts on initial load or after returning from an article.
+    setSimple(simplePreferred && !isPostsTab());
+
+    // Restore the preference after browser Back/Forward cache navigation.
+    window.addEventListener('pageshow', () => {
+        try {
+            simplePreferred = sessionStorage.getItem('portfolio-simple-home') === 'true';
+        } catch (error) {}
+        setSimple(simplePreferred && !isPostsTab());
+    });
+})();
+</script>
+</body>
 </html>
