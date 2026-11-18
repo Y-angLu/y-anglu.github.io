@@ -726,7 +726,7 @@
      <!-- Two-Image Gallery -->
      <div class="grid grid-cols-2 gap-3 sm:gap-4">
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Wheeled Biped V2 belt-driven leg concept" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v2/belt_concept.png"/>
+       <img alt="Final parallel belt layout with thigh actuation split between two thinner belts" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v2/parallel_in_CAD.png"/>
       </figure>
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
        <img alt="Final assembly of leg, awaiting testing" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v2/final_assembly.JPEG"/>
@@ -900,23 +900,15 @@
      </p>
      <!-- Transmission comparison images -->
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-      <!-- Linkage concept -->
+
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- <img src="../images/projects/biped_v2/linkage.png" alt="Biped leg linkage transmission concept" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Linkage concept
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/initial_belt_routing.png" alt="Initial sizing and belt routing" class="w-full h-full object-cover">
+ 
       </div>
-      <!-- Belt-driven concept -->
+
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- <img src="../images/projects/biped_v2/belt_concept.png" alt="Biped belt and pulley transmission concept" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Belt-driven concept
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/trying_for_combo.png" alt="At first, I explored using a linkage and belt combo. However, the linkage did not allow compact packaging while keeping sufficient range of motion" class="w-full h-full object-cover">
+
       </div>
      </div>
      <!-- 2.2 Estimating Joint Requirements -->
@@ -1228,25 +1220,17 @@
                             the thigh's loading across both sides. I prioritized the knee because
                             I expected it to experience greater joint loads.
       </p>
-      <!-- Belt Geometry Images -->
+
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-       <!-- HTD Pulley Geometry -->
+ 
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-        <!-- <img src="../images/projects/biped_v2/htd_pulley.png" alt="HTD tooth profile and pulley geometry for belt transmission" class="w-full h-full object-cover"> -->
-        <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-         <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-          HTD pulley geometry
-         </span>
-        </div>
+        <img src="../images/projects/biped_v2/parallel_in_CAD.png" alt="Final parallel belt layout with thigh actuation split between two thinner belts" class="w-full h-full object-cover">
+
        </div>
-       <!-- Parallel Belt Arrangement -->
+
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-        <!-- <img src="../images/projects/biped_v2/parallel_belts.png" alt="Parallel belt transmission arrangement for biped leg" class="w-full h-full object-cover"> -->
-        <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-         <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-          Parallel belt arrangement
-         </span>
-        </div>
+        <img src="../images/projects/biped_v2/irl_parallel_belts.JPEG" alt="Assembled parallel belts" class="w-full h-full object-cover">
+
        </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1301,81 +1285,63 @@
       ,
                         allowing their tensions to be adjusted separately rather than relying on a shared mechanism.
      </p>
-     <!-- Tensioner images -->
+
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-      <!-- Tensioner CAD -->
+
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- <img src="../images/projects/biped_v2/tensioner_cad.png" alt="Belt tensioner CAD model for wheeled biped leg" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Tensioner CAD
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/tensioners.png" alt="Tensioners, adjusted using standard fasteners with fixed nuts" class="w-full h-full object-cover">
+
       </div>
-      <!-- Tensioner implementation -->
+
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- <img src="../images/projects/biped_v2/tensioner_detail.png" alt="Detail of belt tensioner design for wheeled biped" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Tensioner implementation
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/double_tensioner.png" alt="I initially intended to tension both sides of the thigh belt(s), but it would limit its RoM. In actuality, tensioning the parallel thigh belts individually was probably the more important challenge." class="w-full h-full object-cover">
+
       </div>
      </div>
     </section>
+
     <section aria-labelledby="mechanical-development" class="space-y-4 pt-4">
-     <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="mechanical-development">
-      3. Mechanical Development
-     </h2>
-     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-      I iterated on the leg assembly to integrate the actuators, pulleys, bearings, and structural components within the available space. Beyond the basic kinematics, the design had to accommodate belt routing, component clearances, and practical assembly access.
-     </p>
+        <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20"
+            data-toc-target="" id="mechanical-development">
+            3. Mechanical Development
+        </h2>
 
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+        <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+            I iterated on the leg assembly to integrate the actuators, pulleys, bearings,
+            and structural components within the available space. Beyond the basic
+            kinematics, the design had to accommodate belt routing, component
+            clearances, and practical assembly access.
+        </p>
 
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned cad iteration 01 illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
-      </div>
-   
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-  
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned cad iteration 02 illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
-      </div>
-   
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
 
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned exploded assembly illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
-      </div>
+            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+                <img src="../images/projects/biped_v2/full_leg_render.jpg"
+                    alt="Full leg render"
+                    class="w-full h-full object-cover">
+            </div>
 
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <img src="../images/projects/biped_v2/in_progress.JPEG" alt="Parts nearing full assembly" class="w-full h-full object-cover">
-      </div>
-     
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <img src="../images/projects/biped_v2/final_assembly.JPEG" alt="Final assembly of leg, awaiting testing" class="w-full h-full object-cover">
-      </div>
+            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+                <img src="../images/projects/biped_v2/biped_back_render.png"
+                    alt="Initial leg and body modeling"
+                    class="w-full h-full object-cover">
+            </div>
 
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <img src="../images/projects/biped_v2/close_up_tension.JPEG" alt="Close-up on thigh belt tensioning" class="w-full h-full object-cover">
-       </div>
-      </div>
-     </div>
+            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+                <img src="../images/projects/biped_v2/final_assembly.JPEG"
+                    alt="Final assembly of leg, awaiting testing"
+                    class="w-full h-full object-cover">
+            </div>
+
+            <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
+                <img src="../images/projects/biped_v2/close_up_tension.JPEG"
+                    alt="Close-up on thigh belt tensioning"
+                    class="w-full h-full object-cover">
+            </div>
+
+        </div>
     </section>
+
     <section aria-labelledby="retrospect" class="space-y-4 pt-4">
      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="retrospect">
       4. Retrospective and Lessons Learned
@@ -1384,11 +1350,11 @@
       V2 reinforced that actuator packaging is a system-level design problem. Moving the motors can improve mass distribution or fit, but the transmission, bearings, tensioning hardware, and assembly process must be considered together. The belt-driven arrangement solved my immediate packaging constraint while introducing additional integration complexity.
      </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-      The broader work on leg geometry, torque requirements, dynamics, and controls continues in my
+      I had planned to finish the body and start moving it around after my school term, but started work at Proception! and instead put all my time there. However, my learnings on leg geometry, torque requirements, dynamics, and controls were all put into my
       <a class="text-zinc-900 dark:text-zinc-50 font-bold underline decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-400 transition-colors" href="Capstone.html">
        capstone project
       </a>
-      , where those decisions are developed more systematically.
+      , where those decisions are developed more systematically. 
      </p>
      <div class="flex flex-wrap gap-2 pt-2">
       <a class="inline-block text-xs font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" href="Biped_V1.html">
