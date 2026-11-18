@@ -1106,19 +1106,19 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="First quadruped chassis CAD revision" class="w-full h-full object-cover" src="../images/projects/quadruped/chassis_v1.jpg"/>
+        <img alt="First revision running on RPi - too large" class="w-full h-full object-cover" src="../images/projects/quadruped/version1.png"/>
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          Version 1
         </div>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="Second quadruped chassis CAD revision" class="w-full h-full object-cover" src="../images/projects/quadruped/chassis_v2.jpg"/>
+        <img alt="Second revision sacrificed cable management and assembly" class="w-full h-full object-cover" src="../images/projects/quadruped/version2.png"/>
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          Version 2
         </div>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="Final quadruped chassis CAD revision" class="w-full h-full object-cover" src="../images/projects/quadruped/chassis_v3.jpg"/>
+        <img alt="Third and final revision showing improved cable management" class="w-full h-full object-cover" src="../images/projects/quadruped/version3_above.png"/>
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          Version 3 (Final)
         </div>
@@ -1212,14 +1212,14 @@
        Two 2S LiPo batteries powered the robot through a buck converter supplying separate servo and logic power rails. Twelve hobby servos were controlled through a PCA9685 PWM driver over I²C. While early revisions used a Raspberry Pi, the final design transitioned to an Arduino since the workload was simple and didn’t require a full Linux system. Separating the high-current servo supply from the logic rail prevented brownouts during large transient loads.
       </p>
      </div>
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+     <!--<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
        <img alt="Electrical diagram for quadruped robot" class="w-full h-full object-cover" src=""/>
       </div>
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
        <img alt="Software visualizer for quadruped robot" class="w-full h-full object-cover" src=""/>
       </div>
-     </div>
+     </div>-->
      <div class="space-y-2 mt-6">
       <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="software-and-simulation">
        3.2 Software and Simulation
@@ -1236,20 +1236,19 @@
      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="retrospectives">
       4. Retrospective and Lessons Learned
      </h2>
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-       <img alt="Final quadruped 1" class="w-full h-full object-cover" src=""/>
-      </div>
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-       <img alt="Final quadruped 2" class="w-full h-full object-cover" src=""/>
-      </div>
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-       <img alt="Final quadruped 3" class="w-full h-full object-cover" src=""/>
-      </div>
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-       <img alt="Final quadruped 4" class="w-full h-full object-cover" src=""/>
-      </div>
-     </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+        <!-- Row 1 -->
+        <img src="../images/projects/quadruped/image1.jpg" alt="Final quadruped 1" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+
+        <img src="../images/projects/quadruped/image2.jpg" alt="Final quadruped 2" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+
+        <!-- Row 2 -->
+        <img src="../images/projects/quadruped/main_irl.png" alt="Final quadruped" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+
+        <img src="../images/projects/quadruped/final_side.png" alt="Final quadruped, side view" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+    </div>
+
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       This was my first dynamic robotic system and highlighted the gap between a mechanism that poses correctly and one that moves well. It was rewarding to watch the platform walk, but several limitations became apparent:
      </p>

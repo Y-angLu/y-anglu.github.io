@@ -489,7 +489,7 @@
             .overview-number { color: #71717a; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
 
 
-/* Summary thumbnails: maintain visible inset from the frame on mobile and desktop. */
+/* Summary gallery thumbnails fill their rounded frames. */
 .overview-image.summary-thumbnail {
     position: relative;
     box-sizing: border-box;
@@ -726,10 +726,10 @@
      <!-- Two-Image Gallery -->
      <div class="grid grid-cols-2 gap-3 sm:gap-4">
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Wheeled Biped V2 belt-driven leg concept" class="block w-full h-full !object-contain rounded-lg" loading="lazy" src="../images/projects/biped_v2/belt_concept.png"/>
+       <img alt="Wheeled Biped V2 belt-driven leg concept" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v2/belt_concept.png"/>
       </figure>
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Wheeled Biped V2 parallel belt arrangement" class="block w-full h-full !object-contain rounded-lg" loading="lazy" src="../images/projects/biped_v2/parallel_belts.png"/>
+       <img alt="Final assembly of leg, awaiting testing" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v2/final_assembly.JPEG"/>
       </figure>
      </div>
     </div>
@@ -808,17 +808,6 @@
         </tr>
         <tr>
          <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">
-          Opposing
-         </td>
-         <td class="p-4 align-top">
-          Co-locates motors near the hip without concentric shafts
-         </td>
-         <td class="p-4 align-top">
-          Requires axial clearance and compatible linkage geometry
-         </td>
-        </tr>
-        <tr>
-         <td class="p-4 align-top font-bold text-zinc-900 dark:text-zinc-100">
           Concentric / Stacked
          </td>
          <td class="p-4 align-top">
@@ -843,55 +832,27 @@
       </table>
      </div>
      <!-- Replace each placeholder with an <img> using your own image path. -->
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
+     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 py-2 my-4">
       <!-- Serial -->
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned serial illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/serial_actuator.png" alt="Wheeled biped with serial driven knee by Haizhou Zhao, Lei Yu, Siying Qin, Gumin Jin, Yuqing Chen" class="w-full h-full object-cover">
+
        <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
         Serial
        </div>
       </div>
-      <!-- Opposing -->
-      <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned opposing illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
-       <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
-        Opposing
-       </div>
-      </div>
+
       <!-- Concentric / Stacked -->
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned concentric / stacked illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/MIT_cheetah.jpg" alt="MIT mini cheetah with stacked actuator placement and belt driven knee" class="w-full h-full object-cover">
+ 
        <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
         Concentric / Stacked
        </div>
       </div>
       <!-- Side-by-Side + Belts -->
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned side-by-side + belts illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/planned_packaging.png" alt="Planned side-by-side + belts" class="w-full h-full object-cover">
        <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
         Side-by-Side &amp; Belts
        </div>
@@ -1369,11 +1330,10 @@
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       I iterated on the leg assembly to integrate the actuators, pulleys, bearings, and structural components within the available space. Beyond the basic kinematics, the design had to accommodate belt routing, component clearances, and practical assembly access.
      </p>
-     <!-- Replace each placeholder with an <img> using your own image path. -->
+
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-      <!-- CAD iteration 01 -->
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
+
        <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned cad iteration 01 illustration" class="w-full h-full object-cover"> -->
        <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
         <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
@@ -1381,9 +1341,9 @@
         </span>
        </div>
       </div>
-      <!-- CAD iteration 02 -->
+   
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
+  
        <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned cad iteration 02 illustration" class="w-full h-full object-cover"> -->
        <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
         <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
@@ -1391,9 +1351,9 @@
         </span>
        </div>
       </div>
-      <!-- Exploded assembly -->
+   
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
+
        <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned exploded assembly illustration" class="w-full h-full object-cover"> -->
        <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
         <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
@@ -1401,34 +1361,17 @@
         </span>
        </div>
       </div>
-      <!-- Fabrication -->
+
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned fabrication illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/in_progress.JPEG" alt="Parts nearing full assembly" class="w-full h-full object-cover">
       </div>
-      <!-- Prototype details -->
+     
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned prototype details illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/biped_v2/final_assembly.JPEG" alt="Final assembly of leg, awaiting testing" class="w-full h-full object-cover">
       </div>
-      <!-- Final V2 design -->
+
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- Replace the image path below with your own image file. -->
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned final v2 design illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
+       <img src="../images/projects/biped_v2/close_up_tension.JPEG" alt="Close-up on thigh belt tensioning" class="w-full h-full object-cover">
        </div>
       </div>
      </div>
