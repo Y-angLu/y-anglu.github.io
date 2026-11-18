@@ -640,7 +640,7 @@
     <!-- The overview's skills are adjacent to the hero, not a separate section at the bottom. -->
     <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] gap-4 items-stretch">
      <figure class="overview-image aspect-[16/10] sm:aspect-auto sm:min-h-[265px] p-3">
-      <img alt="Wheeled Biped V1 project image" fetchpriority="high" src="../images/Biped_V1.jpg"/>
+      <img alt="Wheeled Biped V1" fetchpriority="high" src="../images/Biped_V1.jpg"/>
      </figure>
      <aside aria-label="Project skills and tools" class="overview-skills-panel">
       <div>
@@ -731,11 +731,11 @@
      <div class="grid grid-cols-2 gap-3 sm:gap-4">
       <!-- Image 1 -->
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Image description" class="block w-full h-full !object-contain rounded-lg" loading="lazy" src="../images/projects/project_name/image_1.png"/>
+       <img alt="Cable and capstan design" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v1/capstan.png"/>
       </figure>
       <!-- Image 2 -->
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Image description" class="block w-full h-full !object-contain rounded-lg" loading="lazy" src="../images/projects/project_name/image_2.png"/>
+       <img alt="Leg posed" class="block w-full h-full object-cover" loading="lazy" src="../images/projects/biped_v1/on_stand.png"/>
       </figure>
      </div>
     </div>
@@ -1059,47 +1059,42 @@
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       I ultimately built a functioning leg incorporating the capstan transmissions. With the school year approaching, I disassembled the prototype and shifted my focus toward learning about motor control strategies and planning for the next biped iteration.
      </p>
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
-      <!-- Row 1 -->
-      <!-- Image 01 -->
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-        Image placeholder 01
-       </span>
-      </div>
-      <!-- Image 02 -->
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-        Image placeholder 02
-       </span>
-      </div>
-      <!-- Row 2 -->
-      <!-- Image 03 -->
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-        Image placeholder 03
-       </span>
-      </div>
-      <!-- Image 04 -->
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-        Image placeholder 04
-       </span>
-      </div>
-      <!-- Row 3 -->
-      <!-- Image 05 -->
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-        Image placeholder 05
-       </span>
-      </div>
-      <!-- Image 06 -->
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-        Image placeholder 06
-       </span>
-      </div>
-     </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+        <!-- Row 1 -->
+        <figure class="overflow-hidden rounded-xl" data-lightbox-item role="button" tabindex="0">
+            <img src="../images/projects/biped_v1/render_top.JPEG" alt="Top render" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        </figure>
+
+        <figure class="overflow-hidden rounded-xl" data-lightbox-item role="button" tabindex="0">
+
+            <img src="../images/projects/biped_v1/render_bottom.JPEG" alt="Bottom render" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+
+        </figure>
+
+        <!-- Row 2 -->
+        <figure class="overflow-hidden rounded-xl" data-lightbox-item role="button" tabindex="0">
+            <img src="../images/projects/biped_v1/bottom_CAD.png" alt="Bottom CAD" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        </figure>
+
+        <figure class="overflow-hidden rounded-xl" data-lightbox-item role="button" tabindex="0">
+
+            <img src="../images/projects/biped_v1/capstan.png" alt="Cable and capstan design" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+
+        </figure>
+
+        <!-- Row 3 -->
+        <figure class="overflow-hidden rounded-xl" data-lightbox-item role="button" tabindex="0">
+            <img src="../images/projects/biped_v1/assembled_leg.png" alt="Leg during assembly" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        </figure>
+
+        <figure class="overflow-hidden rounded-xl" data-lightbox-item role="button" tabindex="0">
+
+            <img src="../images/projects/biped_v1/on_stand.png" alt="Leg posed" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+
+        </figure>
+    </div>
+
     </section>
     <section aria-labelledby="pivot" class="space-y-4 pt-4">
      <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-50 scroll-mt-20" data-toc-target="" id="pivot">
