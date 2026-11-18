@@ -984,6 +984,23 @@ html.simple-home header nav [aria-controls="posts"] {
     color: #111827 !important;
     background: #a5d8ff;
 }
+/* On narrow screens, place the selectable secret below the centered signature. */
+@media (max-width: 640px) {
+    .footer-secret {
+        left: 50%;
+        top: 100%;
+        margin-left: 0;
+        transform: translateX(-50%);
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        white-space: normal;
+        text-align: center;
+    }
+
+    .footer-signature {
+        margin-bottom: 1.6em;
+    }
+}
 </style>
 </head>
 <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
