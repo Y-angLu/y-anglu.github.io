@@ -853,25 +853,17 @@
       1.2 Cycloidal vs. Rolling-Element Eccentric Drives
      </h3>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-      The rolling-element eccentric drive described by Fritsch et al. (2023) shares a similar reduction principle with cycloidal drives. However, rather than using a rotating cycloidal disc engaging a ring of pins,
+      The rolling-element eccentric drive described by <a class="text-zinc-900 dark:text-zinc-100 underline underline-offset-4 hover:opacity-70 transition-opacity" href="https://link.springer.com/article/10.1007/s10010-023-00688-1" target="_blank" rel="noopener noreferrer">Fritsch et al. (2023)</a> shares a similar reduction principle with cycloidal drives. However, rather than using a rotating cycloidal disc engaging a ring of pins,
       it uses individual rolling elements driven radially by an eccentric crank. These elements follow a stationary gear profile, while a concentric cage constrains their movement and serves as the output.
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned htd pulley geometry illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/wave_actuator/wave_drive.png" alt="Wave drive with rolling elements geometry" class="w-full h-full object-cover">
+
       </div>
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-       <!-- <img src="../images/projects/biped_v2/your-image.png" alt="Planned dual-belt arrangement illustration" class="w-full h-full object-cover"> -->
-       <div class="absolute inset-0 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder
-        </span>
-       </div>
+       <img src="../images/projects/wave_actuator/cycloidal_reducer.png" alt="Cycloidal reducer" class="w-full h-full object-cover"> -->
+
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -932,19 +924,14 @@
                         by the cage. The contact geometry determines how effectively
                         each roller contributes to torque transmission.
      </p>
-     <!-- Image pair: Annotated Wave Drive Mechanism -->
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-        Annotated cross-section: eccentric, rollers, fixed profile, output cage, and force path
-       </span>
-      </div>
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-        Additional annotated wave drive mechanism image
-       </span>
-      </div>
-     </div>
+
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      The mathematical basis for this geometry is discussed by
+      <a class="text-zinc-900 dark:text-zinc-100 underline underline-offset-4 hover:opacity-70 transition-opacity" href="https://doi.org/10.1007/s10010-023-00688-1" target="_blank" rel="noopener noreferrer">Fritsch et al. (2023)</a>:
+      Section 3.1 derives the roller-center trajectory (Eq. 20) and obtains the outer gear profile by offsetting that trajectory along its normal (Eqs. 28–30).
+      <a class="text-zinc-900 dark:text-zinc-100 underline underline-offset-4 hover:opacity-70 transition-opacity" href="https://doi.org/10.1016/j.proeng.2016.07.010" target="_blank" rel="noopener noreferrer">Korotkov et al. (2016)</a>
+      also derive rounded-edge profiles to address sharp transitions and associated wear. These papers provided useful geometric references; I did not independently reproduce their full derivations.
+     </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       I generated the transmission geometry using an Onshape FeatureScript
                         adapted from
@@ -966,19 +953,25 @@
                         the requirements of Wheeled Biped V2, balancing packaging,
                         roller engagement, and manufacturability.
      </p>
-     <!-- Image pair: FeatureScript and Generated Profile -->
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-        FeatureScript parameters and generated wave-drive profile
-       </span>
-      </div>
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-        Additional featurescript and generated profile image
-       </span>
-      </div>
-     </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+
+        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 overflow-hidden">
+            <img src="../images/projects/wave_actuator/python_profile.png"
+                alt="Python file showing driving equations and wave profile"
+                class="w-full h-full object-cover"
+                loading="lazy">
+        </div>
+
+        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 overflow-hidden">
+            <img src="../images/projects/wave_actuator/featurescript.png"
+                alt="Onshape featurescript for profile generation and prototyping"
+                class="w-full h-full object-cover"
+                loading="lazy">
+        </div>
+
+    </div>
+
      <!-- ============================================== -->
      <!-- 2.2 Contact Loading and Material Selection     -->
      <!-- ============================================== -->
@@ -996,6 +989,9 @@
                         angles influence torque transmission. However, determining
                         the load distribution among multiple rollers requires further
                         analysis.
+     </p>
+     <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
+      Fritsch et al. (2023), Section 3.2, provide a force-based treatment of individual roller contacts. My calculation below instead uses a simplified torque balance to estimate average tangential loading; it does not resolve the contact-normal forces or load sharing across rollers.
      </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       For my initial calculations, I assumed
@@ -1038,18 +1034,23 @@
                         Uneven load sharing could also concentrate forces on
                         fewer rollers.
      </p>
-     <!-- Image pair: Contact Forces and Pressure Angle -->
-     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-        Roller-to-profile contact: normal force, pressure angle, and tangential contribution to output torque
-       </span>
-      </div>
-      <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center overflow-hidden">
-       <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 text-center px-4">
-        Additional contact forces and pressure angle image
-       </span>
-      </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
+
+        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 overflow-hidden">
+            <img src="../images/projects/wave_actuator/driving_equations.png"
+                alt="Profile, curvature, and possible force(s) estimation"
+                class="w-full h-full object-cover"
+                loading="lazy">
+        </div>
+
+        <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 overflow-hidden">
+            <img src="../images/projects/wave_actuator/fritsch_reducer.png"
+                alt="Reducer cross section used by Fritsch et al., figure 2"
+                class="w-full h-full object-cover"
+                loading="lazy">
+        </div>
+
+    </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       I selected
@@ -1235,7 +1236,7 @@
         Simulation:
        </strong>
        Use contact analysis and FEA to optimize material usage
-                            and identify stress concentrations.
+                            and identify stress concentrations, especially between the metal rollers and plastic surfaces.
       </li>
       <li>
        <strong class="text-zinc-900 dark:text-zinc-100">
