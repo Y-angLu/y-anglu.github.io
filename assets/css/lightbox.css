@@ -40,6 +40,8 @@
                          position: relative;
                          width: min(100%, 1040px);
                          max-height: min(90vh, 980px);
+                         height: min(90vh, 900px);
+                         height: min(90dvh, 900px);
                          display: flex;
                          flex-direction: column;
                          align-items: center;
@@ -66,29 +68,56 @@
                      }
 
                      .image-lightbox-media {
+                         position: relative;
                          width: 100%;
                          min-height: 0;
+                         flex: 1 1 auto;
                          display: flex;
                          align-items: center;
                          justify-content: center;
-                         overflow: auto;
+                         overflow: hidden;
                          border-radius: 8px;
-                         transition: opacity 160ms ease;
                      }
 
-                     .image-lightbox-media.is-changing,
-                     .image-lightbox-caption.is-changing {
-                         opacity: .25;
-                     }
-
+                     /* Keep the same frame size as users navigate between images.
+                        Crossfade only after the replacement image has decoded. */
                      .image-lightbox-media img {
+                         position: absolute;
+                         top: 50%;
+                         left: 50%;
                          display: block;
                          max-width: 100%;
-                         max-height: 75vh;
+                         max-height: 100%;
                          width: auto;
                          height: auto;
                          object-fit: contain;
                          border-radius: 6px;
+                         transform: translate(-50%, -50%);
+                         opacity: 1;
+                         transition: none;
+                     }
+
+                     .image-lightbox-media img.is-visible {
+                         opacity: 1;
+                     }
+
+                     .image-lightbox-media.is-loading::after {
+                         content: 'Loading image…';
+                         position: absolute;
+                         bottom: 12px;
+                         right: 12px;
+                         z-index: 1;
+                         padding: 5px 9px;
+                         border-radius: 6px;
+                         background: rgb(250 250 250 / 86%);
+                         color: #71717a;
+                         font-size: 11px;
+                         pointer-events: none;
+                     }
+
+                     .dark .image-lightbox-media.is-loading::after {
+                         background: rgb(28 28 31 / 86%);
+                         color: #d4d4d8;
                      }
 
                      .image-lightbox-placeholder {
@@ -113,7 +142,11 @@
                      }
 
                      .image-lightbox-caption {
+                         width: 100%;
                          max-width: 680px;
+                         height: 4.8em;
+                         flex: 0 0 auto;
+                         overflow-y: auto;
                          text-align: center;
                          font-size: 13px;
                          line-height: 1.6;
@@ -174,16 +207,19 @@
 
                          .image-lightbox-content {
                              max-height: 88vh;
+                             max-height: 88dvh;
+                             height: 88vh;
+                             height: 88dvh;
                              padding: 48px 16px 62px;
                          }
 
-                         .image-lightbox-media img { max-height: 65vh; }
+                         .image-lightbox-media img { max-height: 100%; }
                          .image-lightbox-prev { left: 16px; top: auto; bottom: 12px; transform: none; }
                          .image-lightbox-next { right: 16px; top: auto; bottom: 12px; transform: none; }
                      }
 
                      @media (prefers-reduced-motion: reduce) {
-                         .image-lightbox, .image-lightbox-content, .image-lightbox-media,
+                         .image-lightbox, .image-lightbox-content, .image-lightbox-media img,
                          .image-lightbox-caption, .image-lightbox-control, [data-lightbox-item] {
                              transition: none !important;
                          }
