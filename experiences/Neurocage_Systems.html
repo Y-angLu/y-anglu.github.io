@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
         <!-- Search, sharing and structured metadata (nonvisual) -->
         <meta name="description" content="Engineering work experience at Neurocage Systems, documented in Yang Lu’s mechanical engineering portfolio.">
         <meta name="robots" content="index, follow, max-image-preview:large">
@@ -43,8 +44,6 @@
     ]
 }
 </script>
-
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neurocage Systems | Engineering Experience | Yang Lu</title>
 
@@ -102,7 +101,12 @@
                 transition: none;
             }
         }
-                         /* Figure viewer: flat, restrained, and consistent with the article. */
+                         /* Preserve horizontal alignment when the viewer disables page scrolling. */
+                      html {
+                          scrollbar-gutter: stable;
+                      }
+
+                      /* Figure viewer: flat, restrained, and consistent with the article. */
                      [data-lightbox-item] {
                          cursor: zoom-in;
                          transition: border-color 220ms ease, background-color 220ms ease;
@@ -356,7 +360,7 @@
                     Three person team focused on autonomous husbandry systems for neurological research.
                 </p>
                 <p class="mt-4">
-                    Designed systems to assist post-doc studies at the University of Lethbridge. Some examples include automatic feed systems with water and food detection, and behavioural testing boxes.
+                    Designed systems to assist post-doc studies at the University of Lethbridge. Some examples include automatic feed systems with water and food detection, and behavioral testing boxes.
                 </p>
             </div>
 
@@ -369,7 +373,7 @@
                     <img src="../images/experiences/neuro_2.png" alt="Mouse on printer" class="w-full h-full object-cover">
                 </div>
                 <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-                    <img src="../images/experiences/neuro_3.png" alt="Behavioural testing enclosure" class="w-full h-full object-cover">
+                    <img src="../images/experiences/neuro_3.png" alt="Behavioral testing enclosure" class="w-full h-full object-cover">
                 </div>
                 <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
                     <img src="../images/experiences/neuro_4.png" alt="Neurocage project showcase" class="w-full h-full object-cover">
@@ -462,155 +466,182 @@
             </div>
         </div>
         <script>
-            (function () {
-                         const viewer = document.getElementById('image-lightbox');
-                         const media = document.getElementById('lightbox-media');
-                         const caption = document.getElementById('lightbox-caption');
-                         const counter = document.getElementById('lightbox-counter');
-                         const closeButton = document.getElementById('lightbox-close');
-                         const previousButton = document.getElementById('lightbox-prev');
-                         const nextButton = document.getElementById('lightbox-next');
-                         // Register article images and unfinished image placeholders automatically.
-                         // This keeps the viewer working as placeholder images are replaced later.
-                         document.querySelectorAll('main img').forEach(image => {
-                             if (image.closest('[data-lightbox-item]')) return;
-                             const target = image.parentElement;
-                             if (!target || target.closest('a, button')) return;
-                             target.setAttribute('data-lightbox-item', '');
-                             target.setAttribute('role', 'button');
-                             target.setAttribute('tabindex', '0');
-                             target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
-                         });
-                         document.querySelectorAll('main .aspect-square, main .aspect-video, main [class*="aspect-["]').forEach(target => {
-                             if (target.hasAttribute('data-lightbox-item') || target.querySelector('img, [data-lightbox-item]')) return;
-                             const text = target.textContent.toLowerCase();
-                             if (!text.includes('image placeholder')) return;
-                             target.setAttribute('data-lightbox-item', '');
-                             target.setAttribute('role', 'button');
-                             target.setAttribute('tabindex', '0');
-                             target.setAttribute('aria-label', 'Expand image placeholder');
-                             const labels = [...target.querySelectorAll('div')].filter(el =>
-                                 el.classList.contains('absolute') && el.classList.contains('bottom-3'));
-                             if (labels.length) target.dataset.caption = labels[labels.length - 1].textContent.trim();
-                         });
-                         const items = [...document.querySelectorAll('main [data-lightbox-item]')];
-                         let currentIndex = -1;
-                         let previousFocus = null;
-                         let touchStartX = null;
+(function () {
+    const viewer = document.getElementById('image-lightbox');
+    if (!viewer) return;
 
-                         let changeTimer = null;
+    const media = document.getElementById('lightbox-media');
+    const caption = document.getElementById('lightbox-caption');
+    const counter = document.getElementById('lightbox-counter');
+    const closeButton = document.getElementById('lightbox-close');
+    const previousButton = document.getElementById('lightbox-prev');
+    const nextButton = document.getElementById('lightbox-next');
+    if (![media, caption, counter, closeButton, previousButton, nextButton].every(Boolean)) return;
 
-                         function render(index) {
-                             currentIndex = (index + items.length) % items.length;
-                             const item = items[currentIndex];
-                             const source = item.querySelector('img');
-                             const figureCaption = item.querySelector('figcaption');
-                             const description = item.dataset.caption ||
-                                 (figureCaption && figureCaption.textContent.trim()) ||
-                                 (source && source.alt) || item.innerText.trim().replace(/\s+/g, ' ');
+    // Keep explicit galleries; register remaining article images individually.
+    // Do not hijack links or video-player buttons.
+    document.querySelectorAll('main img[src]').forEach(image => {
+        if (image.closest('[data-lightbox-item], a, button')) return;
+        const parent = image.parentElement;
+        const containsMultipleImages = parent && parent.querySelectorAll('img').length > 1;
+        const containsControls = parent && parent.querySelector('button, a, iframe');
+        const target = parent && !containsMultipleImages && !containsControls ? parent : image;
+        if (!target || target.closest('[data-lightbox-item]')) return;
 
-                             media.replaceChildren();
-                             if (source && source.getAttribute('src')) {
-                                 const image = document.createElement('img');
-                                 image.src = source.currentSrc || source.src;
-                                 image.alt = source.alt || description;
-                                 media.appendChild(image);
-                             } else {
-                                 const placeholder = document.createElement('div');
-                                 placeholder.className = 'image-lightbox-placeholder';
-                                 const title = document.createElement('strong');
-                                 title.textContent = item.querySelector('span')?.textContent.trim() || description;
-                                 const note = document.createElement('span');
-                                 note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
-                                 placeholder.append(title, note);
-                                 media.appendChild(placeholder);
-                             }
-                             caption.textContent = description;
-                             counter.textContent = `${currentIndex + 1} / ${items.length}`;
-                         }
+        target.setAttribute('data-lightbox-item', '');
+        target.setAttribute('role', 'button');
+        target.setAttribute('tabindex', '0');
+        target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
+    });
 
-                         function navigate(index) {
-                             if (changeTimer) clearTimeout(changeTimer);
-                             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                                 render(index);
-                                 return;
-                             }
-                             media.classList.add('is-changing');
-                             caption.classList.add('is-changing');
-                             changeTimer = setTimeout(() => {
-                                 render(index);
-                                 media.classList.remove('is-changing');
-                                 caption.classList.remove('is-changing');
-                                 changeTimer = null;
-                             }, 125);
-                         }
+    // Allow deliberately labelled unfinished figure slots, but not arbitrary boxes.
+    document.querySelectorAll('main .aspect-square, main .aspect-video, main [class*="aspect-["]').forEach(target => {
+        if (target.hasAttribute('data-lightbox-item') ||
+            target.closest('a, button') ||
+            target.querySelector('img, [data-lightbox-item], button, a')) return;
+        const text = target.textContent.trim();
+        if (!/image placeholder/i.test(text)) return;
+        target.setAttribute('data-lightbox-item', '');
+        target.setAttribute('role', 'button');
+        target.setAttribute('tabindex', '0');
+        target.setAttribute('aria-label', 'Expand image placeholder');
+        target.dataset.caption = text;
+    });
 
-                         function open(index) {
-                             if (!items.length) return;
-                             previousFocus = document.activeElement;
-                             render(index);
-                             viewer.classList.add('is-open');
-                             viewer.setAttribute('aria-hidden', 'false');
-                             document.body.style.overflow = 'hidden';
-                             closeButton.focus();
-                         }
+    const items = [...document.querySelectorAll('main [data-lightbox-item]')];
+    let currentIndex = -1;
+    let previousFocus = null;
+    let previousOverflow = '';
+    let touchStartX = null;
+    let changeTimer = null;
 
-                         function close() {
-                             if (changeTimer) clearTimeout(changeTimer);
-                             changeTimer = null;
-                             media.classList.remove('is-changing');
-                             caption.classList.remove('is-changing');
-                             viewer.classList.remove('is-open');
-                             viewer.setAttribute('aria-hidden', 'true');
-                             document.body.style.overflow = '';
-                             currentIndex = -1;
-                             if (previousFocus && previousFocus.focus) previousFocus.focus();
-                         }
+    function render(index) {
+        if (!items.length) return;
+        currentIndex = (index + items.length) % items.length;
+        const item = items[currentIndex];
+        const source = item.matches('img') ? item : item.querySelector('img');
+        const figureCaption = item.querySelector('figcaption');
+        const description = item.dataset.caption ||
+            (figureCaption && figureCaption.textContent.trim()) ||
+            (source && source.alt) ||
+            item.textContent.trim().replace(/\s+/g, ' ') || 'Project image';
 
-                         items.forEach((item, index) => {
-                             item.addEventListener('click', () => open(index));
-                             item.addEventListener('keydown', event => {
-                                 if (event.key === 'Enter' || event.key === ' ') {
-                                     event.preventDefault();
-                                     open(index);
-                                 }
-                             });
-                         });
+        media.replaceChildren();
+        if (source && source.getAttribute('src')) {
+            const image = document.createElement('img');
+            image.src = source.currentSrc || source.src;
+            image.alt = source.alt || description;
+            media.appendChild(image);
+        } else {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'image-lightbox-placeholder';
+            const title = document.createElement('strong');
+            title.textContent = description;
+            const note = document.createElement('span');
+            note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
+            placeholder.append(title, note);
+            media.appendChild(placeholder);
+        }
+        caption.textContent = description;
+        counter.textContent = `${currentIndex + 1} / ${items.length}`;
+    }
 
-                         closeButton.addEventListener('click', close);
-                         previousButton.addEventListener('click', () => navigate(currentIndex - 1));
-                         nextButton.addEventListener('click', () => navigate(currentIndex + 1));
-                         viewer.addEventListener('click', event => {
-                             if (event.target === viewer) close();
-                         });
-                         document.addEventListener('keydown', event => {
-                             if (currentIndex < 0) return;
-                             if (event.key === 'Escape') close();
-                             if (event.key === 'ArrowLeft') navigate(currentIndex - 1);
-                             if (event.key === 'ArrowRight') navigate(currentIndex + 1);
-                             if (event.key === 'Tab') {
-                                 const controls = [closeButton, previousButton, nextButton];
-                                 const index = controls.indexOf(document.activeElement);
-                                 if (event.shiftKey && index === 0) {
-                                     event.preventDefault();
-                                     nextButton.focus();
-                                 } else if (!event.shiftKey && index === controls.length - 1) {
-                                     event.preventDefault();
-                                     closeButton.focus();
-                                 }
-                             }
-                         });
-                         media.addEventListener('touchstart', event => {
-                             touchStartX = event.changedTouches[0].screenX;
-                         }, { passive: true });
-                         media.addEventListener('touchend', event => {
-                             if (touchStartX === null) return;
-                             const difference = event.changedTouches[0].screenX - touchStartX;
-                             if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
-                             touchStartX = null;
-                         }, { passive: true });
-                     })();
-        </script>
+    function navigate(index) {
+        if (currentIndex < 0) return;
+        if (changeTimer) clearTimeout(changeTimer);
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            render(index);
+            return;
+        }
+        media.classList.add('is-changing');
+        caption.classList.add('is-changing');
+        changeTimer = setTimeout(() => {
+            render(index);
+            media.classList.remove('is-changing');
+            caption.classList.remove('is-changing');
+            changeTimer = null;
+        }, 125);
+    }
+
+    function open(index) {
+        if (!items.length) return;
+        previousFocus = document.activeElement;
+        previousOverflow = document.body.style.overflow;
+        render(index);
+        viewer.classList.add('is-open');
+        viewer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeButton.focus();
+    }
+
+    function close() {
+        if (currentIndex < 0) return;
+        if (changeTimer) clearTimeout(changeTimer);
+        changeTimer = null;
+        media.classList.remove('is-changing');
+        caption.classList.remove('is-changing');
+        viewer.classList.remove('is-open');
+        viewer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = previousOverflow;
+        currentIndex = -1;
+        if (previousFocus && previousFocus.isConnected && previousFocus.focus) {
+            previousFocus.focus();
+        }
+    }
+
+    items.forEach((item, index) => {
+        item.addEventListener('click', () => open(index));
+        item.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                open(index);
+            }
+        });
+    });
+
+    closeButton.addEventListener('click', close);
+    previousButton.addEventListener('click', () => navigate(currentIndex - 1));
+    nextButton.addEventListener('click', () => navigate(currentIndex + 1));
+    viewer.addEventListener('click', event => {
+        if (event.target === viewer) close();
+    });
+    document.addEventListener('keydown', event => {
+        if (currentIndex < 0) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            close();
+        } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            navigate(currentIndex - 1);
+        } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            navigate(currentIndex + 1);
+        } else if (event.key === 'Tab') {
+            const controls = [closeButton, previousButton, nextButton];
+            const focusedIndex = controls.indexOf(document.activeElement);
+            if (focusedIndex === -1) {
+                event.preventDefault();
+                (event.shiftKey ? nextButton : closeButton).focus();
+            } else if (event.shiftKey && focusedIndex === 0) {
+                event.preventDefault();
+                nextButton.focus();
+            } else if (!event.shiftKey && focusedIndex === controls.length - 1) {
+                event.preventDefault();
+                closeButton.focus();
+            }
+        }
+    });
+    media.addEventListener('touchstart', event => {
+        touchStartX = event.changedTouches[0].screenX;
+    }, { passive: true });
+    media.addEventListener('touchend', event => {
+        if (touchStartX === null || currentIndex < 0) return;
+        const difference = event.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
+        touchStartX = null;
+    }, { passive: true });
+})();
+</script>
 
 </body>
 </html>

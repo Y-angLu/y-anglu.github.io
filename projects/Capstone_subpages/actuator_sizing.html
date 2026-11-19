@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
  <head>
+    <meta charset="utf-8"/>
   <!-- Search, sharing and structured metadata (nonvisual) -->
   <meta content="Modeling and actuator sizing for Notify Robots, including wheeled inverted-pendulum dynamics, MATLAB simulation, torque requirements and model limitations." name="description"/>
   <meta content="index, follow, max-image-preview:large" name="robots"/>
@@ -48,7 +49,6 @@
     ]
 }
 </script>
-  <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
    Robot Dynamics &amp; Actuator Sizing | Notify Robots | Yang Lu
@@ -527,7 +527,7 @@
                              '(prefers-color-scheme: dark)'
                          ).matches;
 
-                         // Subpages use Light Mode when entered from Colour Mode.
+                         // Subpages use Light Mode when entered from Color Mode.
                          // Otherwise, respect the saved theme preference.
                          const useDark = !fromColourMode && (
                              savedTheme === 'dark' ||
@@ -900,10 +900,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Lagragian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_1.png"/>
+       <img alt="Lagrangian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_1.png"/>
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Lagragian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_2.png"/>
+       <img alt="Lagrangian derivation with masses modeled." class="w-full h-full object-cover" src="../../images/projects/capstone/actuator_size/lagrangian_2.png"/>
       </div>
      </div>
      <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100 scroll-mt-20 pt-2" data-toc-target="" id="section-2-2">
@@ -1127,7 +1127,7 @@
       For peak wheel torque, I used the expected reaction force during a nudge as the main loading case. When Nudge pushes against a person, the equal and opposite contact force acts as an external disturbance on the robot. I applied this disturbance in the MATLAB model and evaluated the wheel torque required to maintain balance.
      </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-      I tested different LQR cost-function weights rather than relying on one controller setting. Pitch and displacement varied, and some configurations became unstable, but peak torque stayed near 2 N·m across both wheels (about 1 N·m each) in the successful test cases.
+      I tested different LQR cost-function weights rather than relying on one controller setting. Pitch and displacement varied, and some configurations became unstable, but peak torque stayed near 2 Nm across both wheels (about 1 Nm each) in the successful test cases.
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
@@ -1144,7 +1144,7 @@
       Our current plan is for Nudge to tow Notice, the second robot in the Notify family, as they move around together. I therefore included towing and towing-related acceleration and braking in the representative operating cycle, using an assumed combined load of 10 kg. These are preliminary loading assumptions rather than measured towing requirements.
      </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-      The resulting RMS estimate was 0.29 N·m across both wheels, or approximately 0.147 N·m per wheel.
+      The resulting RMS estimate was 0.29 Nm across both wheels, or approximately 0.147 Nm per wheel.
      </p>
      <div class="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
       <table class="w-full text-left text-sm">
@@ -1313,7 +1313,7 @@
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       Using the assumed nudging load and equivalent lever arm from Section 5.2, the calculated
       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-       peak torque was 0.85 N·m per actuator
+       peak torque was 0.85 Nm per actuator
       </strong>
       , before adding losses or safety margins. To estimate continuous loading, I also needed a representative duty cycle rather than assuming that the actuator would operate at its peak torque all the time.
      </p>
@@ -1352,7 +1352,7 @@
           10 s
          </td>
          <td class="px-4 py-3">
-          0.85 + 0.01575 N·m
+          0.85 + 0.01575 Nm
          </td>
         </tr>
         <tr class="border-t border-zinc-200 dark:border-zinc-800">
@@ -1363,7 +1363,7 @@
           300 s
          </td>
          <td class="px-4 py-3">
-          0.425 + 0.01575 N·m
+          0.425 + 0.01575 Nm
          </td>
         </tr>
         <tr class="border-t border-zinc-200 dark:border-zinc-800">
@@ -1383,7 +1383,7 @@
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       Weighting each state by its duration gave an estimated
       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-       RMS torque of 0.461 N·m per leg actuator
+       RMS torque of 0.461 Nm per leg actuator
       </strong>
       , before margins. This is useful for initial thermal screening, but it depends heavily on the assumed duty cycle and on the still-unverified holding-load estimate.
      </p>
@@ -1423,10 +1423,10 @@
           Wheel (each)
          </td>
          <td class="px-4 py-3">
-          2.00 N·m
+          2.00 Nm
          </td>
          <td class="px-4 py-3">
-          0.294 N·m
+          0.294 Nm
          </td>
         </tr>
         <tr class="border-t border-zinc-200 dark:border-zinc-800">
@@ -1434,10 +1434,10 @@
           Leg (each)
          </td>
          <td class="px-4 py-3">
-          1.70 N·m
+          1.70 Nm
          </td>
          <td class="px-4 py-3">
-          0.922 N·m
+          0.922 Nm
          </td>
         </tr>
        </tbody>
@@ -1446,7 +1446,7 @@
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       This factor is a
       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-       preliminary allowance for uncertain masses and linkage geometry, unmodeled friction and mechanical losses, idealized disturbances, and other non-ideal behaviour
+       preliminary allowance for uncertain masses and linkage geometry, unmodeled friction and mechanical losses, idealized disturbances, and other non-ideal behavior
       </strong>
       . It is not a measured efficiency or a substitute for checking torque–speed curves, thermal limits, traction, and the eventual mechanism.
      </p>
@@ -1498,13 +1498,13 @@
           Peak torque
          </td>
          <td class="px-4 py-3">
-          2.00 N·m
+          2.00 Nm
          </td>
          <td class="px-4 py-3">
-          1.70 N·m
+          1.70 Nm
          </td>
          <td class="px-4 py-3">
-          3.70 N·m
+          3.70 Nm
          </td>
         </tr>
         <tr>
@@ -1512,13 +1512,13 @@
           RMS / rated torque
          </td>
          <td class="px-4 py-3">
-          0.294 N·m
+          0.294 Nm
          </td>
          <td class="px-4 py-3">
-          0.922 N·m
+          0.922 Nm
          </td>
          <td class="px-4 py-3">
-          1.20 N·m rated
+          1.20 Nm rated
          </td>
         </tr>
         <tr>
@@ -1555,13 +1555,13 @@
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       The current estimates use the manufacturer’s torque constant of
       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-       0.41 N·m/A
+       0.41 Nm/A
       </strong>
-      and \(I=\tau/K_t\), assuming consistent current definitions. The closest continuous-duty case is the leg: its estimated 0.922 N·m RMS is about
+      and \(I=\tau/K_t\), assuming consistent current definitions. The closest continuous-duty case is the leg: its estimated 0.922 Nm RMS is about
       <strong class="text-zinc-900 dark:text-zinc-100 font-bold">
-       77% of the motor’s 1.20 N·m rated torque
+       77% of the motor’s 1.20 Nm rated torque
       </strong>
-      . The wheel’s 2.00 N·m peak is about 54% of the advertised 3.70 N·m peak.
+      . The wheel’s 2.00 Nm peak is about 54% of the advertised 3.70 Nm peak.
      </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       Speed also fits on paper. At our target travel speed of 1.58 m/s with 210 mm diameter wheels, direct drive requires approximately
@@ -1606,7 +1606,7 @@
       6.4 Thermal Considerations and Selection
      </h3>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-      The main remaining concern is continuous heating in the legs, particularly when holding position at low speed. The motor’s 1.20 N·m rated torque exceeds our estimated 0.922 N·m RMS requirement, but the manufacturer’s rating depends on its test and cooling conditions. A teammate is exploring whether the wheel design can move air around the motors; that could help while driving, but cannot be assumed to provide sufficient cooling when stationary. Heat conduction through the motor housing and frame will matter as well.
+      The main remaining concern is continuous heating in the legs, particularly when holding position at low speed. The motor’s 1.20 Nm rated torque exceeds our estimated 0.922 Nm RMS requirement, but the manufacturer’s rating depends on its test and cooling conditions. A teammate is exploring whether the wheel design can move air around the motors; that could help while driving, but cannot be assumed to provide sufficient cooling when stationary. Heat conduction through the motor housing and frame will matter as well.
      </p>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
       On the information available before purchasing, the GB7215 offers a practical combination of torque, speed, current demand, and packaging without a gearbox. We are treating it as our selected prototype motor, while recognizing that the manufacturer’s ratings are not a substitute for performance in the assembled robot.
@@ -1841,131 +1841,181 @@
    </div>
   </div>
   <script>
-            (function () {
-                         const viewer = document.getElementById('image-lightbox');
-                         const media = document.getElementById('lightbox-media');
-                         const caption = document.getElementById('lightbox-caption');
-                         const counter = document.getElementById('lightbox-counter');
-                         const closeButton = document.getElementById('lightbox-close');
-                         const previousButton = document.getElementById('lightbox-prev');
-                         const nextButton = document.getElementById('lightbox-next');
-                         const items = [...document.querySelectorAll('main [data-lightbox-item]')];
-                         let currentIndex = -1;
-                         let previousFocus = null;
-                         let touchStartX = null;
+(function () {
+    const viewer = document.getElementById('image-lightbox');
+    if (!viewer) return;
 
-                         let changeTimer = null;
+    const media = document.getElementById('lightbox-media');
+    const caption = document.getElementById('lightbox-caption');
+    const counter = document.getElementById('lightbox-counter');
+    const closeButton = document.getElementById('lightbox-close');
+    const previousButton = document.getElementById('lightbox-prev');
+    const nextButton = document.getElementById('lightbox-next');
+    if (![media, caption, counter, closeButton, previousButton, nextButton].every(Boolean)) return;
 
-                         function render(index) {
-                             currentIndex = (index + items.length) % items.length;
-                             const item = items[currentIndex];
-                             const source = item.querySelector('img');
-                             const figureCaption = item.querySelector('figcaption');
-                             const description = item.dataset.caption ||
-                                 (figureCaption && figureCaption.textContent.trim()) ||
-                                 (source && source.alt) || item.innerText.trim().replace(/\s+/g, ' ');
+    // Keep explicit galleries; register remaining article images individually.
+    // Do not hijack links or video-player buttons.
+    document.querySelectorAll('main img[src]').forEach(image => {
+        if (image.closest('[data-lightbox-item], a, button')) return;
+        const parent = image.parentElement;
+        const containsMultipleImages = parent && parent.querySelectorAll('img').length > 1;
+        const containsControls = parent && parent.querySelector('button, a, iframe');
+        const target = parent && !containsMultipleImages && !containsControls ? parent : image;
+        if (!target || target.closest('[data-lightbox-item]')) return;
 
-                             media.replaceChildren();
-                             if (source && source.getAttribute('src')) {
-                                 const image = document.createElement('img');
-                                 image.src = source.currentSrc || source.src;
-                                 image.alt = source.alt || description;
-                                 media.appendChild(image);
-                             } else {
-                                 const placeholder = document.createElement('div');
-                                 placeholder.className = 'image-lightbox-placeholder';
-                                 const title = document.createElement('strong');
-                                 title.textContent = item.querySelector('span')?.textContent.trim() || description;
-                                 const note = document.createElement('span');
-                                 note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
-                                 placeholder.append(title, note);
-                                 media.appendChild(placeholder);
-                             }
-                             caption.textContent = description;
-                             counter.textContent = `${currentIndex + 1} / ${items.length}`;
-                         }
+        target.setAttribute('data-lightbox-item', '');
+        target.setAttribute('role', 'button');
+        target.setAttribute('tabindex', '0');
+        target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
+    });
 
-                         function navigate(index) {
-                             if (changeTimer) clearTimeout(changeTimer);
-                             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                                 render(index);
-                                 return;
-                             }
-                             media.classList.add('is-changing');
-                             caption.classList.add('is-changing');
-                             changeTimer = setTimeout(() => {
-                                 render(index);
-                                 media.classList.remove('is-changing');
-                                 caption.classList.remove('is-changing');
-                                 changeTimer = null;
-                             }, 125);
-                         }
+    // Allow deliberately labelled unfinished figure slots, but not arbitrary boxes.
+    document.querySelectorAll('main .aspect-square, main .aspect-video, main [class*="aspect-["]').forEach(target => {
+        if (target.hasAttribute('data-lightbox-item') ||
+            target.closest('a, button') ||
+            target.querySelector('img, [data-lightbox-item], button, a')) return;
+        const text = target.textContent.trim();
+        if (!/image placeholder/i.test(text)) return;
+        target.setAttribute('data-lightbox-item', '');
+        target.setAttribute('role', 'button');
+        target.setAttribute('tabindex', '0');
+        target.setAttribute('aria-label', 'Expand image placeholder');
+        target.dataset.caption = text;
+    });
 
-                         function open(index) {
-                             if (!items.length) return;
-                             previousFocus = document.activeElement;
-                             render(index);
-                             viewer.classList.add('is-open');
-                             viewer.setAttribute('aria-hidden', 'false');
-                             document.body.style.overflow = 'hidden';
-                             closeButton.focus();
-                         }
+    const items = [...document.querySelectorAll('main [data-lightbox-item]')];
+    let currentIndex = -1;
+    let previousFocus = null;
+    let previousOverflow = '';
+    let touchStartX = null;
+    let changeTimer = null;
 
-                         function close() {
-                             if (changeTimer) clearTimeout(changeTimer);
-                             changeTimer = null;
-                             media.classList.remove('is-changing');
-                             caption.classList.remove('is-changing');
-                             viewer.classList.remove('is-open');
-                             viewer.setAttribute('aria-hidden', 'true');
-                             document.body.style.overflow = '';
-                             currentIndex = -1;
-                             if (previousFocus && previousFocus.focus) previousFocus.focus();
-                         }
+    function render(index) {
+        if (!items.length) return;
+        currentIndex = (index + items.length) % items.length;
+        const item = items[currentIndex];
+        const source = item.matches('img') ? item : item.querySelector('img');
+        const figureCaption = item.querySelector('figcaption');
+        const description = item.dataset.caption ||
+            (figureCaption && figureCaption.textContent.trim()) ||
+            (source && source.alt) ||
+            item.textContent.trim().replace(/\s+/g, ' ') || 'Project image';
 
-                         items.forEach((item, index) => {
-                             item.addEventListener('click', () => open(index));
-                             item.addEventListener('keydown', event => {
-                                 if (event.key === 'Enter' || event.key === ' ') {
-                                     event.preventDefault();
-                                     open(index);
-                                 }
-                             });
-                         });
+        media.replaceChildren();
+        if (source && source.getAttribute('src')) {
+            const image = document.createElement('img');
+            image.src = source.currentSrc || source.src;
+            image.alt = source.alt || description;
+            media.appendChild(image);
+        } else {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'image-lightbox-placeholder';
+            const title = document.createElement('strong');
+            title.textContent = description;
+            const note = document.createElement('span');
+            note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
+            placeholder.append(title, note);
+            media.appendChild(placeholder);
+        }
+        caption.textContent = description;
+        counter.textContent = `${currentIndex + 1} / ${items.length}`;
+    }
 
-                         closeButton.addEventListener('click', close);
-                         previousButton.addEventListener('click', () => navigate(currentIndex - 1));
-                         nextButton.addEventListener('click', () => navigate(currentIndex + 1));
-                         viewer.addEventListener('click', event => {
-                             if (event.target === viewer) close();
-                         });
-                         document.addEventListener('keydown', event => {
-                             if (currentIndex < 0) return;
-                             if (event.key === 'Escape') close();
-                             if (event.key === 'ArrowLeft') navigate(currentIndex - 1);
-                             if (event.key === 'ArrowRight') navigate(currentIndex + 1);
-                             if (event.key === 'Tab') {
-                                 const controls = [closeButton, previousButton, nextButton];
-                                 const index = controls.indexOf(document.activeElement);
-                                 if (event.shiftKey && index === 0) {
-                                     event.preventDefault();
-                                     nextButton.focus();
-                                 } else if (!event.shiftKey && index === controls.length - 1) {
-                                     event.preventDefault();
-                                     closeButton.focus();
-                                 }
-                             }
-                         });
-                         media.addEventListener('touchstart', event => {
-                             touchStartX = event.changedTouches[0].screenX;
-                         }, { passive: true });
-                         media.addEventListener('touchend', event => {
-                             if (touchStartX === null) return;
-                             const difference = event.changedTouches[0].screenX - touchStartX;
-                             if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
-                             touchStartX = null;
-                         }, { passive: true });
-                     })();
-        </script>
+    function navigate(index) {
+        if (currentIndex < 0) return;
+        if (changeTimer) clearTimeout(changeTimer);
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            render(index);
+            return;
+        }
+        media.classList.add('is-changing');
+        caption.classList.add('is-changing');
+        changeTimer = setTimeout(() => {
+            render(index);
+            media.classList.remove('is-changing');
+            caption.classList.remove('is-changing');
+            changeTimer = null;
+        }, 125);
+    }
+
+    function open(index) {
+        if (!items.length) return;
+        previousFocus = document.activeElement;
+        previousOverflow = document.body.style.overflow;
+        render(index);
+        viewer.classList.add('is-open');
+        viewer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeButton.focus();
+    }
+
+    function close() {
+        if (currentIndex < 0) return;
+        if (changeTimer) clearTimeout(changeTimer);
+        changeTimer = null;
+        media.classList.remove('is-changing');
+        caption.classList.remove('is-changing');
+        viewer.classList.remove('is-open');
+        viewer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = previousOverflow;
+        currentIndex = -1;
+        if (previousFocus && previousFocus.isConnected && previousFocus.focus) {
+            previousFocus.focus();
+        }
+    }
+
+    items.forEach((item, index) => {
+        item.addEventListener('click', () => open(index));
+        item.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                open(index);
+            }
+        });
+    });
+
+    closeButton.addEventListener('click', close);
+    previousButton.addEventListener('click', () => navigate(currentIndex - 1));
+    nextButton.addEventListener('click', () => navigate(currentIndex + 1));
+    viewer.addEventListener('click', event => {
+        if (event.target === viewer) close();
+    });
+    document.addEventListener('keydown', event => {
+        if (currentIndex < 0) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            close();
+        } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            navigate(currentIndex - 1);
+        } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            navigate(currentIndex + 1);
+        } else if (event.key === 'Tab') {
+            const controls = [closeButton, previousButton, nextButton];
+            const focusedIndex = controls.indexOf(document.activeElement);
+            if (focusedIndex === -1) {
+                event.preventDefault();
+                (event.shiftKey ? nextButton : closeButton).focus();
+            } else if (event.shiftKey && focusedIndex === 0) {
+                event.preventDefault();
+                nextButton.focus();
+            } else if (!event.shiftKey && focusedIndex === controls.length - 1) {
+                event.preventDefault();
+                closeButton.focus();
+            }
+        }
+    });
+    media.addEventListener('touchstart', event => {
+        touchStartX = event.changedTouches[0].screenX;
+    }, { passive: true });
+    media.addEventListener('touchend', event => {
+        if (touchStartX === null || currentIndex < 0) return;
+        const difference = event.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
+        touchStartX = null;
+    }, { passive: true });
+})();
+</script>
  </body>
 </html>

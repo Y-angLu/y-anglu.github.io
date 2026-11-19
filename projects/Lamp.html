@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" lang="en">
     <head>
+    <meta charset="utf-8"/>
         <!-- Search, sharing and structured metadata (nonvisual) -->
         <meta name="description" content="Lamp project focused on product design and user experience.">
         <meta name="robots" content="index, follow, max-image-preview:large">
@@ -44,8 +45,6 @@
     ]
 }
 </script>
-
-        <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
         <title>Lamp | Yang Lu</title>
         <link class="favicon" href="../images/gear_favicon.png" rel="icon" type="image/png"/>
@@ -78,13 +77,13 @@
             }
 
             /* ------------------------------------------------------------------
-            COLOUR SYSTEM
+            COLOR SYSTEM
             The lamp's two primaries drive the whole page. Change them here and
             every band, chip and accent follows.
             yellow  rgb(252 227 0)    #FCE300
             warm grey rgb(203 198 184) #CBC6B8
             Dark mode dims the large grounds only; small accents stay at full
-            chroma so the yellow still reads as the product's colour.
+            chroma so the yellow still reads as the product's color.
             ------------------------------------------------------------------ */
             :root {
                 --ylw:      #FCE300;
@@ -135,7 +134,7 @@
                 background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.035) 0 8px, transparent 8px 16px);
                 color: #52525b;
             }
-            /* placeholder sitting on a colour or ink band.
+            /* placeholder sitting on a color or ink band.
             Written as .ph.ph-over so it outranks the `.dark .ph` rule above. */
             .ph.ph-over,
             .dark .ph.ph-over {
@@ -198,13 +197,13 @@
                 inset: 0;
                 z-index: 9999;
                 pointer-events: none;
-                background: #ffffff;
+                background: #fafafa;
                 opacity: 0;
                 transition: opacity 320ms ease;
             }
 
             html.dark .navigation-veil {
-                background: #0E0E0E;
+                background: #121212;
             }
 
             html.page-arriving .navigation-veil,
@@ -246,7 +245,7 @@
                     '(prefers-color-scheme: dark)'
                 ).matches;
 
-                // Subpages use Light Mode when entered from Colour Mode.
+                // Subpages use Light Mode when entered from Color Mode.
                 // Otherwise, respect the saved theme preference.
                 const useDark = !fromColourMode && (
                     savedTheme === 'dark' ||
@@ -586,7 +585,7 @@
                             <strong class="font-bold text-zinc-700 dark:text-zinc-300">
                                 Opportunity:
                             </strong>
-                            controlled lighting with no moving mechanism, but the behaviour is fixed once assembled.
+                            controlled lighting with no moving mechanism, but the behavior is fixed once assembled.
                         </p>
                     </div>
                     <div>
@@ -971,7 +970,7 @@
                         </div>
                         <div class="flex justify-between gap-6 py-2.5 border-b border-zinc-200 dark:border-zinc-800">
                             <dt class="font-bold text-zinc-400 dark:text-zinc-500">
-                                Colour temp
+                                Color temp
                             </dt>
                             <dd class="font-semibold tabular-nums">
                                 3000K
@@ -1014,14 +1013,14 @@
                     </div>
                 </div>
             </section>
-            <!-- ============== 08 · COLOUR & FINISH (speculative) =============== -->
+            <!-- ============== 08 · COLOR & FINISH (speculative) =============== -->
             <section id="colour-finish" class="mx-auto max-w-5xl px-6 pt-16 sm:pt-24 pb-10">
                 <div class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2 sm:gap-x-8">
                     <span class="text-sm sm:text-base font-bold text-zinc-400 dark:text-zinc-500 tabular-nums flex-none w-7">
                         08
                     </span>
                     <h2 class="text-xl sm:text-2xl font-bold tracking-tight">
-                        Colour & Finish
+                        Color & Finish
                     </h2>
                     <span class="text-[10px] font-bold uppercase tracking-[0.14em] px-2 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">
                         Unbuilt · rendered
@@ -1035,11 +1034,11 @@
                     </p>
                     <p class="max-w-2xl text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
                         I chose yellow to give the lamp a bit of personality and playfulness against its otherwise simple,
-                    symmetrical form. Pairing it with a warm off-white helped balance the colour and made the lamp feel
+                    symmetrical form. Pairing it with a warm off-white helped balance the color and made the lamp feel
                     more at home in a living space.
                     </p>
                     <p class="max-w-2xl text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
-                        I also explored how different colours and materials could change the character of the lamp.
+                        I also explored how different colors and materials could change the character of the lamp.
                     The separation between the base and moving shade creates an opportunity to mix contrasting finishes,
                     such as metal and wood. I'd especially like to explore wooden shades in a future version to
                     bring more natural warmth to the design.
@@ -1059,7 +1058,7 @@
                     <div>
                         <div class="flex items-baseline justify-between gap-4 mb-3">
                             <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500">
-                                Colourways
+                                Colorways
                             </div>
                             <div class="text-[10px] font-bold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500">
                                 Body / shade
@@ -1068,7 +1067,7 @@
                         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
                             <!-- 01 — the real pair -->
                             <figure>
-                                <img alt="Colourway 01 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/orange.jpg"/>
+                                <img alt="Colorway 01 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/orange.jpg"/>
                                 <div class="flex h-5 mt-2 border border-black/10 dark:border-white/10">
                                     <span class="flex-1" style="background:#2455D6">
                                     </span>
@@ -1089,7 +1088,7 @@
                             </figure>
                             <!-- 02 — inverted -->
                             <figure>
-                                <img alt="Colourway 02 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/pink.jpg"/>
+                                <img alt="Colorway 02 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/pink.jpg"/>
                                 <div class="flex h-5 mt-2 border border-black/10 dark:border-white/10">
                                     <span class="flex-1" style="background:#FF5C8A">
                                     </span>
@@ -1110,7 +1109,7 @@
                             </figure>
                             <!-- 03 — unset -->
                             <figure>
-                                <img alt="Colourway 03 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/green.jpg"/>
+                                <img alt="Colorway 03 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/green.jpg"/>
                                 <div class="flex h-5 mt-2 border border-black/10 dark:border-white/10">
                                     <span class="flex-1" style="background:#E84A5F">
                                     </span>
@@ -1131,7 +1130,7 @@
                             </figure>
                             <!-- 04 — unset -->
                             <figure>
-                                <img alt="Colourway 04 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/purple yellow.jpg"/>
+                                <img alt="Colorway 04 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/purple yellow.jpg"/>
                                 <div class="flex h-5 mt-2 border border-black/10 dark:border-white/10">
                                     <span class="flex-1" style="background:#6C4AB6">
                                     </span>
@@ -1152,7 +1151,7 @@
                             </figure>
                             <!-- 05 — unset. Delete this card if you only carry four. -->
                             <figure>
-                                <img alt="Colourway 05 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/wood.jpg"/>
+                                <img alt="Colorway 05 of lamp design" class="w-full aspect-[3/4] object-cover" src="../images/projects/lamp/wood.jpg"/>
                                 <div class="flex h-5 mt-2 border border-black/10 dark:border-white/10">
                                     <span class="flex-1" style="background:#D8B589">
                                     </span>
@@ -1260,7 +1259,7 @@
                 <a href="#iteration">05 · Iteration</a>
                 <a href="#mechanism">06 · Mechanism</a>
                 <a href="#light">07 · Light</a>
-                <a href="#colour-finish">08 · Colour &amp; Finish</a>
+                <a href="#colour-finish">08 · Color &amp; Finish</a>
                 <a href="#in-retrospect">09 · Retrospective and Lessons Learned</a>
             </div>
             <button class="lamp-contents-toggle" type="button" id="lamp-contents-toggle" aria-expanded="false" aria-controls="lamp-contents-panel">
@@ -1277,7 +1276,7 @@
         <!-- =================================================================
          MOIRÉ SHADE WIDGET
          Equatorial cross-section of the two-shell spherical shade.
-         Inner shell: N slats, fixed, a slat centre facing front. Outer
+         Inner shell: N slats, fixed, a slat center facing front. Outer
          shell: M = N + Δ slats, offset half a pitch (the closure offset)
          and turned by θ. Light escapes only where both shells show a gap.
          Slat duty (opaque fraction of a pitch cell) runs from 50% at the
@@ -1329,7 +1328,7 @@
                 }
 
                 // Is the shell opaque at world angle phi?
-                //   phase — world angle of slat k=0's centre (already includes spin)
+                //   phase — world angle of slat k=0's center (already includes spin)
                 //   spin  — how far this shell has turned from its fabricated zero
                 // Each slat has ONE width, and that width is a property of the
                 // PHYSICAL SLAT, not of where the slat currently points: it comes
@@ -1338,7 +1337,7 @@
                 // outer shell turns instead of the taper staying pinned to the room.
                 // A gore in cross-section is a single width; it does not taper
                 // within itself. Widths never exceed the pitch, so only the nearest
-                // centre can cover phi.
+                // center can cover phi.
                 // EPS absorbs float error at back = 50%, where the seal is exactly
                 // zero-margin and a sample can otherwise fall in a phantom sliver.
                 const EPS = 1e-9;
@@ -1397,7 +1396,7 @@
                     const backPct = parseInt(inBack.value, 10);
 
                     // Phasing, as measured off the lamp:
-                    //   inner — a slat centre sits dead ahead, so its narrowest slat
+                    //   inner — a slat center sits dead ahead, so its narrowest slat
                     //           (50% duty) straddles the forward direction. Fixed.
                     //   outer — offset half a pitch from the inner, which is the
                     //           half-pitch closure offset, then turned by θ. Its
@@ -1443,7 +1442,7 @@
                     //   → beam (only where both shells are clear) → the shells on top.
 
                     // Two things had to be separated here. On white, the glow only needs
-                    // to be gentle — the harshness was a blown-out white centre and beams
+                    // to be gentle — the harshness was a blown-out white center and beams
                     // held at full strength along their whole length. On near-black, a dim
                     // glow is not soft, it is muddy: translucent yellow over #131313 blends
                     // to olive. So dark composites additively and runs brighter, which is
@@ -1463,8 +1462,8 @@
                     const A = v => Math.min(0.92, v).toFixed(3);
 
                     // 1 · core, nudged toward the net emission direction.
-                    // The nudge and the radius are coupled: the gradient is centred at the
-                    // aim point but clipped to a circle centred on the lamp, so its radius
+                    // The nudge and the radius are coupled: the gradient is centered at the
+                    // aim point but clipped to a circle centered on the lamp, so its radius
                     // has to be (rIn0 - aim) for it to reach zero exactly at the clip edge
                     // on the aim side. Get that wrong and the ramp is sliced off, which is
                     // what made the core read as a hard-edged ball.
@@ -1594,7 +1593,7 @@
             })();
         </script>
         <script>
-                // Drag-to-scroll on the revision strip — same behaviour as the Experiences
+                // Drag-to-scroll on the revision strip — same behavior as the Experiences
             // row on the homepage, scoped locally so this page stays self-contained.
             (function () {
                 const strip = document.getElementById('rev-strip');

@@ -51,7 +51,7 @@ function initTheme() {
         ? savedTheme
         : (systemPrefersDark ? 'dark' : 'light');
 
-    // Reloads reset Colour Mode; returning from subpages restores it.
+    // Reloads reset Color Mode; returning from subpages restores it.
     const navigation = performance.getEntriesByType('navigation')[0];
     const isReload = navigation && navigation.type === 'reload';
 
@@ -88,7 +88,7 @@ function initTheme() {
 
         themeToggleBtn.setAttribute(
             'aria-label',
-            `Change color theme (currently ${currentTheme})`
+            `Change color theme (currently ${currentTheme === 'colour' ? 'color' : currentTheme})`
         );
 
         moonIcon.classList.add('hidden');
@@ -583,7 +583,7 @@ function initPlayfulTiles() {
         });
     });
 
-    // Match each skill bubble to its linked project's assigned colour.
+    // Match each skill bubble to its linked project's assigned color.
     const projectColours = new Map();
 
     document.querySelectorAll('#projects-grid > a[href]').forEach(tile => {
