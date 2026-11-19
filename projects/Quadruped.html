@@ -55,7 +55,8 @@
   </title>
   <link class="favicon" href="../images/gear_favicon.png" rel="icon" type="image/png"/>
   <link as="font" crossorigin="" href="../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf">
-   <script src="https://cdn.tailwindcss.com">
+   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin/>
+<script src="https://cdn.tailwindcss.com">
 </script>
    <script>
             tailwind.config = {
@@ -257,195 +258,9 @@
                          scrollbar-gutter: stable;
                      }
 
-                     /* Figure viewer: flat, restrained, and consistent with the article. */
-                     [data-lightbox-item] {
-                         cursor: zoom-in;
-                         transition: border-color 220ms ease, background-color 220ms ease;
-                     }
-
-                     [data-lightbox-item]:hover,
-                     [data-lightbox-item]:focus-visible {
-                         border-color: #a1a1aa;
-                         outline-offset: 3px;
-                     }
-
-                     .image-lightbox {
-                         position: fixed;
-                         inset: 0;
-                         z-index: 1000;
-                         display: flex;
-                         align-items: center;
-                         justify-content: center;
-                         padding: 24px;
-                         background: rgb(24 24 27 / 28%);
-                         opacity: 0;
-                         visibility: hidden;
-                         pointer-events: none;
-                         transition: opacity 240ms ease, visibility 240ms ease;
-                     }
-
-                     .dark .image-lightbox {
-                         background: rgb(0 0 0 / 46%);
-                     }
-
-                     .image-lightbox.is-open {
-                         opacity: 1;
-                         visibility: visible;
-                         pointer-events: auto;
-                     }
-
-                     .image-lightbox-content {
-                         position: relative;
-                         width: min(100%, 1040px);
-                         max-height: min(90vh, 980px);
-                         display: flex;
-                         flex-direction: column;
-                         align-items: center;
-                         gap: 12px;
-                         padding: 46px 52px 22px;
-                         border: 1px solid #e4e4e7;
-                         border-radius: 12px;
-                         background: #fafafa;
-                         color: #27272a;
-                         opacity: 0;
-                         transform: translateY(6px);
-                         transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.75,.3,1);
-                     }
-
-                     .image-lightbox.is-open .image-lightbox-content {
-                         opacity: 1;
-                         transform: translateY(0);
-                     }
-
-                     .dark .image-lightbox-content {
-                         background: #1c1c1f;
-                         border-color: #3f3f46;
-                         color: #f4f4f5;
-                     }
-
-                     .image-lightbox-media {
-                         width: 100%;
-                         min-height: 0;
-                         display: flex;
-                         align-items: center;
-                         justify-content: center;
-                         overflow: auto;
-                         border-radius: 8px;
-                         transition: opacity 160ms ease;
-                     }
-
-                     .image-lightbox-media.is-changing,
-                     .image-lightbox-caption.is-changing {
-                         opacity: .25;
-                     }
-
-                     .image-lightbox-media img {
-                         display: block;
-                         max-width: 100%;
-                         max-height: 75vh;
-                         width: auto;
-                         height: auto;
-                         object-fit: contain;
-                         border-radius: 6px;
-                     }
-
-                     .image-lightbox-placeholder {
-                         width: min(100%, 680px);
-                         min-height: 180px;
-                         padding: 28px;
-                         display: flex;
-                         flex-direction: column;
-                         align-items: center;
-                         justify-content: center;
-                         gap: 12px;
-                         text-align: center;
-                         border: 1px dashed #a1a1aa;
-                         border-radius: 8px;
-                         background: #f4f4f5;
-                         color: #71717a;
-                     }
-
-                     .dark .image-lightbox-placeholder {
-                         background: #27272a;
-                         color: #d4d4d8;
-                     }
-
-                     .image-lightbox-caption {
-                         max-width: 680px;
-                         text-align: center;
-                         font-size: 13px;
-                         line-height: 1.6;
-                         color: #52525b;
-                         transition: opacity 160ms ease;
-                     }
-
-                     .dark .image-lightbox-caption {
-                         color: #d4d4d8;
-                     }
-
-                     .image-lightbox-counter {
-                         font-size: 11px;
-                         font-weight: 600;
-                         letter-spacing: .05em;
-                         color: #71717a;
-                     }
-
-                     .image-lightbox-control {
-                         position: absolute;
-                         display: flex;
-                         align-items: center;
-                         justify-content: center;
-                         width: 34px;
-                         height: 34px;
-                         border: 1px solid #e4e4e7;
-                         border-radius: 8px;
-                         background: #fafafa;
-                         color: #3f3f46;
-                         font-size: 21px;
-                         cursor: pointer;
-                         transition: background-color 180ms ease, border-color 180ms ease;
-                     }
-
-                     .dark .image-lightbox-control {
-                         background: #1c1c1f;
-                         border-color: #52525b;
-                         color: #f4f4f5;
-                     }
-
-                     .image-lightbox-control:hover,
-                     .image-lightbox-control:focus-visible {
-                         background: #e4e4e7;
-                         border-color: #a1a1aa;
-                     }
-
-                     .dark .image-lightbox-control:hover,
-                     .dark .image-lightbox-control:focus-visible {
-                         background: #3f3f46;
-                     }
-
-                     .image-lightbox-close { top: 10px; right: 12px; }
-                     .image-lightbox-prev { left: 12px; top: 50%; transform: translateY(-50%); }
-                     .image-lightbox-next { right: 12px; top: 50%; transform: translateY(-50%); }
-
-                     @media (max-width: 640px) {
-                         .image-lightbox { padding: 14px; }
-
-                         .image-lightbox-content {
-                             max-height: 88vh;
-                             padding: 48px 16px 62px;
-                         }
-
-                         .image-lightbox-media img { max-height: 65vh; }
-                         .image-lightbox-prev { left: 16px; top: auto; bottom: 12px; transform: none; }
-                         .image-lightbox-next { right: 16px; top: auto; bottom: 12px; transform: none; }
-                     }
-
-                     @media (prefers-reduced-motion: reduce) {
-                         .image-lightbox, .image-lightbox-content, .image-lightbox-media,
-                         .image-lightbox-caption, .image-lightbox-control, [data-lightbox-item] {
-                             transition: none !important;
-                         }
-                     }
+                     </style>
+<link rel="stylesheet" href="../assets/css/lightbox.css"/>
+<style>
 
         
 /* Project overview shared with the Hand page */
@@ -544,7 +359,8 @@
                 root.style.colorScheme = useDark ? 'dark' : 'light';
             })();
         </script>
-   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
   </link>
  </head>
@@ -645,7 +461,7 @@
     <!-- The overview's skills are adjacent to the hero, not a separate section at the bottom. -->
     <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] gap-4 items-stretch">
      <figure class="overview-image aspect-[16/10] sm:aspect-auto sm:min-h-[265px] p-3">
-      <img alt="Quadruped" fetchpriority="high" src="../images/Quadruped_Assembly.jpg"/>
+      <img alt="Quadruped" fetchpriority="high" src="../images/Quadruped_Assembly.jpg" decoding="async">
      </figure>
      <aside aria-label="Project skills and tools" class="overview-skills-panel">
       <div>
@@ -736,10 +552,10 @@
      <!-- Two-Image Gallery -->
      <div class="grid grid-cols-2 gap-3 sm:gap-4">
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Three full iterations and testing" class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../images/projects/quadruped/all_versions.png"/>
+       <img alt="Three full iterations and testing" class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../images/projects/quadruped/all_versions.png" decoding="async">
       </figure>
       <figure class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail">
-       <img alt="Final quadruped" class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../images/projects/quadruped/main_irl.png"/>
+       <img alt="Final quadruped" class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../images/projects/quadruped/main_irl.png" decoding="async">
       </figure>
      </div>
     </div>
@@ -842,21 +658,21 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 py-2 my-4">
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-        <img alt="Direct Drive Leg Architecture" class="w-full h-full object-cover" src="../images/projects/quadruped/ex_direct.png">
+        <img alt="Direct Drive Leg Architecture" class="w-full h-full object-cover" src="../images/projects/quadruped/ex_direct.png" decoding="async" loading="lazy">
          <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
           Direct Drive
          </div>
         </img>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-        <img alt="Offset Actuator Leg Architecture" class="w-full h-full object-cover" src="../images/projects/quadruped/ex_offset.png">
+        <img alt="Offset Actuator Leg Architecture" class="w-full h-full object-cover" src="../images/projects/quadruped/ex_offset.png" decoding="async" loading="lazy">
          <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
           Offset Actuator
          </div>
         </img>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative">
-        <img alt="6-Bar Linkage Leg Architecture" class="w-full h-full object-cover" src="../images/projects/quadruped/ex_linkage.jpg"/>
+        <img alt="6-Bar Linkage Leg Architecture" class="w-full h-full object-cover" src="../images/projects/quadruped/ex_linkage.jpg" decoding="async" loading="lazy">
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          6-Bar Linkage
         </div>
@@ -878,10 +694,10 @@
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-        <img alt="Watt's linkage variation used for leg kinematics" class="w-full h-full object-cover" src="../images/projects/quadruped/watts.jpg"/>
+        <img alt="Watt's linkage variation used for leg kinematics" class="w-full h-full object-cover" src="../images/projects/quadruped/watts.jpg" decoding="async" loading="lazy">
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-        <img alt="Each leg has three DoFs: a hip roll joint (yellow) and two sagittal-plane joints (red and green)" class="w-full h-full object-cover" src="../images/projects/quadruped/three_dofs.jpg"/>
+        <img alt="Each leg has three DoFs: a hip roll joint (yellow) and two sagittal-plane joints (red and green)" class="w-full h-full object-cover" src="../images/projects/quadruped/three_dofs.jpg" decoding="async" loading="lazy">
        </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1084,25 +900,25 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="First revision running on RPi - too large" class="w-full h-full object-cover" src="../images/projects/quadruped/version1.png"/>
+        <img alt="First revision running on RPi - too large" class="w-full h-full object-cover" src="../images/projects/quadruped/version1.png" decoding="async" loading="lazy">
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          Version 1
         </div>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="Second revision sacrificed cable management and assembly" class="w-full h-full object-cover" src="../images/projects/quadruped/version2.png"/>
+        <img alt="Second revision sacrificed cable management and assembly" class="w-full h-full object-cover" src="../images/projects/quadruped/version2.png" decoding="async" loading="lazy">
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          Version 2
         </div>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="Third and final revision showing improved cable management" class="w-full h-full object-cover" src="../images/projects/quadruped/version3_above.png"/>
+        <img alt="Third and final revision showing improved cable management" class="w-full h-full object-cover" src="../images/projects/quadruped/version3_above.png" decoding="async" loading="lazy">
         <div class="absolute bottom-3 left-3 bg-white/90 dark:bg-[#121212]/90 px-3 py-1 rounded-md text-xs font-bold text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200 dark:border-zinc-800">
          Version 3 (Final)
         </div>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 relative group">
-        <img alt="Comparison of quadruped CAD iterations" class="w-full h-full object-cover" src="../images/projects/quadruped/all_versions.png"/>
+        <img alt="Comparison of quadruped CAD iterations" class="w-full h-full object-cover" src="../images/projects/quadruped/all_versions.png" decoding="async" loading="lazy">
        </div>
       </div>
      </div>
@@ -1123,10 +939,10 @@
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-            <img alt="Planar leg inverse kinematics derivation" class="w-full h-full object-cover" src="../images/projects/quadruped/IK_leg.jpg"/>
+            <img alt="Planar leg inverse kinematics derivation" class="w-full h-full object-cover" src="../images/projects/quadruped/IK_leg.jpg" decoding="async" loading="lazy">
         </div>
         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-            <img alt="Hip roll and three-dimensional leg inverse kinematics derivation" class="w-full h-full object-cover" src="../images/projects/quadruped/IK_hip.jpg"/>
+            <img alt="Hip roll and three-dimensional leg inverse kinematics derivation" class="w-full h-full object-cover" src="../images/projects/quadruped/IK_hip.jpg" decoding="async" loading="lazy">
         </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1156,10 +972,10 @@
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-            <img alt="Stance phase and swing phase of trot gait" class="w-full h-full object-cover" src="../images/projects/quadruped/gain_phases.jpg"/>
+            <img alt="Stance phase and swing phase of trot gait" class="w-full h-full object-cover" src="../images/projects/quadruped/gain_phases.jpg" decoding="async" loading="lazy">
         </div>
         <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-            <img alt="Gait in relation to leg" class="w-full h-full object-cover" src="../images/projects/quadruped/gait.jpg"/>
+            <img alt="Gait in relation to leg" class="w-full h-full object-cover" src="../images/projects/quadruped/gait.jpg" decoding="async" loading="lazy">
         </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1184,10 +1000,10 @@
      </div>
      <!--<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-       <img alt="Electrical diagram for quadruped robot" class="w-full h-full object-cover" src=""/>
+       <img alt="Electrical diagram for quadruped robot" class="w-full h-full object-cover" src="" decoding="async" loading="lazy">
       </div>
       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-       <img alt="Software visualizer for quadruped robot" class="w-full h-full object-cover" src=""/>
+       <img alt="Software visualizer for quadruped robot" class="w-full h-full object-cover" src="" decoding="async" loading="lazy">
       </div>
      </div>-->
      <div class="space-y-2 mt-6">
@@ -1209,14 +1025,14 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
         <!-- Row 1 -->
-        <img src="../images/projects/quadruped/final_CAD_top.jpg" alt="Final quadruped revision, designed entirely in Fusion" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        <img src="../images/projects/quadruped/final_CAD_top.jpg" alt="Final quadruped revision, designed entirely in Fusion" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800" decoding="async" loading="lazy">
 
-        <img src="../images/projects/quadruped/final_CAD_bottom.jpg" alt="Bottom of quadruped" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        <img src="../images/projects/quadruped/final_CAD_bottom.jpg" alt="Bottom of quadruped" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800" decoding="async" loading="lazy">
 
         <!-- Row 2 -->
-        <img src="../images/projects/quadruped/main_irl.png" alt="Final quadruped assembly" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        <img src="../images/projects/quadruped/main_irl.png" alt="Final quadruped assembly" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800" decoding="async" loading="lazy">
 
-        <img src="../images/projects/quadruped/final_side.png" alt="Final quadruped assembly, side view" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800">
+        <img src="../images/projects/quadruped/final_side.png" alt="Final quadruped assembly, side view" class="w-full aspect-square object-cover rounded-xl border border-zinc-200 dark:border-zinc-800" decoding="async" loading="lazy">
     </div>
 
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1421,182 +1237,6 @@
     </div>
    </div>
   </div>
-  <script>
-(function () {
-    const viewer = document.getElementById('image-lightbox');
-    if (!viewer) return;
-
-    const media = document.getElementById('lightbox-media');
-    const caption = document.getElementById('lightbox-caption');
-    const counter = document.getElementById('lightbox-counter');
-    const closeButton = document.getElementById('lightbox-close');
-    const previousButton = document.getElementById('lightbox-prev');
-    const nextButton = document.getElementById('lightbox-next');
-    if (![media, caption, counter, closeButton, previousButton, nextButton].every(Boolean)) return;
-
-    // Keep explicit galleries; register remaining article images individually.
-    // Do not hijack links or video-player buttons.
-    document.querySelectorAll('main img[src]').forEach(image => {
-        if (image.closest('[data-lightbox-item], a, button')) return;
-        const parent = image.parentElement;
-        const containsMultipleImages = parent && parent.querySelectorAll('img').length > 1;
-        const containsControls = parent && parent.querySelector('button, a, iframe');
-        const target = parent && !containsMultipleImages && !containsControls ? parent : image;
-        if (!target || target.closest('[data-lightbox-item]')) return;
-
-        target.setAttribute('data-lightbox-item', '');
-        target.setAttribute('role', 'button');
-        target.setAttribute('tabindex', '0');
-        target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
-    });
-
-    // Allow deliberately labelled unfinished figure slots, but not arbitrary boxes.
-    document.querySelectorAll('main .aspect-square, main .aspect-video, main [class*="aspect-["]').forEach(target => {
-        if (target.hasAttribute('data-lightbox-item') ||
-            target.closest('a, button') ||
-            target.querySelector('img, [data-lightbox-item], button, a')) return;
-        const text = target.textContent.trim();
-        if (!/image placeholder/i.test(text)) return;
-        target.setAttribute('data-lightbox-item', '');
-        target.setAttribute('role', 'button');
-        target.setAttribute('tabindex', '0');
-        target.setAttribute('aria-label', 'Expand image placeholder');
-        target.dataset.caption = text;
-    });
-
-    const items = [...document.querySelectorAll('main [data-lightbox-item]')];
-    let currentIndex = -1;
-    let previousFocus = null;
-    let previousOverflow = '';
-    let touchStartX = null;
-    let changeTimer = null;
-
-    function render(index) {
-        if (!items.length) return;
-        currentIndex = (index + items.length) % items.length;
-        const item = items[currentIndex];
-        const source = item.matches('img') ? item : item.querySelector('img');
-        const figureCaption = item.querySelector('figcaption');
-        const description = item.dataset.caption ||
-            (figureCaption && figureCaption.textContent.trim()) ||
-            (source && source.alt) ||
-            item.textContent.trim().replace(/\s+/g, ' ') || 'Project image';
-
-        media.replaceChildren();
-        if (source && source.getAttribute('src')) {
-            const image = document.createElement('img');
-            image.src = source.currentSrc || source.src;
-            image.alt = source.alt || description;
-            media.appendChild(image);
-        } else {
-            const placeholder = document.createElement('div');
-            placeholder.className = 'image-lightbox-placeholder';
-            const title = document.createElement('strong');
-            title.textContent = description;
-            const note = document.createElement('span');
-            note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
-            placeholder.append(title, note);
-            media.appendChild(placeholder);
-        }
-        caption.textContent = description;
-        counter.textContent = `${currentIndex + 1} / ${items.length}`;
-    }
-
-    function navigate(index) {
-        if (currentIndex < 0) return;
-        if (changeTimer) clearTimeout(changeTimer);
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            render(index);
-            return;
-        }
-        media.classList.add('is-changing');
-        caption.classList.add('is-changing');
-        changeTimer = setTimeout(() => {
-            render(index);
-            media.classList.remove('is-changing');
-            caption.classList.remove('is-changing');
-            changeTimer = null;
-        }, 125);
-    }
-
-    function open(index) {
-        if (!items.length) return;
-        previousFocus = document.activeElement;
-        previousOverflow = document.body.style.overflow;
-        render(index);
-        viewer.classList.add('is-open');
-        viewer.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        closeButton.focus();
-    }
-
-    function close() {
-        if (currentIndex < 0) return;
-        if (changeTimer) clearTimeout(changeTimer);
-        changeTimer = null;
-        media.classList.remove('is-changing');
-        caption.classList.remove('is-changing');
-        viewer.classList.remove('is-open');
-        viewer.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = previousOverflow;
-        currentIndex = -1;
-        if (previousFocus && previousFocus.isConnected && previousFocus.focus) {
-            previousFocus.focus();
-        }
-    }
-
-    items.forEach((item, index) => {
-        item.addEventListener('click', () => open(index));
-        item.addEventListener('keydown', event => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                open(index);
-            }
-        });
-    });
-
-    closeButton.addEventListener('click', close);
-    previousButton.addEventListener('click', () => navigate(currentIndex - 1));
-    nextButton.addEventListener('click', () => navigate(currentIndex + 1));
-    viewer.addEventListener('click', event => {
-        if (event.target === viewer) close();
-    });
-    document.addEventListener('keydown', event => {
-        if (currentIndex < 0) return;
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            close();
-        } else if (event.key === 'ArrowLeft') {
-            event.preventDefault();
-            navigate(currentIndex - 1);
-        } else if (event.key === 'ArrowRight') {
-            event.preventDefault();
-            navigate(currentIndex + 1);
-        } else if (event.key === 'Tab') {
-            const controls = [closeButton, previousButton, nextButton];
-            const focusedIndex = controls.indexOf(document.activeElement);
-            if (focusedIndex === -1) {
-                event.preventDefault();
-                (event.shiftKey ? nextButton : closeButton).focus();
-            } else if (event.shiftKey && focusedIndex === 0) {
-                event.preventDefault();
-                nextButton.focus();
-            } else if (!event.shiftKey && focusedIndex === controls.length - 1) {
-                event.preventDefault();
-                closeButton.focus();
-            }
-        }
-    });
-    media.addEventListener('touchstart', event => {
-        touchStartX = event.changedTouches[0].screenX;
-    }, { passive: true });
-    media.addEventListener('touchend', event => {
-        if (touchStartX === null || currentIndex < 0) return;
-        const difference = event.changedTouches[0].screenX - touchStartX;
-        if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
-        touchStartX = null;
-    }, { passive: true });
-})();
-</script>
+  <script src="../assets/js/lightbox.js" defer></script>
  </body>
 </html>

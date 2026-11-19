@@ -38,7 +38,8 @@
         <!-- Assumes this page lives in a posts/ folder beside projects/. -->
         <link rel="icon" type="image/png" href="../images/gear_favicon.png">
         <link rel="preload" href="../fonts/Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
-        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin/>
+<script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
                 darkMode: 'class',
@@ -293,7 +294,7 @@
                                 alt="Diagram of three training pillars: easy runs, long runs and tempo runs"
                                 class="w-full max-w-[70%] h-auto rounded-xl"
                                 loading="lazy"
-                            >
+                             decoding="async">
                         </figure>
 
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">These pairings are simplifications, not exclusive benefits. Importantly, easy and tempo describe intensity, while long describes duration. Most long runs are therefore also easy runs, just extended over a longer period.</p>
@@ -315,7 +316,7 @@
                                 alt="Chart of perceived exertion ranges for easy, long and tempo runs"
                                 class="w-full max-w-[100%] h-auto rounded-xl"
                                 loading="lazy"
-                            >
+                             decoding="async">
                         </figure>
 
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">These ranges are approximate, and pace is relative to each runner's fitness.</p>
@@ -333,7 +334,7 @@
                                 alt="Example weekly running schedule balancing easy runs, a long run and a workout"
                                 class="w-full max-w-[100%] h-auto rounded-xl"
                                 loading="lazy"
-                            >
+                             decoding="async">
                         </figure>
 
                         <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">The goal is to balance training stimulus and recovery. Running harder or longer isn't always better, especially when fatigue compromises subsequent workouts or increases injury risk.</p>

@@ -78,6 +78,7 @@
             }
         </script>
 <link class="favicon" href="images/gear_favicon.png" rel="icon" type="image/png"/>
+<link rel="preload" as="font" href="fonts/Quicksand-VariableFont_wght.ttf" type="font/ttf" crossorigin/>
 <script>
             // Select the destination tab before first paint, including return from posts.
             (function () {
@@ -135,6 +136,7 @@
                 }
             })();
         </script>
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin/>
 <script src="https://cdn.tailwindcss.com">
 </script>
 <script>
@@ -1789,7 +1791,7 @@ html.simple-home header nav [aria-controls="posts"] {
                 popup.id = 'project-skill-preview';
                 popup.setAttribute('aria-hidden', 'true');
                 popup.innerHTML = `
-                    <div class="preview-image-stack"><img alt="" width="300" height="148"></div>
+                    <div class="preview-image-stack"><img alt="" width="300" height="148" decoding="async"></div>
                     <div class="preview-heading"><span></span><span aria-hidden="true">↗</span></div>
                     <div class="preview-tags"></div>
                 `;
@@ -1830,14 +1832,19 @@ html.simple-home header nav [aria-controls="posts"] {
                     return ready;
                 }
 
-                // Defer nonessential work, with a fallback for browsers without idle callbacks.
-                function warmCache() {
-                    cards.forEach(card => preload(imageSource(card)));
-                }
-                if ('requestIdleCallback' in window) {
-                    requestIdleCallback(warmCache, { timeout: 1500 });
-                } else {
-                    window.addEventListener('load', warmCache, { once: true });
+
+                // Preload only preview thumbnails near the visible viewport.
+                if ('IntersectionObserver' in window && !navigator.connection?.saveData) {
+                    const previewObserver = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+                            previewObserver.unobserve(entry.target);
+                            const warm = () => preload(imageSource(entry.target));
+                            if ('requestIdleCallback' in window) requestIdleCallback(warm, { timeout: 1500 });
+                            else warm();
+                        });
+                    }, { rootMargin: '200px 0px' });
+                    cards.forEach(card => previewObserver.observe(card));
                 }
 
                 function place(card) {

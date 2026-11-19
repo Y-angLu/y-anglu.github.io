@@ -1,0 +1,39 @@
+{
+  "viewer_js_pages": [
+    "experiences/Humanoid.html",
+    "experiences/Mycro_Harvest.html",
+    "experiences/Neurocage_Systems.html",
+    "experiences/Proception_AI.html",
+    "experiences/Sanctuary_AI.html",
+    "projects/Biped_V1.html",
+    "projects/Biped_V2.html",
+    "projects/Capstone.html",
+    "projects/Capstone_subpages/actuator_sizing.html",
+    "projects/Capstone_subpages/concept_development.html",
+    "projects/Hand.html",
+    "projects/Quadruped.html",
+    "projects/Wave_Actuator.html"
+  ],
+  "viewer_css_pages": [
+    "experiences/Humanoid.html",
+    "experiences/Mycro_Harvest.html",
+    "experiences/Neurocage_Systems.html",
+    "experiences/Proception_AI.html",
+    "experiences/Sanctuary_AI.html",
+    "projects/Biped_V1.html",
+    "projects/Biped_V2.html",
+    "projects/Capstone.html",
+    "projects/Capstone_subpages/actuator_sizing.html",
+    "projects/Hand.html",
+    "projects/Quadruped.html",
+    "projects/Wave_Actuator.html"
+  ],
+  "viewer_css_exceptions": [
+    "projects/Capstone_subpages/concept_development.html"
+  ],
+  "lazy_added": 166,
+  "async_added": 211,
+  "preconnect_added": 26,
+  "font_preload_added": 1,
+  "preview_idle_prefetch_removed": true
+}

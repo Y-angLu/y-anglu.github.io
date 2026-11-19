@@ -55,7 +55,8 @@
   </title>
   <link class="favicon" href="../../images/gear_favicon.png" rel="icon" type="image/png"/>
   <link as="font" crossorigin="" href="../../fonts/Quicksand-VariableFont_wght.ttf" rel="preload" type="font/ttf">
-   <script src="https://cdn.tailwindcss.com">
+   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin/>
+<script src="https://cdn.tailwindcss.com">
 </script>
    <script>
             tailwind.config = {
@@ -542,7 +543,8 @@
                 root.style.colorScheme = useDark ? 'dark' : 'light';
             })();
         </script>
-   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
   </link>
  </head>
@@ -659,7 +661,7 @@
     <!-- The overview's skills are adjacent to the hero, not a separate section at the bottom. -->
     <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)] gap-4 items-stretch">
      <figure aria-label="Expand image" class="overview-image aspect-[16/10] sm:aspect-auto sm:min-h-[265px] p-3" data-lightbox-item="" role="button" tabindex="0">
-      <img alt="Notify robots artwork." fetchpriority="high" src="../../images/Notify.png"/>
+      <img alt="Notify robots artwork." fetchpriority="high" src="../../images/Notify.png" decoding="async">
      </figure>
      <aside aria-label="Project skills and tools" class="overview-skills-panel">
       <div>
@@ -748,10 +750,10 @@
      <!-- Two-Image Gallery -->
      <div class="grid grid-cols-2 gap-3 sm:gap-4">
       <figure aria-label="Expand image" class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Early sketches of Nudge's appendage." class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../../images/projects/capstone/concept_dev/nudge_idea_1.png"/>
+       <img alt="Early sketches of Nudge's appendage." class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../../images/projects/capstone/concept_dev/nudge_idea_1.png" decoding="async">
       </figure>
       <figure aria-label="Expand image" class="overview-image aspect-[5/4] p-2 sm:p-3 overflow-hidden summary-thumbnail" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Finding Nudge's form and shape." class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../../images/projects/capstone/concept_dev/nose_expression_1.jpg"/>
+       <img alt="Finding Nudge's form and shape." class="block w-full h-full object-contain rounded-lg" loading="lazy" src="../../images/projects/capstone/concept_dev/nose_expression_1.jpg" decoding="async">
       </figure>
      </div>
     </div>
@@ -805,11 +807,11 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="1X's Neo" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/1x_neo.png">
+       <img alt="1X's Neo" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/1x_neo.png" decoding="async" loading="lazy">
        </img>
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Sunday's Memo" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/sunday_memo.png">
+       <img alt="Sunday's Memo" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/sunday_memo.png" decoding="async" loading="lazy">
        </img>
       </div>
      </div>
@@ -824,10 +826,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Initial ideation. What should it do?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/early_ideation_1.png"/>
+       <img alt="Initial ideation. What should it do?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/early_ideation_1.png" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Initial ideation. What's the relationship with the user?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/early_ideation_2.png"/>
+       <img alt="Initial ideation. What's the relationship with the user?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/early_ideation_2.png" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -849,10 +851,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Too many notifications, all of it through a screen. What if we could provide a hardware layer between someone and what's actually important?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/phone_notifications.jpg"/>
+       <img alt="Too many notifications, all of it through a screen. What if we could provide a hardware layer between someone and what's actually important?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/phone_notifications.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Gentle ways to get someone's attention immediately pointed us to our pets." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/headbutt.jpg"/>
+       <img alt="Gentle ways to get someone's attention immediately pointed us to our pets." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/headbutt.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -869,10 +871,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Initial concepts of the telescoping mechanism within Nudge." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/notice_ideation_1.png"/>
+       <img alt="Initial concepts of the telescoping mechanism within Nudge." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/notice_ideation_1.png" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="The first sketch of Nudge and Notice." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/notice_ideation_2.png"/>
+       <img alt="The first sketch of Nudge and Notice." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/notice_ideation_2.png" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -930,10 +932,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Matic vacuum. Useful? Yes. But I don't feel particularly attached to it." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/matic_vacuum.jpg"/>
+       <img alt="Matic vacuum. Useful? Yes. But I don't feel particularly attached to it." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/matic_vacuum.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Might be too literal of an example, but it's hard not to see it." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/quadruped.png"/>
+       <img alt="Might be too literal of an example, but it's hard not to see it." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/quadruped.png" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -947,10 +949,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="One of the most famous wheeled bipeds, who also primarily uses body roll (tilting) to express itself." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/r2d2.jpg"/>
+       <img alt="One of the most famous wheeled bipeds, who also primarily uses body roll (tilting) to express itself." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/r2d2.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Even with wheels, two legs just feels familiar. Wheeled biped by RAI." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/rai.jpg"/>
+       <img alt="Even with wheels, two legs just feels familiar. Wheeled biped by RAI." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/rai.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -969,10 +971,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Initial concept of the finger-like nudging mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nudge_idea_1.png"/>
+       <img alt="Initial concept of the finger-like nudging mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nudge_idea_1.png" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Attempt to classify different priorities and their associated nudging action." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nudge_idea_2.jpg"/>
+       <img alt="Attempt to classify different priorities and their associated nudging action." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nudge_idea_2.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <!-- Image placeholder: Nudge Ideation.pdf; original nudging sketches -->
@@ -993,10 +995,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="First sketch of the differential mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/bump_idea_1.jpg"/>
+       <img alt="First sketch of the differential mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/bump_idea_1.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Trying to capture Nudge's personality." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/bump_idea_2.jpg"/>
+       <img alt="Trying to capture Nudge's personality." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/bump_idea_2.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1010,10 +1012,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Trying to figure out head rotation and expression." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nose_expression_1.jpg"/>
+       <img alt="Trying to figure out head rotation and expression." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nose_expression_1.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Finding its form." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nose_expression_2.jpg"/>
+       <img alt="Finding its form." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/nose_expression_2.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <!-- Image placeholder: Design Log (nudge, height).pdf; industrial design sketches -->
@@ -1037,10 +1039,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Not only did I like Baymax for his shape, but it was interesting because like Nudge, Baymax must rely on his body to convey emotion." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/baymax.jpg"/>
+       <img alt="Not only did I like Baymax for his shape, but it was interesting because like Nudge, Baymax must rely on his body to convey emotion." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/baymax.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Edges, pinch points, hard edges, exposed linkages and mechanisms - everything Nudge is trying not to be." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/edges.jpg"/>
+       <img alt="Edges, pinch points, hard edges, exposed linkages and mechanisms - everything Nudge is trying not to be." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/edges.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1058,10 +1060,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Cool but practical?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/monowheel.jpg"/>
+       <img alt="Cool but practical?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/monowheel.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="One of the only examples of the proposed embedded leg design idea we found. In this case, the leg actuators are still housed in the body. NUS RoboMaster." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/NUS_robomaster.jpg"/>
+       <img alt="One of the only examples of the proposed embedded leg design idea we found. In this case, the leg actuators are still housed in the body. NUS RoboMaster." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/NUS_robomaster.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1085,10 +1087,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Made to be hit and get back up from any angle." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/round_1.jpg"/>
+       <img alt="Made to be hit and get back up from any angle." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/round_1.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="But how round?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/round_2.jpg"/>
+       <img alt="But how round?" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/round_2.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1125,10 +1127,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Early CAD model of Nudge used for sizing and mass estimation" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/first_CAD.jpg"/>
+       <img alt="Early CAD model of Nudge used for sizing and mass estimation" class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/first_CAD.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="One of the ideas explored was an asymmetrical egg shaped profile, with a tread running on the outside. By rotating the cam, nudge could move its body up and down. This was later determined to not be feasible (belt tension, balancing)." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/CAM.jpg"/>
+       <img alt="One of the ideas explored was an asymmetrical egg shaped profile, with a tread running on the outside. By rotating the cam, nudge could move its body up and down. This was later determined to not be feasible (belt tension, balancing)." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/CAM.jpg" decoding="async" loading="lazy">
       </div>
      </div>
     </section>
@@ -1147,10 +1149,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Researching different locomotion architectures." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/locomotion_arc_1.png"/>
+       <img alt="Researching different locomotion architectures." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/locomotion_arc_1.png" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Ascento, a major inspiration to me, famously uses a one dof leg with a gravity compensation mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/locomotion_arc_2.png"/>
+       <img alt="Ascento, a major inspiration to me, famously uses a one dof leg with a gravity compensation mechanism." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/locomotion_arc_2.png" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1176,10 +1178,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Early ideation of leg and actuator packaging in the wheel, with the actuators mounted inside and low on the wheel frame." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/embed_wheel_1.jpg"/>
+       <img alt="Early ideation of leg and actuator packaging in the wheel, with the actuators mounted inside and low on the wheel frame." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/embed_wheel_1.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="More ideation. I was quite convinced that using linear SEAs would be the best option given the size and the relatively static requirements of the legs, but decided that the complexity was not worth it." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/embed_wheel_2.jpg"/>
+       <img alt="More ideation. I was quite convinced that using linear SEAs would be the best option given the size and the relatively static requirements of the legs, but decided that the complexity was not worth it." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/embed_wheel_2.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1209,10 +1211,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Replicating Ascento's GCM setup seemed like the best path forward." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/ascento_gcm.jpeg"/>
+       <img alt="Replicating Ascento's GCM setup seemed like the best path forward." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/ascento_gcm.jpeg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Example of a GCM using an extension spring. Bad picture, but wanted to thank the channel Peng ZhiHui as a major inspiration for me pursuing robotics. The robot pictured has more DoFs than Nudge and Ascento." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/extension_gcm.jpg"/>
+       <img alt="Example of a GCM using an extension spring. Bad picture, but wanted to thank the channel Peng ZhiHui as a major inspiration for me pursuing robotics. The robot pictured has more DoFs than Nudge and Ascento." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/extension_gcm.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1240,10 +1242,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="MIT mini cheetah. Probably the most well known QDD actuator application." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/MIT_cheetah.jpg"/>
+       <img alt="MIT mini cheetah. Probably the most well known QDD actuator application." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/MIT_cheetah.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="SEAs have been declining in use. I think? Apptronik's Apollo is one of the only humanoids still using them." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/apptronik_apollo.jpg"/>
+       <img alt="SEAs have been declining in use. I think? Apptronik's Apollo is one of the only humanoids still using them." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/apptronik_apollo.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1266,10 +1268,10 @@
      </p>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Some art I drew for Notice and Nudge." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/notice_and_nudge.jpg"/>
+       <img alt="Some art I drew for Notice and Nudge." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/notice_and_nudge.jpg" decoding="async" loading="lazy">
       </div>
       <div aria-label="Expand image" class="aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100/70 dark:bg-zinc-800/30" data-lightbox-item="" role="button" tabindex="0">
-       <img alt="Some form finding. I was experimenting with using the body to imply a mouth, but that might be a bit creepy." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/finding_form.jpg"/>
+       <img alt="Some form finding. I was experimenting with using the body to imply a mouth, but that might be a bit creepy." class="w-full h-full object-cover" src="../../images/projects/capstone/concept_dev/finding_form.jpg" decoding="async" loading="lazy">
       </div>
      </div>
      <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
@@ -1473,182 +1475,6 @@
     </div>
    </div>
   </div>
-  <script>
-(function () {
-    const viewer = document.getElementById('image-lightbox');
-    if (!viewer) return;
-
-    const media = document.getElementById('lightbox-media');
-    const caption = document.getElementById('lightbox-caption');
-    const counter = document.getElementById('lightbox-counter');
-    const closeButton = document.getElementById('lightbox-close');
-    const previousButton = document.getElementById('lightbox-prev');
-    const nextButton = document.getElementById('lightbox-next');
-    if (![media, caption, counter, closeButton, previousButton, nextButton].every(Boolean)) return;
-
-    // Keep explicit galleries; register remaining article images individually.
-    // Do not hijack links or video-player buttons.
-    document.querySelectorAll('main img[src]').forEach(image => {
-        if (image.closest('[data-lightbox-item], a, button')) return;
-        const parent = image.parentElement;
-        const containsMultipleImages = parent && parent.querySelectorAll('img').length > 1;
-        const containsControls = parent && parent.querySelector('button, a, iframe');
-        const target = parent && !containsMultipleImages && !containsControls ? parent : image;
-        if (!target || target.closest('[data-lightbox-item]')) return;
-
-        target.setAttribute('data-lightbox-item', '');
-        target.setAttribute('role', 'button');
-        target.setAttribute('tabindex', '0');
-        target.setAttribute('aria-label', 'Expand image: ' + (image.alt || 'Project image'));
-    });
-
-    // Allow deliberately labelled unfinished figure slots, but not arbitrary boxes.
-    document.querySelectorAll('main .aspect-square, main .aspect-video, main [class*="aspect-["]').forEach(target => {
-        if (target.hasAttribute('data-lightbox-item') ||
-            target.closest('a, button') ||
-            target.querySelector('img, [data-lightbox-item], button, a')) return;
-        const text = target.textContent.trim();
-        if (!/image placeholder/i.test(text)) return;
-        target.setAttribute('data-lightbox-item', '');
-        target.setAttribute('role', 'button');
-        target.setAttribute('tabindex', '0');
-        target.setAttribute('aria-label', 'Expand image placeholder');
-        target.dataset.caption = text;
-    });
-
-    const items = [...document.querySelectorAll('main [data-lightbox-item]')];
-    let currentIndex = -1;
-    let previousFocus = null;
-    let previousOverflow = '';
-    let touchStartX = null;
-    let changeTimer = null;
-
-    function render(index) {
-        if (!items.length) return;
-        currentIndex = (index + items.length) % items.length;
-        const item = items[currentIndex];
-        const source = item.matches('img') ? item : item.querySelector('img');
-        const figureCaption = item.querySelector('figcaption');
-        const description = item.dataset.caption ||
-            (figureCaption && figureCaption.textContent.trim()) ||
-            (source && source.alt) ||
-            item.textContent.trim().replace(/\s+/g, ' ') || 'Project image';
-
-        media.replaceChildren();
-        if (source && source.getAttribute('src')) {
-            const image = document.createElement('img');
-            image.src = source.currentSrc || source.src;
-            image.alt = source.alt || description;
-            media.appendChild(image);
-        } else {
-            const placeholder = document.createElement('div');
-            placeholder.className = 'image-lightbox-placeholder';
-            const title = document.createElement('strong');
-            title.textContent = description;
-            const note = document.createElement('span');
-            note.textContent = 'Image placeholder — add your figure or equation screenshot here.';
-            placeholder.append(title, note);
-            media.appendChild(placeholder);
-        }
-        caption.textContent = description;
-        counter.textContent = `${currentIndex + 1} / ${items.length}`;
-    }
-
-    function navigate(index) {
-        if (currentIndex < 0) return;
-        if (changeTimer) clearTimeout(changeTimer);
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            render(index);
-            return;
-        }
-        media.classList.add('is-changing');
-        caption.classList.add('is-changing');
-        changeTimer = setTimeout(() => {
-            render(index);
-            media.classList.remove('is-changing');
-            caption.classList.remove('is-changing');
-            changeTimer = null;
-        }, 125);
-    }
-
-    function open(index) {
-        if (!items.length) return;
-        previousFocus = document.activeElement;
-        previousOverflow = document.body.style.overflow;
-        render(index);
-        viewer.classList.add('is-open');
-        viewer.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        closeButton.focus();
-    }
-
-    function close() {
-        if (currentIndex < 0) return;
-        if (changeTimer) clearTimeout(changeTimer);
-        changeTimer = null;
-        media.classList.remove('is-changing');
-        caption.classList.remove('is-changing');
-        viewer.classList.remove('is-open');
-        viewer.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = previousOverflow;
-        currentIndex = -1;
-        if (previousFocus && previousFocus.isConnected && previousFocus.focus) {
-            previousFocus.focus();
-        }
-    }
-
-    items.forEach((item, index) => {
-        item.addEventListener('click', () => open(index));
-        item.addEventListener('keydown', event => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                open(index);
-            }
-        });
-    });
-
-    closeButton.addEventListener('click', close);
-    previousButton.addEventListener('click', () => navigate(currentIndex - 1));
-    nextButton.addEventListener('click', () => navigate(currentIndex + 1));
-    viewer.addEventListener('click', event => {
-        if (event.target === viewer) close();
-    });
-    document.addEventListener('keydown', event => {
-        if (currentIndex < 0) return;
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            close();
-        } else if (event.key === 'ArrowLeft') {
-            event.preventDefault();
-            navigate(currentIndex - 1);
-        } else if (event.key === 'ArrowRight') {
-            event.preventDefault();
-            navigate(currentIndex + 1);
-        } else if (event.key === 'Tab') {
-            const controls = [closeButton, previousButton, nextButton];
-            const focusedIndex = controls.indexOf(document.activeElement);
-            if (focusedIndex === -1) {
-                event.preventDefault();
-                (event.shiftKey ? nextButton : closeButton).focus();
-            } else if (event.shiftKey && focusedIndex === 0) {
-                event.preventDefault();
-                nextButton.focus();
-            } else if (!event.shiftKey && focusedIndex === controls.length - 1) {
-                event.preventDefault();
-                closeButton.focus();
-            }
-        }
-    });
-    media.addEventListener('touchstart', event => {
-        touchStartX = event.changedTouches[0].screenX;
-    }, { passive: true });
-    media.addEventListener('touchend', event => {
-        if (touchStartX === null || currentIndex < 0) return;
-        const difference = event.changedTouches[0].screenX - touchStartX;
-        if (Math.abs(difference) > 55) navigate(currentIndex + (difference < 0 ? 1 : -1));
-        touchStartX = null;
-    }, { passive: true });
-})();
-</script>
+  <script src="../../assets/js/lightbox.js" defer></script>
  </body>
 </html>
