@@ -878,29 +878,15 @@
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-        <img alt="Six-bar quadruped leg linkage geometry for radial extension" class="w-full h-full object-cover" src="../images/projects/quadruped/decoupled_extension.jpg"/>
+        <img alt="Watt's linkage variation used for leg kinematics" class="w-full h-full object-cover" src="../images/projects/quadruped/watts.jpg"/>
        </div>
        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-        <img alt="Six-bar quadruped leg linkage geometry for angular sweep" class="w-full h-full object-cover" src="../images/projects/quadruped/decoupled_sweep.jpg"/>
+        <img alt="Each leg has three DoFs: a hip roll joint (yellow) and two sagittal-plane joints (red and green)" class="w-full h-full object-cover" src="../images/projects/quadruped/three_dofs.jpg"/>
        </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        I optimized the linkage dimensions to maintain a transmission angle as close to 90° as possible during the stance phase. Since ground reaction forces are only present while the foot is in contact with the ground, maximizing force transmission in this region provided the greatest improvement in overall locomotive performance. Furthermore, this linkage architecture provided a distinct kinematic advantage: joint decoupling. In a standard serial chain, moving the thigh alters the absolute angle of the tibia, creating a coupled system. The parallel nature of the 6-bar linkage largely decoupled radial extension from the angular sweep of the leg, simplifying the inverse kinematic control loop.
       </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2">
-       <!-- Additional linkage illustration 01 -->
-       <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder 01
-        </span>
-       </div>
-       <!-- Additional linkage illustration 02 -->
-       <div class="aspect-square rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/30 flex items-center justify-center p-5 text-center">
-        <span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500">
-         Image placeholder 02
-        </span>
-       </div>
-      </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        However, because packaging constraints prevented the linkage pivot from being perfectly concentric with the servo’s axis, the mechanism suffered from slight cosine losses. The effective lever arm changed as a function of the joint angle, meaning torque delivery was non-linear at the extreme ends of the leg's flexion and extension. This informed actuator selection to ensure sufficient torque margin near the boundaries of the operating workspace.
       </p>
@@ -1021,14 +1007,6 @@
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        Working backward from these torque constraints, I reduced the femur and tibia lengths to 35 mm each. Shorter links limited the possible foot-to-joint moment arms, reduced swing inertia, and fit the compact chassis, at the expense of reachable workspace. The resulting theoretical maximum planar reach was 70 mm.
       </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-        <img alt="Six-bar quadruped leg linkage geometry for radial extension" class="w-full h-full object-cover" src="../images/projects/quadruped/decoupled_extension.jpg"/>
-       </div>
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
-        <img alt="Six-bar quadruped leg linkage geometry for angular sweep" class="w-full h-full object-cover" src="../images/projects/quadruped/decoupled_sweep.jpg"/>
-       </div>
-      </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        The final geometry was an engineering compromise rather than a complete torque optimization. A rigorous check would require the linkage Jacobian across the stance workspace and measured servo performance under repeated loading.
       </p>
@@ -1144,12 +1122,12 @@
        Each leg has three degrees of freedom: a hip roll joint and the two sagittal-plane joints (femur and tibia) driven by the co-located 6-bar linkage. The inverse kinematics solve for these three angles given a desired foot position expressed in the leg’s hip frame.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-        <img alt="Leg IK calculations for quadruped robot" class="w-full h-full object-cover" src=""/>
-       </div>
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-        <img alt="Leg IK calculations for quadruped robot" class="w-full h-full object-cover" src=""/>
-       </div>
+        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+            <img alt="Planar leg inverse kinematics derivation" class="w-full h-full object-cover" src="../images/projects/quadruped/IK_leg.jpg"/>
+        </div>
+        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+            <img alt="Hip roll and three-dimensional leg inverse kinematics derivation" class="w-full h-full object-cover" src="../images/projects/quadruped/IK_hip.jpg"/>
+        </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        It’s worth noting that the planar solver returns an abstract tibia joint angle, not the angle seen from its driving servo. This non-linear behaviour is due to the 6-bar linkage. A final transmission mapping was needed to convert the desired joint angle into the corresponding servo angle.
@@ -1162,14 +1140,6 @@
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        Per-leg IK only positions a single foot, but the robot needs to coordinate all four legs to control its overall posture. To handle this, I used homogeneous transformation matrices to compose rotation (yaw, pitch, roll) and translation (x, y, z) as a single 4×4 operation.
       </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-        <img alt="Body pose control for quadruped robot" class="w-full h-full object-cover" src=""/>
-       </div>
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-        <img alt="Body pose control for quadruped robot" class="w-full h-full object-cover" src=""/>
-       </div>
-      </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        The key idea is that the feet stay planted in the world while the body moves above them. Each foot target was expressed relative to the body center, transformed by the inverse of the desired body pose, then returned to its hip frame for the single-leg IK solver.
       </p>
@@ -1185,12 +1155,12 @@
        Each foot’s trajectory was split into stance and swing phases. Through testing, I found sinusoidal interpolation produced smoother motion and made step height and frequency easy to adjust. I could also change gait speed by varying the number of interpolation points per cycle, at the cost of smoothness.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 py-2 my-4">
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-        <img alt="Trot and gait for quadruped robot" class="w-full h-full object-cover" src=""/>
-       </div>
-       <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
-        <img alt="Trot and gait for quadruped robot" class="w-full h-full object-cover" src=""/>
-       </div>
+        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+            <img alt="Stance phase and swing phase of trot gait" class="w-full h-full object-cover" src="../images/projects/quadruped/gain_phases.jpg"/>
+        </div>
+        <div class="aspect-square bg-zinc-100 dark:bg-zinc-800/30 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
+            <img alt="Gait in relation to leg" class="w-full h-full object-cover" src="../images/projects/quadruped/gait.jpg"/>
+        </div>
       </div>
       <p class="text-zinc-700 dark:text-zinc-300 font-medium text-base leading-relaxed">
        A discovery I made while tinkering with gait timings was the importance of where the stance stroke is centered. My first trajectories were centered on each leg’s neutral standing position, which placed the average contact point behind the hips and shifted the effective center of mass rearwards, making the quadruped back-heavy. Biasing the stance phase forward of neutral recentered the load and noticeably improved stability.
@@ -1462,10 +1432,14 @@
                          const nextButton = document.getElementById('lightbox-next');
                          // Register article images and unfinished image placeholders automatically.
                          // This keeps the viewer working as placeholder images are replaced later.
-                         document.querySelectorAll('main img').forEach(image => {
-                             if (image.closest('[data-lightbox-item]')) return;
-                             const target = image.parentElement;
-                             if (!target || target.closest('a, button')) return;
+                         document.querySelectorAll('main img[src]').forEach(image => {
+                             if (image.closest('a, button')) return;
+                             // A shared gallery grid may contain multiple images. Register
+                             // each image separately instead of making the whole grid one item.
+                             const parent = image.parentElement;
+                             const target = parent && parent.querySelectorAll('img').length === 1
+                                 ? parent : image;
+                             if (target.closest('[data-lightbox-item]')) return;
                              target.setAttribute('data-lightbox-item', '');
                              target.setAttribute('role', 'button');
                              target.setAttribute('tabindex', '0');
@@ -1493,7 +1467,7 @@
                          function render(index) {
                              currentIndex = (index + items.length) % items.length;
                              const item = items[currentIndex];
-                             const source = item.querySelector('img');
+                             const source = item.matches('img') ? item : item.querySelector('img');
                              const figureCaption = item.querySelector('figcaption');
                              const description = item.dataset.caption ||
                                  (figureCaption && figureCaption.textContent.trim()) ||
