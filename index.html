@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="theme-color" content="#fafafa"/>
 <title>
             Yang Lu | Robotics Mechanical Design &amp; Actuation Portfolio
         </title>
@@ -130,6 +131,9 @@
 
                     root.style.backgroundColor = dark ? '#121212' : '#fafafa';
                     root.style.colorScheme = dark ? 'dark' : 'light';
+                    // Set Safari's browser chrome before the first paint.
+                    document.querySelector('meta[name="theme-color"]')
+                        .setAttribute('content', dark ? '#121212' : '#fafafa');
 
                 } catch (error) {
                     document.documentElement.style.backgroundColor = '#fafafa';
@@ -147,6 +151,17 @@
              const background = dark ? '#121212' : '#fafafa';
              root.style.backgroundColor = background;
              root.style.colorScheme = dark ? 'dark' : 'light';
+
+             // Safari sometimes retains its old status-bar tint after a class
+             // change. Replace the meta element only when the colour changes.
+             const current = document.querySelector('meta[name="theme-color"]');
+             if (!current || current.content.toLowerCase() !== background) {
+                 const replacement = document.createElement('meta');
+                 replacement.name = 'theme-color';
+                 replacement.content = background;
+                 if (current) current.replaceWith(replacement);
+                 else document.head.appendChild(replacement);
+             }
          }
          syncBrowserTheme();
          new MutationObserver(syncBrowserTheme).observe(root, {
