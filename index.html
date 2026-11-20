@@ -136,20 +136,17 @@
                 }
             })();
         </script>
- <meta name="theme-color" content="#fafafa"/>
  <script>
-     // Keep Safari's top safe-area/browser chrome in sync with theme changes.
+     // Keep the document background in sync with theme changes on mobile Safari.
      // The theme control lives in script.js and updates the root classes.
      (function () {
          const root = document.documentElement;
-         const themeMeta = document.querySelector('meta[name="theme-color"]');
          function syncBrowserTheme() {
              const dark = root.classList.contains('dark') &&
                  !root.classList.contains('colour-mode');
              const background = dark ? '#121212' : '#fafafa';
              root.style.backgroundColor = background;
              root.style.colorScheme = dark ? 'dark' : 'light';
-             themeMeta.setAttribute('content', background);
          }
          syncBrowserTheme();
          new MutationObserver(syncBrowserTheme).observe(root, {
