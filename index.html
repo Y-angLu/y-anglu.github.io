@@ -1030,9 +1030,9 @@ html.colour-mode:not(.simple-home) header.portfolio-browser-header {
     background: rgba(255,255,255,.94) !important;
     border-bottom-color: #e4e4e7;
 }
-.portfolio-header-layout { display:flex; align-items:center; height:48px; gap:18px; }
-.portfolio-header-brand { flex-shrink:0; white-space:nowrap; }
-.portfolio-header-actions { flex-shrink:0; margin-left:auto; }
+.portfolio-header-layout { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; height:48px; gap:18px; }
+.portfolio-header-brand { justify-self:start; white-space:nowrap; }
+.portfolio-header-actions { justify-self:end; margin-left:0; }
 .header-view-switch {
     position:relative;
     display:grid;
@@ -1120,7 +1120,7 @@ html.dark .header-view-switch #header-resume-view:hover {
     .portfolio-header-actions [aria-controls="posts"] { display:none; }
     .header-view-switch { width:166px; }
     .header-view-switch button { padding:6px 5px; font-size:10px; }
-    .portfolio-header-actions { margin-left:auto; }
+    .portfolio-header-actions { margin-left:0; }
 }
 @media (prefers-reduced-motion:reduce) {
     .header-view-switch::before, .header-view-switch button { transition:none; }
@@ -1136,6 +1136,10 @@ html.dark .header-view-switch #header-resume-view:hover {
                     Yang Lu
                 </a>
 
+<div class="header-view-switch" role="group" aria-label="Choose portfolio display">
+    <button id="simple-mode-toggle" type="button" aria-pressed="true" aria-label="Portfolio view" title="Explore projects and technical details">Portfolio</button>
+    <button id="header-resume-view" type="button" aria-pressed="false" aria-label="Overview view" title="Scan projects and work experience">Overview</button>
+</div>
 <nav aria-label="Primary navigation" class="portfolio-header-actions flex gap-5 text-xs font-bold items-center">
 <button aria-controls="about" aria-pressed="true" class="nav-link text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 focus:outline-none transition cursor-pointer" onclick="navigatePortfolioTab('about'); return false;">
                         About
@@ -1144,10 +1148,6 @@ html.dark .header-view-switch #header-resume-view:hover {
                         Posts
                     </button>
 
-<div class="header-view-switch" role="group" aria-label="Choose portfolio display">
-    <button id="simple-mode-toggle" type="button" aria-pressed="true" aria-label="Portfolio view" title="Explore projects and technical details">Portfolio</button>
-    <button id="header-resume-view" type="button" aria-pressed="false" aria-label="Overview view" title="Scan projects and work experience">Overview</button>
-</div>
 <button aria-label="Change color theme" class="p-1.5 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 rounded-lg transition cursor-pointer" id="theme-toggle" title="Change color theme">
 <svg class="w-[18px] h-[18px]" fill="none" id="theme-toggle-moon" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" stroke-linecap="round" stroke-linejoin="round">
