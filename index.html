@@ -1020,7 +1020,7 @@ html.simple-home header nav [aria-controls="posts"] {
 <button aria-controls="posts" aria-pressed="false" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" onclick="navigatePortfolioTab('posts'); return false;">
                         Posts
                     </button>
-<button aria-controls="simple-portfolio" aria-pressed="false" id="simple-mode-toggle" type="button">Simple view</button>
+<button aria-controls="simple-portfolio" aria-pressed="false" id="simple-mode-toggle" type="button">Quick view</button>
 <button aria-label="Change color theme" class="p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" id="theme-toggle" title="Change color theme">
 <svg class="w-4 h-4" fill="none" id="theme-toggle-moon" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" stroke-linecap="round" stroke-linejoin="round">
@@ -1955,7 +1955,7 @@ html.simple-home header nav [aria-controls="posts"] {
         root.classList.toggle('simple-home', enabled);
         simple.hidden = !enabled;
         toggle.setAttribute('aria-pressed', String(simplePreferred));
-        toggle.textContent = simplePreferred ? 'Full view' : 'Simple view';
+        toggle.textContent = simplePreferred ? 'Full view' : 'Quick view';
         if (enabled) {
             // Keep only one expanded entry at a time, avoiding excessive page growth.
             document.querySelectorAll('#simple-portfolio details').forEach(d => { d.open = false; d.dataset.targetOpen = 'false'; d.getAnimations().forEach(a => a.cancel()); d.style.removeProperty('overflow'); });
