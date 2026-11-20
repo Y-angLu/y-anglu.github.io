@@ -610,7 +610,7 @@ html.simple-home.dark .simple-columns h2 {
 html.simple-home.dark .simple-entry[open] .simple-entry-meta {
     color: #f4f4f5;
 }
-html.simple-home.dark #simple-mode-toggle {
+html.simple-home.dark #nonexistent-legacy-toggle {
     background: #f4f4f5;
     color: #18181b;
     border-color: #f4f4f5;
@@ -633,7 +633,7 @@ html.simple-home.colour-mode #simple-portfolio a {
 
 html { scrollbar-gutter: stable; }
 #simple-mode-toggle { min-width: 85px; text-align: center; font-size:11px; font-weight:700; padding:5px 9px; border:1px solid currentColor; border-radius:7px; }
-html.simple-home #simple-mode-toggle { background:#18181b; color:white; border-color:#18181b; }
+html.simple-home #nonexistent-legacy-toggle { background:#18181b; color:white; border-color:#18181b; }
 @media(max-width:720px) { .simple-columns { grid-template-columns:1fr; gap:22px; } .simple-head { align-items:start; } .simple-head h1 { font-size:23px; } .simple-entry summary { min-height:55px; } }
 @media(min-width:1024px) and (min-height:740px) { html.simple-home #main-content { padding-top:24px; } .simple-entry summary { min-height:60px; } }
 /* Simple/full view transitions are handled symmetrically by switchView(). */
@@ -1003,34 +1003,161 @@ html.simple-home header nav [aria-controls="posts"] {
         margin-bottom: 1.6em;
     }
 }
+
+/* Landing-page view selector. Preserve the neutral visual language of the site. */
+.hero-view-option { color:#52525b; }
+.dark .hero-view-option { color:#d4d4d8; }
+.hero-view-option[aria-pressed="true"] { background:#fff; color:#18181b; box-shadow:0 1px 3px rgba(0,0,0,.10); }
+.dark .hero-view-option[aria-pressed="true"] { background:#3f3f46; color:#fafafa; }
+.hero-view-option:hover:not([aria-pressed="true"]) { color:#18181b; }
+.dark .hero-view-option:hover:not([aria-pressed="true"]) { color:#fff; }
+.hero-view-option:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
+</style>
+<style>
+/* Persistent two-position view switch with a sliding selection indicator. */
+header.portfolio-browser-header {
+    background: rgba(255,255,255,.94) !important;
+    border-bottom: 1px solid #e4e4e7;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: none;
+}
+html.dark header.portfolio-browser-header {
+    background: rgba(18,18,18,.94) !important;
+    border-bottom-color: #3f3f46;
+}
+html.colour-mode:not(.simple-home) header.portfolio-browser-header {
+    background: rgba(255,255,255,.94) !important;
+    border-bottom-color: #e4e4e7;
+}
+.portfolio-header-layout { display:flex; align-items:center; height:48px; gap:18px; }
+.portfolio-header-brand { flex-shrink:0; white-space:nowrap; }
+.portfolio-header-actions { flex-shrink:0; margin-left:auto; }
+.header-view-switch {
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-left:0;
+    padding:3px;
+    width:190px;
+    flex-shrink:0;
+    border:1px solid #d4d4d8;
+    border-radius:8px;
+    background:#ececf0;
+    isolation:isolate;
+}
+/* One physical-looking pill moves between the two labels. */
+.header-view-switch::before {
+    content:"";
+    position:absolute;
+    top:3px;
+    bottom:3px;
+    left:3px;
+    width:calc((100% - 6px) / 2);
+    border-radius:6px;
+    background:#fff;
+    box-shadow:0 1px 4px rgba(0,0,0,.16), 0 0 0 1px rgba(24,24,27,.07);
+    transform:translateX(0);
+    transition:transform 260ms cubic-bezier(.2,.8,.2,1);
+    pointer-events:none;
+    z-index:0;
+}
+html.simple-home .header-view-switch::before { transform:translateX(100%); }
+.header-view-switch button,
+.header-view-switch #simple-mode-toggle,
+.header-view-switch #header-resume-view {
+    position:relative;
+    z-index:1;
+    width:100%;
+    min-width:0;
+    padding:6px 9px;
+    border:0 !important;
+    border-radius:6px !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    color:#71717a !important;
+    font:inherit;
+    font-size:11px;
+    font-weight:700;
+    line-height:1.3;
+    white-space:nowrap;
+    cursor:pointer;
+    transition:color 180ms ease;
+}
+.header-view-switch button[aria-pressed="true"],
+.header-view-switch #simple-mode-toggle[aria-pressed="true"],
+.header-view-switch #header-resume-view[aria-pressed="true"] { color:#18181b !important; }
+.header-view-switch button:hover:not([aria-pressed="true"]) { color:#27272a !important; }
+.header-view-switch button:focus-visible { outline:2px solid #52525b !important; outline-offset:-2px; }
+.header-view-switch button::before,
+.header-view-switch button::after { content:none !important; }
+.dark .header-view-switch { background:#202024; border-color:#71717a; }
+.dark .header-view-switch::before {
+    background:#52525b;
+    box-shadow:0 1px 5px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.16);
+}
+/* Include the button IDs so these rules override the neutral-theme selectors. */
+html.dark .header-view-switch button,
+html.dark .header-view-switch #simple-mode-toggle,
+html.dark .header-view-switch #header-resume-view {
+    color:#f4f4f5 !important;
+}
+html.dark .header-view-switch button[aria-pressed="true"],
+html.dark .header-view-switch #simple-mode-toggle[aria-pressed="true"],
+html.dark .header-view-switch #header-resume-view[aria-pressed="true"] {
+    color:#ffffff !important;
+}
+html.dark .header-view-switch button:hover,
+html.dark .header-view-switch #simple-mode-toggle:hover,
+html.dark .header-view-switch #header-resume-view:hover {
+    color:#ffffff !important;
+}
+@media (max-width:640px) {
+    .portfolio-header-layout { gap:10px; }
+    .portfolio-header-brand { font-size:12px; }
+    .portfolio-header-actions { gap:8px !important; }
+    .portfolio-header-actions [aria-controls="about"],
+    .portfolio-header-actions [aria-controls="posts"] { display:none; }
+    .header-view-switch { width:166px; }
+    .header-view-switch button { padding:6px 5px; font-size:10px; }
+    .portfolio-header-actions { margin-left:auto; }
+}
+@media (prefers-reduced-motion:reduce) {
+    .header-view-switch::before, .header-view-switch button { transition:none; }
+}
 </style>
 </head>
 <body class="bg-zinc-50 dark:bg-[#121212] text-zinc-900 dark:text-zinc-100 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-700 transition-colors duration-200">
 <div aria-hidden="true" class="homepage-navigation-veil">
 </div>
-<header class="sticky top-0 z-50 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-<div class="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
-<a class="font-bold tracking-tight text-base text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition" href="#" onclick="navigatePortfolioTab('about'); return false;">
+<header class="portfolio-browser-header sticky top-0 z-50 transition-colors duration-200">
+<div class="portfolio-header-layout max-w-5xl mx-auto px-6">
+<a class="portfolio-header-brand font-bold tracking-tight text-base text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 transition" href="#" onclick="navigatePortfolioTab('about'); return false;">
                     Yang Lu
                 </a>
-<nav aria-label="Primary navigation" class="flex space-x-6 text-xs font-bold items-center">
+
+<nav aria-label="Primary navigation" class="portfolio-header-actions flex gap-5 text-xs font-bold items-center">
 <button aria-controls="about" aria-pressed="true" class="nav-link text-zinc-900 dark:text-zinc-50 hover:text-zinc-600 dark:hover:text-zinc-300 focus:outline-none transition cursor-pointer" onclick="navigatePortfolioTab('about'); return false;">
                         About
                     </button>
 <button aria-controls="posts" aria-pressed="false" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" onclick="navigatePortfolioTab('posts'); return false;">
                         Posts
                     </button>
-<button aria-controls="simple-portfolio" aria-pressed="false" id="simple-mode-toggle" type="button">Quick view</button>
-<button aria-label="Change color theme" class="p-1 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-50 focus:outline-none transition cursor-pointer" id="theme-toggle" title="Change color theme">
-<svg class="w-4 h-4" fill="none" id="theme-toggle-moon" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+<div class="header-view-switch" role="group" aria-label="Choose portfolio display">
+    <button id="simple-mode-toggle" type="button" aria-pressed="true" aria-label="Portfolio view" title="Explore projects and technical details">Portfolio</button>
+    <button id="header-resume-view" type="button" aria-pressed="false" aria-label="Overview view" title="Scan projects and work experience">Overview</button>
+</div>
+<button aria-label="Change color theme" class="p-1.5 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 rounded-lg transition cursor-pointer" id="theme-toggle" title="Change color theme">
+<svg class="w-[18px] h-[18px]" fill="none" id="theme-toggle-moon" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" stroke-linecap="round" stroke-linejoin="round">
 </path>
 </svg>
-<svg class="w-4 h-4 hidden" fill="none" id="theme-toggle-sun" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg class="w-[18px] h-[18px] hidden" fill="none" id="theme-toggle-sun" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 3v2.25m0 13.5V21M4.22 4.22l1.59 1.59m12.38 12.38l1.59 1.59M3 12h2.25m13.5 0H21M5.81 18.19l-1.59 1.59m14.22-14.22l-1.59 1.59M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" stroke-linecap="round" stroke-linejoin="round">
 </path>
 </svg>
-<svg class="w-4 h-4 hidden" fill="none" id="theme-toggle-colour" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg class="w-[18px] h-[18px] hidden" fill="none" id="theme-toggle-colour" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3">
 </path>
 <path d="M12 17h.01">
@@ -1397,7 +1524,6 @@ html.simple-home header nav [aria-controls="posts"] {
         <div class="simple-head-links">
             <a href="mailto:y494lu@uwaterloo.ca">Email</a>
             <a href="https://www.linkedin.com/in/yang--lu/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
-            <a href="#" id="simple-back" role="button">Full portfolio ↗</a>
         </div>
     </div>
 
@@ -1936,7 +2062,7 @@ html.simple-home header nav [aria-controls="posts"] {
     const root = document.documentElement;
     const toggle = document.getElementById('simple-mode-toggle');
     const simple = document.getElementById('simple-portfolio');
-    const back = document.getElementById('simple-back');
+    const resumeToggle = document.getElementById('header-resume-view');
     if (!toggle || !simple) return;
     // The preference is independent of which tab is currently visible.
     // Posts temporarily hides Simple Mode without disabling the preference.
@@ -1954,8 +2080,8 @@ html.simple-home header nav [aria-controls="posts"] {
     function setSimple(enabled) {
         root.classList.toggle('simple-home', enabled);
         simple.hidden = !enabled;
-        toggle.setAttribute('aria-pressed', String(simplePreferred));
-        toggle.textContent = simplePreferred ? 'Full view' : 'Quick view';
+        toggle.setAttribute('aria-pressed', String(!enabled));
+        resumeToggle?.setAttribute('aria-pressed', String(enabled));
         if (enabled) {
             // Keep only one expanded entry at a time, avoiding excessive page growth.
             document.querySelectorAll('#simple-portfolio details').forEach(d => { d.open = false; d.dataset.targetOpen = 'false'; d.getAnimations().forEach(a => a.cancel()); d.style.removeProperty('overflow'); });
@@ -1992,6 +2118,7 @@ html.simple-home header nav [aria-controls="posts"] {
         if (switching) return;
         switching = true;
         toggle.disabled = true;
+        if (resumeToggle) resumeToggle.disabled = true;
         let outgoing;
         let incoming;
         try {
@@ -2031,29 +2158,32 @@ html.simple-home header nav [aria-controls="posts"] {
             incoming?.cancel();
             main?.style.removeProperty('opacity');
             toggle.disabled = false;
+            if (resumeToggle) resumeToggle.disabled = false;
             switching = false;
         }
     }
 
+    // Both persistent header options use the same existing transition.
     toggle.addEventListener('click', () => {
-        if (switching) return;
-        switchView(() => {
-            simplePreferred = !simplePreferred;
-            savePreference();
-            if (simplePreferred && isPostsTab()) showSection('about');
-            setSimple(simplePreferred && !isPostsTab());
-        });
-    });
-
-    back.addEventListener('click', event => {
-        event.preventDefault();
-        if (switching) return;
+        if (switching || (!simplePreferred && !isPostsTab())) return;
         switchView(() => {
             simplePreferred = false;
             savePreference();
+            if (isPostsTab()) showSection('about');
             setSimple(false);
         });
     });
+
+    resumeToggle?.addEventListener('click', () => {
+        if (switching || (simplePreferred && !isPostsTab())) return;
+        switchView(() => {
+            simplePreferred = true;
+            savePreference();
+            if (isPostsTab()) showSection('about');
+            setSimple(true);
+        });
+    });
+
     // Animate the complete details element as a single box. Animating only
     // .simple-detail left its padding behind, causing a two-stage collapse.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
